@@ -60,5 +60,17 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Beer\" />
+    <Folder Include="Brewery\" />
+    <Folder Include="City\" />
+    <Folder Include="Distillery\" />
+    <Folder Include="Liquor\" />
+    <Folder Include="Profile\" />
+    <Folder Include="State\" />
+    <Folder Include="Winery\" />
+    <Folder Include="Wine\" />
+    <Folder Include="ZipCode\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
