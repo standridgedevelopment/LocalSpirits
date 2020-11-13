@@ -45,6 +45,40 @@ namespace LocalSpirits.WebMVC.Controllers
             return View(model);
         }
 
+        public ActionResult Edit()
+        {
+            var service = CreateService();
+            var detail = service.GetProfile();
+            var model =
+                new ProfileEdit
+                {
+                    FirstName = detail.FirstName,
+                    LastName = detail.LastName,
+                    City = detail.City,
+                    State = detail.State,
+                    ZipCode = detail.ZipCode
+                };
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(ProfileEdit model)
+        {
+            if (!ModelState.IsValid) return View(model);
+
+            var service = CreateService();
+
+            if (service.UpdateProfile(model))
+            {
+                TempData["SaveResult"] = "Your profile was updated.";
+                return RedirectToAction("Index");
+            }
+
+            ModelState.AddModelError("", "Your profile could not be updated.");
+            return View(model);
+        }
+
         private ProfileServices CreateService()
         {
             var userId = Guid.Parse(User.Identity.GetUserId());

@@ -13,6 +13,13 @@ namespace LocalSpirits.Models.Profile
         public string FirstName { get; set; }
         [DisplayName("Last Name")]
         public string LastName { get; set; }
+        [DisplayName("Name")]
+        public string FullName
+        {
+            get { return $"{FirstName} {LastName}"; }
+            set { }
+        }
+       
         public string City { get; set; }
         public string State { get; set; }
         [DisplayName("Zip Code")]

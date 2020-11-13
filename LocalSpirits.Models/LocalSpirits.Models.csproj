@@ -83,10 +83,6 @@
     <Compile Include="State\StateDetail.cs" />
     <Compile Include="State\StateEdit.cs" />
     <Compile Include="State\StateListItem.cs" />
-    <Compile Include="User\UserCreate.cs" />
-    <Compile Include="User\UserDetail.cs" />
-    <Compile Include="User\UserEdit.cs" />
-    <Compile Include="User\UserListItem.cs" />
     <Compile Include="Winery\WineryCreate.cs" />
     <Compile Include="Winery\WineryDetail.cs" />
     <Compile Include="Winery\WineryEdit.cs" />

@@ -8,5 +8,8 @@ namespace LocalSpirits.Models.City
 {
     public class CityListItem
     {
+        [DisplayName("City")]
+        public string Name { get; set; }
+        public string State { get; set; }
     }
 }
