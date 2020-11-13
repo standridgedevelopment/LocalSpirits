@@ -75,6 +75,10 @@
       <Project>{C9D2F654-837E-4ED5-A227-F271429F2172}</Project>
       <Name>LocalSpirits.Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\LocalSpirits.Models\LocalSpirits.Models.csproj">
+      <Project>{6C2F2814-7D6D-430D-B3EB-E25A4E5695DA}</Project>
+      <Name>LocalSpirits.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -54,23 +54,55 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Beer\BeerCreate.cs" />
+    <Compile Include="Beer\BeerDetail.cs" />
+    <Compile Include="Beer\BeerEdit.cs" />
+    <Compile Include="Beer\BeerListItem.cs" />
+    <Compile Include="Brewery\BreweryCreate.cs" />
+    <Compile Include="Brewery\BreweryDetail.cs" />
+    <Compile Include="Brewery\BreweryEdit.cs" />
+    <Compile Include="Brewery\BreweryListItem.cs" />
+    <Compile Include="City\CityCreate.cs" />
+    <Compile Include="City\CityDetail.cs" />
+    <Compile Include="City\CityEdit.cs" />
+    <Compile Include="City\CityListItem.cs" />
+    <Compile Include="Distillery\DistilleryCreate.cs" />
+    <Compile Include="Distillery\DistilleryDetail.cs" />
+    <Compile Include="Distillery\DistilleryEdit.cs" />
+    <Compile Include="Distillery\DistilleryListItem.cs" />
+    <Compile Include="Liquor\LiquorCreate.cs" />
+    <Compile Include="Liquor\LiquorDetail.cs" />
+    <Compile Include="Liquor\LiquorEdit.cs" />
+    <Compile Include="Liquor\LiquorListItem.cs" />
+    <Compile Include="Profile\ProfileCreate.cs" />
+    <Compile Include="Profile\ProfileDetail.cs" />
+    <Compile Include="Profile\ProfileEdit.cs" />
+    <Compile Include="Profile\ProfileListItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="State\StateCreate.cs" />
+    <Compile Include="State\StateDetail.cs" />
+    <Compile Include="State\StateEdit.cs" />
+    <Compile Include="State\StateListItem.cs" />
+    <Compile Include="User\UserCreate.cs" />
+    <Compile Include="User\UserDetail.cs" />
+    <Compile Include="User\UserEdit.cs" />
+    <Compile Include="User\UserListItem.cs" />
+    <Compile Include="Winery\WineryCreate.cs" />
+    <Compile Include="Winery\WineryDetail.cs" />
+    <Compile Include="Winery\WineryEdit.cs" />
+    <Compile Include="Winery\WineryListItem.cs" />
+    <Compile Include="Wine\WineCreate.cs" />
+    <Compile Include="Wine\WineDetail.cs" />
+    <Compile Include="Wine\WineEdit.cs" />
+    <Compile Include="Wine\WineListItem.cs" />
+    <Compile Include="ZipCode\ZipCodeCreate.cs" />
+    <Compile Include="ZipCode\ZipCodeDetail.cs" />
+    <Compile Include="ZipCode\ZipCodeEdit.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Beer\" />
-    <Folder Include="Brewery\" />
-    <Folder Include="City\" />
-    <Folder Include="Distillery\" />
-    <Folder Include="Liquor\" />
-    <Folder Include="Profile\" />
-    <Folder Include="State\" />
-    <Folder Include="Winery\" />
-    <Folder Include="Wine\" />
-    <Folder Include="ZipCode\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

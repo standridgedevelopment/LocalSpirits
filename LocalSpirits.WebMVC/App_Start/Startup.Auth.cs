@@ -6,6 +6,7 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using LocalSpirits.WebMVC.Models;
+using LocalSpirits.WebMVC.Data;
 
 namespace LocalSpirits.WebMVC
 {

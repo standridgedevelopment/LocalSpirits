@@ -1,4 +1,5 @@
 ﻿using LocalSpirits.Data;
+using LocalSpirits.Models.Profile;
 using LocalSpirits.WebMVC.Data;
 using System;
 using System.Collections.Generic;
@@ -8,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace LocalSpirits.Services
 {
-    public class ProfileService
+    public class ProfileServices
     {
         private readonly Guid _userId;
 
-        public ProfileService(Guid userId)
+        public ProfileServices(Guid userId)
         {
             _userId = userId;
         }
@@ -24,7 +25,8 @@ namespace LocalSpirits.Services
                 FirstName = model.FirstName,
                 LastName = model.LastName,
                 City = model.City,
-                State = model.State
+                State = model.State,
+                ZipCode = model.ZipCode
             };
 
             using (var ctx = new ApplicationDbContext())
@@ -48,6 +50,7 @@ namespace LocalSpirits.Services
                         LastName = entity.LastName,
                         City = entity.City,
                         State = entity.State,
+                        ZipCode = entity.ZipCode
                     };
                 }
                 catch { }
@@ -63,9 +66,10 @@ namespace LocalSpirits.Services
                 var entity = ctx.Profiles.Single(e => e.ID == _userId);
 
                 if (model.FirstName != null) entity.FirstName = model.FirstName;
-                if (model.LastName != null) entity.LastName = model.LastName;
-                if (model.City != null) entity.City = model.City;
-                if (model.State != null) entity.State = model.State;
+                entity.LastName = model.LastName;
+                entity.City = model.City;
+                entity.State = model.State;
+                entity.ZipCode = model.ZipCode;
 
                 return ctx.SaveChanges() == 1;
             }

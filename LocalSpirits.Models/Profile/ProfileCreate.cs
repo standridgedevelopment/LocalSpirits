@@ -6,13 +6,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LocalSpirits.Data
+namespace LocalSpirits.Models.Profile
 {
-    public class Profile
+    public class ProfileCreate
     {
-
-        [Key]
-        public Guid ID { get; set; }
         [Required]
         [DisplayName("First Name")]
         public string FirstName { get; set; }
@@ -23,8 +20,8 @@ namespace LocalSpirits.Data
         public string City { get; set; }
         [Required]
         public string State { get; set; }
-
+        [Required]
+        [DisplayName("Zip Code")]
         public int ZipCode { get; set; }
-
     }
 }

@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using LocalSpirits.WebMVC.Models;
+using LocalSpirits.WebMVC.Data;
 
 namespace LocalSpirits.WebMVC.Controllers
 {
