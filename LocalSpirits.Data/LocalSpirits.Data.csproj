@@ -60,9 +60,13 @@
     <Compile Include="Distillery.cs" />
     <Compile Include="IdentityModels.cs" />
     <Compile Include="Liquor.cs" />
-    <Compile Include="Migrations\202011130252385_InitialCreate.cs" />
-    <Compile Include="Migrations\202011130252385_InitialCreate.Designer.cs">
-      <DependentUpon>202011130252385_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\202011131753258_InitialCreate.cs" />
+    <Compile Include="Migrations\202011131753258_InitialCreate.Designer.cs">
+      <DependentUpon>202011131753258_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011131935113_1.cs" />
+    <Compile Include="Migrations\202011131935113_1.Designer.cs">
+      <DependentUpon>202011131935113_1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -77,8 +81,11 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202011130252385_InitialCreate.resx">
-      <DependentUpon>202011130252385_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202011131753258_InitialCreate.resx">
+      <DependentUpon>202011131753258_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011131935113_1.resx">
+      <DependentUpon>202011131935113_1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

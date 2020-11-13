@@ -25,7 +25,7 @@ namespace LocalSpirits.Services
                 FirstName = model.FirstName,
                 LastName = model.LastName,
                 City = model.City,
-                State = model.State,
+                State = (Data.StateName)model.State,
                 ZipCode = model.ZipCode
             };
 

@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace LocalSpirits.Data
 {
+    
     public class Profile
     {
 
@@ -22,7 +23,7 @@ namespace LocalSpirits.Data
         [Required]
         public string City { get; set; }
         [Required]
-        public string State { get; set; }
+        public StateName State { get; set; }
 
         public int ZipCode { get; set; }
 

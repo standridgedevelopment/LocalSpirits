@@ -11,19 +11,15 @@ namespace LocalSpirits.Services
 {
     public class CityService
     {
-        readonly List<CityDetail> searchResults = new List<CityDetail>();
+        readonly List<CityListItem> searchResults = new List<CityListItem>();
 
-        public bool CreateCities(CityCreate model)
+        public bool CreateCity(CityCreate model)
         {
             var state = new State();
-            using (var ctx = new ApplicationDbContext())
-            {
-                state = ctx.States.Single(e => e.Name.Contains(model.State));
-            }
             var entity = new City()
             {
                 Name = model.Name,
-                StateID = state.ID
+                State = $"{model.State}"
             };
 
             using (var ctx = new ApplicationDbContext())
@@ -40,8 +36,9 @@ namespace LocalSpirits.Services
                 var query = ctx.Cities.Select
                     (e => new CityListItem
                     {
+                        ID = e.ID,
                         Name = e.Name,
-                        State = e.State.Name
+                        State = e.State
                     }
                     );
                 return query.ToArray();
@@ -59,43 +56,43 @@ namespace LocalSpirits.Services
                     {
                         ID = entity.ID,
                         Name = entity.Name,
-                        State = entity.State.Name
+                        State = entity.State
                     };
                 }
                 catch { }
                 return new CityDetail();
             }
         }
-        public List<CityDetail> GetCityByName(string name, int state)
+        public List<CityListItem> GetCityByName(string cityName, StateName state)
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var cities = ctx.Cities.Where(e => e.Name.Contains(name) && e.State.Equals(state)).ToList();
+                var cities = ctx.Cities.Where(e => e.Name.Contains(cityName) && e.State.Equals(state)).ToList();
                 foreach (var city in cities)
                 {
-                    var foundCity = new CityDetail
+                    var foundCity = new CityListItem
                     {
                         ID = city.ID,
                         Name = city.Name,
-                        State = city.State.Name
+                        State = city.State
                     };
                     searchResults.Add(foundCity);
                 }
                 return searchResults;
             }
         }
-        public List<CityDetail> GetCityByState(string name)
+        public List<CityListItem> GetCitiesByState(string state)
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var cities = ctx.Cities.Where(e => e.State.Name.Contains(name)).ToList();
+                var cities = ctx.Cities.Where(e => e.State.Equals(state)).ToList();
                 foreach (var city in cities)
                 {
-                    var foundCity = new CityDetail
+                    var foundCity = new CityListItem
                     {
                         ID = city.ID,
                         Name = city.Name,
-                        State = city.State.Name
+                        State = city.State
                     };
                     searchResults.Add(foundCity);
                 }
@@ -108,11 +105,10 @@ namespace LocalSpirits.Services
             {
                 try
                 {
-                    var state = ctx.States.Single(e => e.Name.Contains(model.State));
                     var entity = ctx.Cities.Single(e => e.ID == id);
 
                     entity.Name = model.Name;
-                    entity.StateID = state.ID;
+                    entity.State = $"{model.State}";
                 }
                 catch { return false; }
                 return ctx.SaveChanges() == 1;

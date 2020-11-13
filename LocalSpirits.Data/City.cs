@@ -13,9 +13,10 @@ namespace LocalSpirits.Data
         [Key]
         public int ID { get; set; }
         public string Name { get; set; }
-        [ForeignKey(nameof(State))]
-        public int? StateID { get; set; }
-        public virtual State State { get; set; }
+        public string State { get; set; }
+        //[ForeignKey(nameof(State))]
+        //public int? StateID { get; set; }
+        //public virtual State State { get; set; }
         
     }
 }

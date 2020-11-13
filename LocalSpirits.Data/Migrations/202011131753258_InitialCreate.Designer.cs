@@ -13,7 +13,7 @@ namespace LocalSpirits.Data.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "202011130252385_InitialCreate"; }
+            get { return "202011131753258_InitialCreate"; }
         }
         
         string IMigrationMetadata.Source

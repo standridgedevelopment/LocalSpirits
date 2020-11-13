@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LocalSpirits.Data;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -19,7 +20,7 @@ namespace LocalSpirits.Models.Profile
         [Required]
         public string City { get; set; }
         [Required]
-        public string State { get; set; }
+        public StateName State { get; set; }
         [Required]
         [DisplayName("Zip Code")]
         public int ZipCode { get; set; }

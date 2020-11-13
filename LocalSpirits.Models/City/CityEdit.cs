@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LocalSpirits.Data;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -11,6 +12,6 @@ namespace LocalSpirits.Models.City
     {
         [DisplayName("City")]
         public string Name { get; set; }
-        public string State { get; set; }
+        public StateName State { get; set; }
     }
 }

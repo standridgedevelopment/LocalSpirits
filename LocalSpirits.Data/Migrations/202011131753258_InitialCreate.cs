@@ -51,18 +51,7 @@ namespace LocalSpirits.Data.Migrations
                     {
                         ID = c.Int(nullable: false, identity: true),
                         Name = c.String(),
-                        StateID = c.Int(),
-                    })
-                .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.State", t => t.StateID)
-                .Index(t => t.StateID);
-            
-            CreateTable(
-                "dbo.State",
-                c => new
-                    {
-                        ID = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
+                        State = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.ID);
             
@@ -117,7 +106,7 @@ namespace LocalSpirits.Data.Migrations
                         FirstName = c.String(nullable: false),
                         LastName = c.String(nullable: false),
                         City = c.String(nullable: false),
-                        State = c.String(nullable: false),
+                        State = c.Int(nullable: false),
                         ZipCode = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.ID);
@@ -145,6 +134,15 @@ namespace LocalSpirits.Data.Migrations
                 .ForeignKey("dbo.ApplicationUser", t => t.ApplicationUser_Id)
                 .Index(t => t.IdentityRole_Id)
                 .Index(t => t.ApplicationUser_Id);
+            
+            CreateTable(
+                "dbo.State",
+                c => new
+                    {
+                        ID = c.Int(nullable: false, identity: true),
+                        Name = c.String(),
+                    })
+                .PrimaryKey(t => t.ID);
             
             CreateTable(
                 "dbo.ApplicationUser",
@@ -240,7 +238,6 @@ namespace LocalSpirits.Data.Migrations
             DropForeignKey("dbo.Distillery", "CityID", "dbo.City");
             DropForeignKey("dbo.Brewery", "ZipCode", "dbo.Zipcode");
             DropForeignKey("dbo.Brewery", "CityID", "dbo.City");
-            DropForeignKey("dbo.City", "StateID", "dbo.State");
             DropIndex("dbo.Winery", new[] { "ZipCode" });
             DropIndex("dbo.Winery", new[] { "CityID" });
             DropIndex("dbo.IdentityUserLogin", new[] { "ApplicationUser_Id" });
@@ -249,7 +246,6 @@ namespace LocalSpirits.Data.Migrations
             DropIndex("dbo.IdentityUserRole", new[] { "IdentityRole_Id" });
             DropIndex("dbo.Distillery", new[] { "ZipCode" });
             DropIndex("dbo.Distillery", new[] { "CityID" });
-            DropIndex("dbo.City", new[] { "StateID" });
             DropIndex("dbo.Brewery", new[] { "ZipCode" });
             DropIndex("dbo.Brewery", new[] { "CityID" });
             DropTable("dbo.Wine");
@@ -257,13 +253,13 @@ namespace LocalSpirits.Data.Migrations
             DropTable("dbo.IdentityUserLogin");
             DropTable("dbo.IdentityUserClaim");
             DropTable("dbo.ApplicationUser");
+            DropTable("dbo.State");
             DropTable("dbo.IdentityUserRole");
             DropTable("dbo.IdentityRole");
             DropTable("dbo.Profile");
             DropTable("dbo.Liquor");
             DropTable("dbo.Distillery");
             DropTable("dbo.Zipcode");
-            DropTable("dbo.State");
             DropTable("dbo.City");
             DropTable("dbo.Brewery");
             DropTable("dbo.Beer");
