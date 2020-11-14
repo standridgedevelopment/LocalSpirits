@@ -99,16 +99,16 @@ namespace LocalSpirits.Services
                 return searchResults;
             }
         }
-        public bool UpdateCity(CityEdit model, int id)
+        public bool UpdateCity(CityEdit model)
         {
             using (var ctx = new ApplicationDbContext())
             {
                 try
                 {
-                    var entity = ctx.Cities.Single(e => e.ID == id);
+                    var entity = ctx.Cities.Single(e => e.ID == model.ID);
 
                     entity.Name = model.Name;
-                    entity.State = $"{model.State}";
+                    entity.State = model.State;
                 }
                 catch { return false; }
                 return ctx.SaveChanges() == 1;

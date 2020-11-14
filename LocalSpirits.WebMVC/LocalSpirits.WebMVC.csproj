@@ -263,6 +263,8 @@
     <Content Include="Views\City\Index.cshtml" />
     <Content Include="Views\City\Create.cshtml" />
     <Content Include="Views\City\State.cshtml" />
+    <Content Include="Views\City\Details.cshtml" />
+    <Content Include="Views\City\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
