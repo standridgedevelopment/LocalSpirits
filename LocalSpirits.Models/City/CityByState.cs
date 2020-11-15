@@ -9,6 +9,6 @@ namespace LocalSpirits.Models.City
 {
     public class CityByState
     {
-        public string State { get; set; }
+        public StateName? State { get; set; }
     }
 }

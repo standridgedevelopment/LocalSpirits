@@ -20,6 +20,18 @@ namespace LocalSpirits.WebMVC.Controllers
             var State = new CityByState();
             return View(State);
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Index(CityByState city)
+        {
+            var service = CreateService();
+            if (city.State == null) 
+            {
+                ModelState.AddModelError("", "");
+                return View(city);
+            } 
+            return RedirectToAction($"State/{city.State}") ;
+        }
 
         public ActionResult State(string id, CityByState city)
         {
@@ -31,6 +43,7 @@ namespace LocalSpirits.WebMVC.Controllers
                 var model = service.GetCitiesByState(id);
                 return View(model);
             } 
+            //string state =  $"{city.State}"
             else return RedirectToAction($"State/{city.State}");
 
         }
