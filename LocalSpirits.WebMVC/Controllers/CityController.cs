@@ -25,12 +25,18 @@ namespace LocalSpirits.WebMVC.Controllers
         public ActionResult Index(CityByState city)
         {
             var service = CreateService();
-            if (city.State == null) 
+            if (!Enum.TryParse($"{city.State}", out StateName state))
             {
-                ModelState.AddModelError("", "");
-                return View(city);
-            } 
-            return RedirectToAction($"State/{city.State}") ;
+                city.StateResult = city.AbreviateState(city.State);
+                if (city.StateResult == null)
+                {
+                    ModelState.AddModelError("", "");
+                    return View(city);
+                }
+                state = (StateName)city.StateResult;
+            }
+            
+            return RedirectToAction($"State/{state}") ;
         }
 
         public ActionResult State(string id, CityByState city)
