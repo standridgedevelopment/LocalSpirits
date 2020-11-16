@@ -63,7 +63,7 @@ namespace LocalSpirits.Services
                 return new CityDetail();
             }
         }
-        public List<CityListItem> GetCityByName(string cityName)
+        public List<CityListItem> GetCitiesByName(string cityName)
         {
             using (var ctx = new ApplicationDbContext())
             {
@@ -79,6 +79,37 @@ namespace LocalSpirits.Services
                     searchResults.Add(foundCity);
                 }
                 return searchResults;
+            }
+        }
+        public City GetCityByName(string cityName, StateName state)
+        {
+            var city = new City();
+            string stateName = $"{state}";
+            using (var ctx = new ApplicationDbContext())
+            {
+                try
+                {
+                   city = ctx.Cities.Single(e => e.Name == cityName && e.State == stateName);
+                }
+                catch { return null; }
+
+
+                return city;
+            }
+        }
+        public City GetCityByName(string cityName, string state)
+        {
+            var city = new City();
+            using (var ctx = new ApplicationDbContext())
+            {
+                try
+                {
+                    city = ctx.Cities.Single(e => e.Name == cityName && e.State == state);
+                }
+                catch { return null; }
+
+
+                return city;
             }
         }
         public List<CityListItem> GetCitiesByState(string state)

@@ -20,7 +20,7 @@ namespace LocalSpirits.Models.Brewery
         [Required]
         public StateName State { get; set; }
         [Required]
-        [MinLength(5), MaxLength(5)]
+        //[MinLength(5), MaxLength(5)]
         [DisplayName("Zip Code")]
         public int ZipCode { get; set; }
         public string Hours { get; set; }

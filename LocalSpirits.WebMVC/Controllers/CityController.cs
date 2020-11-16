@@ -33,7 +33,7 @@ namespace LocalSpirits.WebMVC.Controllers
 
             if (city.StateResult == null)
             {
-                var searchByCity = service.GetCityByName(city.State);
+                var searchByCity = service.GetCitiesByName(city.State);
                 if (searchByCity.Count != 0)
                     return RedirectToAction($"CityResults/{city.State}");
             } 
@@ -52,7 +52,7 @@ namespace LocalSpirits.WebMVC.Controllers
             if (id != null)
             {
                 var service = CreateService();
-                var model = service.GetCityByName(id);
+                var model = service.GetCitiesByName(id);
                 return View(model);
             }
             //string state =  $"{city.State}"
@@ -78,7 +78,6 @@ namespace LocalSpirits.WebMVC.Controllers
                 TempData["SaveResult"] = "City was created.";
                 return RedirectToAction("Index");
             };
-
             ModelState.AddModelError("", "City could not be created.");
 
             return View(model);
@@ -138,7 +137,7 @@ namespace LocalSpirits.WebMVC.Controllers
         [HttpPost]
         [ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeletePost(int id)
+        public ActionResult DeleteCity(int id)
         {
             var service = CreateService();
 

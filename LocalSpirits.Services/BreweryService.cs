@@ -1,5 +1,6 @@
 ﻿using LocalSpirits.Data;
 using LocalSpirits.Models.Brewery;
+using LocalSpirits.WebMVC.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,236 +11,211 @@ namespace LocalSpirits.Services
 {
     public class BreweryService
     {
-        readonly List<BreweryDetail> searchResults = new List<BreweryDetail>();
-        public string CreatePark(BreweryCreate model)
+        readonly List<BreweryListItem> searchResults = new List<BreweryListItem>();
+        public string Create(BreweryCreate model)
         {
+            var service = new CityService();
+            var foundCity = service.GetCityByName(model.City, model.State);
+
+            if (foundCity == null) return "invalid city";
             var entity = new Brewery()
             {
-                CityID = model.CityID,
+                CityID = foundCity.ID,
                 Name = model.Name,
-                Acreage = model.Acreage,
+                State = $"{model.State}",
+                ZipCode = model.ZipCode,
                 Hours = model.Hours,
                 PhoneNumber = model.PhoneNumber,
-                Website = model.Website
+                Website = model.Website,
+                LiveMusic = model.LiveMusic
             };
 
             using (var ctx = new ApplicationDbContext())
             {
-                int result = 0;
 
+ 
                 try
                 {
-                    var city = ctx.Cities.Single(e => e.ID == model.CityID);
-                }
-                catch
-                {
-                    if (entity.City == null) result += 1;
-                }
-
-                if (result == 1) return "Invalid City ID";
-
-                try
-                {
-                    ctx.Parks.Add(entity);
+                    ctx.Breweries.Add(entity);
                     ctx.SaveChanges();
-                    return "Okay";
+                    return "okay";
                 }
                 catch { }
                 return "True";
             }
         }
-        public IEnumerable<ParkListItem> GetParks()
+        public IEnumerable<BreweryListItem> GetAll()
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var query = ctx.Parks.Select
-                    (e => new ParkListItem
+                var query = ctx.Breweries.Select
+                    (e => new BreweryListItem
                     {
                         Name = e.Name,
-                        CityName = e.City.Name,
-                        StateName = e.City.State.Name,
+                        City = e.City.Name,
+                        State = e.State,
                         ID = e.ID,
+                        ZipCode = e.ZipCode
                     }
                     );
                 return query.ToArray();
             }
 
         }
-        public ParkDetail GetParkByID(int id)
+        public BreweryDetail GetByID(int id)
         {
             using (var ctx = new ApplicationDbContext())
             {
                 try
                 {
-                    var entity = ctx.Parks.Single(e => e.ID == id);
-                    return new ParkDetail
+                    var entity = ctx.Breweries.Single(e => e.ID == id);
+                    return new BreweryDetail
                     {
                         ID = entity.ID,
                         Name = entity.Name,
-                        CityID = entity.CityID,
-                        CityName = entity.City.Name,
-                        StateID = entity.City.StateID,
-                        StateName = entity.City.State.Name,
-                        Acreage = entity.Acreage,
+                        City = entity.City.Name,
+                        State = entity.State,
+                        ZipCode = entity.ZipCode,
                         Hours = entity.Hours,
                         PhoneNumber = entity.PhoneNumber,
                         Website = entity.Website,
-                        AverageTrailRating = entity.AverageTrailRating,
-                        TrailsInPark = entity.TrailsInPark
+                        Rating = entity.Rating,
+                        LiveMusic = entity.LiveMusic
                     };
                 }
                 catch { }
-                return new ParkDetail();
+                return new BreweryDetail();
             }
         }
-        public List<ParkDetail> GetParkByName(string name)
+        public List<BreweryListItem> GetByName(string name)
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var parks = ctx.Parks.Where(e => e.Name.Contains(name)).ToList();
-                foreach (var park in parks)
+                var breweries = ctx.Breweries.Where(e => e.Name.Contains(name)).ToList();
+                foreach (var brewery in breweries)
                 {
-                    var foundPark = new ParkDetail
+                    var found = new BreweryListItem
                     {
-                        ID = park.ID,
-                        Name = park.Name,
-                        CityID = park.CityID,
-                        CityName = park.City.Name,
-                        StateID = park.City.StateID,
-                        StateName = park.City.State.Name,
-                        Acreage = park.Acreage,
-                        Hours = park.Hours,
-                        PhoneNumber = park.PhoneNumber,
-                        Website = park.Website,
-                        AverageTrailRating = park.AverageTrailRating
+                        ID = brewery.ID,
+                        Name = brewery.Name,
+                        Rating = brewery.Rating,
+                        City = brewery.City.Name,
+                        State = brewery.State,
+                        ZipCode = brewery.ZipCode,
                     };
-                    searchResults.Add(foundPark);
+                    searchResults.Add(found);
                 }
                 return searchResults;
             }
         }
-        public List<ParkDetail> GetParkByCityName(string cityName)
+        public List<BreweryListItem> GetByCityName(string cityName)
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var parks = ctx.Parks.Where(e => e.City.Name == cityName).ToList();
-                foreach (var park in parks)
+                var breweries = ctx.Breweries.Where(e => e.City.Name == cityName).ToList();
+                foreach (var brewery in breweries)
                 {
-                    var foundPark = new ParkDetail
+                    var found = new BreweryListItem
                     {
-                        ID = park.ID,
-                        Name = park.Name,
-                        CityID = park.CityID,
-                        CityName = park.City.Name,
-                        StateID = park.City.StateID,
-                        StateName = park.City.State.Name,
-                        Acreage = park.Acreage,
-                        Hours = park.Hours,
-                        PhoneNumber = park.PhoneNumber,
-                        Website = park.Website,
-                        AverageTrailRating = park.AverageTrailRating
+                        ID = brewery.ID,
+                        Name = brewery.Name,
+                        Rating = brewery.Rating,
+                        City = brewery.City.Name,
+                        State = brewery.State,
+                        ZipCode = brewery.ZipCode,
                     };
-                    searchResults.Add(foundPark);
+                    searchResults.Add(found);
                 }
                 return searchResults;
             }
         }
-        public List<ParkDetail> GetParkByStateName(string stateName)
+        public List<BreweryListItem> GetByStateName(string stateName)
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var parks = ctx.Parks.Where(e => e.City.State.Name == stateName).ToList();
-                foreach (var park in parks)
+                var breweries = ctx.Breweries.Where(e => e.City.State == stateName).ToList();
+                foreach (var brewery in breweries)
                 {
-                    var foundPark = new ParkDetail
+                    var found = new BreweryListItem
                     {
-                        ID = park.ID,
-                        Name = park.Name,
-                        CityID = park.CityID,
-                        CityName = park.City.Name,
-                        StateID = park.City.StateID,
-                        StateName = park.City.State.Name,
-                        Acreage = park.Acreage,
-                        Hours = park.Hours,
-                        PhoneNumber = park.PhoneNumber,
-                        Website = park.Website,
-                        AverageTrailRating = park.AverageTrailRating
+                        ID = brewery.ID,
+                        Name = brewery.Name,
+                        Rating = brewery.Rating,
+                        City = brewery.City.Name,
+                        State = brewery.State,
+                        ZipCode = brewery.ZipCode,
                     };
-                    searchResults.Add(foundPark);
+                    searchResults.Add(found);
                 }
                 return searchResults;
             }
         }
-        public List<ParkDetail> GetParkByAcreage(int minacreage, int maxacreage)
+        public List<BreweryListItem> GetByZipCode(int zipCode)
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var parks = ctx.Parks.Where(e => e.Acreage >= minacreage && e.Acreage <= maxacreage).ToList();
-                foreach (var park in parks)
+                var breweries = ctx.Breweries.Where(e => e.ZipCode == zipCode).ToList();
+                foreach (var brewery in breweries)
                 {
-                    var foundPark = new ParkDetail
+                    var found = new BreweryListItem
                     {
-                        ID = park.ID,
-                        Name = park.Name,
-                        CityID = park.CityID,
-                        CityName = park.City.Name,
-                        StateID = park.City.StateID,
-                        StateName = park.City.State.Name,
-                        Acreage = park.Acreage,
-                        Hours = park.Hours,
-                        PhoneNumber = park.PhoneNumber,
-                        Website = park.Website,
-                        AverageTrailRating = park.AverageTrailRating
+                        ID = brewery.ID,
+                        Name = brewery.Name,
+                        Rating = brewery.Rating,
+                        City = brewery.City.Name,
+                        State = brewery.State,
+                        ZipCode = brewery.ZipCode,
                     };
-                    searchResults.Add(foundPark);
+                    searchResults.Add(found);
                 }
+                return searchResults;
             }
+        }
+        public string Update(BreweryEdit model, int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
 
-            return searchResults;
+                var service = new CityService();
+                var foundCity = service.GetCityByName(model.City, model.State);
+                if (foundCity == null) return "invalid city";
+
+                var entity = ctx.Breweries.Single(e => e.ID == id);
+
+                entity.Name = model.Name;
+                entity.CityID = foundCity.ID;
+                entity.State = $"{model.State}";
+                entity.ZipCode = model.ZipCode;
+                entity.Hours = model.Hours;
+                entity.PhoneNumber = model.PhoneNumber;
+                entity.Website = model.Website;
+                entity.LiveMusic = model.LiveMusic;
+
+               
+
+                try
+                {
+                    ctx.SaveChanges();
+                    return "Okay";
+                }
+                catch { }
+                return "True";
+
+            }
         }
-        public string UpdatePark(ParkEdit model, int id)
+        public bool Delete(int id)
         {
             using (var ctx = new ApplicationDbContext())
             {
                 try
                 {
-                    var entity = ctx.Parks.Single(e => e.ID == id);
+                    var entity = ctx.Breweries.Single(e => e.ID == id);
 
-                    if (model.Name != null) entity.Name = model.Name;
-                    if (model.CityID != 0) entity.CityID = model.CityID;
-                    if (model.Acreage != 0) entity.Acreage = model.Acreage;
-                    if (model.Hours != null) entity.Hours = model.Hours;
-                    if (model.PhoneNumber != null) entity.PhoneNumber = model.PhoneNumber;
-                    if (model.Website != null) entity.Website = model.Website;
-
-                    try
-                    {
-                        ctx.SaveChanges();
-                        return "Okay";
-                    }
-                    catch
-                    {
-                        if (entity.City == null) return "Invalid City ID";
-                    }
-                }
-                catch { }
-                return "Update Error";
-            }
-        }
-        public bool DeletePark(int id)
-        {
-            using (var ctx = new ApplicationDbContext())
-            {
-                try
-                {
-                    var entity = ctx.Parks.Single(e => e.ID == id);
-
-                    ctx.Parks.Remove(entity);
+                    ctx.Breweries.Remove(entity);
                 }
                 catch { return false; }
                 return ctx.SaveChanges() == 1;
             }
         }
     }
-}
 }
