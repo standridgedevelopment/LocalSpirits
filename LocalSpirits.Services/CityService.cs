@@ -63,11 +63,11 @@ namespace LocalSpirits.Services
                 return new CityDetail();
             }
         }
-        public List<CityListItem> GetCityByName(string cityName, StateName state)
+        public List<CityListItem> GetCityByName(string cityName)
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var cities = ctx.Cities.Where(e => e.Name.Contains(cityName) && e.State.Equals(state)).ToList();
+                var cities = ctx.Cities.Where(e => e.Name.Contains(cityName)).ToList();
                 foreach (var city in cities)
                 {
                     var foundCity = new CityListItem

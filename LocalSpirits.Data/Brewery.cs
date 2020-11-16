@@ -16,9 +16,8 @@ namespace LocalSpirits.Data
         [ForeignKey(nameof(City))]
         public int CityID { get; set; }
         public virtual City City { get; set; }
-        [ForeignKey(nameof(Zipcode))]
         public int ZipCode { get; set; }
-        public virtual Zipcode Zipcode { get; set; }
+        public StateName State { get; set; }
         public string Hours { get; set; }
         public string PhoneNumber { get; set; }
         public string Website { get; set; }

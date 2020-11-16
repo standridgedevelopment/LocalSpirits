@@ -265,6 +265,7 @@
     <Content Include="Views\City\State.cshtml" />
     <Content Include="Views\City\Details.cshtml" />
     <Content Include="Views\City\Edit.cshtml" />
+    <Content Include="Views\City\CityResults.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

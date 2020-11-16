@@ -35,7 +35,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to results", "Index")
+    @Html.ActionLink("Back to results", null, null, null, new { href = Request.UrlReferrer })
 </div>
 
 @section Scripts {

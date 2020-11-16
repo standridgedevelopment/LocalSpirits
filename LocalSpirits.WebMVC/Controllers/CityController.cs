@@ -18,6 +18,7 @@ namespace LocalSpirits.WebMVC.Controllers
         {
             var service = CreateService();
             var State = new CityByState();
+            State.State = "Search by City or State";
             return View(State);
         }
         [HttpPost]
@@ -25,33 +26,37 @@ namespace LocalSpirits.WebMVC.Controllers
         public ActionResult Index(CityByState city)
         {
             var service = CreateService();
-            if (!Enum.TryParse($"{city.State}", out StateName state))
+            bool parseResult = Enum.TryParse($"{city.State}", out StateName state);
+
+            if (parseResult == false) city.StateResult = city.AbreviateState(city.State);
+            if (parseResult) city.StateResult = state;
+
+            if (city.StateResult == null)
             {
-                city.StateResult = city.AbreviateState(city.State);
-                if (city.StateResult == null)
-                {
-                    ModelState.AddModelError("", "");
-                    return View(city);
-                }
-                state = (StateName)city.StateResult;
-            }
-            
-            return RedirectToAction($"State/{state}") ;
+                var searchByCity = service.GetCityByName(city.State);
+                if (searchByCity.Count != 0)
+                    return RedirectToAction($"CityResults/{city.State}");
+            } 
+            return RedirectToAction($"State/{city.StateResult}") ;
         }
 
         public ActionResult State(string id, CityByState city)
         {
-            //string State = city.State;
-            
-            if (id != null) 
+            var service = CreateService();
+            var model = service.GetCitiesByState(id);
+            return View(model);
+        }
+
+        public ActionResult CityResults(string id, CityByState city)
+        {
+            if (id != null)
             {
                 var service = CreateService();
-                var model = service.GetCitiesByState(id);
+                var model = service.GetCityByName(id);
                 return View(model);
-            } 
+            }
             //string state =  $"{city.State}"
             else return RedirectToAction($"State/{city.State}");
-
         }
 
         //GET
