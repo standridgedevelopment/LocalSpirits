@@ -1,4 +1,4 @@
-﻿using LocalSpirits.Models.Brewery;
+﻿using LocalSpirits.Models.Business;
 using LocalSpirits.Services;
 using Microsoft.AspNet.Identity;
 using System;
@@ -9,9 +9,9 @@ using System.Web.Mvc;
 
 namespace LocalSpirits.WebMVC.Controllers
 {
-    public class BreweryController : Controller
+    public class BusinessController : Controller
     {
-        // GET: Brewery
+        // GET: Business
         public ActionResult Index()
         {
             return View();
@@ -24,7 +24,7 @@ namespace LocalSpirits.WebMVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(BreweryCreate model)
+        public ActionResult Create(BusinessCreate model)
         {
             if (!ModelState.IsValid) return View(model);
 
@@ -32,12 +32,12 @@ namespace LocalSpirits.WebMVC.Controllers
             string result = service.Create(model);
             if (result == "okay")
             {
-                TempData["SaveResult"] = "Brewery was created.";
+                TempData["SaveResult"] = "Business was created.";
                 return RedirectToAction("Index");
             };
             if (result == "invalid city")
                 ModelState.AddModelError("", $"{model.City} could not be found.");
-            else ModelState.AddModelError("", "Brewery could not be created.");
+            else ModelState.AddModelError("", "Business could not be created.");
 
             return View(model);
         }
@@ -46,7 +46,7 @@ namespace LocalSpirits.WebMVC.Controllers
             var service = CreateService();
             var detail = service.GetByID(id);
             var model =
-                new BreweryEdit
+                new BusinessEdit
                 {
                     ID = detail.ID,
                     Name = detail.Name,
@@ -63,7 +63,7 @@ namespace LocalSpirits.WebMVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, BreweryEdit model)
+        public ActionResult Edit(int id, BusinessEdit model)
         {
             if (!ModelState.IsValid) return View(model);
 
@@ -78,12 +78,12 @@ namespace LocalSpirits.WebMVC.Controllers
             string result = (service.Update(model, id));
             if (result == "okay")
             {
-                TempData["SaveResult"] = "City was updated.";
+                TempData["SaveResult"] = "Business updated!";
                 return RedirectToAction($"State/{model.State}");
             }
             if (result == "invalid city")
                 ModelState.AddModelError("", $"{model.City} could not be found.");
-            else ModelState.AddModelError("", "Brewery could not be updated.");
+            else ModelState.AddModelError("", "Business could not be updated.");
             return View(model);
         }
         public ActionResult Delete(int id)
@@ -97,20 +97,20 @@ namespace LocalSpirits.WebMVC.Controllers
         [HttpPost]
         [ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteBrewery(int id)
+        public ActionResult DeleteBusiness(int id)
         {
             var service = CreateService();
 
             service.Delete(id);
 
-            TempData["SaveResult"] = "City was deleted";
+            TempData["SaveResult"] = "Business was deleted";
 
             return RedirectToAction("Index");
         }
-        private BreweryService CreateService()
+        private BusinessService CreateService()
         {
             var userId = Guid.Parse(User.Identity.GetUserId());
-            var service = new BreweryService();
+            var service = new BusinessService();
             return service;
         }
     }

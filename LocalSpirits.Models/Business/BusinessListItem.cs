@@ -5,14 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LocalSpirits.Models.Brewery
+namespace LocalSpirits.Models.Business
 {
-    public class BreweryListItem
+    public class BusinessListItem
     {
         public int ID { get; set; }
 
         public string TypeOfEstablishment { get; set; }
-        [DisplayName("Brewery Name")]
+        [DisplayName("Business Name")]
         public string Name { get; set; }
         public int Rating { get; set; }
         public string City { get; set; }

@@ -7,12 +7,12 @@ namespace LocalSpirits.Data.Migrations
     {
         public override void Up()
         {
-            AddColumn("dbo.Brewery", "CityName", c => c.String());
+            AddColumn("dbo.Business", "CityName", c => c.String());
         }
         
         public override void Down()
         {
-            DropColumn("dbo.Brewery", "CityName");
+            DropColumn("dbo.Business", "CityName");
         }
     }
 }

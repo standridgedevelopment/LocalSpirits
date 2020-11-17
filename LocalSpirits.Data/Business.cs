@@ -10,9 +10,9 @@ namespace LocalSpirits.Data
 {
     public enum TypeOfEstablishment
     {
-        Winery, Brewery, Distillary
+        Winery, Business, Distillary
     }
-    public class Brewery
+    public class Business
     {
         [Required]
         public string Name { get; set; }

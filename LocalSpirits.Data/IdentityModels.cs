@@ -37,7 +37,7 @@ namespace LocalSpirits.WebMVC.Data
         public DbSet<State> States { get; set; }
         public DbSet<Zipcode> Zipcodes { get; set; }
         public DbSet<City> Cities { get; set; }
-        public DbSet<Brewery> Breweries { get; set; }
+        public DbSet<Business> Businesses { get; set; }
         public DbSet<Winery> Winery { get; set; }
         public DbSet<Distillery> Distilleries { get; set; }
         public DbSet<Beer> Beers { get; set; }

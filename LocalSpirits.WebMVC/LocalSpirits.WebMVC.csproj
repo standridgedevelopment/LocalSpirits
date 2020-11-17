@@ -182,7 +182,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BeerController.cs" />
-    <Compile Include="Controllers\BreweryController.cs" />
+    <Compile Include="Controllers\BusinessController.cs" />
     <Compile Include="Controllers\CityController.cs" />
     <Compile Include="Controllers\DistilleryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -266,10 +266,10 @@
     <Content Include="Views\City\Details.cshtml" />
     <Content Include="Views\City\Edit.cshtml" />
     <Content Include="Views\City\CityResults.cshtml" />
-    <Content Include="Views\Brewery\Index.cshtml" />
-    <Content Include="Views\Brewery\Create.cshtml" />
-    <Content Include="Views\Brewery\Edit.cshtml" />
-    <Content Include="Views\Brewery\Delete.cshtml" />
+    <Content Include="Views\Business\Index.cshtml" />
+    <Content Include="Views\Business\Create.cshtml" />
+    <Content Include="Views\Business\Edit.cshtml" />
+    <Content Include="Views\Business\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

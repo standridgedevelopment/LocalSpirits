@@ -7,24 +7,30 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LocalSpirits.Models.Brewery
+namespace LocalSpirits.Models.Business
 {
-    public class BreweryDetail
+    public class BusinessEdit
     {
         public int ID { get; set; }
-        public string TypeOfEstablishment { get; set; }
-        [DisplayName("Brewery Name")]
+        [Required]
+        [DisplayName("What type of business is this? (Brewery, Winery, Distillary)")]
+        public TypeOfEstablishment typeOfEstablishment { get; set; }
+        [Required]
+        [DisplayName("Business Name")]
         public string Name { get; set; }
-        public int Rating { get; set; }
+        [Required]
         public string City { get; set; }
+        [Required]
         public string State { get; set; }
+        [Required]
+        [MinLength(5), MaxLength(5)]
         [DisplayName("Zip Code")]
         public int ZipCode { get; set; }
         public string Hours { get; set; }
         [DisplayName("Phone Number")]
         public string PhoneNumber { get; set; }
         public string Website { get; set; }
-        [DisplayName("Does this Brewery have live music?")]
+        [DisplayName("Does this Business have live music?")]
         public bool LiveMusic { get; set; }
     }
 }

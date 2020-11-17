@@ -1,5 +1,5 @@
 ﻿using LocalSpirits.Data;
-using LocalSpirits.Models.Brewery;
+using LocalSpirits.Models.Business;
 using LocalSpirits.WebMVC.Data;
 using System;
 using System.Collections.Generic;
@@ -9,16 +9,16 @@ using System.Threading.Tasks;
 
 namespace LocalSpirits.Services
 {
-    public class BreweryService
+    public class BusinessService
     {
-        readonly List<BreweryListItem> searchResults = new List<BreweryListItem>();
-        public string Create(BreweryCreate model)
+        readonly List<BusinessListItem> searchResults = new List<BusinessListItem>();
+        public string Create(BusinessCreate model)
         {
             var service = new CityService();
             var foundCity = service.GetCityByName(model.City, model.State);
 
             if (foundCity == null) return "invalid city";
-            var entity = new Brewery()
+            var entity = new Business()
             {
                 CityID = foundCity.ID,
                 TypeOfEstablishment = $"{model.typeOfEstablishment}",
@@ -37,7 +37,7 @@ namespace LocalSpirits.Services
  
                 try
                 {
-                    ctx.Breweries.Add(entity);
+                    ctx.Businesses.Add(entity);
                     ctx.SaveChanges();
                     return "okay";
                 }
@@ -45,12 +45,12 @@ namespace LocalSpirits.Services
                 return "True";
             }
         }
-        public IEnumerable<BreweryListItem> GetAll()
+        public IEnumerable<BusinessListItem> GetAll()
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var query = ctx.Breweries.Select
-                    (e => new BreweryListItem
+                var query = ctx.Businesses.Select
+                    (e => new BusinessListItem
                     {
                         Name = e.Name,
                         TypeOfEstablishment = e.TypeOfEstablishment,
@@ -64,14 +64,14 @@ namespace LocalSpirits.Services
             }
 
         }
-        public BreweryDetail GetByID(int id)
+        public BusinessDetail GetByID(int id)
         {
             using (var ctx = new ApplicationDbContext())
             {
                 try
                 {
-                    var entity = ctx.Breweries.Single(e => e.ID == id);
-                    return new BreweryDetail
+                    var entity = ctx.Businesses.Single(e => e.ID == id);
+                    return new BusinessDetail
                     {
                         ID = entity.ID,
                         Name = entity.Name,
@@ -87,98 +87,98 @@ namespace LocalSpirits.Services
                     };
                 }
                 catch { }
-                return new BreweryDetail();
+                return new BusinessDetail();
             }
         }
-        public List<BreweryListItem> GetByName(string name)
+        public List<BusinessListItem> GetByName(string name)
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var breweries = ctx.Breweries.Where(e => e.Name.Contains(name)).ToList();
-                foreach (var brewery in breweries)
+                var Businessess = ctx.Businesses.Where(e => e.Name.Contains(name)).ToList();
+                foreach (var business in Businessess)
                 {
-                    var found = new BreweryListItem
+                    var found = new BusinessListItem
                     {
-                        ID = brewery.ID,
-                        Name = brewery.Name,
-                        TypeOfEstablishment = brewery.TypeOfEstablishment,
-                        Rating = brewery.Rating,
-                        City = brewery.City.Name,
-                        State = brewery.State,
-                        ZipCode = brewery.ZipCode,
+                        ID = business.ID,
+                        Name = business.Name,
+                        TypeOfEstablishment = business.TypeOfEstablishment,
+                        Rating = business.Rating,
+                        City = business.City.Name,
+                        State = business.State,
+                        ZipCode = business.ZipCode,
                     };
                     searchResults.Add(found);
                 }
                 return searchResults;
             }
         }
-        public List<BreweryListItem> GetByCityName(string cityName)
+        public List<BusinessListItem> GetByCityName(string cityName)
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var breweries = ctx.Breweries.Where(e => e.City.Name == cityName).ToList();
-                foreach (var brewery in breweries)
+                var Businessess = ctx.Businesses.Where(e => e.City.Name == cityName).ToList();
+                foreach (var business in Businessess)
                 {
-                    var found = new BreweryListItem
+                    var found = new BusinessListItem
                     {
-                        ID = brewery.ID,
-                        Name = brewery.Name,
-                        TypeOfEstablishment = brewery.TypeOfEstablishment,
-                        Rating = brewery.Rating,
-                        City = brewery.City.Name,
-                        State = brewery.State,
-                        ZipCode = brewery.ZipCode,
+                        ID = business.ID,
+                        Name = business.Name,
+                        TypeOfEstablishment = business.TypeOfEstablishment,
+                        Rating = business.Rating,
+                        City = business.City.Name,
+                        State = business.State,
+                        ZipCode = business.ZipCode,
                     };
                     searchResults.Add(found);
                 }
                 return searchResults;
             }
         }
-        public List<BreweryListItem> GetByStateName(string stateName)
+        public List<BusinessListItem> GetByStateName(string stateName)
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var breweries = ctx.Breweries.Where(e => e.City.State == stateName).ToList();
-                foreach (var brewery in breweries)
+                var Businessess = ctx.Businesses.Where(e => e.City.State == stateName).ToList();
+                foreach (var business in Businessess)
                 {
-                    var found = new BreweryListItem
+                    var found = new BusinessListItem
                     {
-                        ID = brewery.ID,
-                        Name = brewery.Name,
-                        TypeOfEstablishment = brewery.TypeOfEstablishment,
-                        Rating = brewery.Rating,
-                        City = brewery.City.Name,
-                        State = brewery.State,
-                        ZipCode = brewery.ZipCode,
+                        ID = business.ID,
+                        Name = business.Name,
+                        TypeOfEstablishment = business.TypeOfEstablishment,
+                        Rating = business.Rating,
+                        City = business.City.Name,
+                        State = business.State,
+                        ZipCode = business.ZipCode,
                     };
                     searchResults.Add(found);
                 }
                 return searchResults;
             }
         }
-        public List<BreweryListItem> GetByZipCode(int zipCode)
+        public List<BusinessListItem> GetByZipCode(int zipCode)
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var breweries = ctx.Breweries.Where(e => e.ZipCode == zipCode).ToList();
-                foreach (var brewery in breweries)
+                var Businessess = ctx.Businesses.Where(e => e.ZipCode == zipCode).ToList();
+                foreach (var business in Businessess)
                 {
-                    var found = new BreweryListItem
+                    var found = new BusinessListItem
                     {
-                        ID = brewery.ID,
-                        Name = brewery.Name,
-                        TypeOfEstablishment = brewery.Name,
-                        Rating = brewery.Rating,
-                        City = brewery.City.Name,
-                        State = brewery.State,
-                        ZipCode = brewery.ZipCode,
+                        ID = business.ID,
+                        Name = business.Name,
+                        TypeOfEstablishment = business.Name,
+                        Rating = business.Rating,
+                        City = business.City.Name,
+                        State = business.State,
+                        ZipCode = business.ZipCode,
                     };
                     searchResults.Add(found);
                 }
                 return searchResults;
             }
         }
-        public string Update(BreweryEdit model, int id)
+        public string Update(BusinessEdit model, int id)
         {
             using (var ctx = new ApplicationDbContext())
             {
@@ -187,7 +187,7 @@ namespace LocalSpirits.Services
                 var foundCity = service.GetCityByName(model.City, model.State);
                 if (foundCity == null) return "invalid city";
 
-                var entity = ctx.Breweries.Single(e => e.ID == id);
+                var entity = ctx.Businesses.Single(e => e.ID == id);
 
                 entity.Name = model.Name;
                 entity.CityID = foundCity.ID;
@@ -214,9 +214,9 @@ namespace LocalSpirits.Services
             {
                 try
                 {
-                    var entity = ctx.Breweries.Single(e => e.ID == id);
+                    var entity = ctx.Businesses.Single(e => e.ID == id);
 
-                    ctx.Breweries.Remove(entity);
+                    ctx.Businesses.Remove(entity);
                 }
                 catch { return false; }
                 return ctx.SaveChanges() == 1;

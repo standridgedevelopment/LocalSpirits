@@ -26,7 +26,7 @@ namespace LocalSpirits.Data.Migrations
                 .PrimaryKey(t => t.ID);
             
             CreateTable(
-                "dbo.Brewery",
+                "dbo.Business",
                 c => new
                     {
                         ID = c.Int(nullable: false, identity: true),
@@ -236,8 +236,8 @@ namespace LocalSpirits.Data.Migrations
             DropForeignKey("dbo.IdentityUserRole", "IdentityRole_Id", "dbo.IdentityRole");
             DropForeignKey("dbo.Distillery", "ZipCode", "dbo.Zipcode");
             DropForeignKey("dbo.Distillery", "CityID", "dbo.City");
-            DropForeignKey("dbo.Brewery", "ZipCode", "dbo.Zipcode");
-            DropForeignKey("dbo.Brewery", "CityID", "dbo.City");
+            DropForeignKey("dbo.Business", "ZipCode", "dbo.Zipcode");
+            DropForeignKey("dbo.Business", "CityID", "dbo.City");
             DropIndex("dbo.Winery", new[] { "ZipCode" });
             DropIndex("dbo.Winery", new[] { "CityID" });
             DropIndex("dbo.IdentityUserLogin", new[] { "ApplicationUser_Id" });
@@ -246,8 +246,8 @@ namespace LocalSpirits.Data.Migrations
             DropIndex("dbo.IdentityUserRole", new[] { "IdentityRole_Id" });
             DropIndex("dbo.Distillery", new[] { "ZipCode" });
             DropIndex("dbo.Distillery", new[] { "CityID" });
-            DropIndex("dbo.Brewery", new[] { "ZipCode" });
-            DropIndex("dbo.Brewery", new[] { "CityID" });
+            DropIndex("dbo.Business", new[] { "ZipCode" });
+            DropIndex("dbo.Business", new[] { "CityID" });
             DropTable("dbo.Wine");
             DropTable("dbo.Winery");
             DropTable("dbo.IdentityUserLogin");
@@ -261,7 +261,7 @@ namespace LocalSpirits.Data.Migrations
             DropTable("dbo.Distillery");
             DropTable("dbo.Zipcode");
             DropTable("dbo.City");
-            DropTable("dbo.Brewery");
+            DropTable("dbo.Business");
             DropTable("dbo.Beer");
         }
     }

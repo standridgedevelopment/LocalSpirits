@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LocalSpirits.Services
 {
-    public class BeerServicec
+    public class BeerService
     {
     }
 }

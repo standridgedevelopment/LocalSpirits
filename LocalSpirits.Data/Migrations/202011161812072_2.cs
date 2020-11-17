@@ -7,22 +7,22 @@ namespace LocalSpirits.Data.Migrations
     {
         public override void Up()
         {
-            DropForeignKey("dbo.Brewery", "ZipCode", "dbo.Zipcode");
+            DropForeignKey("dbo.Business", "ZipCode", "dbo.Zipcode");
             DropForeignKey("dbo.Distillery", "ZipCode", "dbo.Zipcode");
-            DropIndex("dbo.Brewery", new[] { "ZipCode" });
+            DropIndex("dbo.Business", new[] { "ZipCode" });
             DropIndex("dbo.Distillery", new[] { "ZipCode" });
-            AddColumn("dbo.Brewery", "State", c => c.String());
+            AddColumn("dbo.Business", "State", c => c.String());
             AddColumn("dbo.Distillery", "State", c => c.String());
         }
         
         public override void Down()
         {
             DropColumn("dbo.Distillery", "State");
-            DropColumn("dbo.Brewery", "State");
+            DropColumn("dbo.Business", "State");
             CreateIndex("dbo.Distillery", "ZipCode");
-            CreateIndex("dbo.Brewery", "ZipCode");
+            CreateIndex("dbo.Business", "ZipCode");
             AddForeignKey("dbo.Distillery", "ZipCode", "dbo.Zipcode", "ZipCode", cascadeDelete: true);
-            AddForeignKey("dbo.Brewery", "ZipCode", "dbo.Zipcode", "ZipCode", cascadeDelete: true);
+            AddForeignKey("dbo.Business", "ZipCode", "dbo.Zipcode", "ZipCode", cascadeDelete: true);
         }
     }
 }

@@ -58,10 +58,10 @@
     <Compile Include="Beer\BeerDetail.cs" />
     <Compile Include="Beer\BeerEdit.cs" />
     <Compile Include="Beer\BeerListItem.cs" />
-    <Compile Include="Brewery\BreweryCreate.cs" />
-    <Compile Include="Brewery\BreweryDetail.cs" />
-    <Compile Include="Brewery\BreweryEdit.cs" />
-    <Compile Include="Brewery\BreweryListItem.cs" />
+    <Compile Include="Business\BusinessCreate.cs" />
+    <Compile Include="Business\BusinessDetail.cs" />
+    <Compile Include="Business\BusinessEdit.cs" />
+    <Compile Include="Business\BusinessListItem.cs" />
     <Compile Include="City\CityByState.cs" />
     <Compile Include="City\CityCreate.cs" />
     <Compile Include="City\CityDetail.cs" />

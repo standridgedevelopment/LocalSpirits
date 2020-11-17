@@ -8,15 +8,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LocalSpirits.Models.Brewery
+namespace LocalSpirits.Models.Business
 {
-    public class BreweryCreate
+    public class BusinessCreate
     {
         [Required]
-        [DisplayName("Brewery Name")]
+        [DisplayName("Business Name")]
         public string Name { get; set; }
         [Required]
-        [DisplayName("What type of establishment is this?")]
+        [DisplayName("What type of business is this? (Brewery, Winery, Distillary)")]
         public TypeOfEstablishment typeOfEstablishment { get; set; }
         [Required]
         public string City { get; set; }
@@ -30,7 +30,7 @@ namespace LocalSpirits.Models.Brewery
         [DisplayName("Phone Number")]
         public string PhoneNumber { get; set; }
         public string Website { get; set; }
-        [DisplayName("Does this Brewery have live music?")]
+        [DisplayName("Does this Business have live music?")]
         public bool LiveMusic { get; set; }
     }
 }

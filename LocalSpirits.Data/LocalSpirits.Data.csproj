@@ -55,7 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Beer.cs" />
-    <Compile Include="Brewery.cs" />
+    <Compile Include="Business.cs" />
     <Compile Include="City.cs" />
     <Compile Include="Distillery.cs" />
     <Compile Include="IdentityModels.cs" />
@@ -75,6 +75,10 @@
     <Compile Include="Migrations\202011162032561_3.cs" />
     <Compile Include="Migrations\202011162032561_3.Designer.cs">
       <DependentUpon>202011162032561_3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011171625358_4.cs" />
+    <Compile Include="Migrations\202011171625358_4.Designer.cs">
+      <DependentUpon>202011171625358_4.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -100,6 +104,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202011162032561_3.resx">
       <DependentUpon>202011162032561_3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011171625358_4.resx">
+      <DependentUpon>202011171625358_4.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
