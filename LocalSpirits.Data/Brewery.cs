@@ -8,22 +8,30 @@ using System.Threading.Tasks;
 
 namespace LocalSpirits.Data
 {
+    public enum TypeOfEstablishment
+    {
+        Winery, Brewery, Distillary
+    }
     public class Brewery
     {
+        [Required]
         public string Name { get; set; }
         [Key]
         public int ID { get; set; }
+        [Required]
+        public string TypeOfEstablishment{ get; set; }
+
         [ForeignKey(nameof(City))]
         public int CityID { get; set; }
         public virtual City City { get; set; }
-        public string CityName
-        {
-            get
-            {
-                return City.Name;
-            }
-            set { }
-        }
+        //public string CityName
+        //{
+        //    get
+        //    {
+        //        return City.Name;
+        //    }
+        //    set { }
+        //}
         public int ZipCode { get; set; }
         public string State { get; set; }
         public string Hours { get; set; }

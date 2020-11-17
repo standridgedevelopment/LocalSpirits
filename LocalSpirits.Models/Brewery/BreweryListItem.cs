@@ -10,6 +10,8 @@ namespace LocalSpirits.Models.Brewery
     public class BreweryListItem
     {
         public int ID { get; set; }
+
+        public string TypeOfEstablishment { get; set; }
         [DisplayName("Brewery Name")]
         public string Name { get; set; }
         public int Rating { get; set; }

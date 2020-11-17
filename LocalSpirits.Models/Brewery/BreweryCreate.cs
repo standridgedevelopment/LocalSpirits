@@ -16,6 +16,9 @@ namespace LocalSpirits.Models.Brewery
         [DisplayName("Brewery Name")]
         public string Name { get; set; }
         [Required]
+        [DisplayName("What type of establishment is this?")]
+        public TypeOfEstablishment typeOfEstablishment { get; set; }
+        [Required]
         public string City { get; set; }
         [Required]
         public StateName State { get; set; }

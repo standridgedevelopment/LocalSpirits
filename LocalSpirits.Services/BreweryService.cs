@@ -21,6 +21,7 @@ namespace LocalSpirits.Services
             var entity = new Brewery()
             {
                 CityID = foundCity.ID,
+                TypeOfEstablishment = $"{model.typeOfEstablishment}",
                 Name = model.Name,
                 State = $"{model.State}",
                 ZipCode = model.ZipCode,
@@ -52,6 +53,7 @@ namespace LocalSpirits.Services
                     (e => new BreweryListItem
                     {
                         Name = e.Name,
+                        TypeOfEstablishment = e.TypeOfEstablishment,
                         City = e.City.Name,
                         State = e.State,
                         ID = e.ID,
@@ -73,6 +75,7 @@ namespace LocalSpirits.Services
                     {
                         ID = entity.ID,
                         Name = entity.Name,
+                        TypeOfEstablishment = entity.TypeOfEstablishment,
                         City = entity.City.Name,
                         State = entity.State,
                         ZipCode = entity.ZipCode,
@@ -98,6 +101,7 @@ namespace LocalSpirits.Services
                     {
                         ID = brewery.ID,
                         Name = brewery.Name,
+                        TypeOfEstablishment = brewery.TypeOfEstablishment,
                         Rating = brewery.Rating,
                         City = brewery.City.Name,
                         State = brewery.State,
@@ -119,6 +123,7 @@ namespace LocalSpirits.Services
                     {
                         ID = brewery.ID,
                         Name = brewery.Name,
+                        TypeOfEstablishment = brewery.TypeOfEstablishment,
                         Rating = brewery.Rating,
                         City = brewery.City.Name,
                         State = brewery.State,
@@ -140,6 +145,7 @@ namespace LocalSpirits.Services
                     {
                         ID = brewery.ID,
                         Name = brewery.Name,
+                        TypeOfEstablishment = brewery.TypeOfEstablishment,
                         Rating = brewery.Rating,
                         City = brewery.City.Name,
                         State = brewery.State,
@@ -161,6 +167,7 @@ namespace LocalSpirits.Services
                     {
                         ID = brewery.ID,
                         Name = brewery.Name,
+                        TypeOfEstablishment = brewery.Name,
                         Rating = brewery.Rating,
                         City = brewery.City.Name,
                         State = brewery.State,
@@ -190,8 +197,6 @@ namespace LocalSpirits.Services
                 entity.PhoneNumber = model.PhoneNumber;
                 entity.Website = model.Website;
                 entity.LiveMusic = model.LiveMusic;
-
-               
 
                 try
                 {
