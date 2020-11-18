@@ -13,7 +13,8 @@ namespace LocalSpirits.Models.City
         public int ID { get; set; }
         [DisplayName("City")]
         public string Name { get; set; }
-        public string State { get; set; }
+        [DisplayName("State")]
+        public StateName State { get; set; }
 
     }
 }

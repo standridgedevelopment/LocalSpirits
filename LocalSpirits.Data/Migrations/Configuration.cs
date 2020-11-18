@@ -10,7 +10,6 @@ namespace LocalSpirits.Data.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            ContextKey = "LocalSpirits.WebMVC.Data.ApplicationDbContext";
         }
 
         protected override void Seed(LocalSpirits.WebMVC.Data.ApplicationDbContext context)

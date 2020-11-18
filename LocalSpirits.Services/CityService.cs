@@ -139,7 +139,7 @@ namespace LocalSpirits.Services
                     var entity = ctx.Cities.Single(e => e.ID == model.ID);
 
                     entity.Name = model.Name;
-                    entity.State = model.State;
+                    entity.State = $"{model.State}";
                 }
                 catch { return false; }
                 return ctx.SaveChanges() == 1;

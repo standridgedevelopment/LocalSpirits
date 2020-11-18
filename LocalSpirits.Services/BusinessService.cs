@@ -112,6 +112,22 @@ namespace LocalSpirits.Services
                 return searchResults;
             }
         }
+
+        public Business GetByNameAndCity(string name, string city)
+        {
+            var business = new Business();
+            using (var ctx = new ApplicationDbContext())
+            {
+                try
+                {
+                    business = ctx.Businesses.Single(e => e.Name == name && e.City.Name == city);
+
+                }
+                catch { return null; }
+                return business;
+            }
+        }
+
         public List<BusinessListItem> GetByCityName(string cityName)
         {
             using (var ctx = new ApplicationDbContext())
@@ -189,6 +205,7 @@ namespace LocalSpirits.Services
 
                 var entity = ctx.Businesses.Single(e => e.ID == id);
 
+                entity.ID = model.ID;
                 entity.Name = model.Name;
                 entity.CityID = foundCity.ID;
                 entity.State = $"{model.State}";

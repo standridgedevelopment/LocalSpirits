@@ -3,7 +3,7 @@ namespace LocalSpirits.Data.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialCreate : DbMigration
+    public partial class _1 : DbMigration
     {
         public override void Up()
         {
@@ -13,6 +13,7 @@ namespace LocalSpirits.Data.Migrations
                     {
                         ID = c.Int(nullable: false, identity: true),
                         Name = c.String(nullable: false),
+                        BreweryID = c.Int(nullable: false),
                         Aroma = c.String(),
                         Taste = c.String(),
                         ABV = c.Int(nullable: false),
@@ -20,19 +21,23 @@ namespace LocalSpirits.Data.Migrations
                         Package = c.String(),
                         KegsAvailable = c.Boolean(nullable: false),
                         Availability = c.String(),
-                        website = c.String(),
+                        Website = c.String(),
                         Rating = c.Int(nullable: false),
                     })
-                .PrimaryKey(t => t.ID);
+                .PrimaryKey(t => t.ID)
+                .ForeignKey("dbo.Business", t => t.BreweryID, cascadeDelete: true)
+                .Index(t => t.BreweryID);
             
             CreateTable(
                 "dbo.Business",
                 c => new
                     {
                         ID = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
+                        Name = c.String(nullable: false),
+                        TypeOfEstablishment = c.String(nullable: false),
                         CityID = c.Int(nullable: false),
                         ZipCode = c.Int(nullable: false),
+                        State = c.String(),
                         Hours = c.String(),
                         PhoneNumber = c.String(),
                         Website = c.String(),
@@ -41,9 +46,7 @@ namespace LocalSpirits.Data.Migrations
                     })
                 .PrimaryKey(t => t.ID)
                 .ForeignKey("dbo.City", t => t.CityID, cascadeDelete: true)
-                .ForeignKey("dbo.Zipcode", t => t.ZipCode, cascadeDelete: true)
-                .Index(t => t.CityID)
-                .Index(t => t.ZipCode);
+                .Index(t => t.CityID);
             
             CreateTable(
                 "dbo.City",
@@ -51,37 +54,9 @@ namespace LocalSpirits.Data.Migrations
                     {
                         ID = c.Int(nullable: false, identity: true),
                         Name = c.String(),
-                        State = c.Int(nullable: false),
+                        State = c.String(),
                     })
                 .PrimaryKey(t => t.ID);
-            
-            CreateTable(
-                "dbo.Zipcode",
-                c => new
-                    {
-                        ZipCode = c.Int(nullable: false, identity: true),
-                    })
-                .PrimaryKey(t => t.ZipCode);
-            
-            CreateTable(
-                "dbo.Distillery",
-                c => new
-                    {
-                        ID = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
-                        CityID = c.Int(nullable: false),
-                        ZipCode = c.Int(nullable: false),
-                        Hours = c.String(),
-                        PhoneNumber = c.String(),
-                        Website = c.String(),
-                        Rating = c.Int(nullable: false),
-                        LiveMusic = c.Boolean(nullable: false),
-                    })
-                .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.City", t => t.CityID, cascadeDelete: true)
-                .ForeignKey("dbo.Zipcode", t => t.ZipCode, cascadeDelete: true)
-                .Index(t => t.CityID)
-                .Index(t => t.ZipCode);
             
             CreateTable(
                 "dbo.Liquor",
@@ -191,26 +166,6 @@ namespace LocalSpirits.Data.Migrations
                 .Index(t => t.ApplicationUser_Id);
             
             CreateTable(
-                "dbo.Winery",
-                c => new
-                    {
-                        ID = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
-                        CityID = c.Int(nullable: false),
-                        ZipCode = c.Int(nullable: false),
-                        Hours = c.String(),
-                        PhoneNumber = c.String(),
-                        Website = c.String(),
-                        Rating = c.Int(nullable: false),
-                        LiveMusic = c.Boolean(nullable: false),
-                    })
-                .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.City", t => t.CityID, cascadeDelete: true)
-                .ForeignKey("dbo.Zipcode", t => t.ZipCode, cascadeDelete: true)
-                .Index(t => t.CityID)
-                .Index(t => t.ZipCode);
-            
-            CreateTable(
                 "dbo.Wine",
                 c => new
                     {
@@ -228,28 +183,19 @@ namespace LocalSpirits.Data.Migrations
         
         public override void Down()
         {
-            DropForeignKey("dbo.Winery", "ZipCode", "dbo.Zipcode");
-            DropForeignKey("dbo.Winery", "CityID", "dbo.City");
             DropForeignKey("dbo.IdentityUserRole", "ApplicationUser_Id", "dbo.ApplicationUser");
             DropForeignKey("dbo.IdentityUserLogin", "ApplicationUser_Id", "dbo.ApplicationUser");
             DropForeignKey("dbo.IdentityUserClaim", "ApplicationUser_Id", "dbo.ApplicationUser");
             DropForeignKey("dbo.IdentityUserRole", "IdentityRole_Id", "dbo.IdentityRole");
-            DropForeignKey("dbo.Distillery", "ZipCode", "dbo.Zipcode");
-            DropForeignKey("dbo.Distillery", "CityID", "dbo.City");
-            DropForeignKey("dbo.Business", "ZipCode", "dbo.Zipcode");
+            DropForeignKey("dbo.Beer", "BreweryID", "dbo.Business");
             DropForeignKey("dbo.Business", "CityID", "dbo.City");
-            DropIndex("dbo.Winery", new[] { "ZipCode" });
-            DropIndex("dbo.Winery", new[] { "CityID" });
             DropIndex("dbo.IdentityUserLogin", new[] { "ApplicationUser_Id" });
             DropIndex("dbo.IdentityUserClaim", new[] { "ApplicationUser_Id" });
             DropIndex("dbo.IdentityUserRole", new[] { "ApplicationUser_Id" });
             DropIndex("dbo.IdentityUserRole", new[] { "IdentityRole_Id" });
-            DropIndex("dbo.Distillery", new[] { "ZipCode" });
-            DropIndex("dbo.Distillery", new[] { "CityID" });
-            DropIndex("dbo.Business", new[] { "ZipCode" });
             DropIndex("dbo.Business", new[] { "CityID" });
+            DropIndex("dbo.Beer", new[] { "BreweryID" });
             DropTable("dbo.Wine");
-            DropTable("dbo.Winery");
             DropTable("dbo.IdentityUserLogin");
             DropTable("dbo.IdentityUserClaim");
             DropTable("dbo.ApplicationUser");
@@ -258,8 +204,6 @@ namespace LocalSpirits.Data.Migrations
             DropTable("dbo.IdentityRole");
             DropTable("dbo.Profile");
             DropTable("dbo.Liquor");
-            DropTable("dbo.Distillery");
-            DropTable("dbo.Zipcode");
             DropTable("dbo.City");
             DropTable("dbo.Business");
             DropTable("dbo.Beer");

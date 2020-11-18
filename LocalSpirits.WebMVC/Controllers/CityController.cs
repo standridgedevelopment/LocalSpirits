@@ -98,7 +98,6 @@ namespace LocalSpirits.WebMVC.Controllers
                 {
                     ID = detail.ID,
                     Name = detail.Name,
-                    State = detail.State
                 };
             return View(model);
         }
