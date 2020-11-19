@@ -19,23 +19,19 @@ namespace LocalSpirits.WebMVC.Controllers
         {
             var viewModel = new EventViewModel();
             var events = new List<EventViewModel>();
-            start = DateTime.Today.AddDays(-14);
-            end = DateTime.Today.AddDays(-11);
+            start = DateTime.Today;
+            end = DateTime.Today;
 
-            for (var i = 1; i <= 5; i++)
-            {
                 events.Add(new EventViewModel()
                 {
-                    id = i,
-                    title = "Event " + i,
-                    start = start.ToString(),
-                    end = end.ToString(),
-                    allDay = false
+                title = "All Day Event",
+                startRecur = $"2020-11-19",
+                daysOfWeek = new int[] {0, 4}
+                
                 });
 
-                start = start.AddDays(7);
-                end = end.AddDays(7);
-            }
+              
+            
             //events.Add(new EventViewModel()
             //{
             //    id = 10,
