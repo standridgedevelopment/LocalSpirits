@@ -1,58 +1,87 @@
-﻿@model IEnumerable<LocalSpirits.Models.Business.BusinessListItem>
-@{
-    Layout = null;
-}
-
-<!DOCTYPE html>
-<!-- template from http://getbootstrap.com/getting-started -->
-
-<html lang="en">
+﻿<!DOCTYPE html>
+<html lang='en'>
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap 101 Template</title>
+    <meta charset='utf-8' />
+    <link href='~/Scripts/fullcalendar/main.css' rel='stylesheet' />
+    <script src='~/Scripts/fullcalendar/main.js'></script>
+    <script>
 
-    <!-- CSS Includes -->
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.0.1/fullcalendar.min.css">
-
-    <style type="text/css">
-
-        .field-validation-error {
-            color: #ff0000;
+        document.addEventListener('DOMContentLoaded', function () {
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+               initialDate: '2020-09-12',
+      editable: true,
+      selectable: true,
+      businessHours: true,
+      dayMaxEvents: true, // allow "more" link when too many events
+      events: [
+        {
+          title: 'All Day Event',
+          start: '2020-09-01'
+        },
+        {
+          title: 'Long Event',
+          start: '2020-09-07',
+          end: '2020-09-10'
+        },
+        {
+          groupId: 999,
+          title: 'Repeating Event',
+          start: '2020-09-09T16:00:00'
+        },
+        {
+          groupId: 999,
+          title: 'Repeating Event',
+          start: '2020-09-16T16:00:00'
+        },
+        {
+          title: 'Conference',
+          start: '2020-09-11',
+          end: '2020-09-13'
+        },
+        {
+          title: 'Meeting',
+          start: '2020-09-12T10:30:00',
+          end: '2020-09-12T12:30:00'
+        },
+        {
+          title: 'Lunch',
+          start: '2020-09-12T12:00:00'
+        },
+        {
+          title: 'Meeting',
+          start: '2020-09-12T14:30:00'
+        },
+        {
+          title: 'Happy Hour',
+          start: '2020-09-12T17:30:00'
+        },
+        {
+          title: 'Dinner',
+          start: '2020-09-12T20:00:00'
+        },
+        {
+          title: 'Birthday Party',
+          start: '2020-09-13T07:00:00'
+        },
+        {
+          title: 'Click for Google',
+          url: 'http://google.com/',
+          start: '2020-09-28'
         }
-    </style>
-</head>
+      ]
+            });
+            calendar.render();
 
+        });
+
+    </script>
+</head>
 <body>
-    <div class="container">
-        <div id='calendar'></div>
+    <div id='calendar'>
+
     </div>
 
-    <!-- JS includes -->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-
-    <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
-    <script src="//ajax.aspnetcdn.com/ajax/mvc/4.0/jquery.validate.unobtrusive.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.16.0/moment.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.0.1/fullcalendar.min.js"></script>
-
-    <script type="text/javascript">
-
-			$(document).ready(function () {
-				$('#calendar').fullCalendar({
-        			header: {
-            			left: 'prev,next today',
-            			center: 'title',
-            			right: 'month,agendaWeek,agendaDay'
-					},
-            		firstDay: 1, //The day that each week begins (Monday=1)
-            		slotMinutes: 60,
-            		events: '@Url.RouteUrl(new{ action="GetEvents", controller="Calendar"})'
-        		});
-    		});
-    </script>
 </body>
 </html>

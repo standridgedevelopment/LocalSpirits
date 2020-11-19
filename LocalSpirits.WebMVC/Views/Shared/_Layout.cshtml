@@ -12,9 +12,8 @@
     <!-- qTip -->
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/qtip2/3.0.3/jquery.qtip.min.css" />
 
-    <!-- Full Calendar -->
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.9.1/fullcalendar.min.css" />
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.9.1/fullcalendar.print.css" media="print" />
+    <link href='~/Scripts/fullcalendar/main.css' rel='stylesheet' />
+    <script src='~/Scripts/fullcalendar/main.js'></script>
 
     @* Custom *@
     @Styles.Render("~/Content/css/custom-style")
@@ -55,7 +54,8 @@
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/qtip2/3.0.3/jquery.qtip.min.js"></script>
 
     <!-- Full Calendar -->
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.9.1/fullcalendar.min.js"></script>
+    <link href='~/Scripts/fullcalendar/main.css' rel='stylesheet' />
+    <script src='~/Scripts/fullcalendar/main.js'></script>
     @Scripts.Render("~/bundles/Script-calendar")
 
     @RenderSection("scripts", required: false)
