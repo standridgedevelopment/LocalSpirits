@@ -10,7 +10,7 @@ namespace LocalSpirits.Models.Business
     public class BusinessListItem
     {
         public int ID { get; set; }
-
+        [DisplayName("Business Type")]
         public string TypeOfEstablishment { get; set; }
         [DisplayName("Business Name")]
         public string Name { get; set; }

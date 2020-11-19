@@ -10,7 +10,7 @@ namespace LocalSpirits.Data
 {
     public enum TypeOfEstablishment
     {
-        Winery, Business, Distillary
+        Winery, Brewery, Distillary
     }
     public class Business
     {

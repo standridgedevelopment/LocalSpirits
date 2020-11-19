@@ -109,7 +109,7 @@ namespace LocalSpirits.WebMVC.Controllers
         }
         private BusinessService CreateService()
         {
-            var userId = Guid.Parse(User.Identity.GetUserId());
+            //var userId = Guid.Parse(User.Identity.GetUserId());
             var service = new BusinessService();
             return service;
         }

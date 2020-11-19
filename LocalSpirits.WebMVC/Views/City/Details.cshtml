@@ -1,34 +1,53 @@
-﻿@model LocalSpirits.Models.City.CityDetail
+﻿@model IEnumerable<LocalSpirits.Models.Business.BusinessListItem>
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = $"City";
 }
+<h2>
+    
+</h2>
 
-<h2>Details</h2>
-
-<div>
-    <h4>CityDetail</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.State)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.State)
-        </dd>
-
-    </dl>
-</div>
 <p>
-    @Html.ActionLink("Edit Name", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Search Again", "Index")
+    @Html.ActionLink("Create New", "Create")
 </p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TypeOfEstablishment)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Rating)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TypeOfEstablishment)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rating)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+            </td>
+        </tr>
+    }
+
+
+</table>
+<div class="row">
+    <section class="col-md-4 col-md-push-0">
+        @Html.Partial("_CalendarPartial")
+    </section>
+</div>

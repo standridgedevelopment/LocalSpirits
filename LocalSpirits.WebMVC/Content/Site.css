@@ -9,6 +9,11 @@
     padding-right: 15px;
 }
 
+#search {
+    margin-left: 10px !important;
+    margin-top: 2px !important;
+}
+
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
 */

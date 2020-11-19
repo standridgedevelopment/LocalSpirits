@@ -22,28 +22,39 @@ namespace LocalSpirits.WebMVC.Controllers
             return View(State);
         }
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Index(CityByState city)
+        public ActionResult Index(string id ,CityByState city)
         {
             var service = CreateService();
-            bool parseResult = Enum.TryParse($"{city.State}", out StateName state);
+            bool parseResult = Enum.TryParse($"{id}", out StateName state);
 
-            if (parseResult == false) city.StateResult = city.AbreviateState(city.State);
+            if (parseResult == false) city.StateResult = city.AbreviateState(id);
             if (parseResult) city.StateResult = state;
 
             if (city.StateResult == null)
             {
-                var searchByCity = service.GetCitiesByName(city.State);
+                var searchByCity = service.GetCitiesByName(id);
+                if (searchByCity.Count == 1)
+                    return RedirectToAction($"Details/{searchByCity[0].ID}");
                 if (searchByCity.Count != 0)
-                    return RedirectToAction($"CityResults/{city.State}");
+                    return RedirectToAction($"CityResults/{id}");
             } 
             return RedirectToAction($"State/{city.StateResult}") ;
         }
 
-        public ActionResult State(string id, CityByState city)
+        // OLD!!!!!!
+        //public ActionResult State(string id)
+        //{
+        //    var service = CreateService();
+        //    var model = service.GetCitiesByState(id);
+        //    ModelState.Clear();
+        //    return View(model);
+        //}
+        public ActionResult State(string id)
         {
             var service = CreateService();
-            var model = service.GetCitiesByState(id);
+            var businessService = new BusinessService();
+            var model = businessService.GetByStateName(id);
+            ModelState.Clear();
             return View(model);
         }
 
@@ -53,6 +64,7 @@ namespace LocalSpirits.WebMVC.Controllers
             {
                 var service = CreateService();
                 var model = service.GetCitiesByName(id);
+                ModelState.Clear();
                 return View(model);
             }
             //string state =  $"{city.State}"
@@ -84,11 +96,22 @@ namespace LocalSpirits.WebMVC.Controllers
         }
         public ActionResult Details(int id)
         {
+            var businessService = new BusinessService();
             var service = CreateService();
-            var model = service.GetCityByID(id);
+            var city = service.GetCityByID(id);
+            var model = businessService.GetByCityName(city.Name, city.State);
 
             return View(model);
         }
+
+        // Old!!!
+        //public ActionResult Details(int id)
+        //{
+        //    var service = CreateService();
+        //    var model = service.GetCityByID(id);
+
+        //    return View(model);
+        //}
         public ActionResult Edit(int id)
         {
             var service = CreateService();
@@ -148,9 +171,47 @@ namespace LocalSpirits.WebMVC.Controllers
         }
         private CityService CreateService()
         {
-            var userId = Guid.Parse(User.Identity.GetUserId());
+            //var userId = Guid.Parse(User.Identity.GetUserId());
             var service = new CityService();
             return service;
+        }
+        public JsonResult GetEvents(DateTime start, DateTime end)
+        {
+            var viewModel = new EventViewModel();
+            var events = new List<EventViewModel>();
+            start = DateTime.Today.AddDays(-14);
+            end = DateTime.Today.AddDays(-11);
+
+            for (var i = 1; i <= 5; i++)
+            {
+                events.Add(new EventViewModel()
+                {
+                    id = i,
+                    title = "Event " + i,
+                    start = start.ToString(),
+                    end = end.ToString(),
+                    allDay = false
+                });
+
+                start = start.AddDays(7);
+                end = end.AddDays(7);
+
+               
+
+                start = start.AddDays(7);
+                end = end.AddDays(7);
+            }
+            events.Add(new EventViewModel()
+            {
+                id = 10,
+                title = "Recurring Event ",
+                color = "Green",
+                startRecur = start.ToString(),
+                allDay = false
+            }); ;
+
+
+            return Json(events.ToArray(), JsonRequestBehavior.AllowGet);
         }
     }
 }

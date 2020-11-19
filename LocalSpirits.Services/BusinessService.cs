@@ -128,11 +128,11 @@ namespace LocalSpirits.Services
             }
         }
 
-        public List<BusinessListItem> GetByCityName(string cityName)
+        public List<BusinessListItem> GetByCityName(string cityName, string stateName)
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var Businessess = ctx.Businesses.Where(e => e.City.Name == cityName).ToList();
+                var Businessess = ctx.Businesses.Where(e => e.City.Name == cityName && e.City.State == stateName).ToList();
                 foreach (var business in Businessess)
                 {
                     var found = new BusinessListItem

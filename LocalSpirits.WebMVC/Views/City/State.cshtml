@@ -1,60 +1,57 @@
-﻿@model IEnumerable<LocalSpirits.Models.City.CityListItem>
+﻿@model IEnumerable<LocalSpirits.Models.Business.BusinessListItem>
 
 @{
-    if (Model.Count() != 0)
-    {
-        ViewBag.Title = $"{Model.ToList()[0].State}";
-    }
-
+    ViewBag.Title = "State";
 }
 
+<h2>State</h2>
 
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TypeOfEstablishment)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Rating)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.City)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ZipCode)
+        </th>
+        <th></th>
+    </tr>
 
-@if (Model.Count() == 0)
-{
-    <table class="table">
-        <tr>
-            <th>
-                <p>No Results</p>
-            </th>
-            <th></th>
-        </tr>
-    </table>
-    <table class="table">
-        <tr>
-            <th>
-                <p>@Html.ActionLink("Search Again", "Index")</p>
-            </th>
-        </tr>
-    </table>
-   
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.TypeOfEstablishment)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Rating)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.City)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ZipCode)
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+        @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+    </td>
+</tr>
 }
-else
-{
-<h2></h2>
 
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th></th>
-        </tr>
-
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.ActionLink($"{item.Name}", "Details", new { id = item.ID })
-                    @*@Html.DisplayFor(modelItem => item.Name)*@
-                </td>
-            </tr>
-        }
-
-    </table>
-
-
-    <p>
-        @Html.ActionLink("Go Back", "Index")
-    </p>
-}
+</table>
