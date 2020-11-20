@@ -1,4 +1,5 @@
 ﻿using LocalSpirits.Data;
+using LocalSpirits.Models.Business;
 using LocalSpirits.Models.City;
 using LocalSpirits.Models.Profile;
 using LocalSpirits.Services;
@@ -100,6 +101,12 @@ namespace LocalSpirits.WebMVC.Controllers
             var service = CreateService();
             var city = service.GetCityByID(id);
             var model = businessService.GetByCityName(city.Name, city.State);
+            if (model.Count() == 0)
+            {
+                var baseBusiness = new BusinessListItem();
+                baseBusiness.City = city.Name;
+                model.Add(baseBusiness);
+            }
             ModelState.Clear();
 
             return View(model);

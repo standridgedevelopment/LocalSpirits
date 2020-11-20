@@ -24,7 +24,7 @@ namespace LocalSpirits.WebMVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(BusinessCreate model)
+        public ActionResult Create(BusinessCreate model, string id)
         {
             if (!ModelState.IsValid) return View(model);
 
@@ -38,6 +38,15 @@ namespace LocalSpirits.WebMVC.Controllers
             if (result == "invalid city")
                 ModelState.AddModelError("", $"{model.City} could not be found.");
             else ModelState.AddModelError("", "Business could not be created.");
+
+            return View(model);
+        }
+
+        public ActionResult Details(int id)
+        { 
+            var service = CreateService();
+            var model = service.GetByID(id);
+            ModelState.Clear();
 
             return View(model);
         }

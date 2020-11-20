@@ -1,4 +1,6 @@
 ﻿using LocalSpirits.Data;
+using LocalSpirits.Models.Business;
+using LocalSpirits.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,12 +30,11 @@ namespace LocalSpirits.WebMVC.Controllers
                 startRecur = $"2020-11-22",
                 daysOfWeek = new int[] { 5, 6 },
                 color = "Green",
-                allDay = true,
 
-            }) ;
+            });
 
-              
-            
+
+
             //events.Add(new EventViewModel()
             //{
             //    id = 10,
@@ -44,6 +45,46 @@ namespace LocalSpirits.WebMVC.Controllers
             //}); ;
 
 
+            return Json(events.ToArray(), JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult GetBusinessEvents(int id, DateTime start, DateTime end)
+        {
+            var businessService = new BusinessService();
+            var business = businessService.GetByID(id);
+            var events = new List<Event>();
+            start = DateTime.Today;
+            end = DateTime.Today;
+
+            foreach (var cEvent in business.Events )
+            {
+                if (cEvent.start != null)
+                {
+                    events.Add(new Event()
+                    {
+                        title = $"{cEvent.TypeOfEvent} at {cEvent.Business.Name}, {cEvent.City}",
+                        start = cEvent.start,
+                        end = cEvent.end,
+                        color = cEvent.color,
+                        url = cEvent.url,
+
+                    });
+                }
+                if (cEvent.startRecur != null)
+                {
+                    events.Add(new Event()
+                    {
+                        title = cEvent.title,
+                        startRecur = cEvent.startRecur,
+                        daysOfWeek = cEvent.daysOfWeek,
+                        color = cEvent.color,
+                        //startRecur = $"2020-11-22",
+
+                    });
+                }
+                
+            }
+
+            
             return Json(events.ToArray(), JsonRequestBehavior.AllowGet);
         }
     }

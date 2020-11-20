@@ -186,6 +186,7 @@
     <Compile Include="Controllers\CalendarController.cs" />
     <Compile Include="Controllers\CityController.cs" />
     <Compile Include="Controllers\DistilleryController.cs" />
+    <Compile Include="Controllers\EventController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
@@ -355,6 +356,10 @@
     <Content Include="Views\City\Details.cshtml" />
     <Content Include="Views\Home\_CalendarPartialOriginal.cshtml" />
     <Content Include="Views\City\_CalendarPartial.cshtml" />
+    <Content Include="Views\Business\Details.cshtml" />
+    <Content Include="Views\Business\_CalendarPartialBusiness.cshtml" />
+    <Content Include="Views\Event\Index.cshtml" />
+    <Content Include="Views\Event\CreateOne.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

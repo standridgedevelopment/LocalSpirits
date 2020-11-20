@@ -1,11 +1,11 @@
-﻿using LocalSpirits.Data;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LocalSpirits.Data;
 
 namespace LocalSpirits.Models.Business
 {
@@ -26,5 +26,6 @@ namespace LocalSpirits.Models.Business
         public string Website { get; set; }
         [DisplayName("Does this Business have live music?")]
         public bool LiveMusic { get; set; }
+        public ICollection<LocalSpirits.Data.Event> Events { get; set; } 
     }
 }

@@ -22,7 +22,7 @@ namespace LocalSpirits.Data
         public string TypeOfEstablishment{ get; set; }
 
         [ForeignKey(nameof(City))]
-        public int CityID { get; set; }
+        public int? CityID { get; set; }
         public virtual City City { get; set; }
         public int ZipCode { get; set; }
         public string State { get; set; }
@@ -31,6 +31,6 @@ namespace LocalSpirits.Data
         public string Website { get; set; }
         public int Rating { get; set; }
         public bool LiveMusic { get; set; }
-
+        public virtual ICollection<Event> Events { get; set; }
     }
 }

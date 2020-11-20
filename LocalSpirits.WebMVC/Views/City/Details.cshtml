@@ -1,15 +1,17 @@
 ﻿@model IEnumerable<LocalSpirits.Models.Business.BusinessListItem>
 
 @{
-    ViewBag.Title = $"City";
+    ViewBag.Title = $"{Model.ToList()[0].City}";
 }
 <h2>
-    
 </h2>
+@if (Model.Count() != 0)
+{
+    <p>
+        @Html.ActionLink("Create New", "Create", "Business")
+    </p>
+}
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -37,8 +39,8 @@
                 @Html.DisplayFor(modelItem => item.Rating)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                @Html.ActionLink("Edit", "Edit", "Business", new { id = item.ID }, null) |
+                @Html.ActionLink("Details", "Details", "Business", new { id = item.ID }, null) |
                 @Html.ActionLink("Delete", "Delete", new { id = item.ID })
             </td>
         </tr>

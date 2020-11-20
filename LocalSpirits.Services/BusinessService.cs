@@ -83,7 +83,8 @@ namespace LocalSpirits.Services
                         PhoneNumber = entity.PhoneNumber,
                         Website = entity.Website,
                         Rating = entity.Rating,
-                        LiveMusic = entity.LiveMusic
+                        Events = entity.Events
+                        
                     };
                 }
                 catch { }
@@ -120,7 +121,7 @@ namespace LocalSpirits.Services
             {
                 try
                 {
-                    business = ctx.Businesses.Single(e => e.Name == name && e.City.Name == city);
+                    business = ctx.Businesses.Single(e => e.Name.Contains(name) && e.City.Name == city);
 
                 }
                 catch { return null; }

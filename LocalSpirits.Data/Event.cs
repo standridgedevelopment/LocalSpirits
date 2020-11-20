@@ -15,12 +15,15 @@ namespace LocalSpirits.Data
     }
     public class Event
     {
+        [Key]
         public int id { get; set; }
-        [ForeignKey(nameof(Business))]
         public string title { get; set; }
+        [ForeignKey(nameof(Business))]
         public int BusinessID { get; set; }
         public virtual Business Business { get; set; }
+        public string TypeOfEvent { get; set; }
         public string State { get; set; }
+        public string City { get; set; }
         public string start { get; set; }
         public string end { get; set; }
         public int[] daysOfWeek { get; set; }
@@ -28,7 +31,6 @@ namespace LocalSpirits.Data
         public string endRecur { get; set; }
         public string url { get; set; }
         public string color { get; set; }
-
 
     }
 }
