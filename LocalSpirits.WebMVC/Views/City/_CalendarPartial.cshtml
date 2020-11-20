@@ -9,13 +9,29 @@
         document.addEventListener('DOMContentLoaded', function () {
             var calendarEl = document.getElementById('calendar');
             var calendar = new FullCalendar.Calendar(calendarEl, {
+                headerToolbar: { center: 'dayGridMonth,dayGridWeek,listWeek' }, // buttons for switching between views
+                views: {
+                    dayGrid: {
+                        // options apply to dayGridMonth, dayGridWeek, and dayGridDay views
+                    },
+                    timeGrid: {
+                        // options apply to timeGridWeek and timeGridDay views
+                    },
+                    week: {
+                        // options apply to dayGridWeek and timeGridWeek views
+                    },
+                    day: {
+                        // options apply to dayGridDay and timeGridDay views
+                    }
+                },
                 initialView: 'dayGridMonth',
-               initialDate: '2020-11-15',
-      editable: true,
-      selectable: true,
-      businessHours: true,
-      dayMaxEvents: true, // allow "more" link when too many events
-      events: '@Url.RouteUrl(new{ action="GetEvents", controller="Calendar"})'
+                initialDate: '2020-11-15',
+                editable: true,
+                selectable: true,
+                businessHours: true,
+                dayMaxEvents: true, // allow "more" link when too many events
+            events: '@Url.RouteUrl(new{ action="GetEvents", controller="Calendar"})'
+
       //events: [
       //  {
       //    title: 'All Day Event',

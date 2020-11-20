@@ -100,6 +100,7 @@ namespace LocalSpirits.WebMVC.Controllers
             var service = CreateService();
             var city = service.GetCityByID(id);
             var model = businessService.GetByCityName(city.Name, city.State);
+            ModelState.Clear();
 
             return View(model);
         }
@@ -175,43 +176,6 @@ namespace LocalSpirits.WebMVC.Controllers
             var service = new CityService();
             return service;
         }
-        public JsonResult GetEvents(DateTime start, DateTime end)
-        {
-            var viewModel = new EventViewModel();
-            var events = new List<EventViewModel>();
-            start = DateTime.Today.AddDays(-14);
-            end = DateTime.Today.AddDays(-11);
-
-            for (var i = 1; i <= 5; i++)
-            {
-                events.Add(new EventViewModel()
-                {
-                    id = i,
-                    title = "Event " + i,
-                    start = start.ToString(),
-                    end = end.ToString(),
-                    allDay = false
-                });
-
-                start = start.AddDays(7);
-                end = end.AddDays(7);
-
-               
-
-                start = start.AddDays(7);
-                end = end.AddDays(7);
-            }
-            events.Add(new EventViewModel()
-            {
-                id = 10,
-                title = "Recurring Event ",
-                color = "Green",
-                startRecur = start.ToString(),
-                allDay = false
-            }); ;
-
-
-            return Json(events.ToArray(), JsonRequestBehavior.AllowGet);
-        }
+ 
     }
 }

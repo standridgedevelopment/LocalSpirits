@@ -54,10 +54,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Beer\BeerCreate.cs" />
-    <Compile Include="Beer\BeerDetail.cs" />
-    <Compile Include="Beer\BeerEdit.cs" />
-    <Compile Include="Beer\BeerListItem.cs" />
     <Compile Include="Business\BusinessCreate.cs" />
     <Compile Include="Business\BusinessDetail.cs" />
     <Compile Include="Business\BusinessEdit.cs" />
@@ -67,39 +63,21 @@
     <Compile Include="City\CityDetail.cs" />
     <Compile Include="City\CityEdit.cs" />
     <Compile Include="City\CityListItem.cs" />
-    <Compile Include="Distillery\DistilleryCreate.cs" />
-    <Compile Include="Distillery\DistilleryDetail.cs" />
-    <Compile Include="Distillery\DistilleryEdit.cs" />
-    <Compile Include="Distillery\DistilleryListItem.cs" />
-    <Compile Include="Liquor\LiquorCreate.cs" />
-    <Compile Include="Liquor\LiquorDetail.cs" />
-    <Compile Include="Liquor\LiquorEdit.cs" />
-    <Compile Include="Liquor\LiquorListItem.cs" />
+    <Compile Include="Event\EventCreate.cs" />
+    <Compile Include="Event\EventDetail.cs" />
+    <Compile Include="Event\EventEdit.cs" />
+    <Compile Include="Event\EventListItem.cs" />
     <Compile Include="Profile\ProfileCreate.cs" />
     <Compile Include="Profile\ProfileDetail.cs" />
     <Compile Include="Profile\ProfileEdit.cs" />
     <Compile Include="Profile\ProfileListItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Winery\WineryCreate.cs" />
-    <Compile Include="Winery\WineryDetail.cs" />
-    <Compile Include="Winery\WineryEdit.cs" />
-    <Compile Include="Winery\WineryListItem.cs" />
-    <Compile Include="Wine\WineCreate.cs" />
-    <Compile Include="Wine\WineDetail.cs" />
-    <Compile Include="Wine\WineEdit.cs" />
-    <Compile Include="Wine\WineListItem.cs" />
-    <Compile Include="ZipCode\ZipCodeCreate.cs" />
-    <Compile Include="ZipCode\ZipCodeDetail.cs" />
-    <Compile Include="ZipCode\ZipCodeEdit.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Event\" />
-    <Folder Include="State\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\LocalSpirits.Data\LocalSpirits.Data.csproj">
       <Project>{C9D2F654-837E-4ED5-A227-F271429F2172}</Project>

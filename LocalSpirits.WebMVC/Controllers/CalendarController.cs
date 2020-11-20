@@ -17,18 +17,20 @@ namespace LocalSpirits.WebMVC.Controllers
 
         public JsonResult GetEvents(DateTime start, DateTime end)
         {
-            var viewModel = new EventViewModel();
-            var events = new List<EventViewModel>();
+            var viewModel = new Event();
+            var events = new List<Event>();
             start = DateTime.Today;
             end = DateTime.Today;
 
-                events.Add(new EventViewModel()
-                {
+            events.Add(new Event()
+            {
                 title = "All Day Event",
-                startRecur = $"2020-11-19",
-                daysOfWeek = new int[] {0, 4}
-                
-                });
+                startRecur = $"2020-11-22",
+                daysOfWeek = new int[] { 5, 6 },
+                color = "Green",
+                allDay = true,
+
+            }) ;
 
               
             

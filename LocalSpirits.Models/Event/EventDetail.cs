@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LocalSpirits.Models.Distillery
+namespace LocalSpirits.Models.Event
 {
-    public class DistilleryEdit
+    public class EventDetail
     {
     }
 }
