@@ -17,9 +17,12 @@ namespace LocalSpirits.WebMVC.Controllers
             return View();
         }
 
-        public ActionResult Create()
+        public ActionResult Create(int id)
         {
-            return View();
+            var model = new BusinessCreate();
+            model.CityID = id;
+            ModelState.Clear();
+            return View(model);
         }
 
         [HttpPost]
@@ -33,10 +36,8 @@ namespace LocalSpirits.WebMVC.Controllers
             if (result == "okay")
             {
                 TempData["SaveResult"] = "Business was created.";
-                return RedirectToAction("Index");
-            };
-            if (result == "invalid city")
-                ModelState.AddModelError("", $"{model.City} could not be found.");
+                return RedirectToAction($"Details/{model.CityID}", "City");
+            }
             else ModelState.AddModelError("", "Business could not be created.");
 
             return View(model);
@@ -65,7 +66,6 @@ namespace LocalSpirits.WebMVC.Controllers
                     Hours = detail.Hours,
                     PhoneNumber = detail.PhoneNumber,
                     Website = detail.PhoneNumber,
-                    LiveMusic = detail.LiveMusic,
                 };
             return View(model);
         }

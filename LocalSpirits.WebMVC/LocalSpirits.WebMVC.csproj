@@ -360,6 +360,8 @@
     <Content Include="Views\Business\_CalendarPartialBusiness.cshtml" />
     <Content Include="Views\Event\Index.cshtml" />
     <Content Include="Views\Event\CreateOne.cshtml" />
+    <Content Include="Views\City\ZipCode.cshtml" />
+    <Content Include="Views\Event\CreateRecurring.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

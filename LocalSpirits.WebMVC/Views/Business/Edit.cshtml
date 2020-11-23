@@ -1,4 +1,4 @@
-﻿@model LocalSpirits.Models.Business.BusinessDetail
+﻿@model LocalSpirits.Models.Business.BusinessEdit
 
 @{
     ViewBag.Title = "Edit";
@@ -21,7 +21,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.typeOfEstablishment, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.typeOfEstablishment, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EnumDropDownListFor(model => model.typeOfEstablishment, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.typeOfEstablishment, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -76,16 +76,6 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.LiveMusic, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.LiveMusic)
-                    @Html.ValidationMessageFor(model => model.LiveMusic, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Save" class="btn btn-default" />
             </div>
@@ -94,7 +84,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to Business", $"Details/{Model.ID}")
 </div>
 
 @section Scripts {

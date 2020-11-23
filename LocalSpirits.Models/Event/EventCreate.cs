@@ -15,13 +15,64 @@ namespace LocalSpirits.Models.Event
         [DisplayName("Type of Event")]
         public TypeOfEvent TypeOfEvent { get; set; }
         public int BusinessID { get; set; }
-        public string Start { get; set; }
-        public string End { get; set; }
-        public string DaysOfWeek { get; set; } 
-           
-        public int[] DaysOfWeekConverted = new int[7];
-        public string StartRecur { get; set; }
-        public string EndRecur { get; set; }
+        public string Start
+        {
+            get => $"{StartYear}-{StartMonth}-{StartDay}";
+            set { }
+        }
+        public string End
+        {
+            get => $"{EndYear}-{EndMonth}-{EndDay}";
+            set { }
+        }
+        public string DaysOfWeek { 
+            get 
+            {
+                StringBuilder fullDays = new StringBuilder();
+                if (Sunday == true) fullDays.Append("Sunday");
+                if (Monday == true) fullDays.Append("Monday");
+                if (Tuesday == true) fullDays.Append("Tuesday");
+                if (Wednesday == true) fullDays.Append("Wednesday");
+                if (Thursday == true) fullDays.Append("Thursday");
+                if (Friday == true) fullDays.Append("Friday");
+                if (Saturday == true) fullDays.Append("Saturday");
+                return $"{fullDays}";
+            }
+        }
+        public string StartRecur
+        {
+            get => $"{StartRecurYear}-{StartRecurMonth}-{StartRecurDay}";
+            set { }
+        }
+        public string EndRecur
+        {
+            get => $"{EndRecurYear}-{EndRecurMonth}-{EndRecurDay}";
+            set { }
+        }
+
+        public string StartDay { get; set; }
+        public string StartMonth { get; set; }
+        public string StartYear { get; set; }
+        public string EndDay { get; set; }
+        public string EndMonth { get; set; }
+        public string EndYear { get; set; }
+
+        public string StartRecurDay { get; set; }
+        public string StartRecurMonth { get; set; }
+        public string StartRecurYear { get; set; }
+        public string EndRecurDay { get; set; }
+        public string EndRecurMonth { get; set; }
+        public string EndRecurYear { get; set; }
+
+        public bool Sunday { get; set; }
+        public bool Monday { get; set; }
+        public bool Tuesday { get; set; }
+        public bool Wednesday { get; set; }
+        public bool Thursday { get; set; }
+        public bool Friday { get; set; }
+        public bool Saturday { get; set; }
+
+
         public string Url { get; set; }
         public string Color
         {
@@ -29,26 +80,32 @@ namespace LocalSpirits.Models.Event
             {
                 if (TypeOfEvent == TypeOfEvent.Karaoke) return "Green";
                 if (TypeOfEvent == TypeOfEvent.Trivia) return "Red";
-                if (TypeOfEvent == TypeOfEvent.Music) return "Red"; return "Blue";
+                if (TypeOfEvent == TypeOfEvent.Music)  return "Blue";
+                return "Grey";
             }
             set { }
         }
-        public int? Monday
+        public List<int> DaysOfWeekConverted
         {
             get
             {
-                return null;
+                List<int> converted = new List<int>();
+                if (DaysOfWeek != null)
+                {
+                    if (DaysOfWeek.ToLower().Contains("monday")) converted.Add(0);
+                    if (DaysOfWeek.ToLower().Contains("tuesday")) converted.Add(1);
+                    if (DaysOfWeek.ToLower().Contains("wednesday")) converted.Add(2);
+                    if (DaysOfWeek.ToLower().Contains("thursday")) converted.Add(3);
+                    if (DaysOfWeek.ToLower().Contains("friday")) converted.Add(4);
+                    if (DaysOfWeek.ToLower().Contains("saturday")) converted.Add(5);
+                    if (DaysOfWeek.ToLower().Contains("sunday")) converted.Add(6);
+                }
+                
+             
+                return converted;
             }
             set 
             {
-                if (DaysOfWeek.ToLower().Contains("monday")) DaysOfWeekConverted.Append(0);
-                if (DaysOfWeek.ToLower().Contains("tuesday")) DaysOfWeekConverted.Append(1);
-                if (DaysOfWeek.ToLower().Contains("wednesday")) DaysOfWeekConverted.Append(2);
-                if (DaysOfWeek.ToLower().Contains("thursday")) DaysOfWeekConverted.Append(3);
-                if (DaysOfWeek.ToLower().Contains("friday")) DaysOfWeekConverted.Append(4);
-                if (DaysOfWeek.ToLower().Contains("saturday")) DaysOfWeekConverted.Append(5);
-                if (DaysOfWeek.ToLower().Contains("sunday")) DaysOfWeekConverted.Append(6);
-
             }
         }
     }

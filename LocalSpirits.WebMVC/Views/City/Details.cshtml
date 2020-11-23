@@ -3,53 +3,60 @@
 @{
     ViewBag.Title = $"{Model.ToList()[0].City}";
 }
-<h2>
-</h2>
-@if (Model.Count() != 0)
+
+
+@foreach (var item in Model)
 {
-    <p>
-        @Html.ActionLink("Create New", "Create", "Business")
-    </p>
+<h2>
+    @Html.DisplayFor(modelItem => item.City), @Html.DisplayFor(modelItem => item.FullState)
+</h2>
+    break;
 }
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TypeOfEstablishment)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Rating)
-        </th>
-        <th></th>
-    </tr>
 
-    @foreach (var item in Model)
-    {
+<p>
+    @Html.ActionLink("Add Business", $"Create/{Model.ToList()[0].CityID}", "Business")
+</p>
+@if (Model.ToList()[0].ID != 0)
+{
+
+
+
+    <table class="table">
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TypeOfEstablishment)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Rating)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", "Business", new { id = item.ID }, null) |
-                @Html.ActionLink("Details", "Details", "Business", new { id = item.ID }, null) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TypeOfEstablishment)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rating)
+            </th>
+            <th></th>
         </tr>
-    }
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink($"{item.Name}", "Details", "Business", new { id = item.ID }, null)
+
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TypeOfEstablishment)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rating)
+                </td>
+            </tr>
+        }
 
 
-</table>
-<div class="row">
-    <section class="col-md-6 col-md-push-0">
-        @Html.Partial("_CalendarPartial")
-    </section>
-</div>
+    </table>
+    <div class="row">
+        <section class="col-md-6 col-md-push-0">
+            @Html.Partial("_CalendarPartial")
+        </section>
+    </div>
+}

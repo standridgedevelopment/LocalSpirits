@@ -24,7 +24,8 @@
                 @Html.ActionLink($"{item.Name}", "Details", new { id = item.ID })
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.State)
+                @Html.ActionLink($"{item.State}", "State", new { id = item.State })
+
             </td>
         </tr>
     }

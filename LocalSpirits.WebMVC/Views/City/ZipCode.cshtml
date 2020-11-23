@@ -1,22 +1,20 @@
 ﻿@model IEnumerable<LocalSpirits.Models.Business.BusinessListItem>
-
-
-@foreach (var item in Model)
-{
-   ViewBag.Title = $"{item.State}";
-    break;
+@{
+    ViewBag.Title = $"{Model.ToList()[0].ZipCode}";
 }
+
 
 @foreach (var item in Model)
 {
     <h2>
-        @Html.DisplayFor(modelItem => item.FullState)
+        @Html.DisplayFor(modelItem => item.ZipCode)
     </h2>
     break;
 }
 
+
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Add Business", $"Create/{Model.ToList()[0].CityID}", "Business")
 </p>
 <table class="table">
     <tr>
@@ -33,7 +31,7 @@
             @Html.DisplayNameFor(model => model.City)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ZipCode)
+            @Html.DisplayNameFor(model => model.State)
         </th>
         <th></th>
     </tr>
@@ -51,17 +49,19 @@
                 @Html.DisplayFor(modelItem => item.Rating)
             </td>
             <td>
-                @Html.ActionLink($"{item.City}", "Details", new { id = item.ID })
+                @Html.ActionLink($"{item.City}", "Details", new { id = item.CityID })
             </td>
             <td>
-                @Html.ActionLink($"{item.ZipCode}", "ZipCode", new { id = item.ZipCode })
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                @Html.ActionLink($"{item.State}", "State", new { id = item.State })
             </td>
         </tr>
     }
 
 </table>
+<div class="row">
+    <section class="col-md-6 col-md-push-0">
+        @Html.Partial("_CalendarPartial")
+    </section>
+</div>
+
+

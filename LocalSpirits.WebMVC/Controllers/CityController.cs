@@ -59,6 +59,15 @@ namespace LocalSpirits.WebMVC.Controllers
             return View(model);
         }
 
+        public ActionResult ZipCode(int id)
+        {
+            var service = CreateService();
+            var businessService = new BusinessService();
+            var model = businessService.GetByZipCode(id);
+            ModelState.Clear();
+            return View(model);
+        }
+
         public ActionResult CityResults(string id, CityByState city)
         {
             if (id != null)
@@ -105,6 +114,8 @@ namespace LocalSpirits.WebMVC.Controllers
             {
                 var baseBusiness = new BusinessListItem();
                 baseBusiness.City = city.Name;
+                baseBusiness.State = city.State;
+                baseBusiness.CityID = city.ID;
                 model.Add(baseBusiness);
             }
             ModelState.Clear();

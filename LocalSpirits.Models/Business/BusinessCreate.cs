@@ -18,14 +18,11 @@ namespace LocalSpirits.Models.Business
         [Required]
         [DisplayName("What type of business is this? (Brewery, Winery, Distillary)")]
         public TypeOfEstablishment typeOfEstablishment { get; set; }
-        [Required]
-        public string City { get; set; }
-        [Required]
-        public StateName State { get; set; }
+        public int CityID { get; set; }
         [Required]
         //[MinLength(5), MaxLength(5)]
         [DisplayName("Zip Code")]
-        public int ZipCode { get; set; }
+        public int? ZipCode { get; set; }
         public string Hours { get; set; }
         [DisplayName("Phone Number")]
         public string PhoneNumber { get; set; }

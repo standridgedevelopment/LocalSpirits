@@ -15,10 +15,11 @@ namespace LocalSpirits.Models.Event
         public string city { get; set; }
         public string start { get; set; }
         public string end { get; set; }
-        public int[] daysOfWeek { get; set; }
+        public string daysOfWeek { get; set; }
         public string startRecur { get; set; }
         public string endRecur { get; set; }
         public string url { get; set; }
         public string color { get; set; }
+       
     }
 }

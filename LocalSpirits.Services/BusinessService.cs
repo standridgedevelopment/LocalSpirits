@@ -15,20 +15,15 @@ namespace LocalSpirits.Services
         public string Create(BusinessCreate model)
         {
             var service = new CityService();
-            var foundCity = service.GetCityByName(model.City, model.State);
-
-            if (foundCity == null) return "invalid city";
             var entity = new Business()
             {
-                CityID = foundCity.ID,
+                CityID = model.CityID,
                 TypeOfEstablishment = $"{model.typeOfEstablishment}",
                 Name = model.Name,
-                State = $"{model.State}",
                 ZipCode = model.ZipCode,
                 Hours = model.Hours,
                 PhoneNumber = model.PhoneNumber,
                 Website = model.Website,
-                LiveMusic = model.LiveMusic
             };
 
             using (var ctx = new ApplicationDbContext())
@@ -55,9 +50,10 @@ namespace LocalSpirits.Services
                         Name = e.Name,
                         TypeOfEstablishment = e.TypeOfEstablishment,
                         City = e.City.Name,
-                        State = e.State,
+                        State = e.City.State,
                         ID = e.ID,
-                        ZipCode = e.ZipCode
+                        ZipCode = e.ZipCode,
+                        Events = e.Events,
                     }
                     );
                 return query.ToArray();
@@ -77,7 +73,8 @@ namespace LocalSpirits.Services
                         Name = entity.Name,
                         TypeOfEstablishment = entity.TypeOfEstablishment,
                         City = entity.City.Name,
-                        State = entity.State,
+                        CityID = entity.CityID,
+                        State = entity.City.State,
                         ZipCode = entity.ZipCode,
                         Hours = entity.Hours,
                         PhoneNumber = entity.PhoneNumber,
@@ -105,8 +102,10 @@ namespace LocalSpirits.Services
                         TypeOfEstablishment = business.TypeOfEstablishment,
                         Rating = business.Rating,
                         City = business.City.Name,
-                        State = business.State,
+                        CityID = business.CityID,
+                        State = business.City.State,
                         ZipCode = business.ZipCode,
+                        Events = business.Events,
                     };
                     searchResults.Add(found);
                 }
@@ -143,8 +142,10 @@ namespace LocalSpirits.Services
                         TypeOfEstablishment = business.TypeOfEstablishment,
                         Rating = business.Rating,
                         City = business.City.Name,
-                        State = business.State,
+                        CityID = business.CityID,
+                        State = business.City.State,
                         ZipCode = business.ZipCode,
+                        Events = business.Events,
                     };
                     searchResults.Add(found);
                 }
@@ -165,8 +166,10 @@ namespace LocalSpirits.Services
                         TypeOfEstablishment = business.TypeOfEstablishment,
                         Rating = business.Rating,
                         City = business.City.Name,
-                        State = business.State,
+                        CityID = business.CityID,
+                        State = business.City.State,
                         ZipCode = business.ZipCode,
+                        Events = business.Events,
                     };
                     searchResults.Add(found);
                 }
@@ -184,11 +187,13 @@ namespace LocalSpirits.Services
                     {
                         ID = business.ID,
                         Name = business.Name,
-                        TypeOfEstablishment = business.Name,
+                        TypeOfEstablishment = business.TypeOfEstablishment,
                         Rating = business.Rating,
                         City = business.City.Name,
-                        State = business.State,
+                        CityID = business.CityID,
+                        State = business.City.State,
                         ZipCode = business.ZipCode,
+                        Events = business.Events,
                     };
                     searchResults.Add(found);
                 }
@@ -209,12 +214,10 @@ namespace LocalSpirits.Services
                 entity.ID = model.ID;
                 entity.Name = model.Name;
                 entity.CityID = foundCity.ID;
-                entity.State = $"{model.State}";
                 entity.ZipCode = model.ZipCode;
                 entity.Hours = model.Hours;
                 entity.PhoneNumber = model.PhoneNumber;
                 entity.Website = model.Website;
-                entity.LiveMusic = model.LiveMusic;
 
                 try
                 {

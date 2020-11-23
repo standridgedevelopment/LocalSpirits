@@ -25,12 +25,10 @@ namespace LocalSpirits.Models.Business
         [Required]
         [MinLength(5), MaxLength(5)]
         [DisplayName("Zip Code")]
-        public int ZipCode { get; set; }
+        public int? ZipCode { get; set; }
         public string Hours { get; set; }
         [DisplayName("Phone Number")]
         public string PhoneNumber { get; set; }
         public string Website { get; set; }
-        [DisplayName("Does this Business have live music?")]
-        public bool LiveMusic { get; set; }
     }
 }

@@ -17,45 +17,55 @@ namespace LocalSpirits.WebMVC.Controllers
             return View();
         }
 
-        public JsonResult GetEvents(DateTime start, DateTime end)
+        public JsonResult GetEvents(int id, DateTime start, DateTime end)
         {
-            var viewModel = new Event();
+            var businessService = new BusinessService();
+            var cityService = new CityService();
+            var city = cityService.GetCityByID(id);
+            var Businessess = businessService.GetByCityName(city.Name, city.State);
             var events = new List<Event>();
-            start = DateTime.Today;
-            end = DateTime.Today;
 
-            events.Add(new Event()
+            foreach (var business in Businessess)
             {
-                title = "All Day Event",
-                startRecur = $"2020-11-22",
-                daysOfWeek = new int[] { 5, 6 },
-                color = "Green",
+                foreach (var cEvent in business.Events)
+                {
+                    if (cEvent.start != null)
+                    {
+                        events.Add(new Event()
+                        {
+                            title = $"{cEvent.TypeOfEvent} at {cEvent.Business.Name}, {cEvent.City}",
+                            start = cEvent.start,
+                            end = cEvent.end,
+                            color = cEvent.color,
+                            url = cEvent.url,
 
-            });
+                        });
+                    }
+                    if (cEvent.startRecur != null)
+                    {
+                        events.Add(new Event()
+                        {
+                            title = $"{cEvent.TypeOfEvent} at {cEvent.Business.Name}, {cEvent.City}",
+                            startRecur = cEvent.startRecur,
+                            endRecur = cEvent.endRecur,
+                            daysOfWeek = cEvent.DaysOfWeekConverted.ToArray(),
+                            color = cEvent.color,
+                            //startRecur = $"2020-11-22",
 
-
-
-            //events.Add(new EventViewModel()
-            //{
-            //    id = 10,
-            //    title = "Recurring Event ",
-            //    color = "Green",
-            //    startRecur = start.ToString(),
-            //    allDay = false
-            //}); ;
-
-
+                        });
+                    }
+                }  
+            }
             return Json(events.ToArray(), JsonRequestBehavior.AllowGet);
         }
+
         public JsonResult GetBusinessEvents(int id, DateTime start, DateTime end)
         {
             var businessService = new BusinessService();
             var business = businessService.GetByID(id);
             var events = new List<Event>();
-            start = DateTime.Today;
-            end = DateTime.Today;
 
-            foreach (var cEvent in business.Events )
+            foreach (var cEvent in business.Events)
             {
                 if (cEvent.start != null)
                 {
@@ -73,18 +83,19 @@ namespace LocalSpirits.WebMVC.Controllers
                 {
                     events.Add(new Event()
                     {
-                        title = cEvent.title,
+                        title = $"{cEvent.TypeOfEvent} at {cEvent.Business.Name}, {cEvent.City}",
                         startRecur = cEvent.startRecur,
-                        daysOfWeek = cEvent.daysOfWeek,
+                        endRecur = cEvent.endRecur,
+                        daysOfWeek = cEvent.DaysOfWeekConverted.ToArray(),
                         color = cEvent.color,
                         //startRecur = $"2020-11-22",
 
                     });
                 }
-                
+
             }
 
-            
+
             return Json(events.ToArray(), JsonRequestBehavior.AllowGet);
         }
     }

@@ -21,9 +21,7 @@ namespace LocalSpirits.WebMVC.Controllers
 
         // CREATE
         public ActionResult CreateOne(int id)
-        {
-            //var businessService = new BusinessService();
-            //var business = businessService.GetByID(id);
+        { 
             var model = new EventCreate();
             model.BusinessID = id;
 
@@ -31,7 +29,9 @@ namespace LocalSpirits.WebMVC.Controllers
         }
         public ActionResult CreateRecurring(int id)
         {
-            return View();
+            var model = new EventCreate();
+            model.BusinessID = id;
+            return View(model);
         }
 
         [HttpPost]
@@ -45,7 +45,7 @@ namespace LocalSpirits.WebMVC.Controllers
             if (result == "okay")
             {
                 TempData["SaveResult"] = "Event was created.";
-                return RedirectToAction("Index");
+                return RedirectToAction($"Details/{model.BusinessID}", "Business");
             };
             ModelState.AddModelError("", "Event could not be created.");
 
@@ -53,7 +53,7 @@ namespace LocalSpirits.WebMVC.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateRecurring(EventCreate model)
+        public ActionResult CreateRecurring(int id, EventCreate model)
         {
             if (!ModelState.IsValid) return View(model);
 
@@ -62,7 +62,7 @@ namespace LocalSpirits.WebMVC.Controllers
             if (result == "okay")
             {
                 TempData["SaveResult"] = "Event was created.";
-                return RedirectToAction("Index");
+                return RedirectToAction($"Details/{model.BusinessID}", "Business");
             };
             ModelState.AddModelError("", "Event could not be created.");
 
