@@ -25,5 +25,8 @@ namespace LocalSpirits.Models.Profile
         public StateName State { get; set; }
         [DisplayName("Zip Code")]
         public int ZipCode { get; set; }
+
+        public virtual List<Data.Event> Events { get; set; }
+        public virtual List<Data.Visited> Favorites { get; set; }
     }
 }

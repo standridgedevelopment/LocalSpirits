@@ -21,7 +21,7 @@ namespace LocalSpirits.Services
         {
             var entity = new Visited()
             {
-                UserID = _userId,
+                Profile_ID = _userId,
                 BusinessID = model.BusinessID,
                 EventID = model.EventID,
                 Rating = model.Rating,
@@ -49,7 +49,7 @@ namespace LocalSpirits.Services
             {
                 try
                 {
-                    var entity = ctx.Visits.Single(e => e.EventID == id && e.UserID == _userId);
+                    var entity = ctx.Visits.Single(e => e.EventID == id && e.Profile_ID == _userId);
                     return new VisitedDetail
                     {
                         EventID = entity.EventID,
@@ -70,7 +70,7 @@ namespace LocalSpirits.Services
             {
                 try
                 {
-                    var entity = ctx.Visits.Single(e => e.EventID == id && e.UserID == _userId);
+                    var entity = ctx.Visits.Single(e => e.EventID == id && e.Profile_ID == _userId);
 
                     entity.Rating = model.Rating;
                     entity.Rating = model.Rating;

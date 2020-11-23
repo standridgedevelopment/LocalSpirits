@@ -21,7 +21,7 @@ namespace LocalSpirits.Services
         {
             var entity = new Profile()
             {
-                ID = _userId,
+                Profile_ID = _userId,
                 FirstName = model.FirstName,
                 LastName = model.LastName,
                 City = model.City,
@@ -43,14 +43,16 @@ namespace LocalSpirits.Services
 
                 try
                 {
-                    var entity = ctx.Profiles.Single(e => e.ID == _userId);
+                    var entity = ctx.Profiles.Single(e => e.Profile_ID == _userId);
                     return new ProfileDetail
                     {
                         FirstName = entity.FirstName,
                         LastName = entity.LastName,
                         City = entity.City,
                         State = entity.State,
-                        ZipCode = entity.ZipCode
+                        ZipCode = entity.ZipCode,
+                        Events = entity.Events,
+                        Favorites = entity.Favorites
                     };
                 }
                 catch { }
@@ -63,7 +65,7 @@ namespace LocalSpirits.Services
             using (var ctx = new ApplicationDbContext())
             {
 
-                var entity = ctx.Profiles.Single(e => e.ID == _userId);
+                var entity = ctx.Profiles.Single(e => e.Profile_ID == _userId);
 
                 if (model.FirstName != null) entity.FirstName = model.FirstName;
                 entity.LastName = model.LastName;
@@ -78,7 +80,7 @@ namespace LocalSpirits.Services
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var entity = ctx.Profiles.Single(e => e.ID == _userId);
+                var entity = ctx.Profiles.Single(e => e.Profile_ID == _userId);
 
                 ctx.Profiles.Remove(entity);
 

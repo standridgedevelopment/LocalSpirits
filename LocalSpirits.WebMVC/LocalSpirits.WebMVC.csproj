@@ -363,6 +363,7 @@
     <Content Include="Views\City\ZipCode.cshtml" />
     <Content Include="Views\Event\CreateRecurring.cshtml" />
     <Content Include="Views\Event\Details.cshtml" />
+    <Content Include="Views\Profile\_CalendarPartialProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

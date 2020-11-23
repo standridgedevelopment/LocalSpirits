@@ -62,47 +62,6 @@
     <Compile Include="ActivityFeed.cs" />
     <Compile Include="IdentityModels.cs" />
     <Compile Include="Like.cs" />
-    <Compile Include="Migrations\202011201936036_InitialCreate.cs" />
-    <Compile Include="Migrations\202011201936036_InitialCreate.Designer.cs">
-      <DependentUpon>202011201936036_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202011202138320_1.cs" />
-    <Compile Include="Migrations\202011202138320_1.Designer.cs">
-      <DependentUpon>202011202138320_1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202011222016096_2.cs" />
-    <Compile Include="Migrations\202011222016096_2.Designer.cs">
-      <DependentUpon>202011222016096_2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202011222024228_3.cs" />
-    <Compile Include="Migrations\202011222024228_3.Designer.cs">
-      <DependentUpon>202011222024228_3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202011222111042_4.cs" />
-    <Compile Include="Migrations\202011222111042_4.Designer.cs">
-      <DependentUpon>202011222111042_4.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202011222116272_5.cs" />
-    <Compile Include="Migrations\202011222116272_5.Designer.cs">
-      <DependentUpon>202011222116272_5.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202011230022589_6.cs" />
-    <Compile Include="Migrations\202011230022589_6.Designer.cs">
-      <DependentUpon>202011230022589_6.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202011231529481_7.cs" />
-    <Compile Include="Migrations\202011231529481_7.Designer.cs">
-      <DependentUpon>202011231529481_7.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202011231555085_8.cs" />
-    <Compile Include="Migrations\202011231555085_8.Designer.cs">
-      <DependentUpon>202011231555085_8.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202011231700534_9.cs" />
-    <Compile Include="Migrations\202011231700534_9.Designer.cs">
-      <DependentUpon>202011231700534_9.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Profile.cs" />
     <Compile Include="State.cs" />
@@ -111,38 +70,6 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\202011201936036_InitialCreate.resx">
-      <DependentUpon>202011201936036_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202011202138320_1.resx">
-      <DependentUpon>202011202138320_1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202011222016096_2.resx">
-      <DependentUpon>202011222016096_2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202011222024228_3.resx">
-      <DependentUpon>202011222024228_3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202011222111042_4.resx">
-      <DependentUpon>202011222111042_4.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202011222116272_5.resx">
-      <DependentUpon>202011222116272_5.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202011230022589_6.resx">
-      <DependentUpon>202011230022589_6.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202011231529481_7.resx">
-      <DependentUpon>202011231529481_7.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202011231555085_8.resx">
-      <DependentUpon>202011231555085_8.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202011231700534_9.resx">
-      <DependentUpon>202011231700534_9.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

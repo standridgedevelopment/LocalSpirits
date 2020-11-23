@@ -69,6 +69,7 @@ namespace LocalSpirits.Services
                         startRecur = entity.startRecur,
                         endRecur = entity.endRecur,
                         ThirdPartyWebsite = entity.ThirdPartyWebsite,
+                        color = entity.City,
                     };
                 }
                 catch { }
@@ -97,6 +98,7 @@ namespace LocalSpirits.Services
                         startRecur = entity.startRecur,
                         endRecur = entity.endRecur,
                         ThirdPartyWebsite = entity.ThirdPartyWebsite,
+                        color = entity.City,
                     };
                     searchResults.Add(found);
                 }
@@ -124,6 +126,7 @@ namespace LocalSpirits.Services
                         startRecur = entity.startRecur,
                         endRecur = entity.endRecur,
                         ThirdPartyWebsite = entity.ThirdPartyWebsite,
+                        color = entity.City,
                     };
                     searchResults.Add(found);
                 }
@@ -151,6 +154,7 @@ namespace LocalSpirits.Services
                         startRecur = entity.startRecur,
                         endRecur = entity.endRecur,
                         ThirdPartyWebsite = entity.ThirdPartyWebsite,
+                        color = entity.City,
                     };
                     searchResults.Add(found);
                 }

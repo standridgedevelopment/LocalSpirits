@@ -13,7 +13,7 @@ namespace LocalSpirits.Data
         [Key]
         public int ID { get; set; }
         [ForeignKey(nameof(Profile))]
-        public Guid? UserID { get; set; }
+        public Guid? Profile_ID { get; set; }
         public virtual Profile Profile { get; set; }
         [ForeignKey(nameof(Business))]
         public int? BusinessID { get; set; }

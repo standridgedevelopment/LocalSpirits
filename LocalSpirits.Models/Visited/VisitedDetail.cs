@@ -16,5 +16,6 @@ namespace LocalSpirits.Models.Visited
         public bool AddToCalendar { get; set; }
         public int Rating { get; set; }
         public string Review { get; set; }
+        
     }
 }
