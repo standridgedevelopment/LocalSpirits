@@ -1,0 +1,88 @@
+﻿@model LocalSpirits.Models.Event.EventDetail
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>@Html.DisplayFor(model => model.title)</h2>
+
+<div>
+    <h4>EventDetail</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.state)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.state)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.city)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.city)
+        </dd>
+        @if (Model.start != "--")
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.start)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.start)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.end)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.end)
+            </dd>
+        }
+        @if (Model.startRecur != "--")
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.daysOfWeek)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.daysOfWeek)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.startRecur)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.startRecur)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.endRecur)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.endRecur)
+            </dd>
+        }
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.url)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.url)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Add To Calendar", "AddToProfileCalendar", new { id = Model.id }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

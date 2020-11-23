@@ -1,6 +1,8 @@
 ﻿using LocalSpirits.Data;
 using LocalSpirits.Models.Event;
+using LocalSpirits.Models.Visited;
 using LocalSpirits.Services;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,7 +42,7 @@ namespace LocalSpirits.WebMVC.Controllers
         {
             if (!ModelState.IsValid) return View(model);
 
-            var service = CreateService();
+            var service = CreateEventService();
             string result = service.Create(model);
             if (result == "okay")
             {
@@ -57,7 +59,7 @@ namespace LocalSpirits.WebMVC.Controllers
         {
             if (!ModelState.IsValid) return View(model);
 
-            var service = CreateService();
+            var service = CreateEventService();
             string result = service.Create(model);
             if (result == "okay")
             {
@@ -68,10 +70,48 @@ namespace LocalSpirits.WebMVC.Controllers
 
             return View(model);
         }
-        private EventService CreateService()
+
+        public ActionResult AddToProfileCalendar(int id)
         {
-            //var userId = Guid.Parse(User.Identity.GetUserId());
-            var service = new EventService();
+            var eventService = CreateEventService();
+            var visitedService = CreateVisitedService();
+            var thisEvent = eventService.GetByID(id);
+            var foundVisit = visitedService.GetVisitByEventID(id);
+            
+            if (foundVisit.EventID != null)
+            {
+                foundVisit.AddToCalendar = true;
+                visitedService.UpdateEventVisit(foundVisit, id);
+                return RedirectToAction($"Details/{foundVisit.BusinessID}", "Business");
+            }
+            else
+            {
+                
+                var model = new VisitedCreate();
+                model.AddToCalendar = true;
+                model.EventID = id;
+                visitedService.CreateVisit(model);
+                return RedirectToAction($"Details/{thisEvent.BusinessID}", "Business");
+            }
+        }
+        public ActionResult Details(int id)
+        {
+            var service = CreateEventService();
+            var model = service.GetByID(id);
+            ModelState.Clear();
+
+            return View(model);
+        }
+        private VisitedService CreateVisitedService()
+        {
+            var userId = Guid.Parse(User.Identity.GetUserId());
+            var service = new VisitedService(userId);
+            return service;
+        }
+        private EventService CreateEventService()
+        {
+            var userId = Guid.Parse(User.Identity.GetUserId());
+            var service = new EventService(userId);
             return service;
         }
 

@@ -11,14 +11,16 @@ namespace LocalSpirits.Services
 {
     public class EventService
     {
+        private readonly Guid _userId;
+
+        public EventService(Guid userId)
+        {
+            _userId = userId;
+        }
         readonly List<EventDetail> searchResults = new List<EventDetail>();
         public string Create(EventCreate model)
         {
-            //var service = new BusinessService();
-            //var foundBusiness = service.GetByNameAndCity(model.BusinessName, model.City);
-
-            //if (foundBusiness == null) return "invalid city";
-
+          
             var entity = new Event()
             {
                 TypeOfEvent = $"{model.TypeOfEvent}",
@@ -28,7 +30,7 @@ namespace LocalSpirits.Services
                 DaysOfWeekInput = model.DaysOfWeek,
                 startRecur = model.StartRecur,
                 endRecur = model.EndRecur,
-                url = model.Url,
+                ThirdPartyWebsite = model.Url,
                 color = model.Color
             };
 
@@ -55,8 +57,10 @@ namespace LocalSpirits.Services
                     return new EventDetail
                     {
                         id = entity.id,
-                        title = entity.title,
-                        business = entity.Business.Name,
+                        title = $"{entity.TypeOfEvent} at {entity.Business.Name}, {entity.City}",
+                        TypeOfEvent = entity.TypeOfEvent,
+                        Business = entity.Business.Name,
+                        BusinessID = entity.BusinessID,
                         city = entity.Business.City.Name,
                         state = entity.Business.City.State,
                         start = entity.start,
@@ -64,8 +68,7 @@ namespace LocalSpirits.Services
                         daysOfWeek = entity.DaysOfWeekInput,
                         startRecur = entity.startRecur,
                         endRecur = entity.endRecur,
-                        url = entity.url,
-                        color = entity.color,
+                        ThirdPartyWebsite = entity.ThirdPartyWebsite,
                     };
                 }
                 catch { }
@@ -83,8 +86,9 @@ namespace LocalSpirits.Services
                     var found = new EventDetail
                     {
                         id = entity.id,
-                        title = entity.title,
-                        business = entity.Business.Name,
+                        title = $"{entity.TypeOfEvent} at {entity.Business.Name}, {entity.City}",
+                        Business = entity.Business.Name,
+                        BusinessID = entity.BusinessID,
                         city = entity.Business.City.Name,
                         state = entity.Business.City.State,
                         start = entity.start,
@@ -92,8 +96,7 @@ namespace LocalSpirits.Services
                         daysOfWeek = entity.DaysOfWeekInput,
                         startRecur = entity.startRecur,
                         endRecur = entity.endRecur,
-                        url = entity.url,
-                        color = entity.color,
+                        ThirdPartyWebsite = entity.ThirdPartyWebsite,
                     };
                     searchResults.Add(found);
                 }
@@ -110,8 +113,9 @@ namespace LocalSpirits.Services
                     var found = new EventDetail
                     {
                         id = entity.id,
-                        title = entity.title,
-                        business = entity.Business.Name,
+                        title = $"{entity.TypeOfEvent} at {entity.Business.Name}, {entity.City}",
+                        Business = entity.Business.Name,
+                        BusinessID = entity.BusinessID,
                         city = entity.Business.City.Name,
                         state = entity.Business.City.State,
                         start = entity.start,
@@ -119,8 +123,7 @@ namespace LocalSpirits.Services
                         daysOfWeek = entity.DaysOfWeekInput,
                         startRecur = entity.startRecur,
                         endRecur = entity.endRecur,
-                        url = entity.url,
-                        color = entity.color,
+                        ThirdPartyWebsite = entity.ThirdPartyWebsite,
                     };
                     searchResults.Add(found);
                 }
@@ -137,8 +140,9 @@ namespace LocalSpirits.Services
                     var found = new EventDetail
                     {
                         id = entity.id,
-                        title = entity.title,
-                        business = entity.Business.Name,
+                        title = $"{entity.TypeOfEvent} at {entity.Business.Name}, {entity.City}",
+                        Business = entity.Business.Name,
+                        BusinessID = entity.BusinessID,
                         city = entity.Business.City.Name,
                         state = entity.Business.City.State,
                         start = entity.start,
@@ -146,8 +150,7 @@ namespace LocalSpirits.Services
                         daysOfWeek = entity.DaysOfWeekInput,
                         startRecur = entity.startRecur,
                         endRecur = entity.endRecur,
-                        url = entity.url,
-                        color = entity.color,
+                        ThirdPartyWebsite = entity.ThirdPartyWebsite,
                     };
                     searchResults.Add(found);
                 }
@@ -193,9 +196,9 @@ namespace LocalSpirits.Services
             {
                 try
                 {
-                    var entity = ctx.Beers.Single(e => e.ID == id);
+                    var entity = ctx.Events.Single(e => e.id == id);
 
-                    ctx.Beers.Remove(entity);
+                    ctx.Events.Remove(entity);
                 }
                 catch { return false; }
                 return ctx.SaveChanges() == 1;

@@ -61,6 +61,7 @@
     <Compile Include="ProfileService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StateServices.cs" />
+    <Compile Include="VisitedService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

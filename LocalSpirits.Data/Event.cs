@@ -30,7 +30,13 @@ namespace LocalSpirits.Data
         public string DaysOfWeekInput { get; set; }
         public string startRecur { get; set; }
         public string endRecur { get; set; }
-        public string url { get; set; }
+        public string url
+        {
+            get => $"https://localhost:44384/Event/Details/{id}";
+
+            set { }
+        }
+        public string ThirdPartyWebsite { get; set; }
         public string color { get; set; }
         public List<int> DaysOfWeekConverted
         {

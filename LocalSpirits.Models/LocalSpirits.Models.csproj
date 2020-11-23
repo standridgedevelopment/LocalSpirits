@@ -72,6 +72,9 @@
     <Compile Include="Profile\ProfileEdit.cs" />
     <Compile Include="Profile\ProfileListItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Visited\VisitedCreate.cs" />
+    <Compile Include="Visited\VisitedDetail.cs" />
+    <Compile Include="Visited\VisitedEdit.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

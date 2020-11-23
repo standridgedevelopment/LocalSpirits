@@ -30,5 +30,6 @@ namespace LocalSpirits.Data
         public string Website { get; set; }
         public int Rating { get; set; }
         public virtual ICollection<Event> Events { get; set; }
+        public virtual ICollection<Visited> Ratings { get; set; }
     }
 }

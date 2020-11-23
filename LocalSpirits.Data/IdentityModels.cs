@@ -38,7 +38,7 @@ namespace LocalSpirits.WebMVC.Data
         public DbSet<City> Cities { get; set; }
         public DbSet<Business> Businesses { get; set; }
         public DbSet<Event> Events { get; set; }
-        public DbSet<Beer> Beers { get; set; }
+        public DbSet<Visited> Visits { get; set; }
 
 
 

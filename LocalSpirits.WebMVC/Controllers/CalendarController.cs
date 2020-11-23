@@ -33,6 +33,7 @@ namespace LocalSpirits.WebMVC.Controllers
                     {
                         events.Add(new Event()
                         {
+                            id = cEvent.id,
                             title = $"{cEvent.TypeOfEvent} at {cEvent.Business.Name}, {cEvent.City}",
                             start = cEvent.start,
                             end = cEvent.end,
@@ -45,6 +46,7 @@ namespace LocalSpirits.WebMVC.Controllers
                     {
                         events.Add(new Event()
                         {
+                            id = cEvent.id,
                             title = $"{cEvent.TypeOfEvent} at {cEvent.Business.Name}, {cEvent.City}",
                             startRecur = cEvent.startRecur,
                             endRecur = cEvent.endRecur,
@@ -71,6 +73,7 @@ namespace LocalSpirits.WebMVC.Controllers
                 {
                     events.Add(new Event()
                     {
+                        id = cEvent.id,
                         title = $"{cEvent.TypeOfEvent} at {cEvent.Business.Name}, {cEvent.City}",
                         start = cEvent.start,
                         end = cEvent.end,
@@ -83,6 +86,7 @@ namespace LocalSpirits.WebMVC.Controllers
                 {
                     events.Add(new Event()
                     {
+                        id = cEvent.id,
                         title = $"{cEvent.TypeOfEvent} at {cEvent.Business.Name}, {cEvent.City}",
                         startRecur = cEvent.startRecur,
                         endRecur = cEvent.endRecur,
