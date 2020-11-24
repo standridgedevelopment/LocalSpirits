@@ -16,6 +16,8 @@ namespace LocalSpirits.Data
         [Key]
         public Guid ID { get; set; }
         [Required]
+        public string Username { get; set; }
+        [Required]
         [DisplayName("First Name")]
         public string FirstName { get; set; }
         [Required]
@@ -30,8 +32,11 @@ namespace LocalSpirits.Data
 
 
         public virtual List<Visited> AllVisits { get; set; } = new List<Visited>();
+        public virtual List<Friend> FriendsList { get; set; } = new List<Friend>();
+        public virtual List<FriendRequest> FreindRequests { get; set; } = new List<FriendRequest>();
+        public virtual List<ActivityFeed> Feed { get; set; } = new List<ActivityFeed>();
 
 
-        
+
     }
 }

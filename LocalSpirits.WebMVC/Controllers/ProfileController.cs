@@ -1,4 +1,5 @@
-﻿using LocalSpirits.Models.Profile;
+﻿using LocalSpirits.Models.Friends;
+using LocalSpirits.Models.Profile;
 using LocalSpirits.Services;
 using Microsoft.AspNet.Identity;
 using System;
@@ -13,10 +14,17 @@ namespace LocalSpirits.WebMVC.Controllers
     public class ProfileController : Controller
     {
         // GET: Profile
-        public ActionResult Index()
+        public ActionResult Index(string id)
         {
-            var service = CreateService();
-            var model = service.GetProfile();
+            var service = CreateProfileService();
+            var ownProfile = service.GetProfile();
+            var model = service.GetByUsername(id);
+
+            if (ownProfile.Username == id || id == null) 
+                return RedirectToAction("HomeProfile");
+
+            ModelState.Clear();
+
             return View(model);
         }
 
@@ -32,26 +40,78 @@ namespace LocalSpirits.WebMVC.Controllers
         {
             if (!ModelState.IsValid) return View(model);
 
-            var service = CreateService();
-
-            if (service.CreateUser(model))
+            var service = CreateProfileService();
+            string result = service.CreateUser(model);
+            if (result == "okay")
             {
                 TempData["SaveResult"] = "Your profile was created.";
                 return RedirectToAction("Index");
             };
 
+            if (result == "username taken")
+            {
+                ModelState.AddModelError("", "Username not available.");
+                TempData["SaveResult"] = "Profile not created.";
+                return View(model);
+            };
             ModelState.AddModelError("", "Profile could not be created.");
 
             return View(model);
         }
 
+        //Search By Name Results
+        public ActionResult Search(string id)
+        {
+            if (id != null)
+            {
+                var service = CreateProfileService();
+                var model = service.GetByName(id);
+                ModelState.Clear();
+                return View(model);
+            }
+            //string state =  $"{city.State}"
+            else return RedirectToAction($"State", "City");
+        }
+
+        public ActionResult HomeProfile()
+        {
+            var service = CreateProfileService();
+            var model = service.GetProfile();
+            ModelState.Clear();
+
+            return View(model);
+        }
+        public ActionResult CheckForFriend(string id)
+        {
+            var service = CreateProfileService();
+            string result = service.CheckForFriend(id);
+            var model = service.GetByUsername(id);
+            if (result == "pending") return View("PendingFriends", model);
+            if (result == "friends") return View("AreFriends", model);
+            return View("NotFriends", model);
+        }
+
+        public ActionResult SendFriendRequest (string id)
+        {
+            var friendService = CreateFriendService();
+            friendService.SendFriendRequest(id);
+            return RedirectToAction($"Index/{id}");
+        }
+        public ActionResult CancelFriendRequest(string id)
+        {
+            var friendService = CreateFriendService();
+            friendService.CancelFriendRequest(id);
+            return RedirectToAction($"Index/{id}");
+        }
+
         public ActionResult Edit()
         {
-            var service = CreateService();
+            var service = CreateProfileService();
             var detail = service.GetProfile();
             var model =
                 new ProfileEdit
                 {
+                    Username = detail.Username,
                     FirstName = detail.FirstName,
                     LastName = detail.LastName,
                     City = detail.City,
@@ -67,7 +127,7 @@ namespace LocalSpirits.WebMVC.Controllers
         {
             if (!ModelState.IsValid) return View(model);
 
-            var service = CreateService();
+            var service = CreateProfileService();
 
             if (service.UpdateProfile(model))
             {
@@ -79,10 +139,16 @@ namespace LocalSpirits.WebMVC.Controllers
             return View(model);
         }
 
-        private ProfileServices CreateService()
+        private ProfileServices CreateProfileService()
         {
             var userId = Guid.Parse(User.Identity.GetUserId());
             var service = new ProfileServices(userId);
+            return service;
+        }
+        private FriendsService CreateFriendService()
+        {
+            var userId = Guid.Parse(User.Identity.GetUserId());
+            var service = new FriendsService(userId);
             return service;
         }
     }

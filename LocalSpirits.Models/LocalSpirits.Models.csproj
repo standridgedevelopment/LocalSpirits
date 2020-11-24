@@ -67,6 +67,10 @@
     <Compile Include="Event\EventDetail.cs" />
     <Compile Include="Event\EventEdit.cs" />
     <Compile Include="Event\EventListItem.cs" />
+    <Compile Include="Friends\FriendCreate.cs" />
+    <Compile Include="Friends\FriendDetail.cs" />
+    <Compile Include="Friends\FriendRequestCreate.cs" />
+    <Compile Include="Friends\FriendRequestListItem.cs" />
     <Compile Include="Profile\ProfileCreate.cs" />
     <Compile Include="Profile\ProfileDetail.cs" />
     <Compile Include="Profile\ProfileEdit.cs" />

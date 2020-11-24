@@ -8,19 +8,16 @@ using System.Threading.Tasks;
 
 namespace LocalSpirits.Data
 {
-    public class Comment
+    public class Friend
     {
         [Key]
         public int ID { get; set; }
         [ForeignKey(nameof(Profile))]
-        public Guid? UserID { get; set; }
+        public Guid? ProfileID { get; set; }
         public virtual Profile Profile { get; set; }
-        [ForeignKey(nameof(ActivityFeed))]
-        public int? FeedID { get; set; }
-        public virtual ActivityFeed ActivityFeed { get; set; }
-        public string AddComment { get; set; }
-        public DateTimeOffset Created { get; set; }
 
-        public DateTimeOffset? Modified { get; set; }
+        [ForeignKey(nameof(FriendsProfile))]
+        public Guid? FriendsID { get; set; }
+        public virtual Profile FriendsProfile { get; set; }
     }
 }

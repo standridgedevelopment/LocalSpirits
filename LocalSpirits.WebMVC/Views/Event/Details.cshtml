@@ -82,7 +82,7 @@
     </dl>
 </div>
 <p>`
-    @Html.ActionLink("Add/Remove From Calendar", "AddToProfileCalendar", new { id = Model.id }) |
+    @Html.Action("CheckIfOnCalendar", "Event", new { id = Model.id })
     @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
-    @Html.ActionLink("Back to List", "Index")
+    <a href="javascript:void(0);" onclick="history.go(-1);">Go Back</a>
 </p>

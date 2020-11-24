@@ -1,0 +1,29 @@
+﻿@model IEnumerable<LocalSpirits.Models.Profile.ProfileDetail>
+
+
+<h2>Search Results</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FullName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.City)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink($"{item.FullName}", "Index", new { id = item.Username } )
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.City)
+            </td>
+        </tr>
+    }
+
+</table>

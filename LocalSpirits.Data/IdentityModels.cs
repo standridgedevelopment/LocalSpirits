@@ -39,8 +39,8 @@ namespace LocalSpirits.WebMVC.Data
         public DbSet<Business> Businesses { get; set; }
         public DbSet<Event> Events { get; set; }
         public DbSet<Visited> Visits { get; set; }
-
-
+        public DbSet<Friend> Friends { get; set; }
+        public DbSet<FriendRequest> FriendRequests { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

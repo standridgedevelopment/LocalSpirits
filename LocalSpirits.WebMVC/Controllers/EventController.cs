@@ -23,7 +23,7 @@ namespace LocalSpirits.WebMVC.Controllers
 
         // CREATE
         public ActionResult CreateOne(int id)
-        { 
+        {
             var model = new EventCreate();
             model.BusinessID = id;
 
@@ -38,7 +38,7 @@ namespace LocalSpirits.WebMVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateOne(int id ,EventCreate model)
+        public ActionResult CreateOne(int id, EventCreate model)
         {
             if (!ModelState.IsValid) return View(model);
 
@@ -71,33 +71,44 @@ namespace LocalSpirits.WebMVC.Controllers
             return View(model);
         }
 
+        public ActionResult CheckIfOnCalendar(int id)
+        {
+            var eventService = CreateEventService();
+            var visitedService = CreateVisitedService();
+            var thisEvent = eventService.GetByID(id);
+            var foundVisit = visitedService.GetVisitByEventID(id);
+            ModelState.Clear();
+            if (foundVisit.AddToCalendar == true)
+                return View("OnCalendar", thisEvent);
+            return View("NotOnCalendar", thisEvent);
+        }
         public ActionResult AddToProfileCalendar(int id)
         {
             var eventService = CreateEventService();
             var visitedService = CreateVisitedService();
             var thisEvent = eventService.GetByID(id);
             var foundVisit = visitedService.GetVisitByEventID(id);
-            
+
             if (foundVisit.EventID != null)
             {
                 if (foundVisit.AddToCalendar == true)
                 {
                     foundVisit.AddToCalendar = false;
                     visitedService.UpdateEventVisit(foundVisit, id);
-                    return RedirectToAction($"Details/{foundVisit.BusinessID}", "Business");
+                    return RedirectToAction($"Details/{foundVisit.EventID}", "Event");
                 }
                 foundVisit.AddToCalendar = true;
                 visitedService.UpdateEventVisit(foundVisit, id);
-                return RedirectToAction($"Details/{foundVisit.BusinessID}", "Business");
+                return RedirectToAction($"Details/{foundVisit.EventID}", "Event");
             }
             else
             {
-                
+
                 var model = new VisitedCreate();
                 model.AddToCalendar = true;
                 model.EventID = id;
                 visitedService.CreateVisit(model);
-                return RedirectToAction($"Details/{thisEvent.BusinessID}", "Business");
+                return RedirectToAction($"Details/{id}", "Event");
             }
         }
         public ActionResult Details(int id)

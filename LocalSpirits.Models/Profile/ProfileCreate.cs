@@ -12,6 +12,8 @@ namespace LocalSpirits.Models.Profile
     public class ProfileCreate
     {
         [Required]
+        public string Username { get; set; }
+        [Required]
         [DisplayName("First Name")]
         public string FirstName { get; set; }
         [Required]

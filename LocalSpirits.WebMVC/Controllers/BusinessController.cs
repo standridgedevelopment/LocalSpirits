@@ -51,6 +51,19 @@ namespace LocalSpirits.WebMVC.Controllers
 
             return View(model);
         }
+
+        public ActionResult Search(string id)
+        {
+            if (id != null)
+            {
+                var service = CreateService();
+                var model = service.GetByName(id);
+                ModelState.Clear();
+                return View(model);
+            }
+            //string state =  $"{city.State}"
+            else return RedirectToAction($"State", "City");
+        }
         public ActionResult Edit(int id)
         {
             var service = CreateService();

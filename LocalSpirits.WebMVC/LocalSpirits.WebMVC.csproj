@@ -187,6 +187,7 @@
     <Compile Include="Controllers\CityController.cs" />
     <Compile Include="Controllers\DistilleryController.cs" />
     <Compile Include="Controllers\EventController.cs" />
+    <Compile Include="Controllers\FriendsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
@@ -343,10 +344,9 @@
     <Content Include="Views\Profile\Edit.cshtml" />
     <Content Include="Views\City\Index.cshtml" />
     <Content Include="Views\City\Create.cshtml" />
-    <Content Include="Views\City\StateOld.cshtml" />
     <Content Include="Views\City\DetailsOld.cshtml" />
     <Content Include="Views\City\Edit.cshtml" />
-    <Content Include="Views\City\CityResults.cshtml" />
+    <Content Include="Views\City\Search.cshtml" />
     <Content Include="Views\Business\Index.cshtml" />
     <Content Include="Views\Business\Create.cshtml" />
     <Content Include="Views\Business\Edit.cshtml" />
@@ -364,10 +364,19 @@
     <Content Include="Views\Event\CreateRecurring.cshtml" />
     <Content Include="Views\Event\Details.cshtml" />
     <Content Include="Views\Profile\_CalendarPartialProfile.cshtml" />
+    <Content Include="Views\Business\Search.cshtml" />
+    <Content Include="Views\Profile\HomeProfile.cshtml" />
+    <Content Include="Views\Profile\Search.cshtml" />
+    <Content Include="Views\Profile\NotFriends.cshtml" />
+    <Content Include="Views\Profile\PendingFriends.cshtml" />
+    <Content Include="Views\Profile\AreFriends .cshtml" />
+    <Content Include="Views\Event\OnCalendar.cshtml" />
+    <Content Include="Views\Event\NotOnCalendar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Calendar\" />
+    <Folder Include="Views\Friends\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

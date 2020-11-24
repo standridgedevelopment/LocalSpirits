@@ -19,5 +19,8 @@ namespace LocalSpirits.Data
         public int? FeedID { get; set; }
         public virtual ActivityFeed ActivityFeed { get; set; }
         public bool Liked { get; set; }
+        public DateTimeOffset Created { get; set; }
+
+        public DateTimeOffset? Modified { get; set; }
     }
 }

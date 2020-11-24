@@ -10,6 +10,7 @@ namespace LocalSpirits.Models.Profile
 {
     public class ProfileDetail
     {
+        public string Username { get; set; }
         [DisplayName("First Name")]
         public string FirstName { get; set; }
         [DisplayName("Last Name")]
