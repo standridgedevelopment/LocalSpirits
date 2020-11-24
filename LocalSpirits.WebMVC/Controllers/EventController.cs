@@ -80,6 +80,12 @@ namespace LocalSpirits.WebMVC.Controllers
             
             if (foundVisit.EventID != null)
             {
+                if (foundVisit.AddToCalendar == true)
+                {
+                    foundVisit.AddToCalendar = false;
+                    visitedService.UpdateEventVisit(foundVisit, id);
+                    return RedirectToAction($"Details/{foundVisit.BusinessID}", "Business");
+                }
                 foundVisit.AddToCalendar = true;
                 visitedService.UpdateEventVisit(foundVisit, id);
                 return RedirectToAction($"Details/{foundVisit.BusinessID}", "Business");

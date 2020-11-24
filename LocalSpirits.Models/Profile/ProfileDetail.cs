@@ -20,13 +20,14 @@ namespace LocalSpirits.Models.Profile
             get { return $"{FirstName} {LastName}"; }
             set { }
         }
-       
+
         public string City { get; set; }
         public StateName State { get; set; }
         [DisplayName("Zip Code")]
         public int ZipCode { get; set; }
 
-        public virtual List<Data.Event> Events { get; set; }
-        public virtual List<Data.Visited> Favorites { get; set; }
-    }
+
+        public List<Data.Visited> Favorites { get; set; }
+        public List<Data.Event> Events { get; set; }
+      }
 }

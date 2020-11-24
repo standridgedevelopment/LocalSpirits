@@ -21,7 +21,7 @@ namespace LocalSpirits.Services
         {
             var entity = new Profile()
             {
-                Profile_ID = _userId,
+                ID = _userId,
                 FirstName = model.FirstName,
                 LastName = model.LastName,
                 City = model.City,
@@ -43,7 +43,45 @@ namespace LocalSpirits.Services
 
                 try
                 {
-                    var entity = ctx.Profiles.Single(e => e.Profile_ID == _userId);
+                    var entity = ctx.Profiles.Single(e => e.ID == _userId);
+
+                    List<Data.Visited> favorites = new List<Data.Visited>();
+                    foreach (var visit in entity.AllVisits)
+                    {
+                        if (visit.AddToFavorites == true)
+                        {
+                            var visitdetails = new Data.Visited
+                            {
+                                BusinessID = visit.BusinessID,
+                            };
+                            favorites.Add(visitdetails);
+                        }
+                    }
+
+                    List<Data.Event> events = new List<Data.Event>();
+                    foreach (var visit in entity.AllVisits)
+                    {
+                        if (visit.AddToCalendar == true)
+                        {
+                            var visitdetails = new Data.Event
+                            {
+                                id = visit.Event.id,
+                                title = $"{visit.Event.TypeOfEvent} at {visit.Event.Business.Name}, {visit.Event.City}",
+                                TypeOfEvent = visit.Event.TypeOfEvent,
+                                BusinessID = visit.Event.BusinessID,
+                                Business = visit.Event.Business,
+                                start = visit.Event.start,
+                                end = visit.Event.end,
+                                daysOfWeek = visit.Event.DaysOfWeekConverted.ToArray(),
+                                startRecur = visit.Event.startRecur,
+                                endRecur = visit.Event.endRecur,
+                                ThirdPartyWebsite = visit.Event.ThirdPartyWebsite,
+                                color = visit.Event.color,
+                            };
+                            events.Add(visitdetails);
+                        }
+                    }
+
                     return new ProfileDetail
                     {
                         FirstName = entity.FirstName,
@@ -51,8 +89,8 @@ namespace LocalSpirits.Services
                         City = entity.City,
                         State = entity.State,
                         ZipCode = entity.ZipCode,
-                        Events = entity.Events,
-                        Favorites = entity.Favorites
+                        Favorites = favorites,
+                        Events = events,
                     };
                 }
                 catch { }
@@ -65,7 +103,7 @@ namespace LocalSpirits.Services
             using (var ctx = new ApplicationDbContext())
             {
 
-                var entity = ctx.Profiles.Single(e => e.Profile_ID == _userId);
+                var entity = ctx.Profiles.Single(e => e.ID == _userId);
 
                 if (model.FirstName != null) entity.FirstName = model.FirstName;
                 entity.LastName = model.LastName;
@@ -80,7 +118,7 @@ namespace LocalSpirits.Services
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var entity = ctx.Profiles.Single(e => e.Profile_ID == _userId);
+                var entity = ctx.Profiles.Single(e => e.ID == _userId);
 
                 ctx.Profiles.Remove(entity);
 

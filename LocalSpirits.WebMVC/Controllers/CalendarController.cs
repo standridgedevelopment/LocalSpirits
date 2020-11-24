@@ -107,9 +107,9 @@ namespace LocalSpirits.WebMVC.Controllers
             var profile = profileService.GetProfile();
             var events = new List<Event>();
 
-                foreach (var cEvent in profile.Events)
+            foreach (var cEvent in profile.Events)
                 {
-                    if (cEvent.start != null)
+                    if (cEvent.start != "--")
                     {
                         events.Add(new Event()
                         {
@@ -122,7 +122,7 @@ namespace LocalSpirits.WebMVC.Controllers
 
                         });
                     }
-                    if (cEvent.startRecur != null)
+                    if (cEvent.startRecur != "--")
                     {
                         events.Add(new Event()
                         {
@@ -130,9 +130,8 @@ namespace LocalSpirits.WebMVC.Controllers
                             title = $"{cEvent.TypeOfEvent} at {cEvent.Business.Name}, {cEvent.City}",
                             startRecur = cEvent.startRecur,
                             endRecur = cEvent.endRecur,
-                            daysOfWeek = cEvent.DaysOfWeekConverted.ToArray(),
+                            daysOfWeek = cEvent.daysOfWeek,
                             color = cEvent.color,
-                            //startRecur = $"2020-11-22",
 
                         });
                     }
