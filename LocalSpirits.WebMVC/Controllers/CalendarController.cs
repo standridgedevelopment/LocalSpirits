@@ -138,6 +138,44 @@ namespace LocalSpirits.WebMVC.Controllers
                 }
             return Json(events.ToArray(), JsonRequestBehavior.AllowGet);
         }
+        public JsonResult GetFriendsEvents(string id, DateTime start, DateTime end)
+        {
+            var profileService = CreateProfileService();
+            var profile = profileService.GetByUsername(id);
+            var events = new List<Event>();
+
+            foreach (var cEvent in profile.Events)
+            {
+                if (cEvent.start != "--")
+                {
+                    events.Add(new Event()
+                    {
+                        id = cEvent.id,
+                        title = $"{cEvent.TypeOfEvent} at {cEvent.Business.Name}, {cEvent.City}",
+                        start = cEvent.start,
+                        end = cEvent.end,
+                        color = cEvent.color,
+                        url = cEvent.url,
+
+                    });
+                }
+                if (cEvent.startRecur != "--")
+                {
+                    events.Add(new Event()
+                    {
+                        id = cEvent.id,
+                        title = $"{cEvent.TypeOfEvent} at {cEvent.Business.Name}, {cEvent.City}",
+                        startRecur = cEvent.startRecur,
+                        endRecur = cEvent.endRecur,
+                        daysOfWeek = cEvent.daysOfWeek,
+                        color = cEvent.color,
+
+                    });
+                }
+            }
+            return Json(events.ToArray(), JsonRequestBehavior.AllowGet);
+        }
+
         private ProfileServices CreateProfileService()
         {
             var userId = Guid.Parse(User.Identity.GetUserId());

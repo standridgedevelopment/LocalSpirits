@@ -30,7 +30,7 @@
         <tr>
 
             <td>
-                @Html.DisplayFor(modelItem => item.FullName)
+                @Html.ActionLink($"{item.FullName}", "Index", new { id = item.Username })
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.City)

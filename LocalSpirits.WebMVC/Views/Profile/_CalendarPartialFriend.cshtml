@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='utf-8' />
+    <link href='~/Scripts/fullcalendar/main.css' rel='stylesheet' />
+    <script src='~/Scripts/fullcalendar/main.js'></script>
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                //eventClick: function (info) {
+                //    var eventObj = info.event;
+
+                //    if (eventObj.url) {
+                //        alert(
+                //            'Clicked ' + eventObj.title + '.\n' +
+                //            'Will open ' + eventObj.url + ' in a new tab'
+                //        );
+
+                //        window.open(eventObj.url);
+
+                //        info.jsEvent.preventDefault(); // prevents browser from following link in current tab.
+                //    } else {
+                //        alert('Clicked ' + eventObj.title);
+                //    }
+                //},
+                headerToolbar: { center: 'dayGridMonth,dayGridWeek,listWeek' }, // buttons for switching between views
+                views: {
+                    dayGrid: {
+                        // options apply to dayGridMonth, dayGridWeek, and dayGridDay views
+                    },
+                    timeGrid: {
+                        // options apply to timeGridWeek and timeGridDay views
+                    },
+                    week: {
+                        // options apply to dayGridWeek and timeGridWeek views
+                    },
+                    day: {
+                        // options apply to dayGridDay and timeGridDay views
+                    }
+                },
+                initialView: 'dayGridMonth',
+                initialDate: '2020-11-15',
+                editable: true,
+                selectable: true,
+                businessHours: true,
+                dayMaxEvents: true, // allow "more" link when too many events
+                events: '@Url.RouteUrl(new{ action= "GetFriendsEvents", controller="Calendar", id = Model.Username })'
+
+            });
+            calendar.render();
+
+        });
+
+    </script>
+</head>
+<body>
+    <div id='calendar'>
+
+    </div>
+
+</body>
+</html>
