@@ -39,7 +39,7 @@
                 @Html.DisplayFor(modelItem => item.State)
             </td>
             <td>
-                @Html.ActionLink("Remove Friend", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.ActionLink("Remove Friend", "RemoveFriend", new { id = item.Username })
             </td>
         </tr>
     }

@@ -112,6 +112,14 @@ namespace LocalSpirits.WebMVC.Controllers
             return RedirectToAction($"FriendsList");
         }
 
+        public ActionResult RemoveFriend(string id)
+        {
+            var friendService = CreateFriendService();
+
+            friendService.RemoveFriend(id);
+            return RedirectToAction($"FriendsList");
+        }
+
         public ActionResult FriendsList()
         {
             var profileService = CreateProfileService();

@@ -50,6 +50,26 @@ namespace LocalSpirits.Services
             }
         }
 
+        public bool RemoveFriend(string username)
+        {
+
+
+            using (var ctx = new ApplicationDbContext())
+            {
+                var userProfile = ctx.Profiles.Single(e => e.ID == _userId);
+                var otherProfile = ctx.Profiles.Single(e => e.Username == username);
+
+                var deleteFriend= ctx.Friends.Where(e => e.ProfileID == _userId && e.FriendsID == otherProfile.ID)
+                    .Single();
+                var otherDeleteFriend = ctx.Friends.Where(e => e.ProfileID == otherProfile.ID && e.FriendsID == _userId)
+                    .Single();
+             
+                ctx.Friends.Remove(deleteFriend);
+                ctx.Friends.Remove(otherDeleteFriend);
+                return ctx.SaveChanges() == 2;
+            }
+        }
+
         public bool SendFriendRequest(string username)
         {
             using (var ctx = new ApplicationDbContext())
