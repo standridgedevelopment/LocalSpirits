@@ -10,6 +10,8 @@ namespace LocalSpirits.Models.Friends
     {
         public Guid? ProfileID { get; set; }
         public string FullName { get; set; }
+        public string Username { get; set; }
         public DateTimeOffset TimeSent { get; set; }
+
     }
 }

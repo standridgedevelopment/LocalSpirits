@@ -17,21 +17,36 @@ namespace LocalSpirits.Services
         {
             _userId = userId;
         }
-        public bool AddFriend(Guid id)
+        public bool AddFriend(string username)
         {
-            var entity = new Friend()
-            {
-                ProfileID = _userId,
-                FriendsID = id,
-            };
+            
 
             using (var ctx = new ApplicationDbContext())
             {
-                var deleteFriendRequest = ctx.FriendRequests.Where(e => e.ProfileID == id)
+                var userProfile = ctx.Profiles.Single(e => e.ID == _userId);
+                var otherProfile = ctx.Profiles.Single(e => e.Username == username);
+                var yourFriendObject = new Friend()
+                {
+                    FriendsUsername = otherProfile.Username,
+                    ProfileID = _userId,
+                    FriendsID = otherProfile.ID,
+                };
+                var theirFriendObject = new Friend()
+                {
+                    FriendsUsername = userProfile.Username,
+                    ProfileID = otherProfile.ID,
+                    FriendsID = _userId,
+                };
+
+                var deleteFriendRequest = ctx.FriendRequests.Where(e => e.ProfileID == _userId && e.FriendsID == otherProfile.ID)
+                    .Single();
+                var deleteOtherRequest = ctx.FriendRequests.Where(e => e.ProfileID == otherProfile.ID && e.FriendsID == _userId)
                     .Single();
                 ctx.FriendRequests.Remove(deleteFriendRequest);
-                ctx.Friends.Add(entity);
-                return ctx.SaveChanges() == 2;
+                ctx.FriendRequests.Remove(deleteOtherRequest);
+                ctx.Friends.Add(yourFriendObject);
+                ctx.Friends.Add(theirFriendObject);
+                return ctx.SaveChanges() == 4;
             }
         }
 
@@ -39,16 +54,30 @@ namespace LocalSpirits.Services
         {
             using (var ctx = new ApplicationDbContext())
             {
+                var userProfile = ctx.Profiles.Single(e => e.ID == _userId);
                 var otherProfile = ctx.Profiles.Single(e => e.Username == username);
 
-                var entity = new FriendRequest()
+                var sentRequest = new FriendRequest()
                 {
+                    Sender = userProfile.FullName,
+                    Reciever = otherProfile.FullName,
                     ProfileID = _userId,
                     FriendsID = otherProfile.ID,
+                    SendersUsername = userProfile.Username,
                     Created = DateTime.Now
                 };
-                ctx.FriendRequests.Add(entity);
-                return ctx.SaveChanges() == 1;
+                var recievedRequest = new FriendRequest()
+                {
+                    Sender = userProfile.FullName,
+                    Reciever = otherProfile.FullName,
+                    ProfileID = otherProfile.ID,
+                    FriendsID = _userId,
+                    SendersUsername = userProfile.Username,
+                    Created = DateTime.Now
+                };
+                ctx.FriendRequests.Add(sentRequest);
+                ctx.FriendRequests.Add(recievedRequest);
+                return ctx.SaveChanges() == 2;
             }
         }
         public bool CancelFriendRequest(string username)
@@ -57,26 +86,28 @@ namespace LocalSpirits.Services
             {
                 var otherProfile = ctx.Profiles.Single(e => e.Username == username);
                 var friendRequest = ctx.FriendRequests.Single(e => e.ProfileID == _userId && e.FriendsID == otherProfile.ID);
+                var otherRequest = ctx.FriendRequests.Single(e => e.ProfileID == otherProfile.ID && e.FriendsID == _userId);
                 ctx.FriendRequests.Remove(friendRequest);
+                ctx.FriendRequests.Remove(otherRequest);
                 return ctx.SaveChanges() == 1;
             }
         }
 
-        public IEnumerable<FriendRequestListItem> GetFriendRequests()
-        {
-            using (var ctx = new ApplicationDbContext())
-            {
-                var query = ctx.FriendRequests.Where(e => e.ProfileID == _userId)
-                    .Select
-                    (e => new FriendRequestListItem
-                    {
-                        ProfileID = e.ProfileID,
-                        FullName = $"{e.FriendsProfile.FirstName}",
-                        TimeSent = e.Created,
-                    }
-                    );
-                return query.ToArray();
-            }
-        }
+        //public IEnumerable<FriendRequestListItem> GetFriendRequests()
+        //{
+        //    using (var ctx = new ApplicationDbContext())
+        //    {
+        //        var query = ctx.FriendRequests.Where(e => e.ProfileID == _userId)
+        //            .Select
+        //            (e => new FriendRequestListItem
+        //            {
+        //                ProfileID = e.ProfileID,
+        //                FullName = $"{e.F",
+        //                TimeSent = e.Created,
+        //            }
+        //            );
+        //        return query.ToArray();
+        //    }
+        //}
     }
 }

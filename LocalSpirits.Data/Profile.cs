@@ -40,8 +40,8 @@ namespace LocalSpirits.Data
 
 
         public virtual List<Visited> AllVisits { get; set; } = new List<Visited>();
-        //public virtual List<Friend> FriendsList { get; set; } = new List<Friend>();
-        //public virtual List<FriendRequest> FriendRequests { get; set; } = new List<FriendRequest>();
+        public virtual List<Friend> FriendsList { get; set; } = new List<Friend>();
+        public virtual List<FriendRequest> FriendRequests { get; set; } = new List<FriendRequest>();
         public virtual List<ActivityFeed> Feed { get; set; } = new List<ActivityFeed>();
 
 

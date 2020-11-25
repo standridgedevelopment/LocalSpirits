@@ -66,6 +66,9 @@ namespace LocalSpirits.Services
                         ZipCode = entity.ZipCode,
                         Favorites = favorites,
                         Events = events,
+                        FriendRequests = entity.FriendRequests,
+                        FriendsList = entity.FriendsList,
+                        Feed = entity.Feed,
                     };
                 }
                 catch { }
@@ -108,7 +111,7 @@ namespace LocalSpirits.Services
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var Profiles = ctx.Profiles.Where(e => e.FirstName.Contains(name)|| e.LastName.Contains(name)).ToList();
+                var Profiles = ctx.Profiles.Where(e => e.FirstName.Contains(name) || e.LastName.Contains(name)).ToList();
                 foreach (var profile in Profiles)
                 {
                     List<Visited> favorites = GetFavorites(profile.AllVisits);
@@ -132,20 +135,24 @@ namespace LocalSpirits.Services
 
         public string CheckForFriend(string username)
         {
-            
+
             using (var ctx = new ApplicationDbContext())
             {
-                var otherProfile = ctx.Profiles.Single(e => e.Username == username);
-                var friendsList = ctx.Friends.Where(e => e.ProfileID == _userId).ToList();
+                var myProfile = GetProfile();
+                var otherProfile = GetByUsername(username);
                 try
                 {
-                    var checkForFriendRequest = ctx.FriendRequests.Single(e => e.FriendsID == otherProfile.ID);
-                    return "pending";
+                    foreach (var friendRequest in myProfile.FriendRequests)
+                    {
+                        if (friendRequest.Reciever == otherProfile.FullName)
+                            return "pending";
+                    }
+                    
                 }
                 catch { }
-                foreach (var friend in friendsList)
+                foreach (var friend in myProfile.FriendsList)
                 {
-                    if (friend.FriendsProfile.Username == username)
+                    if (friend.FriendsUsername == username)
                         return "friends";
                 }
                 return "not friends";
@@ -156,21 +163,21 @@ namespace LocalSpirits.Services
             var foundFriends = new List<ProfileDetail>();
             using (var ctx = new ApplicationDbContext())
             {
-                var userProfile = ctx.Profiles.Single(e => e.ID == _userId);
-                var friendsList = ctx.Friends.Where(e => e.ProfileID == _userId).ToList();
+                var userProfile = GetProfile();
 
-                foreach (var friend in friendsList)
+                foreach (var friend in userProfile.FriendsList)
                 {
+                    var friendsProfile = GetByUsername(friend.FriendsUsername);
                     var friendInList = new ProfileDetail
                     {
-                        FullName = friend.FriendsProfile.FullName,
-                        Username = friend.FriendsProfile.Username,
-                        FirstName = friend.FriendsProfile.FirstName,
-                        LastName = friend.FriendsProfile.LastName,
-                        City = friend.FriendsProfile.City,
-                        State = friend.FriendsProfile.State,
-                        ZipCode = friend.Profile.ZipCode,
-                       
+                        FullName = friendsProfile.FullName,
+                        Username = friendsProfile.Username,
+                        FirstName = friendsProfile.FirstName,
+                        LastName = friendsProfile.LastName,
+                        City = friendsProfile.City,
+                        State = friendsProfile.State,
+                        ZipCode = friendsProfile.ZipCode,
+
                     };
                     foundFriends.Add(friendInList);
                 }
@@ -182,24 +189,26 @@ namespace LocalSpirits.Services
             var friendsRequests = new List<FriendRequestListItem>();
             using (var ctx = new ApplicationDbContext())
             {
-                var foundRequests = ctx.FriendRequests.Where(e => e.FriendsID == _userId).ToList();
+                var foundRequests = ctx.FriendRequests.Where(e => e.ProfileID == _userId).ToList();
                 var userProfile = ctx.Profiles.Single(e => e.ID == _userId);
 
-
-                foreach (var request in foundRequests)
+                foreach (var request in userProfile.FriendRequests)
                 {
-                    if(request.FriendsID == _userId)
+                    if (request.SendersUsername != userProfile.Username)
                     {
                         var friendInList = new FriendRequestListItem
                         {
                             ProfileID = request.ProfileID,
-                            FullName = request.Profile.FullName,
+                            FullName = request.Sender,
                             TimeSent = request.Created,
+                            Username = request.SendersUsername,
                         };
                         friendsRequests.Add(friendInList);
                     }
-                   
+                    
                 }
+
+
             }
             return friendsRequests;
         }
@@ -256,7 +265,7 @@ namespace LocalSpirits.Services
                     };
                     events.Add(visitdetails);
                 }
-                
+
             }
             return events;
         }

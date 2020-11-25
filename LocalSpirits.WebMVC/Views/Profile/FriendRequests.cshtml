@@ -23,8 +23,8 @@
                 @Html.DisplayFor(modelItem => item.TimeSent)
             </td>
             <td>
-                @Html.ActionLink("Accept", "AcceptFriendRequest", new { id = item.ProfileID }) |
-                @Html.ActionLink("Decline", "Delete", new { id = item.ProfileID })
+                @Html.ActionLink("Accept", "AcceptFriendRequest", new { id = item.Username }) |
+                @Html.ActionLink("Decline", "Delete", new { id = item.Username })
             </td>
         </tr>
     }
