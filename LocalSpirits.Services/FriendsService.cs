@@ -17,21 +17,21 @@ namespace LocalSpirits.Services
         {
             _userId = userId;
         }
-        public bool AddFriend(FriendCreate model)
+        public bool AddFriend(Guid id)
         {
             var entity = new Friend()
             {
                 ProfileID = _userId,
-                FriendsID = model.FriendsID,
+                FriendsID = id,
             };
 
             using (var ctx = new ApplicationDbContext())
             {
-                var deleteFriendRequest = ctx.FriendRequests.Where(e => e.FriendsID == model.FriendsID)
+                var deleteFriendRequest = ctx.FriendRequests.Where(e => e.ProfileID == id)
                     .Single();
-
+                ctx.FriendRequests.Remove(deleteFriendRequest);
                 ctx.Friends.Add(entity);
-                return ctx.SaveChanges() == 1;
+                return ctx.SaveChanges() == 2;
             }
         }
 
@@ -70,6 +70,7 @@ namespace LocalSpirits.Services
                     .Select
                     (e => new FriendRequestListItem
                     {
+                        ProfileID = e.ProfileID,
                         FullName = $"{e.FriendsProfile.FirstName}",
                         TimeSent = e.Created,
                     }

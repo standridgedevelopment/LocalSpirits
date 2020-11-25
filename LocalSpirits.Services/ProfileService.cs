@@ -1,4 +1,5 @@
 ﻿using LocalSpirits.Data;
+using LocalSpirits.Models.Friends;
 using LocalSpirits.Models.Profile;
 using LocalSpirits.WebMVC.Data;
 using System;
@@ -134,21 +135,73 @@ namespace LocalSpirits.Services
             
             using (var ctx = new ApplicationDbContext())
             {
-                var entity = ctx.Profiles.Single(e => e.ID == _userId);
                 var otherProfile = ctx.Profiles.Single(e => e.Username == username);
+                var friendsList = ctx.Friends.Where(e => e.ProfileID == _userId).ToList();
                 try
                 {
                     var checkForFriendRequest = ctx.FriendRequests.Single(e => e.FriendsID == otherProfile.ID);
                     return "pending";
                 }
                 catch { }
-                foreach (var friend in entity.FriendsList)
+                foreach (var friend in friendsList)
                 {
                     if (friend.FriendsProfile.Username == username)
                         return "friends";
                 }
                 return "not friends";
             }
+        }
+        public List<ProfileDetail> GetFriendsList()
+        {
+            var foundFriends = new List<ProfileDetail>();
+            using (var ctx = new ApplicationDbContext())
+            {
+                var userProfile = ctx.Profiles.Single(e => e.ID == _userId);
+                var friendsList = ctx.Friends.Where(e => e.ProfileID == _userId).ToList();
+
+                foreach (var friend in friendsList)
+                {
+                    var friendInList = new ProfileDetail
+                    {
+                        FullName = friend.FriendsProfile.FullName,
+                        Username = friend.FriendsProfile.Username,
+                        FirstName = friend.FriendsProfile.FirstName,
+                        LastName = friend.FriendsProfile.LastName,
+                        City = friend.FriendsProfile.City,
+                        State = friend.FriendsProfile.State,
+                        ZipCode = friend.Profile.ZipCode,
+                       
+                    };
+                    foundFriends.Add(friendInList);
+                }
+            }
+            return foundFriends;
+        }
+        public List<FriendRequestListItem> GetFriendsRequests()
+        {
+            var friendsRequests = new List<FriendRequestListItem>();
+            using (var ctx = new ApplicationDbContext())
+            {
+                var foundRequests = ctx.FriendRequests.Where(e => e.FriendsID == _userId).ToList();
+                var userProfile = ctx.Profiles.Single(e => e.ID == _userId);
+
+
+                foreach (var request in foundRequests)
+                {
+                    if(request.FriendsID == _userId)
+                    {
+                        var friendInList = new FriendRequestListItem
+                        {
+                            ProfileID = request.ProfileID,
+                            FullName = request.Profile.FullName,
+                            TimeSent = request.Created,
+                        };
+                        friendsRequests.Add(friendInList);
+                    }
+                   
+                }
+            }
+            return friendsRequests;
         }
 
         public bool UpdateProfile(ProfileEdit model)

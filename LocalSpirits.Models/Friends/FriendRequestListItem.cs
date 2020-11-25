@@ -8,6 +8,7 @@ namespace LocalSpirits.Models.Friends
 {
     public class FriendRequestListItem
     {
+        public Guid? ProfileID { get; set; }
         public string FullName { get; set; }
         public DateTimeOffset TimeSent { get; set; }
     }

@@ -372,6 +372,8 @@
     <Content Include="Views\Profile\AreFriends .cshtml" />
     <Content Include="Views\Event\OnCalendar.cshtml" />
     <Content Include="Views\Event\NotOnCalendar.cshtml" />
+    <Content Include="Views\Profile\FriendsList.cshtml" />
+    <Content Include="Views\Profile\FriendRequests.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

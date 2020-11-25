@@ -103,6 +103,28 @@ namespace LocalSpirits.WebMVC.Controllers
             friendService.CancelFriendRequest(id);
             return RedirectToAction($"Index/{id}");
         }
+        public ActionResult AcceptFriendRequest(Guid id)
+        {
+            var friendService = CreateFriendService();
+            friendService.AddFriend(id);
+            return RedirectToAction($"FriendsList");
+        }
+
+        public ActionResult FriendsList()
+        {
+            var profileService = CreateProfileService();
+            var friendsList = profileService.GetFriendsList();
+            return View(friendsList);
+        }
+
+        public ActionResult FriendRequests()
+        {
+            var profileService = CreateProfileService();
+            var friendRequests = profileService.GetFriendsRequests();
+            if (friendRequests.Count != 0)
+                return View(friendRequests);
+            else return View(friendRequests);
+        }
 
         public ActionResult Edit()
         {
