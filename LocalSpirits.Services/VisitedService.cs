@@ -1,4 +1,5 @@
 ﻿using LocalSpirits.Data;
+using LocalSpirits.Models.ActivityFeed;
 using LocalSpirits.Models.Visited;
 using LocalSpirits.WebMVC.Data;
 using System;
@@ -76,6 +77,8 @@ namespace LocalSpirits.Services
                     entity.Rating = model.Rating;
                     entity.AddToCalendar = model.AddToCalendar;
                     entity.AddToFavorites = model.AddToFavorites;
+
+                    var activityFeedItem = new ActivityFeedCreate();
                     try
                     {
                         ctx.SaveChanges();

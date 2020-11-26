@@ -1,4 +1,5 @@
 ﻿using LocalSpirits.Data;
+using LocalSpirits.Models.ActivityFeed;
 using LocalSpirits.Models.Friends;
 using LocalSpirits.Models.Profile;
 using LocalSpirits.WebMVC.Data;
@@ -133,85 +134,7 @@ namespace LocalSpirits.Services
             }
         }
 
-        public string CheckForFriend(string username)
-        {
-
-            using (var ctx = new ApplicationDbContext())
-            {
-                var myProfile = GetProfile();
-                var otherProfile = GetByUsername(username);
-                try
-                {
-                    foreach (var friendRequest in myProfile.FriendRequests)
-                    {
-                        if (friendRequest.Reciever == otherProfile.FullName)
-                            return "pending";
-                    }
-                    
-                }
-                catch { }
-                foreach (var friend in myProfile.FriendsList)
-                {
-                    if (friend.FriendsUsername == username)
-                        return "friends";
-                }
-                return "not friends";
-            }
-        }
-        public List<ProfileDetail> GetFriendsList()
-        {
-            var foundFriends = new List<ProfileDetail>();
-            using (var ctx = new ApplicationDbContext())
-            {
-                var userProfile = GetProfile();
-
-                foreach (var friend in userProfile.FriendsList)
-                {
-                    var friendsProfile = GetByUsername(friend.FriendsUsername);
-                    var friendInList = new ProfileDetail
-                    {
-                        FullName = friendsProfile.FullName,
-                        Username = friendsProfile.Username,
-                        FirstName = friendsProfile.FirstName,
-                        LastName = friendsProfile.LastName,
-                        City = friendsProfile.City,
-                        State = friendsProfile.State,
-                        ZipCode = friendsProfile.ZipCode,
-
-                    };
-                    foundFriends.Add(friendInList);
-                }
-            }
-            return foundFriends;
-        }
-        public List<FriendRequestListItem> GetFriendsRequests()
-        {
-            var friendsRequests = new List<FriendRequestListItem>();
-            using (var ctx = new ApplicationDbContext())
-            {
-                var foundRequests = ctx.FriendRequests.Where(e => e.ProfileID == _userId).ToList();
-                var userProfile = ctx.Profiles.Single(e => e.ID == _userId);
-
-                foreach (var request in userProfile.FriendRequests)
-                {
-                    if (request.SendersUsername != userProfile.Username)
-                    {
-                        var friendInList = new FriendRequestListItem
-                        {
-                            ProfileID = request.ProfileID,
-                            FullName = request.Sender,
-                            TimeSent = request.Created,
-                            Username = request.SendersUsername,
-                        };
-                        friendsRequests.Add(friendInList);
-                    }
-                    
-                }
-
-
-            }
-            return friendsRequests;
-        }
+        
 
         public bool UpdateProfile(ProfileEdit model)
         {
@@ -285,6 +208,57 @@ namespace LocalSpirits.Services
                 }
             }
             return favorites;
+        }
+
+        public bool CreateFeedItem(ActivityFeedCreate model)
+        {
+            var entity = new ActivityFeed()
+            {
+                UserID = _userId,
+                Activity = $"{model.Activity}",
+                ObjectID = model.ObjectID,
+                ObjectType = model.ObjectType,
+            };
+
+            using (var ctx = new ApplicationDbContext())
+            {
+                ctx.ActivityFeed.Add(entity);
+                ctx.SaveChanges();
+                return true;
+            }
+
+        }
+        public List<ActivityFeedListItem> GetFullFriendsActivityFeed()
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var userProfile = ctx.Profiles.Single(e => e.ID == _userId);
+                List<ActivityFeedListItem> activityFeed = new List<ActivityFeedListItem>();
+                foreach (var friend in userProfile.FriendsList)
+                {
+                    var otherProfile = GetByUsername(friend.FriendsUsername);
+                    foreach (var activity in otherProfile.Feed)
+                    {
+                        if ((DateTimeOffset.Now - activity.Created).TotalDays <= 3)
+                        {
+                            var activityItem = new ActivityFeedListItem
+                            {
+                                ID = activity.ID,
+                                UserID = activity.UserID,
+                                FullName = activity.Content,
+                                Activity = activity.Activity,
+                                Username = activity.Username,
+                                ObjectID = activity.ObjectID,
+                                ObjectType = activity.ObjectType,
+                                Created = activity.Created,
+                            };
+                            activityFeed.Add(activityItem);
+                        }
+                        else return activityFeed;
+                    }
+                }
+                return activityFeed;
+            }
         }
     }
 }

@@ -181,11 +181,9 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\BeerController.cs" />
     <Compile Include="Controllers\BusinessController.cs" />
     <Compile Include="Controllers\CalendarController.cs" />
     <Compile Include="Controllers\CityController.cs" />
-    <Compile Include="Controllers\DistilleryController.cs" />
     <Compile Include="Controllers\EventController.cs" />
     <Compile Include="Controllers\FriendsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -367,19 +365,19 @@
     <Content Include="Views\Business\Search.cshtml" />
     <Content Include="Views\Profile\HomeProfile.cshtml" />
     <Content Include="Views\Profile\Search.cshtml" />
-    <Content Include="Views\Profile\NotFriends.cshtml" />
-    <Content Include="Views\Profile\PendingFriends.cshtml" />
-    <Content Include="Views\Profile\AreFriends.cshtml" />
+    <Content Include="Views\Friends\NotFriends.cshtml" />
+    <Content Include="Views\Friends\PendingFriends.cshtml" />
+    <Content Include="Views\Friends\AreFriends.cshtml" />
     <Content Include="Views\Event\OnCalendar.cshtml" />
     <Content Include="Views\Event\NotOnCalendar.cshtml" />
-    <Content Include="Views\Profile\FriendsList.cshtml" />
-    <Content Include="Views\Profile\FriendRequests.cshtml" />
+    <Content Include="Views\Friends\FriendsList.cshtml" />
+    <Content Include="Views\Friends\FriendRequests.cshtml" />
     <Content Include="Views\Profile\_CalendarPartialFriend.cshtml" />
+    <Content Include="Views\Home\HomeFeed.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Calendar\" />
-    <Folder Include="Views\Friends\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

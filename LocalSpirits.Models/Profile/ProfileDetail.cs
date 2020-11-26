@@ -32,6 +32,6 @@ namespace LocalSpirits.Models.Profile
         public List<Data.Event> Events { get; set; }
         public List<Friend> FriendsList { get; set; } 
         public  List<FriendRequest> FriendRequests { get; set; }
-        public virtual List<ActivityFeed> Feed { get; set; } 
+        public virtual List<Data.ActivityFeed> Feed { get; set; } 
     }
 }

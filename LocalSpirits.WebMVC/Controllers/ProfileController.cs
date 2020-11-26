@@ -81,61 +81,7 @@ namespace LocalSpirits.WebMVC.Controllers
 
             return View(model);
         }
-        public ActionResult CheckForFriend(string id)
-        {
-            var service = CreateProfileService();
-            string result = service.CheckForFriend(id);
-            var model = service.GetByUsername(id);
-            ModelState.Clear();
-            if (result == "pending") return View("PendingFriends", model);
-            if (result == "friends") return View("AreFriends", model);
-            return View("NotFriends", model);
-        }
-
-        public ActionResult SendFriendRequest (string id)
-        {
-            var friendService = CreateFriendService();
-            friendService.SendFriendRequest(id);
-            return RedirectToAction($"Index/{id}");
-        }
-        public ActionResult CancelFriendRequest(string id)
-        {
-            var friendService = CreateFriendService();
-            friendService.CancelFriendRequest(id);
-            return RedirectToAction($"Index/{id}");
-        }
-        public ActionResult AcceptFriendRequest(string id)
-        {
-            var friendService = CreateFriendService();
-
-            friendService.AddFriend(id);
-            return RedirectToAction($"FriendsList");
-        }
-
-        public ActionResult RemoveFriend(string id)
-        {
-            var friendService = CreateFriendService();
-
-            friendService.RemoveFriend(id);
-            return RedirectToAction($"FriendsList");
-        }
-
-        public ActionResult FriendsList()
-        {
-            var profileService = CreateProfileService();
-            var friendsList = profileService.GetFriendsList();
-            return View(friendsList);
-        }
-
-        public ActionResult FriendRequests()
-        {
-            var profileService = CreateProfileService();
-            var friendRequests = profileService.GetFriendsRequests();
-            if (friendRequests.Count != 0)
-                return View(friendRequests);
-            else return View(friendRequests);
-        }
-
+        
         public ActionResult Edit()
         {
             var service = CreateProfileService();

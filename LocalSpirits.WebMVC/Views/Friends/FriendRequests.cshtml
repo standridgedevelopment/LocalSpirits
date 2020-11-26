@@ -1,0 +1,30 @@
+﻿@model IEnumerable<LocalSpirits.Models.Friends.FriendRequestListItem>
+
+@if(Model.Count() != 0)
+{
+<table style="width:50%;">
+    <tr >
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FullName)
+            </td>
+            <td >
+                @Html.ActionLink("Accept", "AcceptFriendRequest", "Friends", new { id = item.Username }, null) |
+                @Html.ActionLink("Decline", "Delete", "Friends", new { id = item.Username }, null)
+            </td>
+        </tr>
+    }
+
+</table>
+}
+@if (Model.Count() == 0)
+{
+    <p>No Friend Requests</p>
+}
+
+

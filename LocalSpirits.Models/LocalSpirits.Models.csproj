@@ -54,6 +54,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActivityFeed\ActivityFeedCreate.cs" />
+    <Compile Include="ActivityFeed\ActivityFeedListItem.cs" />
     <Compile Include="Business\BusinessCreate.cs" />
     <Compile Include="Business\BusinessDetail.cs" />
     <Compile Include="Business\BusinessEdit.cs" />

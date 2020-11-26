@@ -41,6 +41,7 @@ namespace LocalSpirits.WebMVC.Data
         public DbSet<Visited> Visits { get; set; }
         public DbSet<Friend> Friends { get; set; }
         public DbSet<FriendRequest> FriendRequests { get; set; }
+        public DbSet<ActivityFeed> ActivityFeed { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

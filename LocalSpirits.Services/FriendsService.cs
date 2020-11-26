@@ -1,5 +1,6 @@
 ﻿using LocalSpirits.Data;
 using LocalSpirits.Models.Friends;
+using LocalSpirits.Models.Profile;
 using LocalSpirits.WebMVC.Data;
 using System;
 using System.Collections.Generic;
@@ -112,22 +113,85 @@ namespace LocalSpirits.Services
                 return ctx.SaveChanges() == 1;
             }
         }
+        public string CheckForFriend(string username)
+        {
+            var profileService = new ProfileServices(_userId);
+            using (var ctx = new ApplicationDbContext())
+            {
+                var myProfile = profileService.GetProfile();
+                var otherProfile = profileService.GetByUsername(username);
+                try
+                {
+                    foreach (var friendRequest in myProfile.FriendRequests)
+                    {
+                        if (friendRequest.Reciever == otherProfile.FullName)
+                            return "pending";
+                    }
 
-        //public IEnumerable<FriendRequestListItem> GetFriendRequests()
-        //{
-        //    using (var ctx = new ApplicationDbContext())
-        //    {
-        //        var query = ctx.FriendRequests.Where(e => e.ProfileID == _userId)
-        //            .Select
-        //            (e => new FriendRequestListItem
-        //            {
-        //                ProfileID = e.ProfileID,
-        //                FullName = $"{e.F",
-        //                TimeSent = e.Created,
-        //            }
-        //            );
-        //        return query.ToArray();
-        //    }
-        //}
+                }
+                catch { }
+                foreach (var friend in myProfile.FriendsList)
+                {
+                    if (friend.FriendsUsername == username)
+                        return "friends";
+                }
+                return "not friends";
+            }
+        }
+        public List<ProfileDetail> GetFriendsList()
+        {
+            var profileService = new ProfileServices(_userId);
+            var foundFriends = new List<ProfileDetail>();
+            using (var ctx = new ApplicationDbContext())
+            {
+                var userProfile = profileService.GetProfile();
+
+                foreach (var friend in userProfile.FriendsList)
+                {
+                    var friendsProfile = profileService.GetByUsername(friend.FriendsUsername);
+                    var friendInList = new ProfileDetail
+                    {
+                        FullName = friendsProfile.FullName,
+                        Username = friendsProfile.Username,
+                        FirstName = friendsProfile.FirstName,
+                        LastName = friendsProfile.LastName,
+                        City = friendsProfile.City,
+                        State = friendsProfile.State,
+                        ZipCode = friendsProfile.ZipCode,
+
+                    };
+                    foundFriends.Add(friendInList);
+                }
+            }
+            return foundFriends;
+        }
+        public List<FriendRequestListItem> GetFriendsRequests()
+        {
+            var friendsRequests = new List<FriendRequestListItem>();
+            using (var ctx = new ApplicationDbContext())
+            {
+                var foundRequests = ctx.FriendRequests.Where(e => e.ProfileID == _userId).ToList();
+                var userProfile = ctx.Profiles.Single(e => e.ID == _userId);
+
+                foreach (var request in userProfile.FriendRequests)
+                {
+                    if (request.SendersUsername != userProfile.Username)
+                    {
+                        var friendInList = new FriendRequestListItem
+                        {
+                            ProfileID = request.ProfileID,
+                            FullName = request.Sender,
+                            TimeSent = request.Created,
+                            Username = request.SendersUsername,
+                        };
+                        friendsRequests.Add(friendInList);
+                    }
+
+                }
+
+
+            }
+            return friendsRequests;
+        }
     }
 }
