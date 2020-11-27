@@ -377,6 +377,7 @@
     <Content Include="Views\Business\Following.cshtml" />
     <Content Include="Views\Business\NotFollowing.cshtml" />
     <Content Include="Views\Friends\RecievedRequest.cshtml" />
+    <Content Include="Views\Home\HomeFeed - Old.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

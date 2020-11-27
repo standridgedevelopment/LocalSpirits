@@ -6,51 +6,50 @@
 
 <h2>HomeFeed</h2>
 
-<table class="table" rules="none">
 
-    @foreach (var item in Model)
-    {
-    <tr>
 
-        @if (item.Activity == "Like")
-        {
-            <td>
-                @Html.ActionLink($"{item.Name}", "Index", "Profile", new { id = item.Username }, null)
-                has liked
-                @Html.ActionLink($"{item.Content}", $"Details/{item.ObjectID}", $"{item.ObjectType}", new { id = item.ID }, null)
-            </td>
-        }
-        @if (item.Activity == "AddToCalendar")
-        {
-            <td>
-                @Html.ActionLink($"{item.Name}", "Index", "Profile", new { id = item.Username }, null)
-                has added
-                @Html.ActionLink($"{item.Content}", $"Details", $"{item.ObjectType}", new { id = item.ObjectID }, null)
-                to their calendar.
-            </td>
-        }
-        @if (item.Activity == "Follow")
-        {
-            <td>
-                @Html.ActionLink($"{item.Name}", "Index", "Profile", new { id = item.Username }, null)
-                has followed
-                @Html.ActionLink($"{item.Content}", $"Details", $"{item.ObjectType}", new { id = item.ObjectID }, null)
-            </td>
-        }
-        @if (item.Activity == "NewEvent")
-        {
-            <td>
-                @Html.ActionLink($"{item.Name}", "Index", "Profile", new { id = item.Username }, null)
-                has added
-                @Html.ActionLink($"{item.Content}", $"Details", $"{item.ObjectType}", new { id = item.ObjectID }, null)
-            </td>
-        }
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-        </td>
-    </tr>
-    }
+@foreach (var item in Model)
+{
+    <div class="card" style="width: 25rem;">
+        <div class="card-body">
 
-</table>
+            @if (item.Activity == "Like")
+            {
+                <p class="card-text">
+                    @Html.ActionLink($"{item.Name}", "Index", "Profile", new { id = item.Username }, null)
+                    has liked
+                    @Html.ActionLink($"{item.Content}", $"Details/{item.ObjectID}", $"{item.ObjectType}", new { id = item.ID }, null)
+                </p>
+            }
+            @if (item.Activity == "AddToCalendar")
+            {
+                <p class="card-text">
+                    @Html.ActionLink($"{item.Name}", "Index", "Profile", new { id = item.Username }, null)
+                    has added
+                    @Html.ActionLink($"{item.Content}", $"Details", $"{item.ObjectType}", new { id = item.ObjectID }, null)
+                    to their calendar.
+                </p>
+            }
+            @if (item.Activity == "Follow")
+            {
+                <p class="card-text">
+                    @Html.ActionLink($"{item.Name}", "Index", "Profile", new { id = item.Username }, null)
+                    has followed
+                    @Html.ActionLink($"{item.Content}", $"Details", $"{item.ObjectType}", new { id = item.ObjectID }, null)
+                </p>
+            }
+            @if (item.Activity == "NewEvent")
+            {
+                <p class="card-text">
+                    @Html.ActionLink($"{item.Name}", "Index", "Profile", new { id = item.Username }, null)
+                    has added
+                    @Html.ActionLink($"{item.Content}", $"Details", $"{item.ObjectType}", new { id = item.ObjectID }, null)
+                </p>
+            }
+        </div>
+    </div>
+}
+
+
+
+
