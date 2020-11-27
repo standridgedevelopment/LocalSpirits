@@ -54,7 +54,6 @@ namespace LocalSpirits.Services
                 {
                     var entity = ctx.Profiles.Single(e => e.ID == _userId);
 
-                    List<Visited> favorites = GetFavorites(entity.AllVisits);
                     List<Event> events = GetEvents(entity.AllVisits);
 
                     return new ProfileDetail
@@ -65,7 +64,6 @@ namespace LocalSpirits.Services
                         City = entity.City,
                         State = entity.State,
                         ZipCode = entity.ZipCode,
-                        Favorites = favorites,
                         Events = events,
                         FriendRequests = entity.FriendRequests,
                         FriendsList = entity.FriendsList,
@@ -87,7 +85,6 @@ namespace LocalSpirits.Services
                 {
                     var entity = ctx.Profiles.Single(e => e.Username.ToLower() == username.ToLower());
 
-                    List<Visited> favorites = GetFavorites(entity.AllVisits);
                     List<Event> events = GetEvents(entity.AllVisits);
 
                     return new ProfileDetail
@@ -98,7 +95,6 @@ namespace LocalSpirits.Services
                         City = entity.City,
                         State = entity.State,
                         ZipCode = entity.ZipCode,
-                        Favorites = favorites,
                         Events = events,
                     };
                 }
@@ -115,7 +111,6 @@ namespace LocalSpirits.Services
                 var Profiles = ctx.Profiles.Where(e => e.FirstName.Contains(name) || e.LastName.Contains(name)).ToList();
                 foreach (var profile in Profiles)
                 {
-                    List<Visited> favorites = GetFavorites(profile.AllVisits);
                     List<Event> events = GetEvents(profile.AllVisits);
                     var found = new ProfileDetail
                     {
@@ -125,7 +120,6 @@ namespace LocalSpirits.Services
                         City = profile.City,
                         State = profile.State,
                         ZipCode = profile.ZipCode,
-                        Favorites = favorites,
                         Events = events,
                     };
                     searchResults.Add(found);
@@ -193,36 +187,34 @@ namespace LocalSpirits.Services
             return events;
         }
 
-        public List<Visited> GetFavorites(List<Visited> AllVisits)
-        {
-            List<Visited> favorites = new List<Visited>();
-            foreach (var visit in AllVisits)
-            {
-                if (visit.AddToFavorites == true)
-                {
-                    var visitdetails = new Data.Visited
-                    {
-                        BusinessID = visit.BusinessID,
-                    };
-                    favorites.Add(visitdetails);
-                }
-            }
-            return favorites;
-        }
-
         public bool CreateFeedItem(ActivityFeedCreate model)
         {
             var entity = new ActivityFeed()
             {
                 UserID = _userId,
+                BusinessID = model.BusinessID,
                 Activity = $"{model.Activity}",
                 ObjectID = model.ObjectID,
                 ObjectType = model.ObjectType,
+                Content = model.Content,
+                Created = DateTimeOffset.Now,
             };
 
             using (var ctx = new ApplicationDbContext())
             {
                 ctx.ActivityFeed.Add(entity);
+                ctx.SaveChanges();
+                return true;
+            }
+        }
+
+        public bool RemoveFeedItem(ActivityFeedCreate model)
+        {
+           
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity = ctx.ActivityFeed.Single(e => e.UserID == _userId && e.Content == model.Content);
+                ctx.ActivityFeed.Remove(entity);
                 ctx.SaveChanges();
                 return true;
             }
@@ -236,26 +228,54 @@ namespace LocalSpirits.Services
                 List<ActivityFeedListItem> activityFeed = new List<ActivityFeedListItem>();
                 foreach (var friend in userProfile.FriendsList)
                 {
-                    var otherProfile = GetByUsername(friend.FriendsUsername);
-                    foreach (var activity in otherProfile.Feed)
+                    //FriendsProfile
+                    if (friend.FriendsID != null)
                     {
-                        if ((DateTimeOffset.Now - activity.Created).TotalDays <= 3)
+                        var otherProfile = ctx.Profiles.Single(e => e.ID == friend.FriendsID);
+                        foreach (var activity in otherProfile.Feed)
                         {
-                            var activityItem = new ActivityFeedListItem
+                            if ((DateTimeOffset.Now - activity.Created).TotalDays <= 3)
                             {
-                                ID = activity.ID,
-                                UserID = activity.UserID,
-                                FullName = activity.Content,
-                                Activity = activity.Activity,
-                                Username = activity.Username,
-                                ObjectID = activity.ObjectID,
-                                ObjectType = activity.ObjectType,
-                                Created = activity.Created,
-                            };
-                            activityFeed.Add(activityItem);
+                                var activityItem = new ActivityFeedListItem
+                                {
+                                    ID = activity.ID,
+                                    UserID = activity.UserID,
+                                    Name = otherProfile.FullName,
+                                    Content = activity.Content,
+                                    Activity = activity.Activity,
+                                    Username = otherProfile.Username,
+                                    ObjectID = activity.ObjectID,
+                                    ObjectType = activity.ObjectType,
+                                    Created = activity.Created,
+                                };
+                                activityFeed.Add(activityItem);
+                            }
                         }
-                        else return activityFeed;
                     }
+                    //BusinessProfile
+                    if (friend.BusinessID != null)
+                    {
+                        var otherProfile = ctx.Businesses.Single(e => e.ID == friend.BusinessID);
+                        foreach (var activity in otherProfile.Feed)
+                        {
+                            if ((DateTimeOffset.Now - activity.Created).TotalDays <= 3 && activity.Activity != "Follow")
+                            {
+                                var activityItem = new ActivityFeedListItem
+                                {
+                                    ID = activity.ID,
+                                    UserID = activity.UserID,
+                                    Name = otherProfile.Name,
+                                    Content = activity.Content,
+                                    Activity = activity.Activity,
+                                    ObjectID = activity.ObjectID,
+                                    ObjectType = activity.ObjectType,
+                                    Created = activity.Created,
+                                };
+                                activityFeed.Add(activityItem);
+                            }
+                        }
+                    }
+
                 }
                 return activityFeed;
             }

@@ -16,6 +16,9 @@ namespace LocalSpirits.Data
         public Guid? ProfileID { get; set; }
         public virtual Profile Profile { get; set; }
         public Guid? FriendsID { get; set; }
+        [ForeignKey(nameof(Business))]
+        public int? BusinessID { get; set; }
+        public virtual Business Business { get; set; }
         public string FriendsUsername { get; set; }
     }
 }

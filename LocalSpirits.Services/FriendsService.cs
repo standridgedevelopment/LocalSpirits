@@ -113,6 +113,53 @@ namespace LocalSpirits.Services
                 return ctx.SaveChanges() == 1;
             }
         }
+        public bool FollowBusiness(int id)
+        {
+
+
+            using (var ctx = new ApplicationDbContext())
+            {
+                var userProfile = ctx.Profiles.Single(e => e.ID == _userId);
+                var business = ctx.Businesses.Single(e => e.ID == id);
+                var yourFriendObject = new Friend()
+                {
+                    ProfileID = _userId,
+                    BusinessID = business.ID,
+                };
+
+                ctx.Friends.Add(yourFriendObject);
+                return ctx.SaveChanges() == 1;
+            }
+        }
+        public bool StopFollowingBusiness(int id)
+        {
+
+
+            using (var ctx = new ApplicationDbContext())
+            {
+                var userProfile = ctx.Profiles.Single(e => e.ID == _userId);
+                var deleteFriend = ctx.Friends.Where(e => e.ProfileID == _userId && e.BusinessID == id)
+                    .Single();
+             
+                ctx.Friends.Remove(deleteFriend);
+                return ctx.SaveChanges() == 1;
+            }
+        }
+        public bool CheckForFollow(int id)
+        {
+            var profileService = new ProfileServices(_userId);
+            using (var ctx = new ApplicationDbContext())
+            {
+                var myProfile = profileService.GetProfile();
+                foreach (var friend in myProfile.FriendsList)
+                {
+                    if (friend.BusinessID == id)
+                        return true;
+                }
+                return false;
+            }
+        }
+
         public string CheckForFriend(string username)
         {
             var profileService = new ProfileServices(_userId);
@@ -126,6 +173,8 @@ namespace LocalSpirits.Services
                     {
                         if (friendRequest.Reciever == otherProfile.FullName)
                             return "pending";
+                        if (friendRequest.Sender == otherProfile.FullName)
+                            return "theySent";
                     }
 
                 }

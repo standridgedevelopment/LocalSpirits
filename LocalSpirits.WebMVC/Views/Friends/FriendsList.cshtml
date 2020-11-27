@@ -11,30 +11,33 @@
 
             @if (Model.Count() != 0)
             {
-                <table class="table table-borderless" >
+        <table class="table table-borderless">
+            <tr>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                if (item.City != null)
+                {
                     <tr>
+                        <td>
+                            @Html.ActionLink($"{item.FullName}", "Index", "Profile", new { id = item.Username }, null)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.City)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.State)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Remove", $"RemovieFriend/{item.Username}", "Friends", null, new { @class = "btn btn-primary btn-xs" })
+                        </td>
                     </tr>
+                }
 
-                    @foreach (var item in Model)
-                    {
-                        <tr>
+            }
 
-                            <td>
-                                @Html.ActionLink($"{item.FullName}", "Index", "Profile", new { id = item.Username }, null)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.City)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.State)
-                            </td>
-                            <td>
-                                @Html.ActionLink("Remove Friend", "RemoveFriend", "Friends", new { id = item.Username }, null)
-                            </td>
-                        </tr>
-                    }
-
-                </table>
+        </table>
             }
         </div>
 

@@ -374,6 +374,9 @@
     <Content Include="Views\Friends\FriendRequests.cshtml" />
     <Content Include="Views\Profile\_CalendarPartialFriend.cshtml" />
     <Content Include="Views\Home\HomeFeed.cshtml" />
+    <Content Include="Views\Business\Following.cshtml" />
+    <Content Include="Views\Business\NotFollowing.cshtml" />
+    <Content Include="Views\Friends\RecievedRequest.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

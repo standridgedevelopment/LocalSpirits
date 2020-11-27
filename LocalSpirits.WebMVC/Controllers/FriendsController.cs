@@ -19,6 +19,7 @@ namespace LocalSpirits.WebMVC.Controllers
             var model = profileService.GetByUsername(id);
             ModelState.Clear();
             if (result == "pending") return View("PendingFriends", model);
+            if (result == "theySent") return View("RecievedRequest", model);
             if (result == "friends") return View("AreFriends", model);
             return View("NotFriends", model);
         }

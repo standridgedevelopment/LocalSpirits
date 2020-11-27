@@ -1,17 +1,12 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
+@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    @Html.Action("GetHomeFeed")
+}
 
-<div class="row">
-    <div class="panel-heading">
-        <div class="col-md-8  custom-heading3">
-            <h3>
-                <i class="fa fa-calendar"></i>
-                <span>ASP.NET MVC5 - Full Calendar JQuery Plugin</span>
-            </h3>
-        </div>
-    </div>
-</div>
 
 @*<div class="jumbotron">
         <h1>ASP.NET</h1>

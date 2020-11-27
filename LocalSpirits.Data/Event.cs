@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LocalSpirits.Data
@@ -24,6 +23,7 @@ namespace LocalSpirits.Data
         public string TypeOfEvent { get; set; }
         public string State { get; set; }
         public string City { get; set; }
+        public string StartDay { get; set; }
         public string start { get; set; }
         public string end { get; set; }
         public int[] daysOfWeek { get; set; }

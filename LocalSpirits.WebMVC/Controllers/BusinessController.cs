@@ -1,4 +1,7 @@
-﻿using LocalSpirits.Models.Business;
+﻿using LocalSpirits.Data;
+using LocalSpirits.Models.ActivityFeed;
+using LocalSpirits.Models.Business;
+using LocalSpirits.Models.Visited;
 using LocalSpirits.Services;
 using Microsoft.AspNet.Identity;
 using System;
@@ -31,8 +34,8 @@ namespace LocalSpirits.WebMVC.Controllers
         {
             if (!ModelState.IsValid) return View(model);
 
-            var service = CreateService();
-            string result = service.Create(model);
+            var businessService = CreateBusinessService();
+            string result = businessService.Create(model);
             if (result == "okay")
             {
                 TempData["SaveResult"] = "Business was created.";
@@ -44,9 +47,9 @@ namespace LocalSpirits.WebMVC.Controllers
         }
 
         public ActionResult Details(int id)
-        { 
-            var service = CreateService();
-            var model = service.GetByID(id);
+        {
+            var businessService = CreateBusinessService();
+            var model = businessService.GetByID(id);
             ModelState.Clear();
 
             return View(model);
@@ -56,8 +59,8 @@ namespace LocalSpirits.WebMVC.Controllers
         {
             if (id != null)
             {
-                var service = CreateService();
-                var model = service.GetByName(id);
+                var businessService = CreateBusinessService();
+                var model = businessService.GetByName(id);
                 ModelState.Clear();
                 return View(model);
             }
@@ -66,8 +69,8 @@ namespace LocalSpirits.WebMVC.Controllers
         }
         public ActionResult Edit(int id)
         {
-            var service = CreateService();
-            var detail = service.GetByID(id);
+            var businessService = CreateBusinessService();
+            var detail = businessService.GetByID(id);
             var model =
                 new BusinessEdit
                 {
@@ -95,9 +98,9 @@ namespace LocalSpirits.WebMVC.Controllers
                 return View(model);
             }
 
-            var service = CreateService();
+            var businessService = CreateBusinessService();
 
-            string result = (service.Update(model, id));
+            string result = (businessService.Update(model, id));
             if (result == "okay")
             {
                 TempData["SaveResult"] = "Business updated!";
@@ -110,7 +113,7 @@ namespace LocalSpirits.WebMVC.Controllers
         }
         public ActionResult Delete(int id)
         {
-            var service = CreateService();
+            var service = CreateBusinessService();
             var model = service.GetByID(id);
 
             return View(model);
@@ -121,18 +124,78 @@ namespace LocalSpirits.WebMVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteBusiness(int id)
         {
-            var service = CreateService();
+            var businessService = CreateBusinessService();
 
-            service.Delete(id);
+            businessService.Delete(id);
 
             TempData["SaveResult"] = "Business was deleted";
 
             return RedirectToAction("Index");
         }
-        private BusinessService CreateService()
+
+        public ActionResult CheckIfFollowing(int id)
+        {
+            var businessService = CreateBusinessService();
+            var friendService = CreateFriendsService();
+
+            var thisBusiness = businessService.GetByID(id);
+            var checkFollowing = friendService.CheckForFollow(id);
+            ModelState.Clear();
+            if (checkFollowing == true)
+                return View("Following", thisBusiness);
+            return View("NotFollowing", thisBusiness);
+        }
+        public ActionResult FollowBusiness(int id)
+        {
+            var businessService = CreateBusinessService();
+            var profileService = CreateProfileService();
+            var friendService = CreateFriendsService();
+
+            var thisBusiness = businessService.GetByID(id);
+            var checkFollowing = friendService.CheckForFollow(id);
+
+            var activityFeedItem = new ActivityFeedCreate();
+            activityFeedItem.Activity = TypeOfActivity.Follow;
+            activityFeedItem.Content = $"{thisBusiness.Name}, {thisBusiness.City}";
+            activityFeedItem.ObjectID = thisBusiness.ID;
+            activityFeedItem.ObjectType = "Business";
+            activityFeedItem.BusinessID = id;
+
+
+            if (checkFollowing == true)
+            {
+                profileService.RemoveFeedItem(activityFeedItem);
+                friendService.StopFollowingBusiness(id);
+                return RedirectToAction($"Details/{id}", "Business");
+            }
+            profileService.CreateFeedItem(activityFeedItem);
+            friendService.FollowBusiness(id);
+
+            return RedirectToAction($"Details/{id}", "Business");
+
+        }
+        private BusinessService CreateBusinessService()
         {
             //var userId = Guid.Parse(User.Identity.GetUserId());
             var service = new BusinessService();
+            return service;
+        }
+        private VisitedService CreateVisitedService()
+        {
+            var userId = Guid.Parse(User.Identity.GetUserId());
+            var service = new VisitedService(userId);
+            return service;
+        }
+        private ProfileServices CreateProfileService()
+        {
+            var userId = Guid.Parse(User.Identity.GetUserId());
+            var service = new ProfileServices(userId);
+            return service;
+        }
+        private FriendsService CreateFriendsService()
+        {
+            var userId = Guid.Parse(User.Identity.GetUserId());
+            var service = new FriendsService(userId);
             return service;
         }
     }

@@ -25,6 +25,7 @@ namespace LocalSpirits.Services
             {
                 TypeOfEvent = $"{model.TypeOfEvent}",
                 BusinessID = model.BusinessID,
+                StartDay = model.StartDay,
                 start = model.Start,
                 end = model.End,
                 DaysOfWeekInput = model.DaysOfWeek,
@@ -57,7 +58,36 @@ namespace LocalSpirits.Services
                     return new EventDetail
                     {
                         id = entity.id,
-                        title = $"{entity.TypeOfEvent} at {entity.Business.Name}, {entity.City}",
+                        title = $"{entity.TypeOfEvent} at {entity.Business.Name}, {entity.Business.City.Name}",
+                        TypeOfEvent = entity.TypeOfEvent,
+                        Business = entity.Business.Name,
+                        BusinessID = entity.BusinessID,
+                        city = entity.Business.City.Name,
+                        state = entity.Business.City.State,
+                        start = entity.start,
+                        end = entity.end,
+                        daysOfWeek = entity.DaysOfWeekInput,
+                        startRecur = entity.startRecur,
+                        endRecur = entity.endRecur,
+                        ThirdPartyWebsite = entity.ThirdPartyWebsite,
+                        color = entity.City,
+                    };
+                }
+                catch { }
+                return new EventDetail();
+            }
+        }
+        public EventDetail GetByBusinessIDAndStart(int id, string start)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                try
+                {
+                    var entity = ctx.Events.Single(e => e.BusinessID == id && e.StartDay == start);
+                    return new EventDetail
+                    {
+                        id = entity.id,
+                        title = $"{entity.TypeOfEvent} at {entity.Business.Name}, {entity.Business.City.Name}",
                         TypeOfEvent = entity.TypeOfEvent,
                         Business = entity.Business.Name,
                         BusinessID = entity.BusinessID,

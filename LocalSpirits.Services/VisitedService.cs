@@ -65,6 +65,27 @@ namespace LocalSpirits.Services
                 return new VisitedDetail();
             }
         }
+        public VisitedDetail GetVisitByBusinessID(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                try
+                {
+                    var entity = ctx.Visits.Single(e => e.BusinessID == id && e.Profile_ID == _userId);
+                    return new VisitedDetail
+                    {
+                        EventID = entity.EventID,
+                        BusinessID = entity.BusinessID,
+                        AddToCalendar = entity.AddToCalendar,
+                        Rating = entity.Rating,
+                        Review = entity.Review,
+                        AddToFavorites = entity.AddToFavorites
+                    };
+                }
+                catch { }
+                return new VisitedDetail();
+            }
+        }
         public string UpdateEventVisit(VisitedDetail model, int id)
         {
             using (var ctx = new ApplicationDbContext())
@@ -78,7 +99,33 @@ namespace LocalSpirits.Services
                     entity.AddToCalendar = model.AddToCalendar;
                     entity.AddToFavorites = model.AddToFavorites;
 
-                    var activityFeedItem = new ActivityFeedCreate();
+                    
+                    try
+                    {
+                        ctx.SaveChanges();
+                        return "Okay";
+                    }
+                    catch { }
+                }
+                catch { }
+
+                return "Update Error";
+            }
+        }
+        public string UpdateBusinessFollow(VisitedDetail model, int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                try
+                {
+                    var entity = ctx.Visits.Single(e => e.BusinessID == id && e.Profile_ID == _userId);
+
+                    entity.Rating = model.Rating;
+                    entity.Rating = model.Rating;
+                    entity.AddToCalendar = model.AddToCalendar;
+                    entity.AddToFavorites = model.AddToFavorites;
+
+
                     try
                     {
                         ctx.SaveChanges();

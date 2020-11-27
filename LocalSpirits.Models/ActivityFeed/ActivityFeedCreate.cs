@@ -13,6 +13,7 @@ namespace LocalSpirits.Models.ActivityFeed
         public int ObjectID { get; set; }
         public string ObjectType { get; set; }
         public string Content { get; set; }
+        public int? BusinessID { get; set; }
 
     }
 }

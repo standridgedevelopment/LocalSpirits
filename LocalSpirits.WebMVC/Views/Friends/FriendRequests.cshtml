@@ -11,11 +11,12 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.FullName)
+                @Html.ActionLink($"{item.FullName}", "Index", "Profile", new { id = item.Username }, null)
             </td>
-            <td >
-                @Html.ActionLink("Accept", "AcceptFriendRequest", "Friends", new { id = item.Username }, null) |
-                @Html.ActionLink("Decline", "Delete", "Friends", new { id = item.Username }, null)
+            <td>
+                @Html.ActionLink("Accept", $"AcceptFriendRequest/{item.Username}", "Friends", null, new { @class = "btn btn-primary btn-xs" })
+                @Html.ActionLink("Decline", $"CancelFriendRequest/{item.Username}", "Friends", null, new { @class = "btn btn-primary btn-xs" })
+
             </td>
         </tr>
     }

@@ -1,4 +1,5 @@
 ﻿using LocalSpirits.Data;
+using LocalSpirits.Models.ActivityFeed;
 using LocalSpirits.Models.Event;
 using LocalSpirits.Models.Visited;
 using LocalSpirits.Services;
@@ -42,10 +43,21 @@ namespace LocalSpirits.WebMVC.Controllers
         {
             if (!ModelState.IsValid) return View(model);
 
-            var service = CreateEventService();
-            string result = service.Create(model);
+            var eventService = CreateEventService();
+            var profileService = CreateProfileService();
+            string result = eventService.Create(model);
             if (result == "okay")
             {
+                var newEvent = eventService.GetByBusinessIDAndStart(model.BusinessID, model.StartDay);
+
+                var activityFeedItem = new ActivityFeedCreate();
+                activityFeedItem.Activity = TypeOfActivity.NewEvent;
+                activityFeedItem.Content = $"{newEvent.title} on {model.StartMonth}/{model.StartDay}/{model.StartYear}";
+                activityFeedItem.BusinessID = model.BusinessID;
+                activityFeedItem.ObjectID = newEvent.id;
+                activityFeedItem.ObjectType = "Event";
+                profileService.CreateFeedItem(activityFeedItem);
+
                 TempData["SaveResult"] = "Event was created.";
                 return RedirectToAction($"Details/{model.BusinessID}", "Business");
             };
@@ -59,8 +71,8 @@ namespace LocalSpirits.WebMVC.Controllers
         {
             if (!ModelState.IsValid) return View(model);
 
-            var service = CreateEventService();
-            string result = service.Create(model);
+            var eventService = CreateEventService();
+            string result = eventService.Create(model);
             if (result == "okay")
             {
                 TempData["SaveResult"] = "Event was created.";
@@ -86,18 +98,31 @@ namespace LocalSpirits.WebMVC.Controllers
         {
             var eventService = CreateEventService();
             var visitedService = CreateVisitedService();
+            var profileService = CreateProfileService();
             var thisEvent = eventService.GetByID(id);
             var foundVisit = visitedService.GetVisitByEventID(id);
+
+            var activityFeedItem = new ActivityFeedCreate();
+            activityFeedItem.Activity = TypeOfActivity.AddToCalendar;
+            activityFeedItem.Content = $"{thisEvent.title}";
+            activityFeedItem.ObjectID = thisEvent.id;
+            activityFeedItem.ObjectType = "Event";
 
             if (foundVisit.EventID != null)
             {
                 if (foundVisit.AddToCalendar == true)
                 {
                     foundVisit.AddToCalendar = false;
+                    profileService.RemoveFeedItem(activityFeedItem);
+
                     visitedService.UpdateEventVisit(foundVisit, id);
                     return RedirectToAction($"Details/{foundVisit.EventID}", "Event");
                 }
                 foundVisit.AddToCalendar = true;
+
+               
+                profileService.CreateFeedItem(activityFeedItem);
+
                 visitedService.UpdateEventVisit(foundVisit, id);
                 return RedirectToAction($"Details/{foundVisit.EventID}", "Event");
             }
@@ -107,14 +132,16 @@ namespace LocalSpirits.WebMVC.Controllers
                 var model = new VisitedCreate();
                 model.AddToCalendar = true;
                 model.EventID = id;
+
+                profileService.CreateFeedItem(activityFeedItem);
                 visitedService.CreateVisit(model);
                 return RedirectToAction($"Details/{id}", "Event");
             }
         }
         public ActionResult Details(int id)
         {
-            var service = CreateEventService();
-            var model = service.GetByID(id);
+            var eventService = CreateEventService();
+            var model = eventService.GetByID(id);
             ModelState.Clear();
 
             return View(model);
@@ -129,6 +156,12 @@ namespace LocalSpirits.WebMVC.Controllers
         {
             var userId = Guid.Parse(User.Identity.GetUserId());
             var service = new EventService(userId);
+            return service;
+        }
+        private ProfileServices CreateProfileService()
+        {
+            var userId = Guid.Parse(User.Identity.GetUserId());
+            var service = new ProfileServices(userId);
             return service;
         }
 

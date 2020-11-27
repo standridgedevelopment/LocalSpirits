@@ -1,0 +1,5 @@
+﻿@model LocalSpirits.Models.Business.BusinessDetail
+
+@Html.ActionLink("Follow", $"FollowBusiness/{Model.ID}", null, null, new { @class = "btn btn-primary btn-large" })
+@Html.ActionLink("Edit", "Edit", new { id = Model.ID }, new { @class = "btn btn-primary btn-large" })
+
