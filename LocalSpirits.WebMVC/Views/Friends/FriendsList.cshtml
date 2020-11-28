@@ -11,40 +11,33 @@
 
             @if (Model.Count() != 0)
             {
-        <table class="table table-borderless">
-            <tr>
-            </tr>
 
-            @foreach (var item in Model)
-            {
-                if (item.City != null)
+                foreach (var item in Model)
                 {
-                    <tr>
-                        <td>
-                            @Html.ActionLink($"{item.FullName}", "Index", "Profile", new { id = item.Username }, null)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.City)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.State)
-                        </td>
-                        <td>
-                            @Html.ActionLink("Remove", $"RemovieFriend/{item.Username}", "Friends", null, new { @class = "btn btn-primary btn-xs" })
-                        </td>
-                    </tr>
+
+                    if (item.City != null)
+                    {
+                        <div class="panel panel-warning" style="width: 22rem;">
+                            <dl class="dl-horizontal-friend">
+                                <dt> @Html.ActionLink($"{item.FullName}", "Index", "Profile", new { id = item.Username }, null)</dt>
+                                <dd>
+                                    @Html.ActionLink("Remove", $"RemoveFriend/{item.Username}", "Friends", null, new { @class = "btn btn-warning btn-xs" })
+                                </dd>
+                            </dl>
+                        </div>
+
+
+                    }
+
+
                 }
-
-            }
-
-        </table>
             }
         </div>
 
         <div class="col-sm-6 col-md-6 my-6">
             <h2>Friend Requests</h2>
             @Html.Action("FriendRequests")
-            
+
         </div>
 
     </div>

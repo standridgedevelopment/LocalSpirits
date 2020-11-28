@@ -1,9 +1,9 @@
 ﻿body {
-    padding-top: 50px;
+    padding-top: 60px;
     padding-bottom: 20px;
 }
 
-/* Set padding to keep content from hitting the edges */
+ set padding to keep content from hitting the edges 
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
@@ -14,16 +14,56 @@
     margin-top: 12px !important;
 }
 
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
-*/
-.dl-horizontal dt {
-    white-space: normal;
+.noborders td {
+        border:0;
+    }
+
+override the default bootstrap behavior where horizontal description lists
+will truncate terms that are too long to fit in the left column
+
+
+.dl-horizontal-friend dt {
+    float: left;
+    width: 120px!important;
+    clear: left;
+    text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.dl-horizontal-request dt {
+    float: left;
+    width: 135px !important;
+    clear: left;
+    text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
+.dl-horizontal dd {
+    margin-left: 60px;
+}
+
+}
+a {
+    color: #FF8C00;
+    text-decoration: none;
+}
 textarea {
     max-width: 280px;
+}
+
+.navbar-custom {
+    background-color: #CCF0C8
+}
+.navbar-brand {
+    color: black !important
+}
+
+    .navbar-brand:visited {
+        color: black !important
+    }
+.nav li a {
+    color: #FFF;
 }

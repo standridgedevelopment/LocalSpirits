@@ -337,7 +337,7 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Profile\Index.cshtml" />
+    <Content Include="Views\Profile\About.cshtml" />
     <Content Include="Views\Profile\Create.cshtml" />
     <Content Include="Views\Profile\Edit.cshtml" />
     <Content Include="Views\City\Index.cshtml" />
@@ -378,6 +378,8 @@
     <Content Include="Views\Business\NotFollowing.cshtml" />
     <Content Include="Views\Friends\RecievedRequest.cshtml" />
     <Content Include="Views\Home\HomeFeed - Old.cshtml" />
+    <Content Include="Views\Profile\Activity.cshtml" />
+    <Content Include="Views\Profile\GetFeed.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

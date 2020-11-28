@@ -1,3 +1,4 @@
 ﻿@model LocalSpirits.Models.Profile.ProfileDetail
 
-@Html.ActionLink("Remove Friend", "RemoveFriend", "Friends", new { id = Model.Username }, new { @class = "btn btn-primary btn-large" })
+@Html.ActionLink("Remove Friend", "RemoveFriend", "Friends", new { id = Model.Username }, new { @class = "btn btn-warning btn-large" })
+@Html.ActionLink($"About", "About", "Profile", new { id = Model.Username }, new { @class = "btn btn-warning btn-large" })

@@ -1,0 +1,63 @@
+﻿
+@model IEnumerable<LocalSpirits.Models.ActivityFeed.ActivityFeedListItem>
+
+@{
+    ViewBag.Title = "HomeFeed";
+}
+
+
+
+@foreach (var item in Model)
+{
+    <h2> @Html.DisplayFor(modelItem => item.Name)</h2>
+    @Html.Action("CheckForFriend", "Friends")
+    break;
+}
+
+
+@foreach (var item in Model)
+{
+    <div class="panel panel-warning" style="width: 25rem;">
+
+        @if (item.Activity == "Like")
+        {
+            <div class="panel-heading">@Html.ActionLink($"{item.Name}", "Index", "Profile", new { id = item.Username }, new { @class = "my-class" })</div>
+            <div class="panel-body">
+                Liked
+                @Html.ActionLink($"{item.Content}", $"Details/{item.ObjectID}", $"{item.ObjectType}", new { id = item.ID }, new { @class = "my-class" })
+            </div>
+        }
+        @if (item.Activity == "AddToCalendar")
+        {
+            <div class="panel-heading">@Html.ActionLink($"{item.Name}", "Index", "Profile", new { id = item.Username }, new { @class = "my-class" })</div>
+            <div class="panel-body">
+                Added
+                @Html.ActionLink($"{item.Content}", $"Details", $"{item.ObjectType}", new { id = item.ObjectID }, new { @class = "my-class" })
+                to their calendar.
+            </div>
+        }
+        @if (item.Activity == "Follow")
+        {
+            <div class="panel-heading">@Html.ActionLink($"{item.Name}", "Index", "Profile", new { id = item.Username }, new { @class = "my-class" })</div>
+
+            <div class="panel-body">
+                Followed
+                @Html.ActionLink($"{item.Content}", $"Details", $"{item.ObjectType}", new { id = item.ObjectID }, new { @class = "my-class" })
+            </div>
+        }
+        @if (item.Activity == "NewEvent")
+        {
+            <div class="panel-heading">@Html.ActionLink($"{item.Name}", "Index", "Profile", new { id = item.Username }, new { @class = "my-class" })</div>
+
+            <div class="panel-body">
+                Added
+                @Html.ActionLink($"{item.Content}", $"Details", $"{item.ObjectType}", new { id = item.ObjectID }, new { @class = "my-class" })
+            </div>
+        }
+    </div>
+}
+
+
+
+
+

@@ -4,32 +4,28 @@
     ViewBag.Title = "Profile";
 }
 
-<h2>Profile</h2>
+    <div class="panel panel-warning" style="width: 20rem;">
 
+        <dl class="dl-horizontal">
+            <dt class="profile">Name:</dt>
+            <dd>
+                @Html.DisplayFor(model => model.FullName)
+            </dd>
+            <dt>City:</dt>
+            <dd>
+                @Html.DisplayFor(modelItem => modelItem.City)
+            </dd>
+            <dt>ZipCode:</dt>
+            <dd>
+                @Html.DisplayFor(modelItem => modelItem.ZipCode)
+            </dd>
+            <dt>State:</dt>
+            <dd>
+                @Html.DisplayFor(modelItem => modelItem.State)
+            </dd>
+        </dl>
+    </div>
 
-
-<dl class="dl-horizontal">
-    <dt>Username:</dt>
-    <dd>
-        @Html.DisplayFor(model => model.Username)
-    </dd>
-    <dt>Name:</dt>
-    <dd>
-        @Html.DisplayFor(model => model.FullName)
-    </dd>
-    <dt>City:</dt>
-    <dd>
-        @Html.DisplayFor(modelItem => modelItem.City)
-    </dd>
-    <dt>State:</dt>
-    <dd>
-        @Html.DisplayFor(modelItem => modelItem.State)
-    </dd>
-    <dt>ZipCode:</dt>
-    <dd>
-        @Html.DisplayFor(modelItem => modelItem.ZipCode)
-    </dd>
-</dl>
 
 <p>
     @Html.ActionLink("Update Profile", "Edit")

@@ -1,31 +1,27 @@
 ﻿@model IEnumerable<LocalSpirits.Models.Friends.FriendRequestListItem>
 
-@if(Model.Count() != 0)
+@if (Model.Count() != 0)
 {
-<table style="width:50%;">
-    <tr >
-        <th></th>
-    </tr>
 
-    @foreach (var item in Model)
+    foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.ActionLink($"{item.FullName}", "Index", "Profile", new { id = item.Username }, null)
-            </td>
-            <td>
-                @Html.ActionLink("Accept", $"AcceptFriendRequest/{item.Username}", "Friends", null, new { @class = "btn btn-primary btn-xs" })
-                @Html.ActionLink("Decline", $"CancelFriendRequest/{item.Username}", "Friends", null, new { @class = "btn btn-primary btn-xs" })
 
-            </td>
-        </tr>
+        <div class="panel panel-warning" style="width: 25rem;">
+            <dl class="dl-horizontal-request">
+                <dt>
+                    @Html.ActionLink($"{item.FullName}", "Index", "Profile", new { id = item.Username }, null)
+                </dt>
+                <dd>
+                    @Html.ActionLink("Accept", $"AcceptFriendRequest/{item.Username}", "Friends", null, new { @class = "btn btn-warning btn-xs" })
+                    @Html.ActionLink("Decline", $"CancelFriendRequest/{item.Username}", "Friends", null, new { @class = "btn btn-warning btn-xs" })
+                </dd>
+            </dl>
+        </div>
     }
-
-</table>
-}
-@if (Model.Count() == 0)
-{
-    <p>No Friend Requests</p>
+    if (Model.Count() == 0)
+    {
+        <p>No Friend Requests</p>
+    }
 }
 
 

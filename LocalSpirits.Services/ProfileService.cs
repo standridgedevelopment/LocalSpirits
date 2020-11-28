@@ -128,7 +128,7 @@ namespace LocalSpirits.Services
             }
         }
 
-        
+
 
         public bool UpdateProfile(ProfileEdit model)
         {
@@ -210,7 +210,7 @@ namespace LocalSpirits.Services
 
         public bool RemoveFeedItem(ActivityFeedCreate model)
         {
-           
+
             using (var ctx = new ApplicationDbContext())
             {
                 var entity = ctx.ActivityFeed.Single(e => e.UserID == _userId && e.Content == model.Content);
@@ -279,6 +279,34 @@ namespace LocalSpirits.Services
                 }
                 return activityFeed;
             }
+        }
+        public List<ActivityFeedListItem> GetOneFriendsActivityFeed(string username)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var userProfile = ctx.Profiles.Single(e => e.ID == _userId);
+                var otherProfile = ctx.Profiles.Single(e => e.Username == username);
+                List<ActivityFeedListItem> activityFeed = new List<ActivityFeedListItem>();
+
+                foreach (var activity in otherProfile.Feed)
+                {
+                    var activityItem = new ActivityFeedListItem
+                    {
+                        ID = activity.ID,
+                        UserID = activity.UserID,
+                        Name = otherProfile.FullName,
+                        Content = activity.Content,
+                        Activity = activity.Activity,
+                        Username = otherProfile.Username,
+                        ObjectID = activity.ObjectID,
+                        ObjectType = activity.ObjectType,
+                        Created = activity.Created,
+                    };
+                    activityFeed.Add(activityItem);
+                }
+                return activityFeed;
+            }
+
         }
     }
 }

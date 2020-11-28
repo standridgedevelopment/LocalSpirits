@@ -1097,7 +1097,7 @@ textarea {
   line-height: inherit;
 }
 a {
-  color: #337ab7;
+  color: #ffb347;
   text-decoration: none;
 }
 a:hover,
@@ -1337,7 +1337,7 @@ mark,
   color: #777777;
 }
 .text-primary {
-  color: #337ab7;
+    color: #ffb347;
 }
 a.text-primary:hover,
 a.text-primary:focus {
@@ -1452,18 +1452,34 @@ dd {
   margin-left: 0;
 }
 @media (min-width: 768px) {
-  .dl-horizontal dt {
-    float: left;
-    width: 160px;
-    clear: left;
-    text-align: right;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-  .dl-horizontal dd {
-    margin-left: 180px;
-  }
+    .dl-horizontal dt {
+        float: left;
+        width: 80px;
+        clear: left;
+        text-align: left;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .dl-horizontal dd {
+        margin-left: 60px;
+    }
+}
+@media (min-width: 768px) {
+    .dl-horizontal-friend dt {
+        float: left;
+        width: 150px;
+        clear: left;
+        text-align: left;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .dl-horizontal dd {
+        margin-left: 60px;
+    }
 }
 abbr[title],
 abbr[data-original-title] {

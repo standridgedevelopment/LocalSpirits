@@ -18,14 +18,13 @@ namespace LocalSpirits.WebMVC.Controllers
         {
             var service = CreateProfileService();
             var ownProfile = service.GetProfile();
-            var model = service.GetByUsername(id);
 
             if (ownProfile.Username == id || id == null) 
                 return RedirectToAction("HomeProfile");
 
             ModelState.Clear();
 
-            return View(model);
+            return RedirectToAction($"Activity/{id}");
         }
 
         //GET
@@ -81,7 +80,24 @@ namespace LocalSpirits.WebMVC.Controllers
 
             return View(model);
         }
-        
+
+        public ActionResult About(string id)
+        {
+            var service = CreateProfileService();
+            var model = service.GetByUsername(id);
+
+            ModelState.Clear();
+
+            return View(model);
+        }
+        public ActionResult Activity(string id)
+        {
+            var profileService = CreateProfileService();
+            var activityFeed = profileService.GetOneFriendsActivityFeed(id);
+            ModelState.Clear();
+            return View("GetFeed", activityFeed);
+        }
+
         public ActionResult Edit()
         {
             var service = CreateProfileService();
