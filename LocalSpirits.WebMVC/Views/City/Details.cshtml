@@ -10,6 +10,15 @@
     <h2>
         @Html.DisplayFor(modelItem => item.City), @Html.DisplayFor(modelItem => item.FullState)
     </h2>
+
+    <div>
+        @Html.ActionLink("View All", $"Details/{item.CityID}/", new { type = "" }, new { @class = "btn btn-warning btn-large" })
+        @Html.ActionLink("View Breweries", $"Details/{item.CityID}/", new { type = "Brewery" }, new { @class = "btn btn-warning btn-large" })
+        @Html.ActionLink("View Distillaries", $"Details/{item.CityID}", new { type = "Distillery" }, new { @class = "btn btn-warning btn-large" })
+        @Html.ActionLink("View Wineries", $"Details/{item.CityID}", new { type = "Winery" }, new { @class = "btn btn-warning btn-large" })
+        @Html.ActionLink("View Bars", $"Details/{item.CityID}", new { type = "Bar" }, new { @class = "btn btn-warning btn-large" })
+
+    </div>
     break;
 }
 
@@ -27,26 +36,92 @@
         <div class="panel panel-warning" style="width: 25rem;">
             <div class="panel-heading">@Html.ActionLink($"{item.Name}", "Details", "Business", new { id = item.ID }, null)</div>
             <div class="panel-body">
-                @if (item.RateTotal == 5)
-                {
-                    <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
-                    <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
-                    <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
-                    <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
-                    <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
-                }
-                @if (item.RateTotal == 0)
-                {
-                    <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
-                    <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
-                    <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
-                    <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
-                    <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
-                }
+                @{
+                    if (item.RateAverage == 5)
+                    {
+                        <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                    }
+                    else if (item.RateAverage >= (decimal)4.5)
+                    {
+                        <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/HalfStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                    }
+                    else if (item.RateAverage >= 4)
+                    {
+                        <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                    }
+                    else if (item.RateAverage >= (decimal)3.5)
+                    {
+                        <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/HalfStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                    }
+                    else if (item.RateAverage >= 3)
+                    {
+                        <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                    }
+                    else if (item.RateAverage >= (decimal)2.5)
+                    {
+                        <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/HalfStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                    }
+                    else if (item.RateAverage >= 2)
+                    {
+                        <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                    }
+                    else if (item.RateAverage >= (decimal)1.5)
+                    {
+                        <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/HalfStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                    }
+                    else if (item.RateAverage >= 1)
+                    {
+                        <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                    }
 
+                    else if (item.RateAverage == 0)
+                    {
+                        <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                    }
+                }
                 (@item.RateCount) @{if (item.RateCount > 0)
                     {
-                        decimal a = @item.RateTotal / @item.RateCount; <span class="avr"> @a</span>
+                        decimal a = @item.RateAverage; <span class="avr"> @a</span>
 
                     }
                 }<br />
@@ -75,13 +150,13 @@
         });
 
         $("img.rating").click(function (e) {
-           // $("img.rating").unbind("mouseout mouseover click");
+            // $("img.rating").unbind("mouseout mouseover click");
             $(this).css('color', 'red');
-           // alert(e.currentTarget + ' was clicked!');
+            // alert(e.currentTarget + ' was clicked!');
             // call ajax methods to update database
             var url = "/Movies/PostRating?rating=" + parseInt($(this).attr("id")) + "&mid=" + parseInt($(this).attr("mid"));
             $.post(url, null, function (data) {
-                $(e.currentTarget).closest('tr').find('div.result').text(data).css('color','red') // $("#result").text(data);
+                $(e.currentTarget).closest('tr').find('div.result').text(data).css('color', 'red') // $("#result").text(data);
             });
         });
     });
@@ -90,8 +165,7 @@
         img.attr("src", "/assets/img/" + image)
             .prevAll("img.rating").attr("src", "/assets/img" + image);
     }
-    function refilRating(img1)
-    {
+    function refilRating(img1) {
         var rt = $(img1).closest('tr').find("span.avr").text();
         var img = $(img1).closest('tr').find("img[id='" + parseInt(rt) + "']");
         img.attr("src", "assets/img/FilledStar.png").prevAll("img.rating").attr("src", "assets/img/FilledStar.png");

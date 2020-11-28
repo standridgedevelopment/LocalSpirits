@@ -36,20 +36,26 @@ namespace LocalSpirits.Models.Business
             }
 
         }
-        public int RateTotal
+        public decimal RateAverage
         {
 
             get
 
             {
-                return (Ratings.Sum(m => m.Rating));
+                if( RateCount != 0)
+                {
+                    return (Ratings.Sum(m => (decimal)m.Rating) / (decimal)RateCount);
+                }
+                return 0;
 
             }
 
         }
-        public ICollection<VisitedDetail> Ratings { get; set; }
-       
         public bool ReviewFromUser { get; set; }
+        public bool FollowByUser { get; set; }
+        public ICollection<Data.Visited> Ratings { get; set; }
+       
+  
         public ICollection<Data.Event> Events { get; set; }
     }
 }

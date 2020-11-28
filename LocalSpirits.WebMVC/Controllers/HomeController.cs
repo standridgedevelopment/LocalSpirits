@@ -17,10 +17,17 @@ namespace LocalSpirits.WebMVC.Controllers
 		[HttpGet]
 		public ActionResult Index()
 		{
-			return View(new Event());
+			try
+            {
+				var profileService = CreateProfileService();
+				return RedirectToAction("Activity");
+			}
+
+            catch { }
+			return View();
 		}
 
-		public ActionResult GetHomeFeed()
+		public ActionResult Activity()
 		{
 			var profileService = CreateProfileService();
 			var activityFeed = profileService.GetFullFriendsActivityFeed();

@@ -50,8 +50,17 @@ namespace LocalSpirits.WebMVC.Controllers
         {
             var businessService = CreateBusinessService();
             var visitedService = CreateVisitedService();
+            var friendService = CreateFriendsService();
+
             var visit = visitedService.GetVisitByBusinessID(id);
             var model = businessService.GetByID(id);
+            var checkFollowing = friendService.CheckForFollow(id);
+
+            ModelState.Clear();
+            if (checkFollowing == true)
+            {
+                model.FollowByUser = true;
+            }
 
             if (visit.Rating > 1 && visit != null)
             {

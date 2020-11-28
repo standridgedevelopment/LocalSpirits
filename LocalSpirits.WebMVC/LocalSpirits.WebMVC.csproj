@@ -200,7 +200,7 @@
   <ItemGroup>
     <Content Include="assets\img\EmptyStar.png" />
     <Content Include="assets\img\FilledStar.png" />
-    <Content Include="assets\img\Half_Star_Yellow.png" />
+    <Content Include="assets\img\HalfStar.png" />
     <Content Include="assets\img\Me.jpg" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -385,6 +385,7 @@
     <Content Include="Views\Home\FriendRequestCount.cshtml" />
     <Content Include="Views\Friends\FriendRequestCount.cshtml" />
     <Content Include="Views\Business\AddRating.cshtml" />
+    <Content Include="Views\Home\Activity.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -68,16 +68,16 @@ namespace LocalSpirits.Services
                 {
                     var entity = ctx.Businesses.Single(e => e.ID == id);
                     var ratings = new List<Visited>();
-                    //if (entity.AllVisits != null)
-                    //{
+                    if (entity.AllVisits != null)
+                    {
 
-                    //    foreach (var rating in entity.AllVisits)
-                    //    {
-                    //        if (rating.Rating > 0)
-                    //            ratings.Add(rating);
-                    //    }
+                        foreach (var rating in entity.AllVisits)
+                        {
+                            if (rating.Rating > 0)
+                                ratings.Add(rating);
+                        }
 
-                    //}
+                    }
                     return new BusinessDetail
                     {
                         ID = entity.ID,
@@ -90,9 +90,8 @@ namespace LocalSpirits.Services
                         Hours = entity.Hours,
                         PhoneNumber = entity.PhoneNumber,
                         Website = entity.Website,
-                        Rating = entity.Rating,
                         Events = entity.Events,
-                        //Ratings = ratings,
+                        Ratings = ratings,
                         ReviewFromUser = false,
                   
                     };
@@ -105,9 +104,20 @@ namespace LocalSpirits.Services
         {
             using (var ctx = new ApplicationDbContext())
             {
+                var ratings = new List<Visited>();
                 var Businessess = ctx.Businesses.Where(e => e.Name.Contains(name)).ToList();
                 foreach (var business in Businessess)
                 {
+                    if (business.AllVisits != null)
+                    {
+
+                        foreach (var rating in business.AllVisits)
+                        {
+                            if (rating.Rating > 0)
+                                ratings.Add(rating);
+                        }
+
+                    }
                     var found = new BusinessListItem
                     {
                         ID = business.ID,
@@ -119,6 +129,7 @@ namespace LocalSpirits.Services
                         State = business.City.State,
                         ZipCode = business.ZipCode,
                         Events = business.Events,
+                        Ratings = ratings,
                        
                     };
                     searchResults.Add(found);
@@ -147,8 +158,19 @@ namespace LocalSpirits.Services
             using (var ctx = new ApplicationDbContext())
             {
                 var Businessess = ctx.Businesses.Where(e => e.City.Name == cityName && e.City.State == stateName).ToList();
+                var ratings = new List<Visited>();
                 foreach (var business in Businessess)
                 {
+                    if (business.AllVisits != null)
+                    {
+
+                        foreach (var rating in business.AllVisits)
+                        {
+                            if (rating.Rating > 0)
+                                ratings.Add(rating);
+                        }
+
+                    }
                     var found = new BusinessListItem
                     {
                         ID = business.ID,
@@ -160,6 +182,7 @@ namespace LocalSpirits.Services
                         State = business.City.State,
                         ZipCode = business.ZipCode,
                         Events = business.Events,
+                        Ratings = ratings,
                     };
                     searchResults.Add(found);
                 }
@@ -170,9 +193,20 @@ namespace LocalSpirits.Services
         {
             using (var ctx = new ApplicationDbContext())
             {
+                var ratings = new List<Visited>();
                 var Businessess = ctx.Businesses.Where(e => e.City.State == stateName).ToList();
                 foreach (var business in Businessess)
                 {
+                    if (business.AllVisits != null)
+                    {
+
+                        foreach (var rating in business.AllVisits)
+                        {
+                            if (rating.Rating > 0)
+                                ratings.Add(rating);
+                        }
+
+                    }
                     var found = new BusinessListItem
                     {
                         ID = business.ID,
@@ -183,7 +217,126 @@ namespace LocalSpirits.Services
                         CityID = business.CityID,
                         State = business.City.State,
                         ZipCode = business.ZipCode,
-                        Events = business.Events,                       
+                        Events = business.Events,     
+                        Ratings = ratings,
+                    };
+                    searchResults.Add(found);
+                }
+                return searchResults;
+            }
+        }
+        public List<BusinessListItem> GetByStateAndType(string stateName, string type)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                
+                var Businesses = new List<Business>();
+                Businesses = ctx.Businesses.Where(e => e.City.State == stateName).ToList();
+                if (type != null && type.Contains("Brewery"))
+                {
+                    Businesses = ctx.Businesses.Where(e => e.City.State == stateName && e.TypeOfEstablishment == "Brewery").ToList();
+
+                }
+                if (type != null && type.Contains("Winery"))
+                {
+                    Businesses = ctx.Businesses.Where(e => e.City.State == stateName && e.TypeOfEstablishment == "Winery").ToList();
+
+                }
+                if (type != null && type.Contains("Distillery"))
+                {
+                    Businesses = ctx.Businesses.Where(e => e.City.State == stateName && e.TypeOfEstablishment == "Distillery").ToList();
+
+                }
+                if (type != null && type.Contains("Bar"))
+                {
+                    Businesses = ctx.Businesses.Where(e => e.City.State == stateName && e.TypeOfEstablishment == "Bar").ToList();
+
+                }
+
+                foreach (var business in Businesses)
+                {
+                    var ratings = new List<Visited>();
+                    if (business.AllVisits != null)
+                    {
+
+                        foreach (var rating in business.AllVisits)
+                        {
+                            if (rating.Rating > 0)
+                                ratings.Add(rating);
+                        }
+
+                    }
+                    var found = new BusinessListItem
+                    {
+                        ID = business.ID,
+                        Name = business.Name,
+                        TypeOfEstablishment = business.TypeOfEstablishment,
+                        Rating = business.Rating,
+                        City = business.City.Name,
+                        CityID = business.CityID,
+                        State = business.City.State,
+                        ZipCode = business.ZipCode,
+                        Events = business.Events,
+                        Ratings = ratings,
+                    };
+                    searchResults.Add(found);
+                }
+                return searchResults;
+            }
+        }
+        public List<BusinessListItem> GetByCityAndType(int id, string type)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+
+                var Businesses = new List<Business>();
+                Businesses = ctx.Businesses.Where(e => e.City.ID == id).ToList();
+                if (type != null && type.Contains("Brewery"))
+                {
+                    Businesses = ctx.Businesses.Where(e => e.City.ID == id && e.TypeOfEstablishment == "Brewery").ToList();
+
+                }
+                if (type != null && type.Contains("Winery"))
+                {
+                    Businesses = ctx.Businesses.Where(e => e.City.ID == id && e.TypeOfEstablishment == "Winery").ToList();
+
+                }
+                if (type != null && type.Contains("Distillery"))
+                {
+                    Businesses = ctx.Businesses.Where(e => e.City.ID == id && e.TypeOfEstablishment == "Distillery").ToList();
+
+                }
+                if (type != null && type.Contains("Bar"))
+                {
+                    Businesses = ctx.Businesses.Where(e => e.City.ID == id && e.TypeOfEstablishment == "Bar").ToList();
+
+                }
+
+                foreach (var business in Businesses)
+                {
+                    var ratings = new List<Visited>();
+                    if (business.AllVisits != null)
+                    {
+
+                        foreach (var rating in business.AllVisits)
+                        {
+                            if (rating.Rating > 0)
+                                ratings.Add(rating);
+                        }
+
+                    }
+                    var found = new BusinessListItem
+                    {
+                        ID = business.ID,
+                        Name = business.Name,
+                        TypeOfEstablishment = business.TypeOfEstablishment,
+                        Rating = business.Rating,
+                        City = business.City.Name,
+                        CityID = business.CityID,
+                        State = business.City.State,
+                        ZipCode = business.ZipCode,
+                        Events = business.Events,
+                        Ratings = ratings,
                     };
                     searchResults.Add(found);
                 }
@@ -194,9 +347,20 @@ namespace LocalSpirits.Services
         {
             using (var ctx = new ApplicationDbContext())
             {
+                var ratings = new List<Visited>();
                 var Businessess = ctx.Businesses.Where(e => e.ZipCode == zipCode).ToList();
                 foreach (var business in Businessess)
                 {
+                    if (business.AllVisits != null)
+                    {
+
+                        foreach (var rating in business.AllVisits)
+                        {
+                            if (rating.Rating > 0)
+                                ratings.Add(rating);
+                        }
+
+                    }
                     var found = new BusinessListItem
                     {
                         ID = business.ID,
@@ -207,7 +371,8 @@ namespace LocalSpirits.Services
                         CityID = business.CityID,
                         State = business.City.State,
                         ZipCode = business.ZipCode,
-                        Events = business.Events,            
+                        Events = business.Events,   
+                        Ratings = ratings,
                     };
                     searchResults.Add(found);
                 }

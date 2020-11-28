@@ -28,8 +28,26 @@ namespace LocalSpirits.Models.Business
         public int? ZipCode { get; set; }
         public ICollection<LocalSpirits.Data.Event> Events { get; set; }
 
-        public int RateCount { get; set; }
-        public int RateTotal { get; set; }
+        public int RateCount
+        {
+            get
+            {
+                return Ratings.Count;
+            }
+
+        }
+        public decimal RateAverage
+        {
+
+            get
+
+            {
+                return (Ratings.Sum(m => (decimal)m.Rating) / (decimal)RateCount);
+
+            }
+
+        }
+        public ICollection<Data.Visited> Ratings { get; set; }
 
         public string GetFullStateName(string stateName)
         {

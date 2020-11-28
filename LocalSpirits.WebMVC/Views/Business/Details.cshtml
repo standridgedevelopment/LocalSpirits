@@ -4,98 +4,208 @@
     ViewBag.Title = $"{Model.Name}";
 }
 
-<h2> @Html.DisplayFor(model => model.Name)</h2>
+
 
 @using Microsoft.AspNet.Identity
 @if (Request.IsAuthenticated)
 {
+    <div class="container">
+        <h2> @Html.DisplayFor(model => model.Name)</h2>
+        @if (Model.FollowByUser == true)
+        {
+            @Html.ActionLink("Stop Following", $"FollowBusiness/{Model.ID}", null, null, new { @class = "btn btn-warning btn-large" })
+        }
+        @if (Model.FollowByUser == false)
+        {
+            @Html.ActionLink("Follow", $"FollowBusiness/{Model.ID}", null, null, new { @class = "btn btn-warning btn-large" })
 
-    @Html.Action("CheckIfFollowing")
+        }
+        @if (Model.ReviewFromUser == false)
+        {
+            @Html.ActionLink("Add Rating", "AddRating", new { id = Model.ID }, new { @class = "btn btn-warning btn-large" })
+        }
+        @if (Model.ReviewFromUser == true)
+        {
+            @Html.ActionLink("Update Rating", "AddRating", new { id = Model.ID }, new { @class = "btn btn-warning btn-large" })
+        }
+        <div>
+            <hr />
+            <dl class="dl-horizontal-business">
+                <dt>
+                    @Html.DisplayNameFor(model => model.TypeOfEstablishment)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.TypeOfEstablishment)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Rating)
+                </dt>
+
+                <dd>
+                    @{
+                        if (Model.RateAverage == (decimal)5)
+                        {
+                            <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                            <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                            <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                            <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                            <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        }
+                        else if (Model.RateAverage >= (decimal)4.5)
+                        {
+                            <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                            <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                            <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                            <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                            <img src="~/assets/img/HalfStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        }
+                        else if (Model.RateAverage >= (decimal)4)
+                        {
+                            <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                            <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                            <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                            <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                            <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        }
+                        else if (Model.RateAverage >= (decimal)3.5)
+                        {
+                            <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                            <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                            <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                            <img src="~/assets/img/HalfStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                            <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        }
+                        else if (Model.RateAverage >= (decimal)3)
+                        {
+                            <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                            <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                            <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                            <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                            <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        }
+                        else if (Model.RateAverage >= (decimal)2.5)
+                        {
+                            <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                            <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                            <img src="~/assets/img/HalfStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                            <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                            <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        }
+                        else if (Model.RateAverage >= (decimal)2)
+                        {
+                            <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                            <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                            <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                            <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                            <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        }
+                        else if (Model.RateAverage >= (decimal)1.5)
+                        {
+                            <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                            <img src="~/assets/img/HalfStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                            <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                            <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                            <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        }
+                        else if (Model.RateAverage >= (decimal)1.0)
+                        {
+                            <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                            <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                            <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                            <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                            <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        }
+
+                        else if (Model.RateAverage == 0)
+                        {
+                            <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                            <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                            <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                            <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                            <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        }
+                    }
+                    (@Model.RateCount) @{
+                        if (Model.RateCount > 0)
+                        {
+                            decimal a = Model.RateAverage; <span class="avr"> @a</span>
+
+
+                        }<br />
+                    }
+
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.City)
+                </dt>
+
+                <dd>
+                    @Html.ActionLink($"{Model.City}", "Details", "City", new { id = Model.CityID }, null)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.State)
+                </dt>
+
+                <dd>
+                    @Html.ActionLink($"{Model.State}", "State", "City", new { id = Model.State }, null)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.ZipCode)
+                </dt>
+
+                <dd>
+                    @Html.ActionLink($"{Model.ZipCode}", "ZipCode", "City", new { id = Model.ZipCode }, null)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Hours)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Hours)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.PhoneNumber)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.PhoneNumber)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Website)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Website)
+                </dd>
+
+            </dl>
+        </div>
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.ID }, new { @class = "btn btn-warning btn-large" })
+        </p>
+        <p>
+            @Html.ActionLink("Add Event", "Index", "Event", new { id = Model.ID }, new { @class = "btn btn-warning btn-large" })
+        </p>
+
+        <div class="row">
+            <section class="col-md-8 col-md-push-0">
+                @Html.Partial("_CalendarPartialBusiness")
+            </section>
+        </div>
+
+        <p>
+            @Html.ActionLink("Back to List", "Index")
+        </p>
+    </div>
 
 
 }
-<div>
-    <hr />
-    <dl class="dl-horizontal-business">
-        <dt>
-            @Html.DisplayNameFor(model => model.TypeOfEstablishment)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.TypeOfEstablishment)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Rating)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Rating)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.City)
-        </dt>
-
-        <dd>
-            @Html.ActionLink($"{Model.City}", "Details", "City", new { id = Model.CityID }, null)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.State)
-        </dt>
-
-        <dd>
-            @Html.ActionLink($"{Model.State}", "State", "City", new { id = Model.State }, null)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ZipCode)
-        </dt>
-
-        <dd>
-            @Html.ActionLink($"{Model.ZipCode}", "ZipCode", "City", new { id = Model.ZipCode }, null)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Hours)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Hours)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PhoneNumber)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PhoneNumber)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Website)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Website)
-        </dd>
-
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", "Business", new { id = Model.ID }, null)
-</p>
-<p>
-    @Html.ActionLink("Add Event", "Index", "Event", new { id = Model.ID }, null)
-</p>
-
-<div class="row">
-    <section class="col-md-8 col-md-push-0">
-        @Html.Partial("_CalendarPartialBusiness")
-    </section>
-</div>
-
-<p>
-    @Html.ActionLink("Back to List", "Index")
-</p>

@@ -84,15 +84,32 @@ namespace LocalSpirits.WebMVC.Controllers
         //    ModelState.Clear();
         //    return View(model);
         //}
-        public ActionResult State(string id)
+        public ActionResult State(string id, string type)
         {
             var service = CreateCityService();
             var businessService = new BusinessService();
-            var model = businessService.GetByStateName(id);
+            var model = businessService.GetByStateAndType(id, type);
             ModelState.Clear();
             return View(model);
         }
+        public ActionResult Details(int id, string type )
+        {
+            var businessService = new BusinessService();
+            var service = CreateCityService();
+            var city = service.GetCityByID(id);
+            var model = businessService.GetByCityAndType(id, type);
+            if (model.Count() == 0)
+            {
+                var baseBusiness = new BusinessListItem();
+                baseBusiness.City = city.Name;
+                baseBusiness.State = city.State;
+                baseBusiness.CityID = city.ID;
+                model.Add(baseBusiness);
+            }
+            ModelState.Clear();
 
+            return View(model);
+        }
         public ActionResult ZipCode(int id)
         {
             var service = CreateCityService();
@@ -138,24 +155,7 @@ namespace LocalSpirits.WebMVC.Controllers
 
             return View(model);
         }
-        public ActionResult Details(int id)
-        {
-            var businessService = new BusinessService();
-            var service = CreateCityService();
-            var city = service.GetCityByID(id);
-            var model = businessService.GetByCityName(city.Name, city.State);
-            if (model.Count() == 0)
-            {
-                var baseBusiness = new BusinessListItem();
-                baseBusiness.City = city.Name;
-                baseBusiness.State = city.State;
-                baseBusiness.CityID = city.ID;
-                model.Add(baseBusiness);
-            }
-            ModelState.Clear();
-
-            return View(model);
-        }
+        
 
         // Old!!!
         //public ActionResult Details(int id)

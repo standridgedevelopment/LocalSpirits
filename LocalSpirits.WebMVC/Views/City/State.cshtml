@@ -12,6 +12,14 @@
     <h2>
         @Html.DisplayFor(modelItem => item.FullState)
     </h2>
+    <div>
+        @Html.ActionLink("View All", $"State/{item.State}/", new { type = "" }, new { @class = "btn btn-warning btn-large" })
+        @Html.ActionLink("View Breweries", $"State/{item.State}/", new { type = "Brewery" }, new { @class = "btn btn-warning btn-large" })
+        @Html.ActionLink("View Distillaries", $"State/{item.State}", new { type = "Distillery" }, new { @class = "btn btn-warning btn-large" })
+        @Html.ActionLink("View Wineries", $"State/{item.State}", new { type = "Winery" }, new { @class = "btn btn-warning btn-large" })
+        @Html.ActionLink("View Bars", $"State/{item.State}", new { type = "Bar" }, new { @class = "btn btn-warning btn-large" })
+
+    </div>
     break;
 }
 
@@ -20,8 +28,96 @@
     <div class="panel panel-warning" style="width: 25rem;">
         <div class="panel-heading">@Html.ActionLink($"{item.Name}", "Details", "Business", new { id = item.ID }, null)</div>
         <div class="panel-body">
-            @Html.DisplayFor(modelItem => item.Rating)
-            <br />
+            @{
+                if (item.RateAverage == 5)
+                {
+                    <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                    <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                    <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                    <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                    <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                }
+                else if (item.RateAverage >= (decimal)4.5)
+                {
+                    <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                    <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                    <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                    <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                    <img src="~/assets/img/HalfStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                }
+                else if (item.RateAverage >= 4)
+                {
+                    <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                    <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                    <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                    <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                    <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                }
+                else if (item.RateAverage >= (decimal)3.5)
+                {
+                    <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                    <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                    <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                    <img src="~/assets/img/HalfStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                    <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                }
+                else if (item.RateAverage >= 3)
+                {
+                    <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                    <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                    <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                    <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                    <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                }
+                else if (item.RateAverage >= (decimal)2.5)
+                {
+                    <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                    <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                    <img src="~/assets/img/HalfStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                    <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                    <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                }
+                else if (item.RateAverage >= 2)
+                {
+                    <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                    <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                    <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                    <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                    <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                }
+                else if (item.RateAverage >= (decimal)1.5)
+                {
+                    <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                    <img src="~/assets/img/HalfStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                    <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                    <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                    <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                }
+                else if (item.RateAverage >= (decimal)1.0)
+                {
+                    <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                    <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                    <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                    <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                    <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                }
+
+                else if (item.RateAverage == 0)
+                {
+                    <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                    <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                    <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                    <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                    <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                }
+            }
+
+            (@item.RateCount) @{if (item.RateCount > 0)
+                {
+                    decimal a = @item.RateAverage; <span class="avr"> @a</span>
+
+                }
+            }<br />
             @Html.DisplayFor(modelItem => item.TypeOfEstablishment)
             <br />
             @Html.ActionLink($"{item.City}", "Details", new { id = item.ID })

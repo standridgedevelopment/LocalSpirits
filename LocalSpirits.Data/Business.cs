@@ -31,7 +31,7 @@ namespace LocalSpirits.Data
         public int Rating { get; set; }
        
         public virtual ICollection<Event> Events { get; set; }
-        //public virtual ICollection<Visited> AllVisits { get; set; }
+        public virtual ICollection<Visited> AllVisits { get; set; }
         public virtual List<ActivityFeed> Feed { get; set; } = new List<ActivityFeed>();
     }
 }
