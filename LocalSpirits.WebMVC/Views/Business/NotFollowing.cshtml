@@ -1,5 +1,15 @@
 ﻿@model LocalSpirits.Models.Business.BusinessDetail
 
-@Html.ActionLink("Follow", $"FollowBusiness/{Model.ID}", null, null, new { @class = "btn btn-primary btn-large" })
-@Html.ActionLink("Edit", "Edit", new { id = Model.ID }, new { @class = "btn btn-primary btn-large" })
+
+@Html.ActionLink("Follow", $"FollowBusiness/{Model.ID}", null, null, new { @class = "btn btn-warning btn-large" })
+@Html.ActionLink("Edit", "Edit", new { id = Model.ID }, new { @class = "btn btn-warning btn-large" })
+@if (Model.ReviewFromUser == false)
+{
+    @Html.ActionLink("Add Rating", "AddRating", new { id = Model.ID }, new { @class = "btn btn-warning btn-large" })
+}
+@if (Model.ReviewFromUser == true)
+{
+    @Html.ActionLink("Update Rating", "AddRating", new { id = Model.ID }, new { @class = "btn btn-warning btn-large" })
+}
+
 

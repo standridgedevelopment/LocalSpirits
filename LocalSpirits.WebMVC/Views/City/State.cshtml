@@ -1,9 +1,9 @@
 ﻿@model IEnumerable<LocalSpirits.Models.Business.BusinessListItem>
 
-
+@Html.ActionLink("Add City", "Create")
 @foreach (var item in Model)
 {
-   ViewBag.Title = $"{item.State}";
+    ViewBag.Title = $"{item.State}";
     break;
 }
 
@@ -15,49 +15,21 @@
     break;
 }
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TypeOfEstablishment)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Rating)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.City)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ZipCode)
-        </th>
-        <th></th>
-    </tr>
+@foreach (var item in Model)
+{
+    <div class="panel panel-warning" style="width: 25rem;">
+        <div class="panel-heading">@Html.ActionLink($"{item.Name}", "Details", "Business", new { id = item.ID }, null)</div>
+        <div class="panel-body">
+            @Html.DisplayFor(modelItem => item.Rating)
+            <br />
+            @Html.DisplayFor(modelItem => item.TypeOfEstablishment)
+            <br />
+            @Html.ActionLink($"{item.City}", "Details", new { id = item.ID })
+            <br />
+            @Html.ActionLink($"{item.ZipCode}", "ZipCode", new { id = item.ZipCode })
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.ActionLink($"{item.Name}", "Details", "Business", new { id = item.ID }, null)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TypeOfEstablishment)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Rating)
-            </td>
-            <td>
-                @Html.ActionLink($"{item.City}", "Details", new { id = item.ID })
-            </td>
-            <td>
-                @Html.ActionLink($"{item.ZipCode}", "ZipCode", new { id = item.ZipCode })
-            </td>
-       
-        </tr>
-    }
+        </div>
+    </div>
+}
 
-</table>
+

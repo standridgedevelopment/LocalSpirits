@@ -112,7 +112,7 @@ namespace LocalSpirits.Services
                 return "Update Error";
             }
         }
-        public string UpdateBusinessFollow(VisitedDetail model, int id)
+        public string UpdateBusinessFollow(VisitedDetail model, int? id)
         {
             using (var ctx = new ApplicationDbContext())
             {
@@ -121,11 +121,8 @@ namespace LocalSpirits.Services
                     var entity = ctx.Visits.Single(e => e.BusinessID == id && e.Profile_ID == _userId);
 
                     entity.Rating = model.Rating;
-                    entity.Rating = model.Rating;
                     entity.AddToCalendar = model.AddToCalendar;
                     entity.AddToFavorites = model.AddToFavorites;
-
-
                     try
                     {
                         ctx.SaveChanges();

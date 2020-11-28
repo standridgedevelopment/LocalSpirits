@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using LocalSpirits.Data;
+using LocalSpirits.Models.Visited;
 
 namespace LocalSpirits.Models.Business
 {
@@ -26,7 +27,29 @@ namespace LocalSpirits.Models.Business
         [DisplayName("Phone Number")]
         public string PhoneNumber { get; set; }
         public string Website { get; set; }
-        [DisplayName("Does this Business have live music?")]
-        public ICollection<LocalSpirits.Data.Event> Events { get; set; } 
+
+        public int RateCount
+        {
+            get
+            {
+                return Ratings.Count;
+            }
+
+        }
+        public int RateTotal
+        {
+
+            get
+
+            {
+                return (Ratings.Sum(m => m.Rating));
+
+            }
+
+        }
+        public ICollection<VisitedDetail> Ratings { get; set; }
+       
+        public bool ReviewFromUser { get; set; }
+        public ICollection<Data.Event> Events { get; set; }
     }
 }

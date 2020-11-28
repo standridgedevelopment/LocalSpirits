@@ -9,24 +9,14 @@
 @using Microsoft.AspNet.Identity
 @if (Request.IsAuthenticated)
 {
-    <div class="container">
-        <div class="row my-5">
 
-            <div class="col-sm-6 col-md-6 my-6">
-                @Html.Action("CheckIfFollowing")
-            </div>
+    @Html.Action("CheckIfFollowing")
 
-            <div class="col-sm-6 col-md-6 my-6">
-              
-            </div>
 
-        </div>
-    </div>
-    
 }
 <div>
     <hr />
-    <dl class="dl-horizontal">
+    <dl class="dl-horizontal-business">
         <dt>
             @Html.DisplayNameFor(model => model.TypeOfEstablishment)
         </dt>

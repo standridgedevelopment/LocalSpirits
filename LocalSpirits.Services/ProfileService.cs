@@ -54,6 +54,37 @@ namespace LocalSpirits.Services
                 {
                     var entity = ctx.Profiles.Single(e => e.ID == _userId);
 
+                    //List<Event> events = GetEvents(entity.AllVisits);
+
+                    return new ProfileDetail
+                    {
+                        Username = entity.Username,
+                        FirstName = entity.FirstName,
+                        LastName = entity.LastName,
+                        City = entity.City,
+                        State = entity.State,
+                        ZipCode = entity.ZipCode,
+                        //Events = events,
+                        FriendRequests = entity.FriendRequests,
+                        FriendsList = entity.FriendsList,
+                        Feed = entity.Feed,
+                    };
+                }
+                catch { }
+                return new ProfileDetail();
+
+            }
+
+        }
+        public ProfileDetail GetFullProfile()
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+
+                try
+                {
+                    var entity = ctx.Profiles.Single(e => e.ID == _userId);
+
                     List<Event> events = GetEvents(entity.AllVisits);
 
                     return new ProfileDetail
@@ -68,6 +99,35 @@ namespace LocalSpirits.Services
                         FriendRequests = entity.FriendRequests,
                         FriendsList = entity.FriendsList,
                         Feed = entity.Feed,
+                    };
+                }
+                catch { }
+                return new ProfileDetail();
+
+            }
+        }
+        public ProfileDetail GetIncomingFriendRequests()
+        {
+            var incomingFriends = new List<FriendRequest>();
+            using (var ctx = new ApplicationDbContext())
+            {
+
+                try
+                {
+                    var entity = ctx.Profiles.Single(e => e.ID == _userId);
+                    foreach (var item in entity.FriendRequests)
+                    {
+                        if (item.SendersUsername != entity.Username)
+                            incomingFriends.Add(item);
+                    }
+
+                    //List<Event> events = GetEvents(entity.AllVisits);
+
+                    return new ProfileDetail
+                    {
+
+                        FriendRequests = incomingFriends,
+
                     };
                 }
                 catch { }
@@ -224,60 +284,65 @@ namespace LocalSpirits.Services
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var userProfile = ctx.Profiles.Single(e => e.ID == _userId);
                 List<ActivityFeedListItem> activityFeed = new List<ActivityFeedListItem>();
-                foreach (var friend in userProfile.FriendsList)
+                try
                 {
-                    //FriendsProfile
-                    if (friend.FriendsID != null)
+                    var userProfile = ctx.Profiles.Single(e => e.ID == _userId);
+                    
+                    foreach (var friend in userProfile.FriendsList)
                     {
-                        var otherProfile = ctx.Profiles.Single(e => e.ID == friend.FriendsID);
-                        foreach (var activity in otherProfile.Feed)
+                        //FriendsProfile
+                        if (friend.FriendsID != null)
                         {
-                            if ((DateTimeOffset.Now - activity.Created).TotalDays <= 3)
+                            var otherProfile = ctx.Profiles.Single(e => e.ID == friend.FriendsID);
+                            foreach (var activity in otherProfile.Feed)
                             {
-                                var activityItem = new ActivityFeedListItem
+                                if ((DateTimeOffset.Now - activity.Created).TotalDays <= 3)
                                 {
-                                    ID = activity.ID,
-                                    UserID = activity.UserID,
-                                    Name = otherProfile.FullName,
-                                    Content = activity.Content,
-                                    Activity = activity.Activity,
-                                    Username = otherProfile.Username,
-                                    ObjectID = activity.ObjectID,
-                                    ObjectType = activity.ObjectType,
-                                    Created = activity.Created,
-                                };
-                                activityFeed.Add(activityItem);
+                                    var activityItem = new ActivityFeedListItem
+                                    {
+                                        ID = activity.ID,
+                                        UserID = activity.UserID,
+                                        Name = otherProfile.FullName,
+                                        Content = activity.Content,
+                                        Activity = activity.Activity,
+                                        Username = otherProfile.Username,
+                                        ObjectID = activity.ObjectID,
+                                        ObjectType = activity.ObjectType,
+                                        Created = activity.Created,
+                                    };
+                                    activityFeed.Add(activityItem);
+                                }
                             }
                         }
-                    }
-                    //BusinessProfile
-                    if (friend.BusinessID != null)
-                    {
-                        var otherProfile = ctx.Businesses.Single(e => e.ID == friend.BusinessID);
-                        foreach (var activity in otherProfile.Feed)
+                        //BusinessProfile
+                        if (friend.BusinessID != null)
                         {
-                            if ((DateTimeOffset.Now - activity.Created).TotalDays <= 3 && activity.Activity != "Follow")
+                            var otherProfile = ctx.Businesses.Single(e => e.ID == friend.BusinessID);
+                            foreach (var activity in otherProfile.Feed)
                             {
-                                var activityItem = new ActivityFeedListItem
+                                if ((DateTimeOffset.Now - activity.Created).TotalDays <= 3 && activity.Activity != "Follow")
                                 {
-                                    ID = activity.ID,
-                                    UserID = activity.UserID,
-                                    Name = otherProfile.Name,
-                                    Content = activity.Content,
-                                    Activity = activity.Activity,
-                                    ObjectID = activity.ObjectID,
-                                    ObjectType = activity.ObjectType,
-                                    Created = activity.Created,
-                                };
-                                activityFeed.Add(activityItem);
+                                    var activityItem = new ActivityFeedListItem
+                                    {
+                                        ID = activity.ID,
+                                        UserID = activity.UserID,
+                                        Name = otherProfile.Name,
+                                        Content = activity.Content,
+                                        Activity = activity.Activity,
+                                        ObjectID = activity.ObjectID,
+                                        ObjectType = activity.ObjectType,
+                                        Created = activity.Created,
+                                    };
+                                    activityFeed.Add(activityItem);
+                                }
                             }
                         }
-                    }
 
+                    }
+                    return activityFeed;
                 }
-                return activityFeed;
+                catch { return activityFeed; }
             }
         }
         public List<ActivityFeedListItem> GetOneFriendsActivityFeed(string username)

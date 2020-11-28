@@ -28,6 +28,9 @@ namespace LocalSpirits.Models.Business
         public int? ZipCode { get; set; }
         public ICollection<LocalSpirits.Data.Event> Events { get; set; }
 
+        public int RateCount { get; set; }
+        public int RateTotal { get; set; }
+
         public string GetFullStateName(string stateName)
         {
             if (stateName.ToLower() == "al") return "Alabama";

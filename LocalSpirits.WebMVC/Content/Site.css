@@ -40,6 +40,15 @@ will truncate terms that are too long to fit in the left column
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+.dl-horizontal-business dt {
+    float: left;
+    width: 135px !important;
+    clear: left;
+    text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
 
 .dl-horizontal dd {
     margin-left: 60px;

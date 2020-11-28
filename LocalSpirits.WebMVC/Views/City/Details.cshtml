@@ -7,9 +7,9 @@
 
 @foreach (var item in Model)
 {
-<h2>
-    @Html.DisplayFor(modelItem => item.City), @Html.DisplayFor(modelItem => item.FullState)
-</h2>
+    <h2>
+        @Html.DisplayFor(modelItem => item.City), @Html.DisplayFor(modelItem => item.FullState)
+    </h2>
     break;
 }
 
@@ -22,41 +22,79 @@
 
 
 
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TypeOfEstablishment)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Rating)
-            </th>
-            <th></th>
-        </tr>
+    foreach (var item in Model)
+    {
+        <div class="panel panel-warning" style="width: 25rem;">
+            <div class="panel-heading">@Html.ActionLink($"{item.Name}", "Details", "Business", new { id = item.ID }, null)</div>
+            <div class="panel-body">
+                @if (item.RateTotal == 5)
+                {
+                    <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                    <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                    <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                    <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                    <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                }
+                @if (item.RateTotal == 0)
+                {
+                    <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                    <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                    <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                    <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                    <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                }
 
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.ActionLink($"{item.Name}", "Details", "Business", new { id = item.ID }, null)
+                (@item.RateCount) @{if (item.RateCount > 0)
+                    {
+                        decimal a = @item.RateTotal / @item.RateCount; <span class="avr"> @a</span>
 
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TypeOfEstablishment)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Rating)
-                </td>
-            </tr>
-        }
+                    }
+                }<br />
+                @Html.DisplayFor(modelItem => item.TypeOfEstablishment)
 
-
-    </table>
+            </div>
+        </div>
+    }
     <div class="row">
         <section class="col-md-8 col-md-push-0">
             @Html.Partial("_CalendarPartial")
         </section>
     </div>
 }
+<script type="text/javascript">
+
+
+    $(function () {
+        $("img.rating").mouseover(function () {
+            giveRating($(this), "FilledStar.png");
+            $(this).css("cursor", "pointer");
+        });
+        $("img.rating").mouseout(function () {
+            giveRating($(this), "EmptyStar.png");
+            refilRating($(this));
+        });
+
+        $("img.rating").click(function (e) {
+           // $("img.rating").unbind("mouseout mouseover click");
+            $(this).css('color', 'red');
+           // alert(e.currentTarget + ' was clicked!');
+            // call ajax methods to update database
+            var url = "/Movies/PostRating?rating=" + parseInt($(this).attr("id")) + "&mid=" + parseInt($(this).attr("mid"));
+            $.post(url, null, function (data) {
+                $(e.currentTarget).closest('tr').find('div.result').text(data).css('color','red') // $("#result").text(data);
+            });
+        });
+    });
+
+    function giveRating(img, image) {
+        img.attr("src", "/assets/img/" + image)
+            .prevAll("img.rating").attr("src", "/assets/img" + image);
+    }
+    function refilRating(img1)
+    {
+        var rt = $(img1).closest('tr').find("span.avr").text();
+        var img = $(img1).closest('tr').find("img[id='" + parseInt(rt) + "']");
+        img.attr("src", "assets/img/FilledStar.png").prevAll("img.rating").attr("src", "assets/img/FilledStar.png");
+    }
+
+</script>

@@ -9,11 +9,14 @@
 
 @foreach (var item in Model)
 {
-    <h2> @Html.DisplayFor(modelItem => item.Name)</h2>
-    @Html.Action("CheckForFriend", "Friends")
+    <h2>@Html.Raw(item.Name)</h2>
     break;
-}
 
+}
+@Html.Action("CheckForFriend", "Friends")
+
+<br />
+<br />
 
 @foreach (var item in Model)
 {

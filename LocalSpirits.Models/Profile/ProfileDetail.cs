@@ -28,7 +28,6 @@ namespace LocalSpirits.Models.Profile
         public int ZipCode { get; set; }
 
 
-        public List<Data.Visited> Favorites { get; set; }
         public List<Data.Event> Events { get; set; }
         public List<Friend> FriendsList { get; set; } 
         public  List<FriendRequest> FriendRequests { get; set; }

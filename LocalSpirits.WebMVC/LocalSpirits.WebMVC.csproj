@@ -198,6 +198,9 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="assets\img\EmptyStar.png" />
+    <Content Include="assets\img\FilledStar.png" />
+    <Content Include="assets\img\Half_Star_Yellow.png" />
     <Content Include="assets\img\Me.jpg" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -342,7 +345,6 @@
     <Content Include="Views\Profile\Edit.cshtml" />
     <Content Include="Views\City\Index.cshtml" />
     <Content Include="Views\City\Create.cshtml" />
-    <Content Include="Views\City\DetailsOld.cshtml" />
     <Content Include="Views\City\Edit.cshtml" />
     <Content Include="Views\City\Search.cshtml" />
     <Content Include="Views\Business\Index.cshtml" />
@@ -380,6 +382,9 @@
     <Content Include="Views\Home\HomeFeed - Old.cshtml" />
     <Content Include="Views\Profile\Activity.cshtml" />
     <Content Include="Views\Profile\GetFeed.cshtml" />
+    <Content Include="Views\Home\FriendRequestCount.cshtml" />
+    <Content Include="Views\Friends\FriendRequestCount.cshtml" />
+    <Content Include="Views\Business\AddRating.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

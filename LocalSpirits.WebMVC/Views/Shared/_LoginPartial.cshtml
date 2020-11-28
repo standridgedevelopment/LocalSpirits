@@ -7,7 +7,7 @@
 
 <ul class="nav navbar-nav navbar-right">
     <li>
-        @Html.ActionLink("Friends", "FriendsList", "Friends", routeValues: null, htmlAttributes: new { title = "Profile" })
+        @Html.Action("GetFriendFriendRequestCount", "Friends")
     </li>
     <li>
         @Html.ActionLink("Profile", "HomeProfile", "Profile", routeValues: null, htmlAttributes: new { title = "Profile" })

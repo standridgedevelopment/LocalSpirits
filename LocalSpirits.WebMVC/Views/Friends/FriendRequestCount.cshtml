@@ -1,0 +1,15 @@
+﻿@model LocalSpirits.Models.Profile.ProfileDetail
+@if (Model.FriendRequests != null)
+{
+    if (Model.FriendRequests.Count() > 0)
+    {
+        <a href="@Url.Action("FriendsList", "Friends")" title="Profile">
+            Friends <span class="badge"> @Html.Raw(Model.FriendRequests.Count())</span>
+        </a>
+    }
+    else
+    {
+        <a href="@Url.Action("FriendsList", "Friends")" title="Profile">Friends</a>
+    }
+}
+

@@ -49,7 +49,15 @@ namespace LocalSpirits.WebMVC.Controllers
         public ActionResult Details(int id)
         {
             var businessService = CreateBusinessService();
+            var visitedService = CreateVisitedService();
+            var visit = visitedService.GetVisitByBusinessID(id);
             var model = businessService.GetByID(id);
+
+            if (visit.Rating > 1 && visit != null)
+            {
+                model.ReviewFromUser = true;
+            }
+
             ModelState.Clear();
 
             return View(model);
@@ -111,6 +119,42 @@ namespace LocalSpirits.WebMVC.Controllers
             else ModelState.AddModelError("", "Business could not be updated.");
             return View(model);
         }
+        public ActionResult AddRating(int id)
+        {
+            var businessService = CreateBusinessService();
+            var visitedService = CreateVisitedService();
+  
+            var foundVisit = visitedService.GetVisitByBusinessID(id);
+            ModelState.Clear();
+            if (foundVisit.BusinessID == null)
+            {
+                var newVisit = new VisitedCreate();
+                newVisit.BusinessID = id;
+                visitedService.CreateVisit(newVisit);
+                var model = new VisitedDetail();
+                model.BusinessID = id;
+                return View(model);
+            }
+            return View(foundVisit);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddRating(int id, VisitedDetail model)
+        {
+            var visitedService = CreateVisitedService();
+
+            if (!ModelState.IsValid) return View(model);
+
+            string result = visitedService.UpdateBusinessFollow(model, model.BusinessID);
+            if (result == "Okay")
+            {
+                TempData["SaveResult"] = "Rating updated!";
+                return RedirectToAction($"Details/{model.BusinessID}");
+            }
+            else ModelState.AddModelError("", "Business could not be updated.");
+            return View(model);
+        }
         public ActionResult Delete(int id)
         {
             var service = CreateBusinessService();
@@ -142,8 +186,8 @@ namespace LocalSpirits.WebMVC.Controllers
             var checkFollowing = friendService.CheckForFollow(id);
             ModelState.Clear();
             if (checkFollowing == true)
-                return View("Following", thisBusiness);
-            return View("NotFollowing", thisBusiness);
+                return PartialView("Following", thisBusiness);
+            return PartialView("NotFollowing", thisBusiness);
         }
         public ActionResult FollowBusiness(int id)
         {

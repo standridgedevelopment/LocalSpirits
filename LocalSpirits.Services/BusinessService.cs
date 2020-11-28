@@ -67,6 +67,17 @@ namespace LocalSpirits.Services
                 try
                 {
                     var entity = ctx.Businesses.Single(e => e.ID == id);
+                    var ratings = new List<Visited>();
+                    //if (entity.AllVisits != null)
+                    //{
+
+                    //    foreach (var rating in entity.AllVisits)
+                    //    {
+                    //        if (rating.Rating > 0)
+                    //            ratings.Add(rating);
+                    //    }
+
+                    //}
                     return new BusinessDetail
                     {
                         ID = entity.ID,
@@ -80,8 +91,10 @@ namespace LocalSpirits.Services
                         PhoneNumber = entity.PhoneNumber,
                         Website = entity.Website,
                         Rating = entity.Rating,
-                        Events = entity.Events
-                        
+                        Events = entity.Events,
+                        //Ratings = ratings,
+                        ReviewFromUser = false,
+                  
                     };
                 }
                 catch { }
@@ -106,6 +119,7 @@ namespace LocalSpirits.Services
                         State = business.City.State,
                         ZipCode = business.ZipCode,
                         Events = business.Events,
+                       
                     };
                     searchResults.Add(found);
                 }
@@ -169,7 +183,7 @@ namespace LocalSpirits.Services
                         CityID = business.CityID,
                         State = business.City.State,
                         ZipCode = business.ZipCode,
-                        Events = business.Events,
+                        Events = business.Events,                       
                     };
                     searchResults.Add(found);
                 }
@@ -193,7 +207,7 @@ namespace LocalSpirits.Services
                         CityID = business.CityID,
                         State = business.City.State,
                         ZipCode = business.ZipCode,
-                        Events = business.Events,
+                        Events = business.Events,            
                     };
                     searchResults.Add(found);
                 }

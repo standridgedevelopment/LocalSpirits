@@ -18,9 +18,9 @@ namespace LocalSpirits.WebMVC.Controllers
             string result = friendService.CheckForFriend(id);
             var model = profileService.GetByUsername(id);
             ModelState.Clear();
-            if (result == "pending") return View("PendingFriends", model);
-            if (result == "theySent") return View("RecievedRequest", model);
-            if (result == "friends") return View("AreFriends", model);
+            if (result == "pending") return PartialView("PendingFriends", model);
+            if (result == "theySent") return PartialView("RecievedRequest", model);
+            if (result == "friends") return PartialView("AreFriends", model);
             return View("NotFriends", model);
         }
 
@@ -66,6 +66,13 @@ namespace LocalSpirits.WebMVC.Controllers
             if (friendRequests.Count != 0)
                 return View(friendRequests);
             else return View(friendRequests);
+        }
+        public ActionResult GetFriendFriendRequestCount()
+        {
+            var profileService = CreateProfileService();
+            var profile = profileService.GetIncomingFriendRequests();
+           
+        return PartialView("FriendRequestCount", profile);
         }
 
         private ProfileServices CreateProfileService()

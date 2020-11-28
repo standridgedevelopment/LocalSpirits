@@ -104,7 +104,7 @@ namespace LocalSpirits.WebMVC.Controllers
         public JsonResult GetPersonalEvents(string id, DateTime start, DateTime end)
         {
             var profileService = CreateProfileService();
-            var profile = profileService.GetProfile();
+            var profile = profileService.GetFullProfile();
             var events = new List<Event>();
 
             foreach (var cEvent in profile.Events)
