@@ -359,7 +359,7 @@
     <Content Include="Views\Business\Details.cshtml" />
     <Content Include="Views\Business\_CalendarPartialBusiness.cshtml" />
     <Content Include="Views\Event\Index.cshtml" />
-    <Content Include="Views\Event\CreateOne.cshtml" />
+    <Content Include="Views\Event\Create.cshtml" />
     <Content Include="Views\City\ZipCode.cshtml" />
     <Content Include="Views\Event\CreateRecurring.cshtml" />
     <Content Include="Views\Event\Details.cshtml" />
@@ -386,6 +386,7 @@
     <Content Include="Views\Friends\FriendRequestCount.cshtml" />
     <Content Include="Views\Business\AddRating.cshtml" />
     <Content Include="Views\Home\Activity.cshtml" />
+    <Content Include="Views\Event\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

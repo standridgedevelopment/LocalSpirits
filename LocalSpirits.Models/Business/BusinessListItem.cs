@@ -42,7 +42,7 @@ namespace LocalSpirits.Models.Business
             get
 
             {
-                return (Ratings.Sum(m => (decimal)m.Rating) / (decimal)RateCount);
+                return Math.Round(Ratings.Sum(m => (decimal)m.Rating) / (decimal)RateCount, 1);
 
             }
 

@@ -26,11 +26,10 @@ namespace LocalSpirits.Services
                 TypeOfEvent = $"{model.TypeOfEvent}",
                 BusinessID = model.BusinessID,
                 StartDay = model.StartDay,
+                StartMonth = model.StartMonth,
+                StartYear = model.StartYear,
                 start = model.Start,
-                end = model.End,
-                DaysOfWeekInput = model.DaysOfWeek,
-                startRecur = model.StartRecur,
-                endRecur = model.EndRecur,
+                end = model.Start,
                 ThirdPartyWebsite = model.Url,
                 color = model.Color
             };
@@ -65,11 +64,11 @@ namespace LocalSpirits.Services
                         city = entity.Business.City.Name,
                         state = entity.Business.City.State,
                         start = entity.start,
-                        end = entity.end,
-                        daysOfWeek = entity.DaysOfWeekInput,
-                        startRecur = entity.startRecur,
-                        endRecur = entity.endRecur,
+                        end = entity.end,                      
                         ThirdPartyWebsite = entity.ThirdPartyWebsite,
+                        StartDay = entity.StartDay,
+                        StartMonth = entity.StartMonth,
+                        StartYear = entity.StartYear,
                         color = entity.City,
                     };
                 }
@@ -94,10 +93,7 @@ namespace LocalSpirits.Services
                         city = entity.Business.City.Name,
                         state = entity.Business.City.State,
                         start = entity.start,
-                        end = entity.end,
-                        daysOfWeek = entity.DaysOfWeekInput,
-                        startRecur = entity.startRecur,
-                        endRecur = entity.endRecur,
+                        end = entity.end,                    
                         ThirdPartyWebsite = entity.ThirdPartyWebsite,
                         color = entity.City,
                     };
@@ -124,9 +120,6 @@ namespace LocalSpirits.Services
                         state = entity.Business.City.State,
                         start = entity.start,
                         end = entity.end,
-                        daysOfWeek = entity.DaysOfWeekInput,
-                        startRecur = entity.startRecur,
-                        endRecur = entity.endRecur,
                         ThirdPartyWebsite = entity.ThirdPartyWebsite,
                         color = entity.City,
                     };
@@ -151,10 +144,7 @@ namespace LocalSpirits.Services
                         city = entity.Business.City.Name,
                         state = entity.Business.City.State,
                         start = entity.start,
-                        end = entity.end,
-                        daysOfWeek = entity.DaysOfWeekInput,
-                        startRecur = entity.startRecur,
-                        endRecur = entity.endRecur,
+                        end = entity.end,                     
                         ThirdPartyWebsite = entity.ThirdPartyWebsite,
                         color = entity.City,
                     };
@@ -180,9 +170,6 @@ namespace LocalSpirits.Services
                         state = entity.Business.City.State,
                         start = entity.start,
                         end = entity.end,
-                        daysOfWeek = entity.DaysOfWeekInput,
-                        startRecur = entity.startRecur,
-                        endRecur = entity.endRecur,
                         ThirdPartyWebsite = entity.ThirdPartyWebsite,
                         color = entity.City,
                     };
@@ -207,11 +194,8 @@ namespace LocalSpirits.Services
                 entity.BusinessID = foundBusiness.ID;
                 entity.City = model.City;
                 entity.start = model.Start;
-                entity.end = model.End;
-                entity.daysOfWeek = model.DaysOfWeekConverted;
-                entity.startRecur = model.StartRecur;
-                entity.endRecur = model.EndRecur;
-                entity.url = model.Url;
+                entity.end = model.Start;
+                entity.ThirdPartyWebsite = model.ThirdPartyWebsite;
                 entity.color = model.Color;
 
                 try

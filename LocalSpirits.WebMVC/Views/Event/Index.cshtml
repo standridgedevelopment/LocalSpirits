@@ -7,9 +7,10 @@
 <h2>Create New Event</h2>
 <div class="containter my-5">
         <h4 class="text-dark front-eight-bold mb-3">Is this a One-Time or a Recurring event?</h4>
-    <p>
-        @Html.ActionLink("One-Time Event", "CreateOne", new { id = Model.ID })
-    </p>
+        <p>
+            @Html.ActionLink("One-Time Event", "CreateOne", new { id = Model.ID })
+
+        </p>
     <p>
         @Html.ActionLink("Recurring Event", "CreateRecurring", new { id = Model.ID })
     </p>

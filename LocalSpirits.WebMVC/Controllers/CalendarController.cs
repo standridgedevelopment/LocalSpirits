@@ -43,20 +43,6 @@ namespace LocalSpirits.WebMVC.Controllers
 
                         });
                     }
-                    if (cEvent.startRecur != null)
-                    {
-                        events.Add(new Event()
-                        {
-                            id = cEvent.id,
-                            title = $"{cEvent.TypeOfEvent} at {cEvent.Business.Name}, {cEvent.City}",
-                            startRecur = cEvent.startRecur,
-                            endRecur = cEvent.endRecur,
-                            daysOfWeek = cEvent.DaysOfWeekConverted.ToArray(),
-                            color = cEvent.color,
-                            //startRecur = $"2020-11-22",
-
-                        });
-                    }
                 }  
             }
             return Json(events.ToArray(), JsonRequestBehavior.AllowGet);
@@ -83,20 +69,20 @@ namespace LocalSpirits.WebMVC.Controllers
 
                     });
                 }
-                if (cEvent.startRecur != null)
-                {
-                    events.Add(new Event()
-                    {
-                        id = cEvent.id,
-                        title = $"{cEvent.TypeOfEvent} at {cEvent.Business.Name}, {cEvent.City}",
-                        startRecur = cEvent.startRecur,
-                        endRecur = cEvent.endRecur,
-                        daysOfWeek = cEvent.DaysOfWeekConverted.ToArray(),
-                        color = cEvent.color,
-                        //startRecur = $"2020-11-22",
+                //if (cEvent.startRecur != null)
+                //{
+                //    events.Add(new Event()
+                //    {
+                //        id = cEvent.id,
+                //        title = $"{cEvent.TypeOfEvent} at {cEvent.Business.Name}, {cEvent.City}",
+                //        startRecur = cEvent.startRecur,
+                //        endRecur = cEvent.endRecur,
+                //        daysOfWeek = cEvent.DaysOfWeekConverted.ToArray(),
+                //        color = cEvent.color,
+                //        //startRecur = $"2020-11-22",
 
-                    });
-                }
+                //    });
+                //}
             }
 
             return Json(events.ToArray(), JsonRequestBehavior.AllowGet);
@@ -122,19 +108,19 @@ namespace LocalSpirits.WebMVC.Controllers
 
                         });
                     }
-                    if (cEvent.startRecur != "--")
-                    {
-                        events.Add(new Event()
-                        {
-                            id = cEvent.id,
-                            title = $"{cEvent.TypeOfEvent} at {cEvent.Business.Name}, {cEvent.City}",
-                            startRecur = cEvent.startRecur,
-                            endRecur = cEvent.endRecur,
-                            daysOfWeek = cEvent.daysOfWeek,
-                            color = cEvent.color,
+                    //if (cEvent.startRecur != "--")
+                    //{
+                    //    events.Add(new Event()
+                    //    {
+                    //        id = cEvent.id,
+                    //        title = $"{cEvent.TypeOfEvent} at {cEvent.Business.Name}, {cEvent.City}",
+                    //        startRecur = cEvent.startRecur,
+                    //        endRecur = cEvent.endRecur,
+                    //        daysOfWeek = cEvent.daysOfWeek,
+                    //        color = cEvent.color,
 
-                        });
-                    }
+                    //    });
+                    //}
                 }
             return Json(events.ToArray(), JsonRequestBehavior.AllowGet);
         }
@@ -159,19 +145,19 @@ namespace LocalSpirits.WebMVC.Controllers
 
                     });
                 }
-                if (cEvent.startRecur != "--")
-                {
-                    events.Add(new Event()
-                    {
-                        id = cEvent.id,
-                        title = $"{cEvent.TypeOfEvent} at {cEvent.Business.Name}, {cEvent.City}",
-                        startRecur = cEvent.startRecur,
-                        endRecur = cEvent.endRecur,
-                        daysOfWeek = cEvent.daysOfWeek,
-                        color = cEvent.color,
+                //if (cEvent.startRecur != "--")
+                //{
+                //    events.Add(new Event()
+                //    {
+                //        id = cEvent.id,
+                //        title = $"{cEvent.TypeOfEvent} at {cEvent.Business.Name}, {cEvent.City}",
+                //        startRecur = cEvent.startRecur,
+                //        endRecur = cEvent.endRecur,
+                //        daysOfWeek = cEvent.daysOfWeek,
+                //        color = cEvent.color,
 
-                    });
-                }
+                //    });
+                //}
             }
             return Json(events.ToArray(), JsonRequestBehavior.AllowGet);
         }

@@ -20,59 +20,64 @@ namespace LocalSpirits.Models.Event
             get => $"{StartYear}-{StartMonth}-{StartDay}";
             set { }
         }
-        public string End
-        {
-            get => $"{EndYear}-{EndMonth}-{EndDay}";
-            set { }
-        }
-        public string DaysOfWeek { 
-            get 
-            {
-                StringBuilder fullDays = new StringBuilder();
-                if (Sunday == true) fullDays.Append("Sunday");
-                if (Monday == true) fullDays.Append("Monday");
-                if (Tuesday == true) fullDays.Append("Tuesday");
-                if (Wednesday == true) fullDays.Append("Wednesday");
-                if (Thursday == true) fullDays.Append("Thursday");
-                if (Friday == true) fullDays.Append("Friday");
-                if (Saturday == true) fullDays.Append("Saturday");
-                return $"{fullDays}";
-            }
-        }
-        public string StartRecur
-        {
-            get => $"{StartRecurYear}-{StartRecurMonth}-{StartRecurDay}";
-            set { }
-        }
-        public string EndRecur
-        {
-            get => $"{EndRecurYear}-{EndRecurMonth}-{EndRecurDay}";
-            set { }
-        }
-
+        public string Description { get; set; }
+        [DisplayName("Day")]
         public string StartDay { get; set; }
+        [DisplayName("Month")]
         public string StartMonth { get; set; }
+        [DisplayName("Year")]
         public string StartYear { get; set; }
-        public string EndDay { get; set; }
-        public string EndMonth { get; set; }
-        public string EndYear { get; set; }
+        //public string End
+        //{
+        //    get => $"{EndYear}-{EndMonth}-{EndDay}";
+        //    set { }
+        //}
+       
+        //public string EndDay { get; set; }
+        //public string EndMonth { get; set; }
+        //public string EndYear { get; set; }
+        //public string DaysOfWeek { 
+        //    get 
+        //    {
+        //        StringBuilder fullDays = new StringBuilder();
+        //        if (Sunday == true) fullDays.Append("Sunday");
+        //        if (Monday == true) fullDays.Append("Monday");
+        //        if (Tuesday == true) fullDays.Append("Tuesday");
+        //        if (Wednesday == true) fullDays.Append("Wednesday");
+        //        if (Thursday == true) fullDays.Append("Thursday");
+        //        if (Friday == true) fullDays.Append("Friday");
+        //        if (Saturday == true) fullDays.Append("Saturday");
+        //        return $"{fullDays}";
+        //    }
+        //}
+        //public string StartRecur
+        //{
+        //    get => $"{StartRecurYear}-{StartRecurMonth}-{StartRecurDay}";
+        //    set { }
+        //}
+        //public string EndRecur
+        //{
+        //    get => $"{EndRecurYear}-{EndRecurMonth}-{EndRecurDay}";
+        //    set { }
+        //}
 
-        public string StartRecurDay { get; set; }
-        public string StartRecurMonth { get; set; }
-        public string StartRecurYear { get; set; }
-        public string EndRecurDay { get; set; }
-        public string EndRecurMonth { get; set; }
-        public string EndRecurYear { get; set; }
 
-        public bool Sunday { get; set; }
-        public bool Monday { get; set; }
-        public bool Tuesday { get; set; }
-        public bool Wednesday { get; set; }
-        public bool Thursday { get; set; }
-        public bool Friday { get; set; }
-        public bool Saturday { get; set; }
+        //public string StartRecurDay { get; set; }
+        //public string StartRecurMonth { get; set; }
+        //public string StartRecurYear { get; set; }
+        //public string EndRecurDay { get; set; }
+        //public string EndRecurMonth { get; set; }
+        //public string EndRecurYear { get; set; }
 
+        //public bool Sunday { get; set; }
+        //public bool Monday { get; set; }
+        //public bool Tuesday { get; set; }
+        //public bool Wednesday { get; set; }
+        //public bool Thursday { get; set; }
+        //public bool Friday { get; set; }
+        //public bool Saturday { get; set; }
 
+        [DisplayName("Website")]
         public string Url { get; set; }
         public string Color
         {
@@ -85,28 +90,28 @@ namespace LocalSpirits.Models.Event
             }
             set { }
         }
-        public List<int> DaysOfWeekConverted
-        {
-            get
-            {
-                List<int> converted = new List<int>();
-                if (DaysOfWeek != null)
-                {
-                    if (DaysOfWeek.ToLower().Contains("monday")) converted.Add(0);
-                    if (DaysOfWeek.ToLower().Contains("tuesday")) converted.Add(1);
-                    if (DaysOfWeek.ToLower().Contains("wednesday")) converted.Add(2);
-                    if (DaysOfWeek.ToLower().Contains("thursday")) converted.Add(3);
-                    if (DaysOfWeek.ToLower().Contains("friday")) converted.Add(4);
-                    if (DaysOfWeek.ToLower().Contains("saturday")) converted.Add(5);
-                    if (DaysOfWeek.ToLower().Contains("sunday")) converted.Add(6);
-                }
+        //public List<int> DaysOfWeekConverted
+        //{
+        //    get
+        //    {
+        //        List<int> converted = new List<int>();
+        //        if (DaysOfWeek != null)
+        //        {
+        //            if (DaysOfWeek.ToLower().Contains("monday")) converted.Add(0);
+        //            if (DaysOfWeek.ToLower().Contains("tuesday")) converted.Add(1);
+        //            if (DaysOfWeek.ToLower().Contains("wednesday")) converted.Add(2);
+        //            if (DaysOfWeek.ToLower().Contains("thursday")) converted.Add(3);
+        //            if (DaysOfWeek.ToLower().Contains("friday")) converted.Add(4);
+        //            if (DaysOfWeek.ToLower().Contains("saturday")) converted.Add(5);
+        //            if (DaysOfWeek.ToLower().Contains("sunday")) converted.Add(6);
+        //        }
                 
              
-                return converted;
-            }
-            set 
-            {
-            }
-        }
+        //        return converted;
+        //    }
+        //    set 
+        //    {
+        //    }
+        //}
     }
 }

@@ -233,10 +233,7 @@ namespace LocalSpirits.Services
                         BusinessID = visit.Event.BusinessID,
                         Business = visit.Event.Business,
                         start = visit.Event.start,
-                        end = visit.Event.end,
-                        daysOfWeek = visit.Event.DaysOfWeekConverted.ToArray(),
-                        startRecur = visit.Event.startRecur,
-                        endRecur = visit.Event.endRecur,
+                        end = visit.Event.end,                     
                         ThirdPartyWebsite = visit.Event.ThirdPartyWebsite,
                         color = visit.Event.color,
                     };

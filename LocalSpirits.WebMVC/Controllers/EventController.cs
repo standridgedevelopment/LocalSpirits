@@ -23,23 +23,16 @@ namespace LocalSpirits.WebMVC.Controllers
         }
 
         // CREATE
-        public ActionResult CreateOne(int id)
+        public ActionResult Create(int id)
         {
             var model = new EventCreate();
             model.BusinessID = id;
-
+            ModelState.Clear();
             return View(model);
         }
-        public ActionResult CreateRecurring(int id)
-        {
-            var model = new EventCreate();
-            model.BusinessID = id;
-            return View(model);
-        }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateOne(int id, EventCreate model)
+        public ActionResult Create(int id, EventCreate model)
         {
             if (!ModelState.IsValid) return View(model);
 
@@ -65,6 +58,14 @@ namespace LocalSpirits.WebMVC.Controllers
 
             return View(model);
         }
+        public ActionResult CreateRecurring(int id)
+        {
+            var model = new EventCreate();
+            model.BusinessID = id;
+            return View(model);
+        }
+
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult CreateRecurring(int id, EventCreate model)
@@ -144,6 +145,49 @@ namespace LocalSpirits.WebMVC.Controllers
             var model = eventService.GetByID(id);
             ModelState.Clear();
 
+            return View(model);
+        }
+        public ActionResult Edit(int id)
+        {
+            var eventService = CreateEventService();
+            var detail = eventService.GetByID(id);
+            var model =
+                new EventEdit
+                {
+                    ID = detail.id,
+                    City = detail.city,
+                    BusinessID = detail.BusinessID,
+                    ThirdPartyWebsite = detail.ThirdPartyWebsite,
+                    Description = detail.Description,
+                    StartDay = detail.StartDay,
+                    StartMonth = detail.StartMonth,
+                    StartYear = detail.StartYear,
+                };
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int id, EventEdit model)
+        {
+            if (!ModelState.IsValid) return View(model);
+
+            if (model.ID != id)
+            {
+                ModelState.AddModelError("", "Id Mismatch");
+                return View(model);
+            }
+
+            var eventService = CreateEventService();
+
+            string result = (eventService.Update(model, id));
+            if (result == "okay")
+            {
+                TempData["SaveResult"] = "Business updated!";
+                return RedirectToAction($"Details/{model.BusinessID}", "Business");
+            }
+           
+            else ModelState.AddModelError("", "Event could not be updated.");
             return View(model);
         }
         private VisitedService CreateVisitedService()

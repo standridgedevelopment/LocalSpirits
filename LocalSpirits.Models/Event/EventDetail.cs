@@ -15,14 +15,13 @@ namespace LocalSpirits.Models.Event
         public string Business { get; set; }
         public string state { get; set; }
         public string city { get; set; }
+        public string Description { get; set; }
         public string start { get; set; }
         public string end { get; set; }
-        public string daysOfWeek { get; set; }
-        public string startRecur { get; set; }
-        public string endRecur { get; set; }
-        public string url { get; set; }
         public string color { get; set; }
         public string ThirdPartyWebsite { get; set; }
-       
+        public string StartDay { get; set; }
+        public string StartMonth { get; set; }
+        public string StartYear { get; set; }
     }
 }
