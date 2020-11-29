@@ -4,7 +4,7 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
+<h2>Update</h2>
 
 
 @using (Html.BeginForm())
@@ -12,7 +12,6 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>BreweryEdit</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.ID)
@@ -77,14 +76,14 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Save" class="btn btn-warning btn-large" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to Business", $"Details/{Model.ID}")
+    @Html.ActionLink("Back", $"Details/{Model.ID}", null, new { @class = "btn btn-warning btn-large" })
 </div>
 
 @section Scripts {

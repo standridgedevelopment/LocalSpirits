@@ -9,7 +9,7 @@ namespace LocalSpirits.Models.Visited
 {
     public class VisitedCreate
     {
-        public int? EventID { get; set; }
+        public int EventID { get; set; }
         public int? BusinessID { get; set; }
         [Range(1, 5)]
         public int Rating { get; set; }

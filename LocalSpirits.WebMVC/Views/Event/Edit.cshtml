@@ -16,6 +16,9 @@
                 <hr />
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 @Html.HiddenFor(model => model.BusinessID)
+                @Html.HiddenFor(model => model.ID)
+                @Html.HiddenFor(model => model.City)
+
                 <div class="form-group">
                     <div class="col-xs-2 col-sm-6 col-md-2">
                         @Html.LabelFor(model => model.TypeOfEvent, htmlAttributes: new { @class = "control-label" })
@@ -80,7 +83,7 @@
 
                 <div class="form-group">
                     <div class="col-md-10">
-                        <input type="submit" value="Create" class="btn btn-warning btn-large" />
+                        <input type="submit" value="Update" class="btn btn-warning btn-large" />
                     </div>
                 </div>
             </div>

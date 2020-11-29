@@ -138,20 +138,6 @@ namespace LocalSpirits.Services
             }
         }
 
-        public Business GetByNameAndCity(string name, string city)
-        {
-            var business = new Business();
-            using (var ctx = new ApplicationDbContext())
-            {
-                try
-                {
-                    business = ctx.Businesses.Single(e => e.Name.Contains(name) && e.City.Name == city);
-
-                }
-                catch { return null; }
-                return business;
-            }
-        }
 
         public List<BusinessListItem> GetByCityName(string cityName, string stateName)
         {

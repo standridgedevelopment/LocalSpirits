@@ -264,6 +264,25 @@ namespace LocalSpirits.Services
                 return true;
             }
         }
+        public bool CreateBusinessFeedItem(ActivityFeedCreate model)
+        {
+            var entity = new ActivityFeed()
+            {
+                BusinessID = model.BusinessID,
+                Activity = $"{model.Activity}",
+                ObjectID = model.ObjectID,
+                ObjectType = model.ObjectType,
+                Content = model.Content,
+                Created = DateTimeOffset.Now,
+            };
+
+            using (var ctx = new ApplicationDbContext())
+            {
+                ctx.ActivityFeed.Add(entity);
+                ctx.SaveChanges();
+                return true;
+            }
+        }
 
         public bool RemoveFeedItem(ActivityFeedCreate model)
         {
@@ -272,6 +291,22 @@ namespace LocalSpirits.Services
             {
                 var entity = ctx.ActivityFeed.Single(e => e.UserID == _userId && e.Content == model.Content);
                 ctx.ActivityFeed.Remove(entity);
+                ctx.SaveChanges();
+                return true;
+            }
+
+        }
+        public bool RemoveBusinessFeedItem(ActivityFeedCreate model)
+        {
+
+            using (var ctx = new ApplicationDbContext())
+            {
+                var EventFeedItem = ctx.ActivityFeed.Where(e => e.ObjectType == model.ObjectType && e.ObjectID == model.ObjectID).ToList();
+                foreach (var item in EventFeedItem)
+                {
+                    ctx.ActivityFeed.Remove(item);
+                }
+                
                 ctx.SaveChanges();
                 return true;
             }
@@ -307,6 +342,8 @@ namespace LocalSpirits.Services
                                         ObjectID = activity.ObjectID,
                                         ObjectType = activity.ObjectType,
                                         Created = activity.Created,
+                                        BusinessID = activity.BusinessID,
+
                                     };
                                     activityFeed.Add(activityItem);
                                 }
@@ -330,6 +367,7 @@ namespace LocalSpirits.Services
                                         ObjectID = activity.ObjectID,
                                         ObjectType = activity.ObjectType,
                                         Created = activity.Created,
+                                        BusinessID = activity.BusinessID,
                                     };
                                     activityFeed.Add(activityItem);
                                 }
@@ -363,6 +401,7 @@ namespace LocalSpirits.Services
                         ObjectID = activity.ObjectID,
                         ObjectType = activity.ObjectType,
                         Created = activity.Created,
+                        BusinessID = activity.BusinessID,
                     };
                     activityFeed.Add(activityItem);
                 }

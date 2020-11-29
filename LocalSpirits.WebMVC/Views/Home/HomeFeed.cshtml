@@ -40,7 +40,7 @@
     }
     @if (item.Activity == "NewEvent")
     {
-        <div class="panel-heading">@Html.ActionLink($"{item.Name}", "Index", "Profile", new { id = item.Username }, new { @class = "my-class" })</div>
+        <div class="panel-heading">@Html.ActionLink($"{item.Name}", "Details", "Business", new { id = item.BusinessID }, new { @class = "my-class" })</div>
 
         <div class="panel-body">
             Added

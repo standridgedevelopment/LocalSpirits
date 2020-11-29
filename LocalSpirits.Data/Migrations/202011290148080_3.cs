@@ -7,10 +7,12 @@ namespace LocalSpirits.Data.Migrations
     {
         public override void Up()
         {
+            AddColumn("dbo.Event", "description", c => c.String());
         }
         
         public override void Down()
         {
+            DropColumn("dbo.Event", "description");
         }
     }
 }

@@ -31,7 +31,8 @@ namespace LocalSpirits.Services
                 start = model.Start,
                 end = model.Start,
                 ThirdPartyWebsite = model.Url,
-                color = model.Color
+                color = model.Color,
+                description = model.Description,
             };
 
             using (var ctx = new ApplicationDbContext())
@@ -70,6 +71,7 @@ namespace LocalSpirits.Services
                         StartMonth = entity.StartMonth,
                         StartYear = entity.StartYear,
                         color = entity.City,
+                        Description = entity.description,
                     };
                 }
                 catch { }
@@ -180,21 +182,18 @@ namespace LocalSpirits.Services
         }
         public string Update(EventEdit model, int id)
         {
-            var service = new BusinessService();
-            var foundBusiness = service.GetByNameAndCity(model.BusinessName, model.City);
-
-            if (foundBusiness == null) return "invalid city";
-
             using (var ctx = new ApplicationDbContext())
             {
                 var entity = ctx.Events.Single(e => e.id == id);
 
                 entity.id = model.ID;
-                entity.title = model.Title;
-                entity.BusinessID = foundBusiness.ID;
+                entity.BusinessID = model.BusinessID;
                 entity.City = model.City;
                 entity.start = model.Start;
                 entity.end = model.Start;
+                entity.StartDay = model.StartDay;
+                entity.StartMonth = model.StartMonth;
+                entity.StartYear = model.StartYear;
                 entity.ThirdPartyWebsite = model.ThirdPartyWebsite;
                 entity.color = model.Color;
 

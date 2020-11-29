@@ -64,9 +64,17 @@
     <Compile Include="FriendRequest.cs" />
     <Compile Include="IdentityModels.cs" />
     <Compile Include="Like.cs" />
-    <Compile Include="Migrations\202011290136078_3.cs" />
-    <Compile Include="Migrations\202011290136078_3.Designer.cs">
-      <DependentUpon>202011290136078_3.cs</DependentUpon>
+    <Compile Include="Migrations\202011290141342_2.cs" />
+    <Compile Include="Migrations\202011290141342_2.Designer.cs">
+      <DependentUpon>202011290141342_2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011290148080_3.cs" />
+    <Compile Include="Migrations\202011290148080_3.Designer.cs">
+      <DependentUpon>202011290148080_3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011290233059_4.cs" />
+    <Compile Include="Migrations\202011290233059_4.Designer.cs">
+      <DependentUpon>202011290233059_4.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -79,8 +87,14 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202011290136078_3.resx">
-      <DependentUpon>202011290136078_3.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202011290141342_2.resx">
+      <DependentUpon>202011290141342_2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011290148080_3.resx">
+      <DependentUpon>202011290148080_3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011290233059_4.resx">
+      <DependentUpon>202011290233059_4.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

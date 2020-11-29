@@ -62,7 +62,7 @@ namespace LocalSpirits.WebMVC.Controllers
                 model.FollowByUser = true;
             }
 
-            if (visit.Rating > 1 && visit != null)
+            if (visit.Rating >= 1 && visit != null)
             {
                 model.ReviewFromUser = true;
             }
@@ -139,6 +139,7 @@ namespace LocalSpirits.WebMVC.Controllers
             {
                 var newVisit = new VisitedCreate();
                 newVisit.BusinessID = id;
+                newVisit.EventID = 7;
                 visitedService.CreateVisit(newVisit);
                 var model = new VisitedDetail();
                 model.BusinessID = id;
@@ -212,7 +213,6 @@ namespace LocalSpirits.WebMVC.Controllers
             activityFeedItem.Content = $"{thisBusiness.Name}, {thisBusiness.City}";
             activityFeedItem.ObjectID = thisBusiness.ID;
             activityFeedItem.ObjectType = "Business";
-            activityFeedItem.BusinessID = id;
 
 
             if (checkFollowing == true)

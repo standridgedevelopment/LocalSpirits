@@ -49,7 +49,7 @@ namespace LocalSpirits.WebMVC.Controllers
                 activityFeedItem.BusinessID = model.BusinessID;
                 activityFeedItem.ObjectID = newEvent.id;
                 activityFeedItem.ObjectType = "Event";
-                profileService.CreateFeedItem(activityFeedItem);
+                profileService.CreateBusinessFeedItem(activityFeedItem);
 
                 TempData["SaveResult"] = "Event was created.";
                 return RedirectToAction($"Details/{model.BusinessID}", "Business");
@@ -163,6 +163,7 @@ namespace LocalSpirits.WebMVC.Controllers
                     StartMonth = detail.StartMonth,
                     StartYear = detail.StartYear,
                 };
+            ModelState.Clear();
             return View(model);
         }
 
@@ -172,23 +173,44 @@ namespace LocalSpirits.WebMVC.Controllers
         {
             if (!ModelState.IsValid) return View(model);
 
-            if (model.ID != id)
-            {
-                ModelState.AddModelError("", "Id Mismatch");
-                return View(model);
-            }
-
             var eventService = CreateEventService();
 
             string result = (eventService.Update(model, id));
-            if (result == "okay")
+            if (result == "Okay")
             {
-                TempData["SaveResult"] = "Business updated!";
+                TempData["SaveResult"] = "Event updated!";
                 return RedirectToAction($"Details/{model.BusinessID}", "Business");
             }
            
             else ModelState.AddModelError("", "Event could not be updated.");
             return View(model);
+        }
+        public ActionResult Delete(int id)
+        {
+            var eventService = CreateEventService();
+            var model = eventService.GetByID(id);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteEvent(int id)
+        {
+            var eventService = CreateEventService();
+            var profileService = CreateProfileService();
+            var deleteFeedItem = new ActivityFeedCreate();
+
+            var deletedEvent = eventService.GetByID(id);
+            deleteFeedItem.ObjectType = "Event";
+            deleteFeedItem.ObjectID = deletedEvent.id;
+            eventService.Delete(id);
+            profileService.RemoveBusinessFeedItem(deleteFeedItem);
+
+            TempData["SaveResult"] = "Event was deleted";
+
+            return RedirectToAction($"Details/{deletedEvent.BusinessID}", "Business");
         }
         private VisitedService CreateVisitedService()
         {

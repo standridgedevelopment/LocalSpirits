@@ -12,20 +12,10 @@ namespace LocalSpirits.Models.Event
     public class EventEdit
     {
         public int ID { get; set; }
-        public string Title
-        {
-            get
-            {
-                return $"{TypeOfEvent} at {BusinessName}, {City}";
-            }
-            set { }
-        }
         [Required]
         [DisplayName("Type of Event")]
         public TypeOfEvent TypeOfEvent { get; set; }
-        [Required]
-        [DisplayName("Name of Business")]
-        public string BusinessName { get; set; }
+       
         public int BusinessID { get; set; }
         [Required]
         public string City { get; set; }
