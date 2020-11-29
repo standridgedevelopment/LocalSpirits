@@ -39,10 +39,10 @@ namespace LocalSpirits.Data
         public int ZipCode { get; set; }
 
 
-        public virtual List<Visited> AllVisits { get; set; } = new List<Visited>();
-        public virtual List<Friend> FriendsList { get; set; } = new List<Friend>();
-        public virtual List<FriendRequest> FriendRequests { get; set; } = new List<FriendRequest>();
-        public virtual List<ActivityFeed> Feed { get; set; } = new List<ActivityFeed>();
+        public virtual ICollection<Visited> AllVisits { get; set; } = new List<Visited>();
+        public virtual ICollection<Friend> FriendsList { get; set; } = new List<Friend>();
+        public virtual ICollection<FriendRequest> FriendRequests { get; set; } = new List<FriendRequest>();
+        public virtual ICollection<ActivityFeed> Feed { get; set; } = new List<ActivityFeed>();
 
 
 

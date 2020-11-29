@@ -17,16 +17,29 @@ namespace LocalSpirits.Models.Event
         public int BusinessID { get; set; }
         public string Start
         {
-            get => $"{StartYear}-{StartMonth}-{StartDay}";
+            get 
+            {
+                return $"{StartYear}-{StartMonthToString}-{StartDayToString}";
+            } 
+            set { }
+        }
+        public string StartMonthToString
+        {
+            get => StartMonth.ToString("00");
+            set { }
+        }
+        public string StartDayToString
+        {
+            get => StartDay.ToString("00");
             set { }
         }
         public string Description { get; set; }
         [DisplayName("Day")]
-        public string StartDay { get; set; }
+        public int StartDay { get; set; }
         [DisplayName("Month")]
-        public string StartMonth { get; set; }
+        public int StartMonth { get; set; }
         [DisplayName("Year")]
-        public string StartYear { get; set; }
+        public int StartYear { get; set; }
         //public string End
         //{
         //    get => $"{EndYear}-{EndMonth}-{EndDay}";

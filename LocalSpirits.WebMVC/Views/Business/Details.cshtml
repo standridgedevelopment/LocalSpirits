@@ -183,6 +183,13 @@
 
     <div class="row">
         <section class="col-md-8 col-md-push-0">
+            <div>
+                @Html.ActionLink("All Events", $"Details/{Model.ID}", new { eventType = "" }, new { @class = "btn btn-warning btn-xs" })
+                @Html.ActionLink("Karaoke", $"Details/{Model.ID}", new { eventType = "Karaoke" }, new { @class = "btn btn-success btn-xs" })
+                @Html.ActionLink("Trivia", $"Details/{Model.ID}", new { eventType = "Trivia" }, new { @class = "btn btn-danger btn-xs" })
+                @Html.ActionLink("Live Music", $"Details/{Model.ID}", new { eventType = "Music" }, new { @class = "btn btn-primary btn-xs" })
+
+            </div>
             @Html.Partial("_CalendarPartialBusiness")
         </section>
     </div>

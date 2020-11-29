@@ -12,11 +12,11 @@
     </h2>
 
     <div>
-        @Html.ActionLink("View All", $"Details/{item.CityID}/", new { type = "" }, new { @class = "btn btn-warning btn-large" })
-        @Html.ActionLink("View Breweries", $"Details/{item.CityID}/", new { type = "Brewery" }, new { @class = "btn btn-warning btn-large" })
-        @Html.ActionLink("View Distillaries", $"Details/{item.CityID}", new { type = "Distillery" }, new { @class = "btn btn-warning btn-large" })
-        @Html.ActionLink("View Wineries", $"Details/{item.CityID}", new { type = "Winery" }, new { @class = "btn btn-warning btn-large" })
-        @Html.ActionLink("View Bars", $"Details/{item.CityID}", new { type = "Bar" }, new { @class = "btn btn-warning btn-large" })
+        @Html.ActionLink("All", $"Details/{item.CityID}/", new { type = "" }, new { @class = "btn btn-warning btn-xs" })
+        @Html.ActionLink("Breweries", $"Details/{item.CityID}/", new { type = "Brewery" }, new { @class = "btn btn-warning btn-xs" })
+        @Html.ActionLink("Distillaries", $"Details/{item.CityID}", new { type = "Distillery" }, new { @class = "btn btn-warning btn-xs" })
+        @Html.ActionLink("Wineries", $"Details/{item.CityID}", new { type = "Winery" }, new { @class = "btn btn-warning btn-xs" })
+        @Html.ActionLink("Bars", $"Details/{item.CityID}", new { type = "Bar" }, new { @class = "btn btn-warning btn-xs" })
 
     </div>
     break;
@@ -131,44 +131,20 @@
         </div>
     }
     <div class="row">
-        <section class="col-md-8 col-md-push-0">
+        <section class="col-md-8">
+            @foreach (var item in Model)
+            {
+            <div>
+                @Html.ActionLink("All Events", $"Details/{item.CityID}", new { eventType = "" }, new { @class = "btn btn-warning btn-xs" })
+                @Html.ActionLink("Karaoke", $"Details/{item.CityID}", new { eventType = "Karaoke" }, new { @class = "btn btn-success btn-xs" })
+                @Html.ActionLink("Trivia", $"Details/{item.CityID}", new { eventType = "Trivia" }, new { @class = "btn btn-danger btn-xs" })
+                @Html.ActionLink("Live Music", $"Details/{item.CityID}", new { eventType = "Music" }, new { @class = "btn btn-primary btn-xs" })
+                
+            </div>
+            break;
+            }
             @Html.Partial("_CalendarPartial")
         </section>
     </div>
 }
-<script type="text/javascript">
 
-
-    $(function () {
-        $("img.rating").mouseover(function () {
-            giveRating($(this), "FilledStar.png");
-            $(this).css("cursor", "pointer");
-        });
-        $("img.rating").mouseout(function () {
-            giveRating($(this), "EmptyStar.png");
-            refilRating($(this));
-        });
-
-        $("img.rating").click(function (e) {
-            // $("img.rating").unbind("mouseout mouseover click");
-            $(this).css('color', 'red');
-            // alert(e.currentTarget + ' was clicked!');
-            // call ajax methods to update database
-            var url = "/Movies/PostRating?rating=" + parseInt($(this).attr("id")) + "&mid=" + parseInt($(this).attr("mid"));
-            $.post(url, null, function (data) {
-                $(e.currentTarget).closest('tr').find('div.result').text(data).css('color', 'red') // $("#result").text(data);
-            });
-        });
-    });
-
-    function giveRating(img, image) {
-        img.attr("src", "/assets/img/" + image)
-            .prevAll("img.rating").attr("src", "/assets/img" + image);
-    }
-    function refilRating(img1) {
-        var rt = $(img1).closest('tr').find("span.avr").text();
-        var img = $(img1).closest('tr').find("img[id='" + parseInt(rt) + "']");
-        img.attr("src", "assets/img/FilledStar.png").prevAll("img.rating").attr("src", "assets/img/FilledStar.png");
-    }
-
-</script>

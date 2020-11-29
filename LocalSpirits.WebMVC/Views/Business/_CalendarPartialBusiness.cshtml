@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@model LocalSpirits.Models.Business.BusinessDetail
+
+<!DOCTYPE html>
 <html lang='en'>
 <head>
     <meta charset='utf-8' />
@@ -46,7 +48,7 @@
                 selectable: true,
                 businessHours: true,
                 dayMaxEvents: true, // allow "more" link when too many events
-                events: '@Url.RouteUrl(new{ action="GetBusinessEvents", controller="Calendar", id = Model.ID })'
+                events: '@Url.RouteUrl(new{ action=$"GetBusinessEvents/{Model.ID}", controller="Calendar", eventType = Model.EventFilter })'
 
             });
             calendar.render();

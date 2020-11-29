@@ -19,7 +19,7 @@ namespace LocalSpirits.Data
         public int? BusinessID { get; set; }
         public virtual Business Business { get; set; }
         [ForeignKey(nameof(Event))]
-        public int EventID { get; set; }
+        public int? EventID { get; set; }
         public virtual Event Event { get; set; }
         public bool AddToFavorites { get; set; }
         public bool AddToCalendar { get; set; }

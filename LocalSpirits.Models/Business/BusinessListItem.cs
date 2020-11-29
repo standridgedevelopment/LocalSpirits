@@ -15,6 +15,8 @@ namespace LocalSpirits.Models.Business
         [DisplayName("Business Name")]
         public string Name { get; set; }
         public int Rating { get; set; }
+        public string BusinessFilter { get; set; }
+        public string EventFilter { get; set; }
         public string City { get; set; }
         public int? CityID { get; set; }
         public string State { get; set; }

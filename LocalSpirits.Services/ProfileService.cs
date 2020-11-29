@@ -85,7 +85,7 @@ namespace LocalSpirits.Services
                 {
                     var entity = ctx.Profiles.Single(e => e.ID == _userId);
 
-                    List<Event> events = GetEvents(entity.AllVisits);
+                    ICollection<Event> events = GetEvents(entity.AllVisits);
 
                     return new ProfileDetail
                     {
@@ -145,7 +145,7 @@ namespace LocalSpirits.Services
                 {
                     var entity = ctx.Profiles.Single(e => e.Username.ToLower() == username.ToLower());
 
-                    List<Event> events = GetEvents(entity.AllVisits);
+                    ICollection<Event> events = GetEvents(entity.AllVisits);
 
                     return new ProfileDetail
                     {
@@ -171,7 +171,7 @@ namespace LocalSpirits.Services
                 var Profiles = ctx.Profiles.Where(e => e.FirstName.Contains(name) || e.LastName.Contains(name)).ToList();
                 foreach (var profile in Profiles)
                 {
-                    List<Event> events = GetEvents(profile.AllVisits);
+                    ICollection<Event> events = GetEvents(profile.AllVisits);
                     var found = new ProfileDetail
                     {
                         Username = profile.Username,
@@ -218,7 +218,7 @@ namespace LocalSpirits.Services
                 return ctx.SaveChanges() == 1;
             }
         }
-        public List<Event> GetEvents(List<Visited> AllVisits)
+        public ICollection<Event> GetEvents(ICollection<Visited> AllVisits)
         {
             List<Event> events = new List<Event>();
             foreach (var visit in AllVisits)
@@ -301,12 +301,16 @@ namespace LocalSpirits.Services
 
             using (var ctx = new ApplicationDbContext())
             {
-                var EventFeedItem = ctx.ActivityFeed.Where(e => e.ObjectType == model.ObjectType && e.ObjectID == model.ObjectID).ToList();
-                foreach (var item in EventFeedItem)
+                var eventFeedItems = ctx.ActivityFeed.Where(e => e.ObjectType == model.ObjectType && e.ObjectID == model.ObjectID).ToList();
+                var visitedItems = ctx.Visits.Where(e => e.EventID == model.ObjectID).ToList();
+                foreach (var events in eventFeedItems)
                 {
-                    ctx.ActivityFeed.Remove(item);
+                    ctx.ActivityFeed.Remove(events);
                 }
-                
+                foreach (var visits in visitedItems)
+                {
+                    ctx.Visits.Remove(visits);
+                }
                 ctx.SaveChanges();
                 return true;
             }
@@ -347,6 +351,7 @@ namespace LocalSpirits.Services
                                     };
                                     activityFeed.Add(activityItem);
                                 }
+                                else continue;
                             }
                         }
                         //BusinessProfile
@@ -371,10 +376,12 @@ namespace LocalSpirits.Services
                                     };
                                     activityFeed.Add(activityItem);
                                 }
+                                else continue;
                             }
                         }
 
                     }
+                    activityFeed = activityFeed.OrderByDescending(d => d.Created.DateTime).ToList();
                     return activityFeed;
                 }
                 catch { return activityFeed; }
@@ -408,6 +415,47 @@ namespace LocalSpirits.Services
                 return activityFeed;
             }
 
+        }
+        public Like GetLike(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                try
+                {
+                    var foundLike = ctx.Likes.Single(e => e.ActivityFeedID == id && e.UserID == _userId);
+                    return foundLike;
+                }
+                catch {}
+            return null;
+            }
+        }
+        public bool LikeFeedItem(int id)
+        {
+            var entity = new Like()
+            {
+                UserID = _userId,
+                ActivityFeedID = id,
+                Liked = true,
+                Created = DateTimeOffset.Now,
+            };
+
+            using (var ctx = new ApplicationDbContext())
+            {
+                ctx.Likes.Add(entity);
+                ctx.SaveChanges();
+                return true;
+            }
+        }
+        public bool UnlikeFeedItem(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var foundLike = ctx.Likes.Single(e => e.ActivityFeedID == id && e.UserID == _userId);
+                ctx.Likes.Remove(foundLike);
+                ctx.SaveChanges();
+                return true;
+
+            }
         }
     }
 }

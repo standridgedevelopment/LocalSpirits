@@ -29,8 +29,9 @@
 
             </dl>
         </div>
-        @Html.Action("CheckIfOnCalendar", "Event", new { id = Model.id })
+
     </div>
+    @Html.Action("CheckIfOnCalendar", "Event", new { id = Model.id })
     @Html.ActionLink("Edit", "Edit", new { id = Model.id }, new { @class = "btn btn-warning btn-large" })
     @Html.ActionLink("Delete", "Delete", new { id = Model.id }, new { @class = "btn btn-warning btn-large" })
 </div>

@@ -16,7 +16,7 @@ namespace LocalSpirits.Data
         public Guid? UserID { get; set; }
         public virtual Profile Profile { get; set; }
         [ForeignKey(nameof(ActivityFeed))]
-        public int? FeedID { get; set; }
+        public int? ActivityFeedID { get; set; }
         public virtual ActivityFeed ActivityFeed { get; set; }
         public bool Liked { get; set; }
         public DateTimeOffset Created { get; set; }

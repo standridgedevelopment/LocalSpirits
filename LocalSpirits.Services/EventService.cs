@@ -25,9 +25,9 @@ namespace LocalSpirits.Services
             {
                 TypeOfEvent = $"{model.TypeOfEvent}",
                 BusinessID = model.BusinessID,
-                StartDay = model.StartDay,
-                StartMonth = model.StartMonth,
-                StartYear = model.StartYear,
+                StartDay = model.StartDayToString,
+                StartMonth = model.StartMonthToString,
+                StartYear = "{ model.StartYear }",
                 start = model.Start,
                 end = model.Start,
                 ThirdPartyWebsite = model.Url,

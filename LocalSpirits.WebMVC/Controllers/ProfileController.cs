@@ -97,6 +97,14 @@ namespace LocalSpirits.WebMVC.Controllers
             ModelState.Clear();
             return View("GetFeed", activityFeed);
         }
+        public ActionResult LikeFeedItem(int id)
+        {
+            var profileService = CreateProfileService();
+            var foundLike = profileService.GetLike(id);
+            if (foundLike != null) profileService.UnlikeFeedItem(id);
+            profileService.LikeFeedItem(id);
+            return PartialView("test");
+        }
 
         public ActionResult Edit()
         {

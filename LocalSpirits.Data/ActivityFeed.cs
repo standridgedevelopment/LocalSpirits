@@ -10,7 +10,7 @@ namespace LocalSpirits.Data
 {
     public enum TypeOfActivity
     {
-        Like, AddToCalendar, Comment, Share, Review, NewEvent, Follow,
+        Like, AddToCalendar, Comment, Share, Rating, NewEvent, Follow,
     }
     public class ActivityFeed
     {
@@ -27,7 +27,9 @@ namespace LocalSpirits.Data
         public int ObjectID { get; set; }
         public string ObjectType { get; set; }
         public string Content { get; set; }
+        public bool LikedByUser { get; set; }
         public DateTimeOffset Created { get; set; }
+        public virtual ICollection<Like> Likes { get; set; }
 
     }
 }

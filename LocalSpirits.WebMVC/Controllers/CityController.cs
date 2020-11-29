@@ -92,12 +92,12 @@ namespace LocalSpirits.WebMVC.Controllers
             ModelState.Clear();
             return View(model);
         }
-        public ActionResult Details(int id, string type )
+        public ActionResult Details(int id, string type, string eventType)
         {
             var businessService = new BusinessService();
             var service = CreateCityService();
             var city = service.GetCityByID(id);
-            var model = businessService.GetByCityAndType(id, type);
+            var model = businessService.GetByCityAndType(id, type, eventType);
             if (model.Count() == 0)
             {
                 var baseBusiness = new BusinessListItem();

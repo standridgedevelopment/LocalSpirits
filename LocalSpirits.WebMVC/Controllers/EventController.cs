@@ -41,7 +41,7 @@ namespace LocalSpirits.WebMVC.Controllers
             string result = eventService.Create(model);
             if (result == "okay")
             {
-                var newEvent = eventService.GetByBusinessIDAndStart(model.BusinessID, model.StartDay);
+                var newEvent = eventService.GetByBusinessIDAndStart(model.BusinessID, model.StartDayToString);
 
                 var activityFeedItem = new ActivityFeedCreate();
                 activityFeedItem.Activity = TypeOfActivity.NewEvent;

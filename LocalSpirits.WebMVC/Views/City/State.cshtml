@@ -13,11 +13,11 @@
         @Html.DisplayFor(modelItem => item.FullState)
     </h2>
     <div>
-        @Html.ActionLink("View All", $"State/{item.State}/", new { type = "" }, new { @class = "btn btn-warning btn-large" })
-        @Html.ActionLink("View Breweries", $"State/{item.State}/", new { type = "Brewery" }, new { @class = "btn btn-warning btn-large" })
-        @Html.ActionLink("View Distillaries", $"State/{item.State}", new { type = "Distillery" }, new { @class = "btn btn-warning btn-large" })
-        @Html.ActionLink("View Wineries", $"State/{item.State}", new { type = "Winery" }, new { @class = "btn btn-warning btn-large" })
-        @Html.ActionLink("View Bars", $"State/{item.State}", new { type = "Bar" }, new { @class = "btn btn-warning btn-large" })
+        @Html.ActionLink("All", $"State/{item.State}/", new { type = "" }, new { @class = "btn btn-warning btn-xs" })
+        @Html.ActionLink("Breweries", $"State/{item.State}/", new { type = "Brewery" }, new { @class = "btn btn-warning btn-xs" })
+        @Html.ActionLink("Distillaries", $"State/{item.State}", new { type = "Distillery" }, new { @class = "btn btn-warning btn-xs" })
+        @Html.ActionLink("Wineries", $"State/{item.State}", new { type = "Winery" }, new { @class = "btn btn-warning btn-xs" })
+        @Html.ActionLink("Bars", $"State/{item.State}", new { type = "Bar" }, new { @class = "btn btn-warning btn-xs" })
 
     </div>
     break;

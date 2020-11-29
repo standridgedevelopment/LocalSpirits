@@ -388,6 +388,7 @@
     <Content Include="Views\Home\Activity.cshtml" />
     <Content Include="Views\Event\Edit.cshtml" />
     <Content Include="Views\Event\Delete.cshtml" />
+    <Content Include="Views\Profile\test.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

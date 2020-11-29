@@ -5,51 +5,196 @@
 }
 
 <h2>Home</h2>
+<script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")" type="text/javascript"></script>
+<script src="//code.jquery.com/jquery-2.1.1.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+    $(function () {
 
+        alert('jQuery Load.If this message box shows it means jQuery is correctly referenced and can be used on this page');
+        $(document).ready(function () {
+            $("like").click(function () {
+                // Change text of button element 
+                $("#Geeks").html("Html Click");
+            });
+        }); 
+      
+    });
+</script>
 
 
 @foreach (var item in Model)
 {
-<div class="panel panel-warning" style="width: 25rem;">
 
-    @if (item.Activity == "Like")
-    {
-        <div class="panel-heading">@Html.ActionLink($"{item.Name}", "Index", "Profile", new { id = item.Username }, new { @class = "my-class" })</div>
-        <div class="panel-body">
-            Liked
-            @Html.ActionLink($"{item.Content}", $"Details/{item.ObjectID}", $"{item.ObjectType}", new { id = item.ID }, new { @class = "my-class" })
-        </div>
-    }
-    @if (item.Activity == "AddToCalendar")
-    {
-        <div class="panel-heading">@Html.ActionLink($"{item.Name}", "Index", "Profile", new { id = item.Username }, new { @class = "my-class" })</div>
-        <div class="panel-body">
-            Added
-            @Html.ActionLink($"{item.Content}", $"Details", $"{item.ObjectType}", new { id = item.ObjectID }, new { @class = "my-class" })
-            to their calendar.
-        </div>
-    }
-    @if (item.Activity == "Follow")
-    {
-        <div class="panel-heading">@Html.ActionLink($"{item.Name}", "Index", "Profile", new { id = item.Username}, new { @class = "my-class" })</div>
 
-        <div class="panel-body">
-            Followed
-            @Html.ActionLink($"{item.Content}", $"Details", $"{item.ObjectType}", new { id = item.ObjectID }, new { @class = "my-class" })
-        </div>
-    }
-    @if (item.Activity == "NewEvent")
+    if (item.Activity == "Like")
     {
-        <div class="panel-heading">@Html.ActionLink($"{item.Name}", "Details", "Business", new { id = item.BusinessID }, new { @class = "my-class" })</div>
-
-        <div class="panel-body">
-            Added
-            @Html.ActionLink($"{item.Content}", $"Details", $"{item.ObjectType}", new { id = item.ObjectID }, new { @class = "my-class" })
+        <div class="panel panel-warning" style="width: 25rem;">
+            <div class="panel-heading">@Html.ActionLink($"{item.Name}", "Index", "Profile", new { id = item.Username }, new { @class = "my-class" })</div>
+            <div class="panel-body">
+                Liked
+                @Html.ActionLink($"{item.Content}", $"Details/{item.ObjectID}", $"{item.ObjectType}", new { id = item.ID }, new { @class = "my-class" })
+            </div>
         </div>
     }
-</div>
+    if (item.Activity == "AddToCalendar")
+    {
+        if (item.Content.Contains("Karaoke"))
+        {
+            <div class="panel panel-success" style="width: 25rem;">
+                <div class="panel-heading">@Html.ActionLink($"{item.Name}", "Index", "Profile", new { id = item.Username }, new { @class = "my-class" })</div>
+                <div class="panel-body">
+                    Added
+                    @Html.ActionLink($"{item.Content}", $"Details", $"{item.ObjectType}", new { id = item.ObjectID }, new { @class = "my-class" })
+                    to their calendar.
+                </div>
+                <div class="panel-footer">
+                    <div class="container">
+                        <div class="col-md-1 my-1">
+                            @Html.ActionLink($"Like", $"LikeFeedItem", $"Profile", new { id = item.ID }, new { @class = "like btn btn-warning btn-xs" })
+
+                        </div>
+
+                        <div class="col-md-1 my-1">
+                            @Html.ActionLink($"Comment", $"Details", $"{item.ObjectType}", new { id = item.ObjectID }, new { @class = "btn btn-warning btn-xs" })
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        }
+        if (item.Content.Contains("Music"))
+        {
+            <div class="panel panel-primary" style="width: 25rem;">
+                <div class="panel-heading">@Html.ActionLink($"{item.Name}", "Index", "Profile", new { id = item.Username }, new { @class = "my-class" })</div>
+                <div class="panel-body">
+                    Added
+                    @Html.ActionLink($"{item.Content}", $"Details", $"{item.ObjectType}", new { id = item.ObjectID }, new { @class = "my-class" })
+                    to their calendar.
+                </div>
+            </div>
+        }
+        if (item.Content.Contains("Trivia"))
+        {
+            <div class="panel panel-danger" style="width: 25rem;">
+                <div class="panel-heading">@Html.ActionLink($"{item.Name}", "Index", "Profile", new { id = item.Username }, new { @class = "my-class" })</div>
+                <div class="panel-body">
+                    Added
+                    @Html.ActionLink($"{item.Content}", $"Details", $"{item.ObjectType}", new { id = item.ObjectID }, new { @class = "my-class" })
+                    to their calendar.
+                </div>
+            </div>
+        }
+    }
+    if (item.Activity == "Follow")
+    {
+
+        <div class="panel panel-warning" style="width: 25rem;">
+            <div class="panel-heading">@Html.ActionLink($"{item.Name}", "Index", "Profile", new { id = item.Username }, new { @class = "my-class" })</div>
+
+            <div class="panel-body">
+                Followed
+                @Html.ActionLink($"{item.Content}", $"Details", $"{item.ObjectType}", new { id = item.ObjectID }, new { @class = "my-class" })
+            </div>
+        </div>
+    }
+    if (item.Activity == "NewEvent")
+    {
+        if (item.Content.Contains("Karaoke"))
+        {
+            <div class="panel panel-success" style="width: 25rem;">
+                <div class="panel-heading">@Html.ActionLink($"{item.Name}", "Details", "Business", new { id = item.BusinessID }, new { @class = "my-class" })</div>
+
+                <div class="panel-body">
+                    Created a new event!
+                    <p>@Html.ActionLink($"{item.Content}", $"Details", $"{item.ObjectType}", new { id = item.ObjectID }, new { @class = "my-class" })</p>
+                </div>
+            </div>
+        }
+        if (item.Content.Contains("Music"))
+        {
+            <div class="panel panel-primary" style="width: 25rem;">
+                <div class="panel-heading">@Html.ActionLink($"{item.Name}", "Details", "Business", new { id = item.BusinessID }, new { @class = "my-class" })</div>
+
+                <div class="panel-body">
+                    Created a new event!
+                    <p>@Html.ActionLink($"{item.Content}", $"Details", $"{item.ObjectType}", new { id = item.ObjectID }, new { @class = "my-class" })</p>
+                </div>
+            </div>
+        }
+        if (item.Content.Contains("Trivia"))
+        {
+            <div class="panel panel-danger" style="width: 25rem;">
+                <div class="panel-heading">@Html.ActionLink($"{item.Name}", "Details", "Business", new { id = item.BusinessID }, new { @class = "my-class" })</div>
+
+                <div class="panel-body">
+                    Created a new event!
+                    <p>@Html.ActionLink($"{item.Content}", $"Details", $"{item.ObjectType}", new { id = item.ObjectID }, new { @class = "my-class" })</p>
+                </div>
+            </div>
+        }
+    }
+    if (item.Activity == "Rating")
+    {
+        <div class="panel panel-warning" style="width: 25rem;">
+            <div class="panel-heading">@Html.ActionLink($"{item.Name}", "Index", "Profile", new { id = item.Username }, new { @class = "my-class" })</div>
+
+            <div class="panel-body">
+
+                Added a
+                @Html.ActionLink($"{item.Content}", $"Details", $"{item.ObjectType}", new { id = item.ObjectID }, new { @class = "my-class" })
+                @if (item.Content.Contains("5"))
+                {<p>
+                        <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                    </p>
+
+                }
+                @if (item.Content.Contains("4"))
+                {<p>
+                        <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                    </p>
+
+                }
+                @if (item.Content.Contains("3"))
+                {<p>
+                        <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                    </p>
+                }
+                @if (item.Content.Contains("2"))
+                {<p>
+                        <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                    </p>
+                }
+                @if (item.Content.Contains("1"))
+                {<p>
+                        <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                    </p>
+                }
+            </div>
+        </div>
+    }
 }
 
+}
 
 
 

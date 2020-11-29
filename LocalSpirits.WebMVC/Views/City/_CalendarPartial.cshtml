@@ -48,7 +48,7 @@
                 selectable: true,
                 businessHours: true,
                 dayMaxEvents: true, // allow "more" link when too many events
-                events: '@Url.RouteUrl(new{ action="GetEvents", controller="Calendar", id = Model.ToList()[0].CityID})'
+                events: '@Url.RouteUrl(new{ action=$"GetCityEvents/{Model.ToList()[0].CityID}", controller="Calendar", type = Model.ToList()[0].BusinessFilter, eventType = Model.ToList()[0].EventFilter })'
             });
             calendar.render();
 

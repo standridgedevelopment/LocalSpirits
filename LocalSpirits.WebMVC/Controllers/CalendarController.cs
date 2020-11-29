@@ -18,12 +18,11 @@ namespace LocalSpirits.WebMVC.Controllers
             return View();
         }
 
-        public JsonResult GetEvents(int id, DateTime start, DateTime end)
+        public JsonResult GetCityEvents(int id, string type, string eventType, DateTime start, DateTime end)
         {
             var businessService = new BusinessService();
             var cityService = new CityService();
-            var city = cityService.GetCityByID(id);
-            var Businessess = businessService.GetByCityName(city.Name, city.State);
+            var Businessess = businessService.GetByCityAndType(id, type, eventType);
             var events = new List<Event>();
 
             foreach (var business in Businessess)
@@ -48,10 +47,10 @@ namespace LocalSpirits.WebMVC.Controllers
             return Json(events.ToArray(), JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult GetBusinessEvents(int id, DateTime start, DateTime end)
+        public JsonResult GetBusinessEvents(int id, string eventType, DateTime start, DateTime end)
         {
             var businessService = new BusinessService();
-            var business = businessService.GetByID(id);
+            var business = businessService.GetByIDAndEventType(id, eventType);
             var events = new List<Event>();
 
             foreach (var cEvent in business.Events)

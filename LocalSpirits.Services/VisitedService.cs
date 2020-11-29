@@ -112,7 +112,7 @@ namespace LocalSpirits.Services
                 return "Update Error";
             }
         }
-        public string UpdateBusinessFollow(VisitedDetail model, int? id)
+        public string UpdateRating(VisitedDetail model, int? id)
         {
             using (var ctx = new ApplicationDbContext())
             {

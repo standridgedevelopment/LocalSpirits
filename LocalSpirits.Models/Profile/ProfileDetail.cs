@@ -28,9 +28,9 @@ namespace LocalSpirits.Models.Profile
         public int ZipCode { get; set; }
 
 
-        public List<Data.Event> Events { get; set; }
-        public List<Friend> FriendsList { get; set; } 
-        public  List<FriendRequest> FriendRequests { get; set; }
-        public virtual List<Data.ActivityFeed> Feed { get; set; } 
+        public ICollection<Data.Event> Events { get; set; }
+        public ICollection<Friend> FriendsList { get; set; } 
+        public ICollection<FriendRequest> FriendRequests { get; set; }
+        public virtual ICollection<Data.ActivityFeed> Feed { get; set; } 
     }
 }

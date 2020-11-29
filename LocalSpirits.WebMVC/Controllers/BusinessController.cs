@@ -46,14 +46,14 @@ namespace LocalSpirits.WebMVC.Controllers
             return View(model);
         }
 
-        public ActionResult Details(int id)
+        public ActionResult Details(int id, string eventType)
         {
             var businessService = CreateBusinessService();
             var visitedService = CreateVisitedService();
             var friendService = CreateFriendsService();
 
             var visit = visitedService.GetVisitByBusinessID(id);
-            var model = businessService.GetByID(id);
+            var model = businessService.GetByIDAndEventType(id, eventType);
             var checkFollowing = friendService.CheckForFollow(id);
 
             ModelState.Clear();
@@ -139,7 +139,6 @@ namespace LocalSpirits.WebMVC.Controllers
             {
                 var newVisit = new VisitedCreate();
                 newVisit.BusinessID = id;
-                newVisit.EventID = 7;
                 visitedService.CreateVisit(newVisit);
                 var model = new VisitedDetail();
                 model.BusinessID = id;
@@ -153,13 +152,23 @@ namespace LocalSpirits.WebMVC.Controllers
         public ActionResult AddRating(int id, VisitedDetail model)
         {
             var visitedService = CreateVisitedService();
+            var profileService = CreateProfileService();
+            var businessService = CreateBusinessService();
+
+            var business = businessService.GetByID((int)model.BusinessID);
+            var newFeedItem = new ActivityFeedCreate();
+            newFeedItem.Activity = TypeOfActivity.Rating;
+            newFeedItem.ObjectType = "Business";
+            newFeedItem.ObjectID = (int)model.BusinessID;
+            newFeedItem.Content = $"{model.Rating}-star rating for {business.Name}";
 
             if (!ModelState.IsValid) return View(model);
 
-            string result = visitedService.UpdateBusinessFollow(model, model.BusinessID);
+            string result = visitedService.UpdateRating(model, model.BusinessID);
             if (result == "Okay")
             {
                 TempData["SaveResult"] = "Rating updated!";
+                profileService.CreateFeedItem(newFeedItem);
                 return RedirectToAction($"Details/{model.BusinessID}");
             }
             else ModelState.AddModelError("", "Business could not be updated.");
