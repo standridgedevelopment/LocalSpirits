@@ -331,8 +331,13 @@ namespace LocalSpirits.Services
                         if (friend.FriendsID != null)
                         {
                             var otherProfile = ctx.Profiles.Single(e => e.ID == friend.FriendsID);
+
+                            //Liked By User??
                             foreach (var activity in otherProfile.Feed)
                             {
+                                bool likedByUser = LikedByUser(activity);
+                                var timePosted = GetFeedPostTime(activity);
+
                                 if ((DateTimeOffset.Now - activity.Created).TotalDays <= 3)
                                 {
                                     var activityItem = new ActivityFeedListItem
@@ -343,10 +348,15 @@ namespace LocalSpirits.Services
                                         Content = activity.Content,
                                         Activity = activity.Activity,
                                         Username = otherProfile.Username,
+                                        UsersFullName = userProfile.FullName,
                                         ObjectID = activity.ObjectID,
                                         ObjectType = activity.ObjectType,
                                         Created = activity.Created,
                                         BusinessID = activity.BusinessID,
+                                        AmountOfLikes = activity.AmountOfLikes,
+                                        LikedByUser = likedByUser,
+                                        WhenPosted = timePosted,
+
 
                                     };
                                     activityFeed.Add(activityItem);
@@ -360,6 +370,9 @@ namespace LocalSpirits.Services
                             var otherProfile = ctx.Businesses.Single(e => e.ID == friend.BusinessID);
                             foreach (var activity in otherProfile.Feed)
                             {
+                                bool likedByUser = LikedByUser(activity);
+                                var timePosted = GetFeedPostTime(activity);
+
                                 if ((DateTimeOffset.Now - activity.Created).TotalDays <= 3 && activity.Activity != "Follow")
                                 {
                                     var activityItem = new ActivityFeedListItem
@@ -371,8 +384,12 @@ namespace LocalSpirits.Services
                                         Activity = activity.Activity,
                                         ObjectID = activity.ObjectID,
                                         ObjectType = activity.ObjectType,
+                                        UsersFullName = userProfile.FullName,
                                         Created = activity.Created,
                                         BusinessID = activity.BusinessID,
+                                        AmountOfLikes = activity.AmountOfLikes,
+                                        LikedByUser = likedByUser,
+                                        WhenPosted = timePosted,
                                     };
                                     activityFeed.Add(activityItem);
                                 }
@@ -397,6 +414,9 @@ namespace LocalSpirits.Services
 
                 foreach (var activity in otherProfile.Feed)
                 {
+                    bool likedByUser = LikedByUser(activity);
+                    var timePosted = GetFeedPostTime(activity);
+
                     var activityItem = new ActivityFeedListItem
                     {
                         ID = activity.ID,
@@ -409,6 +429,9 @@ namespace LocalSpirits.Services
                         ObjectType = activity.ObjectType,
                         Created = activity.Created,
                         BusinessID = activity.BusinessID,
+                        AmountOfLikes = activity.AmountOfLikes,
+                        LikedByUser = likedByUser,
+                        WhenPosted = timePosted,
                     };
                     activityFeed.Add(activityItem);
                 }
@@ -456,6 +479,26 @@ namespace LocalSpirits.Services
                 return true;
 
             }
+        }
+        public bool LikedByUser(ActivityFeed activity)
+        {
+            foreach (var like in activity.Likes)
+            {
+                if (like.UserID == _userId)
+                {
+                    return true;
+                }
+                
+            }
+            return false;
+        }
+        public string GetFeedPostTime(ActivityFeed activity)
+        {
+            var timePosted = DateTimeOffset.Now - activity.Created;
+            if (timePosted.Days > 0) return $"{timePosted.Days}d";
+            if (timePosted.Hours > 0) return $"{timePosted.Hours}h";
+            if (timePosted.Minutes > 0) return $"{timePosted.Minutes}m";
+            return "now";
         }
     }
 }

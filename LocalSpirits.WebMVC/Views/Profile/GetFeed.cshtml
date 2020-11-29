@@ -20,44 +20,549 @@
 
 @foreach (var item in Model)
 {
-    <div class="panel panel-warning" style="width: 25rem;">
 
-        @if (item.Activity == "Like")
-        {
-            <div class="panel-heading">@Html.ActionLink($"{item.Name}", "Index", "Profile", new { id = item.Username }, new { @class = "my-class" })</div>
+
+    if (item.Activity == "Like")
+    {
+        <div class="panel panel-warning" style="width: 25rem;">
+            <div class="panel-heading">
+                @Html.ActionLink($"{item.Name}", "Index", "Profile", new { id = item.Username }, new { @class = "my-class" })
+                <p class="time">@Html.Raw(item.WhenPosted)</p>
+            </div>
             <div class="panel-body">
                 Liked
                 @Html.ActionLink($"{item.Content}", $"Details/{item.ObjectID}", $"{item.ObjectType}", new { id = item.ID }, new { @class = "my-class" })
             </div>
-        }
-        @if (item.Activity == "AddToCalendar")
+        </div>
+    }
+    if (item.Activity == "AddToCalendar")
+    {
+        if (item.Content.Contains("Karaoke"))
         {
-            <div class="panel-heading">@Html.ActionLink($"{item.Name}", "Index", "Profile", new { id = item.Username }, new { @class = "my-class" })</div>
-            <div class="panel-body">
-                Added
-                @Html.ActionLink($"{item.Content}", $"Details", $"{item.ObjectType}", new { id = item.ObjectID }, new { @class = "my-class" })
-                to their calendar.
+            <div class="panel panel-success" style="width: 25rem;">
+                <div class="panel-heading">
+                    @Html.ActionLink($"{item.Name}", "Index", "Profile", new { id = item.Username }, new { @class = "my-class" })
+                    <p class="time">@Html.Raw(item.WhenPosted)</p>
+                </div>
+                <div class="panel-body">
+                    Added
+                    @Html.ActionLink($"{item.Content}", $"Details", $"{item.ObjectType}", new { id = item.ObjectID }, new { @class = "my-class" })
+                    to their calendar.
+                    <br />
+                    <br />
+                    @if (item.AmountOfLikes == 1 && item.LikedByUser == true)
+                    {
+
+                        <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" /> You liked this</p>
+                    }
+                    @if (item.AmountOfLikes == 1 && item.LikedByUser == false)
+                    {
+                        <p><img src="~/assets/img/FilledHeart.png" width="20" height="20" /> 1 person liked this</p>
+                    }
+                    @if (item.AmountOfLikes == 2 && item.LikedByUser == true)
+                    {
+                        <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" />  You and 1 person liked this</p>
+                    }
+                    @if (item.AmountOfLikes > 1 && item.LikedByUser == false)
+                    {
+                        <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" />  @Html.Raw(item.AmountOfLikes) people liked this</p>
+                    }
+                    @if (item.AmountOfLikes > 2 && item.LikedByUser == true)
+                    {
+                        <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" />  You and @Html.Raw(item.AmountOfLikes - 1) people liked this</p>
+                    }
+                </div>
+                <div class="panel-footer">
+                    <div class="container">
+                        <div class="col-md-1 my-1">
+                            @if (item.LikedByUser == false)
+                            {
+                                <a href='@Url.Action($"LikeProfileItem/{item.ID}", "Profile",  new { username = item.Username })'>
+                                    <img src="~/assets/img/EmptyHeart.png" width="30" height="30" />
+                                </a>
+                            }
+                            else
+                            {
+                                <a href='@Url.Action($"LikeProfileItem/{item.ID}", "Profile",  new { username = item.Username })'>
+                                    <img src="~/assets/img/FilledHeart.png" width="30" height="30" />
+                                </a>}
+                        </div>
+
+                        <div class="col-md-1 my-1">
+                            @Html.ActionLink($"Comment", $"Details", $"{item.ObjectType}", new { id = item.ObjectID }, new { @class = "btn btn-warning btn-xs" })
+                        </div>
+
+                    </div>
+                </div>
             </div>
         }
-        @if (item.Activity == "Follow")
+        if (item.Content.Contains("Music"))
         {
-            <div class="panel-heading">@Html.ActionLink($"{item.Name}", "Index", "Profile", new { id = item.Username }, new { @class = "my-class" })</div>
+            <div class="panel panel-primary" style="width: 25rem;">
+                <div class="panel-heading">
+                    @Html.ActionLink($"{item.Name}", "Index", "Profile", new { id = item.Username }, new { @class = "my-class" })
+                    <p class="time">@Html.Raw(item.WhenPosted)</p>
+                </div>
+                <div class="panel-body">
+                    Added
+                    @Html.ActionLink($"{item.Content}", $"Details", $"{item.ObjectType}", new { id = item.ObjectID }, new { @class = "my-class" })
+                    to their calendar.
+                    <br />
+                    <br />
+                    @if (item.AmountOfLikes == 1 && item.LikedByUser == true)
+                    {
+
+                        <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" /> You liked this</p>
+                    }
+                    @if (item.AmountOfLikes == 1 && item.LikedByUser == false)
+                    {
+                        <p><img src="~/assets/img/FilledHeart.png" width="20" height="20" /> 1 person liked this</p>
+                    }
+                    @if (item.AmountOfLikes == 2 && item.LikedByUser == true)
+                    {
+                        <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" />  You and 1 person liked this</p>
+                    }
+                    @if (item.AmountOfLikes > 1 && item.LikedByUser == false)
+                    {
+                        <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" />  @Html.Raw(item.AmountOfLikes) people liked this</p>
+                    }
+                    @if (item.AmountOfLikes > 2 && item.LikedByUser == true)
+                    {
+                        <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" />  You and @Html.Raw(item.AmountOfLikes - 1) people liked this</p>
+                    }
+                </div>
+                <div class="panel-footer">
+                    <div class="container">
+                        <div class="col-md-1 my-1">
+                            @if (item.LikedByUser == false)
+                            {
+                                <a href='@Url.Action($"LikeProfileItem/{item.ID}", "Profile",  new { username = item.Username })'>
+                                    <img src="~/assets/img/EmptyHeart.png" width="30" height="30" />
+                                </a>
+                            }
+                            else
+                            {
+                                <a href='@Url.Action($"LikeProfileItem/{item.ID}", "Profile",  new { username = item.Username })'>
+                                    <img src="~/assets/img/FilledHeart.png" width="30" height="30" />
+                                </a>}
+                        </div>
+
+                        <div class="col-md-1 my-1">
+                            @Html.ActionLink($"Comment", $"Details", $"{item.ObjectType}", new { id = item.ObjectID }, new { @class = "btn btn-warning btn-xs" })
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        }
+        if (item.Content.Contains("Trivia"))
+        {
+            <div class="panel panel-danger" style="width: 25rem;">
+                <div class="panel-heading">
+                    @Html.ActionLink($"{item.Name}", "Index", "Profile", new { id = item.Username }, new { @class = "my-class" })
+                    <p class="time">@Html.Raw(item.WhenPosted)</p>
+                </div>
+                <div class="panel-body">
+                    Added
+                    @Html.ActionLink($"{item.Content}", $"Details", $"{item.ObjectType}", new { id = item.ObjectID }, new { @class = "my-class" })
+                    to their calendar.
+                    <br />
+                    <br />
+                    @if (item.AmountOfLikes == 1 && item.LikedByUser == true)
+                    {
+
+                        <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" /> You liked this</p>
+                    }
+                    @if (item.AmountOfLikes == 1 && item.LikedByUser == false)
+                    {
+                        <p><img src="~/assets/img/FilledHeart.png" width="20" height="20" /> 1 person liked this</p>
+                    }
+                    @if (item.AmountOfLikes == 2 && item.LikedByUser == true)
+                    {
+                        <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" />  You and 1 person liked this</p>
+                    }
+                    @if (item.AmountOfLikes > 1 && item.LikedByUser == false)
+                    {
+                        <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" />  @Html.Raw(item.AmountOfLikes) people liked this</p>
+                    }
+                    @if (item.AmountOfLikes > 2 && item.LikedByUser == true)
+                    {
+                        <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" />  You and @Html.Raw(item.AmountOfLikes - 1) people liked this</p>
+                    }
+                </div>
+                <div class="panel-footer">
+                    <div class="container">
+                        <div class="col-md-1 my-1">
+                            @if (item.LikedByUser == false)
+                            {
+                                <a href='@Url.Action($"LikeProfileItem/{item.ID}", "Profile",  new { username = item.Username })'>
+                                    <img src="~/assets/img/EmptyHeart.png" width="30" height="30" />
+                                </a>
+                            }
+                            else
+                            {
+                                <a href='@Url.Action($"LikeProfileItem/{item.ID}", "Profile",  new { username = item.Username })'>
+                                    <img src="~/assets/img/FilledHeart.png" width="30" height="30" />
+                                </a>}
+                        </div>
+
+                        <div class="col-md-1 my-1">
+                            @Html.ActionLink($"Comment", $"Details", $"{item.ObjectType}", new { id = item.ObjectID }, new { @class = "btn btn-warning btn-xs" })
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    if (item.Activity == "Follow")
+    {
+
+        <div class="panel panel-warning" style="width: 25rem;">
+            <div class="panel-heading">
+                @Html.ActionLink($"{item.Name}", "Index", "Profile", new { id = item.Username }, new { @class = "my-class" })
+                <p class="time">@Html.Raw(item.WhenPosted)</p>
+            </div>
 
             <div class="panel-body">
                 Followed
                 @Html.ActionLink($"{item.Content}", $"Details", $"{item.ObjectType}", new { id = item.ObjectID }, new { @class = "my-class" })
+                <br />
+                <br />
+                @if (item.AmountOfLikes == 1 && item.LikedByUser == true)
+                {
+
+                    <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" /> You liked this</p>
+                }
+                @if (item.AmountOfLikes == 1 && item.LikedByUser == false)
+                {
+                    <p><img src="~/assets/img/FilledHeart.png" width="20" height="20" /> 1 person liked this</p>
+                }
+                @if (item.AmountOfLikes == 2 && item.LikedByUser == true)
+                {
+                    <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" />  You and 1 person liked this</p>
+                }
+                @if (item.AmountOfLikes > 1 && item.LikedByUser == false)
+                {
+                    <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" />  @Html.Raw(item.AmountOfLikes) people liked this</p>
+                }
+                @if (item.AmountOfLikes > 2 && item.LikedByUser == true)
+                {
+                    <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" />  You and @Html.Raw(item.AmountOfLikes - 1) people liked this</p>
+                }
+            </div>
+            <div class="panel-footer">
+                <div class="container">
+                    <div class="col-md-1 my-1">
+                        @if (item.LikedByUser == false)
+                        {
+                            <a href='@Url.Action($"LikeProfileItem/{item.ID}", "Profile",  new { username = item.Username })'>
+                                <img src="~/assets/img/EmptyHeart.png" width="30" height="30" />
+                            </a>
+                        }
+                        else
+                        {
+                            <a href='@Url.Action($"LikeProfileItem/{item.ID}", "Profile",  new { username = item.Username })'>
+                                <img src="~/assets/img/FilledHeart.png" width="30" height="30" />
+                            </a>}
+                    </div>
+
+                    <div class="col-md-1 my-1">
+                        @Html.ActionLink($"Comment", $"Details", $"{item.ObjectType}", new { id = item.ObjectID }, new { @class = "btn btn-warning btn-xs" })
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    }
+    if (item.Activity == "NewEvent")
+    {
+        if (item.Content.Contains("Karaoke"))
+        {
+            <div class="panel panel-success" style="width: 25rem;">
+                <div class="panel-heading">
+                    @Html.ActionLink($"{item.Name}", "Details", "Business", new { id = item.BusinessID }, new { @class = "my-class" })
+                    <p class="time">@Html.Raw(item.WhenPosted)</p>
+                </div>
+
+                <div class="panel-body">
+                    Created a new event!
+                    <p>@Html.ActionLink($"{item.Content}", $"Details", $"{item.ObjectType}", new { id = item.ObjectID }, new { @class = "my-class" })</p>
+                    <br />
+                    <br />
+                    @if (item.AmountOfLikes == 1 && item.LikedByUser == true)
+                    {
+
+                        <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" /> You liked this</p>
+                    }
+                    @if (item.AmountOfLikes == 1 && item.LikedByUser == false)
+                    {
+                        <p><img src="~/assets/img/FilledHeart.png" width="20" height="20" /> 1 person liked this</p>
+                    }
+                    @if (item.AmountOfLikes == 2 && item.LikedByUser == true)
+                    {
+                        <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" />  You and 1 person liked this</p>
+                    }
+                    @if (item.AmountOfLikes > 1 && item.LikedByUser == false)
+                    {
+                        <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" />  @Html.Raw(item.AmountOfLikes) people liked this</p>
+                    }
+                    @if (item.AmountOfLikes > 2 && item.LikedByUser == true)
+                    {
+                        <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" />  You and @Html.Raw(item.AmountOfLikes - 1) people liked this</p>
+                    }
+                </div>
+                <div class="panel-footer">
+                    <div class="container">
+                        <div class="col-md-1 my-1">
+                            @if (item.LikedByUser == false)
+                            {
+                                <a href='@Url.Action($"LikeProfileItem/{item.ID}", "Profile",  new { username = item.Username })'>
+                                    <img src="~/assets/img/EmptyHeart.png" width="30" height="30" />
+                                </a>
+                            }
+                            else
+                            {
+                                <a href='@Url.Action($"LikeProfileItem/{item.ID}", "Profile",  new { username = item.Username })'>
+                                    <img src="~/assets/img/FilledHeart.png" width="30" height="30" />
+                                </a>}
+                        </div>
+
+                        <div class="col-md-1 my-1">
+                            @Html.ActionLink($"Comment", $"Details", $"{item.ObjectType}", new { id = item.ObjectID }, new { @class = "btn btn-warning btn-xs" })
+                        </div>
+
+                    </div>
+                </div>
             </div>
         }
-        @if (item.Activity == "NewEvent")
+        if (item.Content.Contains("Music"))
         {
-            <div class="panel-heading">@Html.ActionLink($"{item.Name}", "Index", "Profile", new { id = item.Username }, new { @class = "my-class" })</div>
+            <div class="panel panel-primary" style="width: 25rem;">
+                <div class="panel-heading">
+                    @Html.ActionLink($"{item.Name}", "Details", "Business", new { id = item.BusinessID }, new { @class = "my-class" })
+                    <p class="time">@Html.Raw(item.WhenPosted)</p>
+                </div>
+
+                <div class="panel-body">
+                    Created a new event!
+                    <p>@Html.ActionLink($"{item.Content}", $"Details", $"{item.ObjectType}", new { id = item.ObjectID }, new { @class = "my-class" })</p>
+                    <br />
+                    <br />
+                    @if (item.AmountOfLikes == 1 && item.LikedByUser == true)
+                    {
+
+                        <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" /> You liked this</p>
+                    }
+                    @if (item.AmountOfLikes == 1 && item.LikedByUser == false)
+                    {
+                        <p><img src="~/assets/img/FilledHeart.png" width="20" height="20" /> 1 person liked this</p>
+                    }
+                    @if (item.AmountOfLikes == 2 && item.LikedByUser == true)
+                    {
+                        <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" />  You and 1 person liked this</p>
+                    }
+                    @if (item.AmountOfLikes > 1 && item.LikedByUser == false)
+                    {
+                        <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" />  @Html.Raw(item.AmountOfLikes) people liked this</p>
+                    }
+                    @if (item.AmountOfLikes > 2 && item.LikedByUser == true)
+                    {
+                        <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" />  You and @Html.Raw(item.AmountOfLikes - 1) people liked this</p>
+                    }
+                </div>
+                <div class="panel-footer">
+                    <div class="container">
+                        <div class="col-md-1 my-1">
+                            @if (item.LikedByUser == false)
+                            {
+                                <a href='@Url.Action($"LikeProfileItem/{item.ID}", "Profile",  new { username = item.Username })'>
+                                    <img src="~/assets/img/EmptyHeart.png" width="30" height="30" />
+                                </a>
+                            }
+                            else
+                            {
+                                <a href='@Url.Action($"LikeProfileItem/{item.ID}", "Profile",  new { username = item.Username })'>
+                                    <img src="~/assets/img/FilledHeart.png" width="30" height="30" />
+                                </a>}
+                        </div>
+
+                        <div class="col-md-1 my-1">
+                            @Html.ActionLink($"Comment", $"Details", $"{item.ObjectType}", new { id = item.ObjectID }, new { @class = "btn btn-warning btn-xs" })
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        }
+        if (item.Content.Contains("Trivia"))
+        {
+            <div class="panel panel-danger" style="width: 25rem;">
+                <div class="panel-heading">
+                    @Html.ActionLink($"{item.Name}", "Details", "Business", new { id = item.BusinessID }, new { @class = "my-class" })
+                    <p class="time">@Html.Raw(item.WhenPosted)</p>
+                </div>
+
+                <div class="panel-body">
+                    Created a new event!
+                    <p>@Html.ActionLink($"{item.Content}", $"Details", $"{item.ObjectType}", new { id = item.ObjectID }, new { @class = "my-class" })</p>
+                    <br />
+                    <br />
+                    @if (item.AmountOfLikes == 1 && item.LikedByUser == true)
+                    {
+
+                        <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" /> You liked this</p>
+                    }
+                    @if (item.AmountOfLikes == 1 && item.LikedByUser == false)
+                    {
+                        <p><img src="~/assets/img/FilledHeart.png" width="20" height="20" /> 1 person liked this</p>
+                    }
+                    @if (item.AmountOfLikes == 2 && item.LikedByUser == true)
+                    {
+                        <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" />  You and 1 person liked this</p>
+                    }
+                    @if (item.AmountOfLikes > 1 && item.LikedByUser == false)
+                    {
+                        <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" />  @Html.Raw(item.AmountOfLikes) people liked this</p>
+                    }
+                    @if (item.AmountOfLikes > 2 && item.LikedByUser == true)
+                    {
+                        <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" />  You and @Html.Raw(item.AmountOfLikes - 1) people liked this</p>
+                    }
+                </div>
+                <div class="panel-footer">
+                    <div class="container">
+                        <div class="col-md-1 my-1">
+                            @if (item.LikedByUser == false)
+                            {
+                                <a href='@Url.Action($"LikeProfileItem/{item.ID}", "Profile",  new { username = item.Username })'>
+                                    <img src="~/assets/img/EmptyHeart.png" width="30" height="30" />
+                                </a>
+                            }
+                            else
+                            {
+                                <a href='@Url.Action($"LikeProfileItem/{item.ID}", "Profile",  new { username = item.Username })'>
+                                    <img src="~/assets/img/FilledHeart.png" width="30" height="30" />
+                                </a>}
+                        </div>
+
+                        <div class="col-md-1 my-1">
+                            @Html.ActionLink($"Comment", $"Details", $"{item.ObjectType}", new { id = item.ObjectID }, new { @class = "btn btn-warning btn-xs" })
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    if (item.Activity == "Rating")
+    {
+        <div class="panel panel-warning" style="width: 25rem;">
+            <div class="panel-heading">
+                @Html.ActionLink($"{item.Name}", "Index", "Profile", new { id = item.Username }, new { @class = "my-class" })
+                <p class="time">@Html.Raw(item.WhenPosted)</p>
+            </div>
+
 
             <div class="panel-body">
-                Added
+
+                Added a
                 @Html.ActionLink($"{item.Content}", $"Details", $"{item.ObjectType}", new { id = item.ObjectID }, new { @class = "my-class" })
+                @if (item.Content.Contains("5"))
+                {<p>
+                        <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                    </p>
+
+                }
+                @if (item.Content.Contains("4"))
+                {<p>
+                        <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                    </p>
+
+                }
+                @if (item.Content.Contains("3"))
+                {<p>
+                        <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                    </p>
+                }
+                @if (item.Content.Contains("2"))
+                {<p>
+                        <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                    </p>
+                }
+                @if (item.Content.Contains("1"))
+                {<p>
+                        <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                    </p>
+                }
+                <br />
+                <br />
+                @if (item.AmountOfLikes == 1 && item.LikedByUser == true)
+                {
+
+                    <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" /> You liked this</p>
+                }
+                @if (item.AmountOfLikes == 1 && item.LikedByUser == false)
+                {
+                    <p><img src="~/assets/img/FilledHeart.png" width="20" height="20" /> 1 person liked this</p>
+                }
+                @if (item.AmountOfLikes == 2 && item.LikedByUser == true)
+                {
+                    <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" />  You and 1 person liked this</p>
+                }
+                @if (item.AmountOfLikes > 1 && item.LikedByUser == false)
+                {
+                    <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" />  @Html.Raw(item.AmountOfLikes) people liked this</p>
+                }
+                @if (item.AmountOfLikes > 2 && item.LikedByUser == true)
+                {
+                    <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" />  You and @Html.Raw(item.AmountOfLikes - 1) people liked this</p>
+                }
             </div>
-        }
-    </div>
+            <div class="panel-footer">
+                <div class="container">
+                    <div class="col-md-1 my-1">
+                        @if (item.LikedByUser == false)
+                        {
+                            <a href='@Url.Action($"LikeProfileItem/{item.ID}", "Profile",  new { username = item.Username })'>
+                                <img src="~/assets/img/EmptyHeart.png" width="30" height="30" />
+                            </a>
+                        }
+                        else
+                        {
+                            <a href='@Url.Action($"LikeProfileItem/{item.ID}", "Profile",  new { username = item.Username })'>
+                                <img src="~/assets/img/FilledHeart.png" width="30" height="30" />
+                            </a>}
+                    </div>
+
+                    <div class="col-md-1 my-1">
+                        @Html.ActionLink($"Comment", $"Details", $"{item.ObjectType}", new { id = item.ObjectID }, new { @class = "btn btn-warning btn-xs" })
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    }
 }
 
 

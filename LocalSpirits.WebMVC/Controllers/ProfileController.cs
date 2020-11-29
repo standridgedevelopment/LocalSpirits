@@ -101,9 +101,25 @@ namespace LocalSpirits.WebMVC.Controllers
         {
             var profileService = CreateProfileService();
             var foundLike = profileService.GetLike(id);
-            if (foundLike != null) profileService.UnlikeFeedItem(id);
+            if (foundLike != null) 
+            {
+                profileService.UnlikeFeedItem(id);
+                return RedirectToAction("Activity", "Home");
+            } 
             profileService.LikeFeedItem(id);
-            return PartialView("test");
+            return RedirectToAction("Activity", "Home");
+        }
+        public ActionResult LikeProfileItem(int id, string username)
+        {
+            var profileService = CreateProfileService();
+            var foundLike = profileService.GetLike(id);
+            if (foundLike != null)
+            {
+                profileService.UnlikeFeedItem(id);
+                return RedirectToAction($"Index/{username}", "Profile");
+            }
+            profileService.LikeFeedItem(id);
+            return RedirectToAction($"Index/{username}", "Profile");
         }
 
         public ActionResult Edit()

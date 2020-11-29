@@ -13,6 +13,9 @@
     margin-left: 10px !important;
     margin-top: 12px !important;
 }
+.time {
+    font-size: 12px;
+}
 
 .noborders td {
         border:0;

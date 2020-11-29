@@ -22,13 +22,22 @@ namespace LocalSpirits.Data
         [ForeignKey(nameof(Business))]
         public int? BusinessID { get; set; }
         public virtual Business Business { get; set; }
+        public string UsersFullName { get; set; }
         public string Username { get; set; }
         public string Activity { get; set; }
         public int ObjectID { get; set; }
         public string ObjectType { get; set; }
         public string Content { get; set; }
-        public bool LikedByUser { get; set; }
+        public int AmountOfLikes
+        {
+            get
+            {
+                return Likes.Count;
+            }
+
+        }
         public DateTimeOffset Created { get; set; }
+        public string HowLongAgo { get; set; }
         public virtual ICollection<Like> Likes { get; set; }
 
     }
