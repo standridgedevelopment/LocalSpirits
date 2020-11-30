@@ -26,7 +26,7 @@ namespace LocalSpirits.Models.Profile
         public StateName State { get; set; }
         [DisplayName("Zip Code")]
         public int ZipCode { get; set; }
-
+        public string ProfilePicture { get; set; }
 
         public ICollection<Data.Event> Events { get; set; }
         public ICollection<Friend> FriendsList { get; set; } 

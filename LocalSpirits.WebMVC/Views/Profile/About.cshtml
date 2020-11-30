@@ -5,26 +5,36 @@
 }
 
 
-<div class="panel panel-warning" style="width: 20rem;">
+<div class="container col-md-pull-1 col-md-6">
+    <div class="col-md-3 my-6">
+        <img src="@Url.Content(Model.ProfilePicture)" width="125" height="125" />
+    </div>
+    <div class="col-md-3 my-6">
+        <div class="panel panel-warning" style="width: 20rem;">
 
-    <dl class="dl-horizontal">
-        <dt class="profile">Name:</dt>
-        <dd>
-            @Html.DisplayFor(model => model.FullName)
-        </dd>
-        <dt>City:</dt>
-        <dd>
-            @Html.DisplayFor(modelItem => modelItem.City)
-        </dd>
-        <dt>ZipCode:</dt>
-        <dd>
-            @Html.DisplayFor(modelItem => modelItem.ZipCode)
-        </dd>
-        <dt>State:</dt>
-        <dd>
-            @Html.DisplayFor(modelItem => modelItem.State)
-        </dd>
-    </dl>
+            <dl class="dl-horizontal">
+                <dt class="profile">Name:</dt>
+                <dd>
+                    @Html.DisplayFor(model => model.FullName)
+                </dd>
+                <dt>City:</dt>
+                <dd>
+                    @Html.DisplayFor(modelItem => modelItem.City)
+                </dd>
+                <dt>ZipCode:</dt>
+                <dd>
+                    @Html.DisplayFor(modelItem => modelItem.ZipCode)
+                </dd>
+                <dt>State:</dt>
+                <dd>
+                    @Html.DisplayFor(modelItem => modelItem.State)
+                </dd>
+                <p>
+                    @Html.ActionLink("Update Profile", "Edit")
+                </p>
+            </dl>
+        </div>
+    </div>
 </div>
 
 

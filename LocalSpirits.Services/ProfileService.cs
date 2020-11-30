@@ -68,6 +68,7 @@ namespace LocalSpirits.Services
                         FriendRequests = entity.FriendRequests,
                         FriendsList = entity.FriendsList,
                         Feed = entity.Feed,
+                        ProfilePicture = entity.ProfilePicture,
                     };
                 }
                 catch { }
@@ -99,6 +100,7 @@ namespace LocalSpirits.Services
                         FriendRequests = entity.FriendRequests,
                         FriendsList = entity.FriendsList,
                         Feed = entity.Feed,
+                        ProfilePicture = entity.ProfilePicture,
                     };
                 }
                 catch { }
@@ -155,7 +157,9 @@ namespace LocalSpirits.Services
                         City = entity.City,
                         State = entity.State,
                         ZipCode = entity.ZipCode,
+                        ProfilePicture = entity.ProfilePicture,
                         Events = events,
+
                     };
                 }
                 catch { }
