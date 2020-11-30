@@ -4,12 +4,14 @@
     if (Model.Notifications.Count() > 0)
     {
         <a href='@Url.Action("HomeProfile", "Profile")'>
-            <img src="~/assets/img/Notifications.png" width="30" height="30" />
+            <img src="~/assets/img/Notifications.png" width="25" height="25" />
             <span class="badge"> @Html.Raw(Model.Notifications.Count())</span>
         </a>
     }
     else
     {
-        
+<a href='@Url.Action("HomeProfile", "Profile")'>
+    <img src="~/assets/img/Notifications.png" width="25" height="25" />
+</a>
     }
 }

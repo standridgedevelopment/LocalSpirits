@@ -13,6 +13,7 @@ namespace LocalSpirits.Models.ActivityFeed
         public int? BusinessID { get; set; }
         public string Name { get; set; }
         public string Username { get; set; }
+        public string ProfilePicture { get; set; }
         public string UsersFullName { get; set; }
         public string Activity { get; set; }
         public bool LikedByUser { get; set; }

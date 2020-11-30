@@ -205,6 +205,13 @@
     <Content Include="assets\img\HalfStar.png" />
     <Content Include="assets\img\Me.jpg" />
     <Content Include="assets\img\Notifications.png" />
+    <Content Include="assets\ProfileIcons\bird.png" />
+    <Content Include="assets\ProfileIcons\clown-fish.png" />
+    <Content Include="assets\ProfileIcons\cocker-spaniel.png" />
+    <Content Include="assets\ProfileIcons\dinosaur.png" />
+    <Content Include="assets\ProfileIcons\parrot.png" />
+    <Content Include="assets\ProfileIcons\penguin.png" />
+    <Content Include="assets\ProfileIcons\seal.png" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />

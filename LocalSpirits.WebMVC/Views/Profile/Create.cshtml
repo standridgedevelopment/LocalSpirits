@@ -18,14 +18,14 @@
 
                 <div class="form-group">
                     @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
                     </div>
@@ -33,15 +33,15 @@
 
                 <div class="form-group">
                     @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-6">
-                        @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                    <div class="col-md-4">
+                         @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                         @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
                     </div>
                 </div>
 
                 <div class="form-group">
                     @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
                     </div>
@@ -49,7 +49,7 @@
 
                 <div class="form-group">
                     @Html.LabelFor(model => model.State, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         @Html.EnumDropDownListFor(model => model.State, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
                     </div>
@@ -57,19 +57,34 @@
 
                 <div class="form-group">
                     @Html.LabelFor(model => model.ZipCode, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         @Html.EditorFor(model => model.ZipCode, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.ZipCode, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row my-5">
+                        <div class="col-md-3 col-md-offset-1 my-6">
+                            <p>1. <img src="~/assets/ProfileIcons/bird.png" width="80" height="80" /> </p>
+                            <p>2. <img src="~/assets/ProfileIcons/clown-fish.png" width="80" height="80" /> </p>
+                            <p>3. <img src="~/assets/ProfileIcons/cocker-spaniel.png" width="80" height="80" /> </p>
+                            <p>4. <img src="~/assets/ProfileIcons/dinosaur.png" width="80" height="80" /> </p>
+                        </div>
+
+                        <div class="col-md-3 my-6">
+                            <p>5. <img src="~/assets/ProfileIcons/parrot.png" width="80" height="80" /> </p>
+                            <p>6. <img src="~/assets/ProfileIcons/penguin.png" width="80" height="80" /> </p>
+                            <p>7. <img src="~/assets/ProfileIcons/seal.png" width="80" height="80" /> </p>
+                        </div>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-6">
-                        <input type="submit" value="Create" class="btn btn-default" />
+                        <input type="submit" value="Create" class="btn btn-warning" />
                     </div>
                 </div>
             </div>
-            <div class="col-sm-4 col-md-4 col-lg-6"><img src="~/assets/img/Me.jpg" alt="" width="360" height="530"></div>
         </div>
     </div>
 }

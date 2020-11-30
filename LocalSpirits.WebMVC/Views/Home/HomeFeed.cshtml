@@ -29,8 +29,18 @@
     {
         <div class="panel panel-warning" style="width: 25rem;">
             <div class="panel-heading">
-                @Html.ActionLink($"{item.Name}", "Index", "Profile", new { id = item.Username }, new { @class = "my-class" })
-                <p class="time">@Html.Raw(item.WhenPosted)</p>
+                <div class="row my-5">
+
+                    <div class="col-md-3 my-6">
+                        <img src="@Url.Content(@item.ProfilePicture)" width="55" height="55" />
+                    </div>
+
+                    <div class="col-md-8 my-6">
+                        @Html.ActionLink($"{item.Name}", "Index", "Profile", new { id = item.Username }, new { @class = "my-class" })
+                        <p class="time">@Html.Raw(item.WhenPosted)</p>
+                    </div>
+
+                </div>
             </div>
             <div class="panel-body">
                 Liked
@@ -44,8 +54,16 @@
         {
             <div class="panel panel-success" style="width: 25rem;">
                 <div class="panel-heading">
-                    @Html.ActionLink($"{item.Name}", "Index", "Profile", new { id = item.Username }, new { @class = "my-class" })
-                    <p class="time">@Html.Raw(item.WhenPosted)</p>
+                    <div class="row my-5">
+                        <div class="col-md-3 my-6">
+                            <img src="@Url.Content(@item.ProfilePicture)" width="55" height="55" />
+                        </div>
+
+                        <div class="col-md-8 my-6">
+                            @Html.ActionLink($"{item.Name}", "Index", "Profile", new { id = item.Username }, new { @class = "my-class" })
+                            <p class="time">@Html.Raw(item.WhenPosted)</p>
+                        </div>
+                    </div>
                 </div>
                 <div class="panel-body">
                     Added
@@ -103,8 +121,16 @@
         {
             <div class="panel panel-primary" style="width: 25rem;">
                 <div class="panel-heading">
-                    @Html.ActionLink($"{item.Name}", "Index", "Profile", new { id = item.Username }, new { @class = "my-class" })
-                    <p class="time">@Html.Raw(item.WhenPosted)</p>
+                    <div class="row my-5">
+                        <div class="col-md-3 my-6">
+                            <img src="@Url.Content(@item.ProfilePicture)" width="55" height="55" />
+                        </div>
+
+                        <div class="col-md-8 my-6">
+                            @Html.ActionLink($"{item.Name}", "Index", "Profile", new { id = item.Username }, new { @class = "my-class" })
+                            <p class="time">@Html.Raw(item.WhenPosted)</p>
+                        </div>
+                    </div>
                 </div>
                 <div class="panel-body">
                     Added
@@ -162,8 +188,16 @@
         {
             <div class="panel panel-danger" style="width: 25rem;">
                 <div class="panel-heading">
-                    @Html.ActionLink($"{item.Name}", "Index", "Profile", new { id = item.Username }, new { @class = "my-class" })
-                    <p class="time">@Html.Raw(item.WhenPosted)</p>
+                    <div class="row my-5">
+                        <div class="col-md-3 my-6">
+                            <img src="@Url.Content(@item.ProfilePicture)" width="55" height="55" />
+                        </div>
+
+                        <div class="col-md-8 my-6">
+                            @Html.ActionLink($"{item.Name}", "Index", "Profile", new { id = item.Username }, new { @class = "my-class" })
+                            <p class="time">@Html.Raw(item.WhenPosted)</p>
+                        </div>
+                    </div>
                 </div>
                 <div class="panel-body">
                     Added
@@ -223,8 +257,16 @@
 
         <div class="panel panel-warning" style="width: 25rem;">
             <div class="panel-heading">
-                @Html.ActionLink($"{item.Name}", "Index", "Profile", new { id = item.Username }, new { @class = "my-class" })
-                <p class="time">@Html.Raw(item.WhenPosted)</p>
+                <div class="row my-5">
+                    <div class="col-md-3 my-6">
+                        <img src="@Url.Content(@item.ProfilePicture)" width="55" height="55" />
+                    </div>
+
+                    <div class="col-md-8 my-6">
+                        @Html.ActionLink($"{item.Name}", "Index", "Profile", new { id = item.Username }, new { @class = "my-class" })
+                        <p class="time">@Html.Raw(item.WhenPosted)</p>
+                    </div>
+                </div>
             </div>
 
             <div class="panel-body">
@@ -462,8 +504,16 @@
     {
         <div class="panel panel-warning" style="width: 25rem;">
             <div class="panel-heading">
-                @Html.ActionLink($"{item.Name}", "Index", "Profile", new { id = item.Username }, new { @class = "my-class" })
-                <p class="time">@Html.Raw(item.WhenPosted)</p>
+                <div class="row my-5">
+                    <div class="col-md-3 my-6">
+                        <img src="@Url.Content(@item.ProfilePicture)" width="55" height="55" />
+                    </div>
+
+                    <div class="col-md-8 my-6">
+                        @Html.ActionLink($"{item.Name}", "Index", "Profile", new { id = item.Username }, new { @class = "my-class" })
+                        <p class="time">@Html.Raw(item.WhenPosted)</p>
+                    </div>
+                </div>
             </div>
            
 

@@ -37,6 +37,7 @@ namespace LocalSpirits.Data
         public StateName State { get; set; }
 
         public int ZipCode { get; set; }
+        public string ProfilePicture { get; set; }
 
 
         public virtual ICollection<Visited> AllVisits { get; set; }
