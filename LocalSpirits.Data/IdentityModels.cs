@@ -43,6 +43,7 @@ namespace LocalSpirits.WebMVC.Data
         public DbSet<FriendRequest> FriendRequests { get; set; }
         public DbSet<ActivityFeed> ActivityFeed { get; set; }
         public DbSet<Like> Likes { get; set; }
+        public DbSet<Notification> Notifications { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

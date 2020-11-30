@@ -7,10 +7,13 @@
 
 <ul class="nav navbar-nav navbar-right">
     <li>
+        @Html.Action("GetNoticiationCount", "Profile")
+    </li>
+    <li>
         @Html.Action("GetFriendFriendRequestCount", "Friends")
     </li>
     <li>
-        @Html.ActionLink("Profile", "HomeProfile", "Profile", routeValues: null, htmlAttributes: new { title = "Profile" })
+        <a href="@Url.Action("HomeProfile", "Profile")" title="Profile">Profile</a>
     </li>
     <li>
         @Html.ActionLink("Account", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })

@@ -64,7 +64,7 @@ namespace LocalSpirits.Services
                         City = entity.City,
                         State = entity.State,
                         ZipCode = entity.ZipCode,
-                        //Events = events,
+                        Notifications = entity.Notifications,
                         FriendRequests = entity.FriendRequests,
                         FriendsList = entity.FriendsList,
                         Feed = entity.Feed,
@@ -491,6 +491,55 @@ namespace LocalSpirits.Services
                 
             }
             return false;
+        }
+        public bool GenerateNotification(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var foundLike = ctx.Likes.Single(e => e.ActivityFeedID == id && e.UserID == _userId);
+                var notification = new Notification
+                {
+                    SenderFullName = foundLike.Profile.FullName,
+                    SenderUsername = foundLike.Profile.Username,
+                    Profile_ID = foundLike.ActivityFeed.UserID,
+                    TimeCreated = DateTimeOffset.Now,
+                    Recieved = false,
+                };
+               
+                ctx.Notifications.Add(notification);
+                ctx.SaveChanges();
+                return true;
+
+            }
+        }
+        public ProfileDetail GetIncomingNotifications()
+        {
+            var notifications = new List<Notification>();
+            using (var ctx = new ApplicationDbContext())
+            {
+
+                try
+                {
+                    var entity = ctx.Profiles.Single(e => e.ID == _userId);
+                    foreach (var item in entity.Notifications)
+                    {
+                        if (item.Recieved == false)
+                            notifications.Add(item);
+                    }
+
+                    //List<Event> events = GetEvents(entity.AllVisits);
+
+                    return new ProfileDetail
+                    {
+
+                        Notifications = notifications,
+
+                    };
+                }
+                catch { }
+                return new ProfileDetail();
+
+            }
         }
         public string GetFeedPostTime(ActivityFeed activity)
         {

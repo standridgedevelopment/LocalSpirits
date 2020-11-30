@@ -73,6 +73,7 @@
     <Compile Include="Friends\FriendDetail.cs" />
     <Compile Include="Friends\FriendRequestCreate.cs" />
     <Compile Include="Friends\FriendRequestListItem.cs" />
+    <Compile Include="Notification\NotificationListItem.cs" />
     <Compile Include="Profile\ProfileCreate.cs" />
     <Compile Include="Profile\ProfileDetail.cs" />
     <Compile Include="Profile\ProfileEdit.cs" />

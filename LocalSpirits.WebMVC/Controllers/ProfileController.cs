@@ -81,6 +81,13 @@ namespace LocalSpirits.WebMVC.Controllers
             return View(model);
         }
 
+        public ActionResult GetNoticiationCount()
+        {
+            var profileService = CreateProfileService();
+            var profile = profileService.GetIncomingNotifications();
+
+            return PartialView("Notifications", profile);
+        }
         public ActionResult About(string id)
         {
             var service = CreateProfileService();
@@ -107,6 +114,7 @@ namespace LocalSpirits.WebMVC.Controllers
                 return RedirectToAction("Activity", "Home");
             } 
             profileService.LikeFeedItem(id);
+            profileService.GenerateNotification((id));
             return RedirectToAction("Activity", "Home");
         }
         public ActionResult LikeProfileItem(int id, string username)

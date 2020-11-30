@@ -31,6 +31,7 @@ namespace LocalSpirits.Models.Profile
         public ICollection<Data.Event> Events { get; set; }
         public ICollection<Friend> FriendsList { get; set; } 
         public ICollection<FriendRequest> FriendRequests { get; set; }
-        public virtual ICollection<Data.ActivityFeed> Feed { get; set; } 
+        public virtual ICollection<Data.ActivityFeed> Feed { get; set; }
+        public ICollection<Data.Notification> Notifications { get; set; }
     }
 }
