@@ -129,6 +129,20 @@ namespace LocalSpirits.WebMVC.Controllers
             profileService.LikeFeedItem(id);
             return RedirectToAction($"Index/{username}", "Profile");
         }
+        public ActionResult LikeProfileItemAjax(int id, string username)
+        {
+            var profileService = CreateProfileService();
+            var foundLike = profileService.GetLike(id);
+            string message = "PersonId";
+
+            if (foundLike != null)
+            {
+                profileService.UnlikeFeedItem(id);
+                return Content(message);
+            }
+            profileService.LikeFeedItem(id);
+            return Content(message);
+        }
 
         public ActionResult Edit()
         {

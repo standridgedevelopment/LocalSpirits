@@ -26,13 +26,13 @@
                 </button>
                 @Html.ActionLink("Local Spirits", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
 
-            <div class= "navbar-collapse collapse ">
-                @Html.Partial("_Search")
-                @Html.Partial("_LoginPartial")
+                <div class="navbar-collapse collapse ">
+                    @Html.Partial("_Search")
+                    @Html.Partial("_LoginPartial")
+                </div>
             </div>
-            </div>
-            
-            
+
+
 
         </div>
     </div>
@@ -43,10 +43,9 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-
     <!-- Include moment-->
     <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
     <!-- qTip -->
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/qtip2/3.0.3/jquery.qtip.min.js"></script>
 
