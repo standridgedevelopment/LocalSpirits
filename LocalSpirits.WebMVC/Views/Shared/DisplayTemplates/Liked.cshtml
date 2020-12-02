@@ -1,0 +1,11 @@
+﻿
+@{
+    ViewBag.Title = "Liked";
+}
+@model bool
+
+<span>
+    <i class="glyphicon @(Model ? "glyphicon-heart" : "glyphicon-heart-empty")"
+       data-toggle="heart"
+       data-id="@ViewBag.Id"></i>
+</span>

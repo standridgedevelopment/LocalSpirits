@@ -6,41 +6,42 @@
     ViewBag.Title = "HomeFeed";
 }
 
-<div class="button-container">
-    <img id="like" src="~/assets/img/EmptyHeart.png" alt="Black Image" width="55" height="55" onclick="changeColor()" />
-</div>
+
+
 
 <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-<script type="text/javascript">
-    //$('#LikeForm').on('submit', function (e) {
-    //    e.preventDefault();
-    //    if (image.getAttribute('src') == "/assets/img/FilledHeart.png") {
-    //        image.src = "/assets/img/EmptyHeart.png";
-    //    }
-    //    else {
-    //        image.src = "/assets/img/FilledHeart.png";
-    //    }
-    //    $.ajax({
-    //        cache: false,
-    //        contentType: false,
-    //        processData: false,
-    //        data: formData,
-    //        success: function (response) {
-    //            alert(response);
-    //        }
-    //    });
-    //});
-    var image = document.getElementById("like");
-    function changeColor() {
-        if (image.getAttribute('src') == "/assets/img/FilledHeart.png") {
-            image.src = "/assets/img/EmptyHeart.png";
-        }
-        else {
-            image.src = "/assets/img/FilledHeart.png";
-        }
-    }
-</script>
+
+
+@section scripts {
+    <script language="javascript" type="text/javascript">
+        $(document).ready(function () {
+            $("i[data-toggle='heart']")
+                .css({ "cursor": "pointer" })
+                .click(function (e) {
+                    var target = $(e.target);
+                    var activityId = target.attr("data-id");
+                    var heartSet = target.hasClass("glyphicon-heart");
+                    var fullUrl = '@Url.Action("heart", "api/Profile")/' + activityId;
+                    $.ajax({
+                        method: heartSet ? "DELETE" : "PUT",
+                        //url: "api/Profile/heart/" + activityId,
+                        url: fullUrl,
+                        data: null
+                    })
+                        .done(function (r) {
+                            target.removeClass();
+                            target.addClass("glyphicon " + (heartSet ? "glyphicon-heart-empty" : "glyphicon-heart"));
+                        })
+                        .fail(function (r) {
+                            alert("Failed to change heart status");
+                        });
+                });
+        });
+    </script>
+}
+
+
 
 @foreach (var item in Model)
 {
@@ -127,29 +128,7 @@
                 <div class="panel-footer">
                     <div class="container">
                         <div class="col-md-1 my-1">
-                            @using (Ajax.BeginForm($"LikeProfileItemAjax/{item.ID}", "Profile", new { username = item.Username }, new AjaxOptions
-                            {
-                                InsertionMode = InsertionMode.InsertAfter,
-                                HttpMethod = "POST",
-                                OnSuccess = "changeColor()",
-                            }, new { id = "like" }))
-                            {
-                                <input type="image" id="like" src="/assets/img/EmptyHeart.png" width="20" height="20" name="submit " onclick="changeColor()" />
-                            }
-                            @if (item.LikedByUser == false)
-                            {
-
-
-                                <a href='@Url.Action($"LikeProfileItem/{item.ID}", "Profile", new { username = item.Username })'>
-                                    <img src="~/assets/img/EmptyHeart.png" width="30" height="30" />
-                                </a>
-                            }
-                            else
-                            {
-
-                                <a href='@Url.Action($"LikeProfileItem/{item.ID}", "Profile", new { username = item.Username })'>
-                                    <img src="~/assets/img/FilledHeart.png" width="30" height="30" />
-                                </a>}
+                            @Html.DisplayFor(modelItem => item.LikedByUser, new { Id = item.ID })
                         </div>
 
                         <div class="col-md-1 my-1">
@@ -346,17 +325,8 @@
             <div class="panel-footer">
                 <div class="container">
                     <div class="col-md-1 my-1">
-                        @if (item.LikedByUser == false)
-                        {
-                            <a href='@Url.Action($"LikeProfileItem/{item.ID}", "Profile",  new { username = item.Username })'>
-                                <img src="~/assets/img/EmptyHeart.png" width="30" height="30" />
-                            </a>
-                        }
-                        else
-                        {
-                            <a href='@Url.Action($"LikeProfileItem/{item.ID}", "Profile",  new { username = item.Username })'>
-                                <img src="~/assets/img/FilledHeart.png" width="30" height="30" />
-                            </a>}
+                        @Html.DisplayFor(modelItem => item.LikedByUser, new { Id = item.ID })
+
                     </div>
 
                     <div class="col-md-1 my-1">

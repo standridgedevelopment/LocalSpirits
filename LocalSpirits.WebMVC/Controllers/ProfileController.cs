@@ -143,7 +143,21 @@ namespace LocalSpirits.WebMVC.Controllers
             profileService.LikeFeedItem(id);
             return Content(message);
         }
+        private bool SetHeartState(int ActivityId, bool newState)
+        {
+            var userId = Guid.Parse(User.Identity.GetUserId());
+            var service = new ProfileServices(userId);
 
+            return service.LikeFeedItem(ActivityId);
+        }
+
+        [Route("{id}/Heart")]
+        [HttpPut]
+        public bool ToggleHeartOn(int id) => SetHeartState(id, true);
+
+        [Route("{id}/Heart")]
+        [HttpDelete]
+        public bool ToggleHeartOff(int id) => SetHeartState(id, false);
         public ActionResult Edit()
         {
             var service = CreateProfileService();

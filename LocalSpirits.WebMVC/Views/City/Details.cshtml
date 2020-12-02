@@ -135,7 +135,7 @@
             @foreach (var item in Model)
             {
             <div>
-                @Html.ActionLink("All Events", $"Details/{item.CityID}", new { eventType = "" }, new { @class = "btn btn-warning btn-xs" })
+                @Html.ActionLink("All Events", $"Details/{item.CityID}", new { eventType = "" }, new { @class = "btn btn-warning btn-xs", @style="" })
                 @Html.ActionLink("Karaoke", $"Details/{item.CityID}", new { eventType = "Karaoke" }, new { @class = "btn btn-success btn-xs" })
                 @Html.ActionLink("Trivia", $"Details/{item.CityID}", new { eventType = "Trivia" }, new { @class = "btn btn-danger btn-xs" })
                 @Html.ActionLink("Live Music", $"Details/{item.CityID}", new { eventType = "Music" }, new { @class = "btn btn-primary btn-xs" })

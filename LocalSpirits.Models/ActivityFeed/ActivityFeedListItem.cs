@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +17,7 @@ namespace LocalSpirits.Models.ActivityFeed
         public string ProfilePicture { get; set; }
         public string UsersFullName { get; set; }
         public string Activity { get; set; }
+        [UIHint("Liked")]
         public bool LikedByUser { get; set; }
         public string Content { get; set; }
         public int ObjectID { get; set; }

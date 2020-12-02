@@ -237,7 +237,7 @@ namespace LocalSpirits.Services
                         BusinessID = visit.Event.BusinessID,
                         Business = visit.Event.Business,
                         start = visit.Event.start,
-                        end = visit.Event.end,                     
+                        end = visit.Event.end,
                         ThirdPartyWebsite = visit.Event.ThirdPartyWebsite,
                         color = visit.Event.color,
                     };
@@ -328,7 +328,7 @@ namespace LocalSpirits.Services
                 try
                 {
                     var userProfile = ctx.Profiles.Single(e => e.ID == _userId);
-                    
+
                     foreach (var friend in userProfile.FriendsList)
                     {
                         //FriendsProfile
@@ -454,8 +454,19 @@ namespace LocalSpirits.Services
                     var foundLike = ctx.Likes.Single(e => e.ActivityFeedID == id && e.UserID == _userId);
                     return foundLike;
                 }
-                catch {}
-            return null;
+                catch { }
+                return null;
+            }
+        }
+        public ActivityFeed GetFeedItem(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+
+                var foundActivity = ctx.ActivityFeed.Single(e => e.ID == id);
+                return foundActivity;
+
+
             }
         }
         public bool LikeFeedItem(int id)
@@ -494,7 +505,7 @@ namespace LocalSpirits.Services
                 {
                     return true;
                 }
-                
+
             }
             return false;
         }
@@ -511,7 +522,7 @@ namespace LocalSpirits.Services
                     TimeCreated = DateTimeOffset.Now,
                     Recieved = false,
                 };
-               
+
                 ctx.Notifications.Add(notification);
                 ctx.SaveChanges();
                 return true;

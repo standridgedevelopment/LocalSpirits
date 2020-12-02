@@ -57,12 +57,11 @@ will truncate terms that are too long to fit in the left column
     margin-left: 60px;
 }
 
-}
-a {
-    color: #FF4D00!important;
+/*a {
+    color: #FF4D00!important;*/
     /*#FF8C00;*/
-    text-decoration: none;
-}
+    /*text-decoration: none;
+}*/
 textarea {
     max-width: 280px;
 }
@@ -79,4 +78,7 @@ textarea {
     }
 .nav li a {
     color: #FFF;
+}
+.glyphicon {
+    font-size: 30px !important;
 }
