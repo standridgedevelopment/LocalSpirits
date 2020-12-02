@@ -128,52 +128,89 @@ namespace LocalSpirits.WebMVC.Controllers
             else ModelState.AddModelError("", "Business could not be updated.");
             return View(model);
         }
-        public ActionResult AddRating(int id)
+        //public ActionResult AddRating(int id)
+        //{
+        //    var businessService = CreateBusinessService();
+        //    var visitedService = CreateVisitedService();
+  
+        //    var foundVisit = visitedService.GetVisitByBusinessID(id);
+        //    ModelState.Clear();
+        //    if (foundVisit.BusinessID == null)
+        //    {
+        //        var newVisit = new VisitedCreate();
+        //        newVisit.BusinessID = id;
+        //        visitedService.CreateVisit(newVisit);
+        //        var model = new VisitedDetail();
+        //        model.BusinessID = id;
+        //        return View(model);
+        //    }
+        //    return View(foundVisit);
+        //}
+
+        public ActionResult AddRating(int id, int rating)
         {
             var businessService = CreateBusinessService();
             var visitedService = CreateVisitedService();
-  
+            var profileService = CreateProfileService();
+
+            var business = businessService.GetByID(id);
             var foundVisit = visitedService.GetVisitByBusinessID(id);
+            foundVisit.Rating = rating;
+
+            var newFeedItem = new ActivityFeedCreate();
+            newFeedItem.Activity = TypeOfActivity.Rating;
+            newFeedItem.ObjectType = "Business";
+            newFeedItem.ObjectID = (int)id;
+            newFeedItem.Content = $"{rating}-star rating for {business.Name}";
+
             ModelState.Clear();
             if (foundVisit.BusinessID == null)
             {
                 var newVisit = new VisitedCreate();
                 newVisit.BusinessID = id;
+                newVisit.Rating = rating;
                 visitedService.CreateVisit(newVisit);
-                var model = new VisitedDetail();
-                model.BusinessID = id;
-                return View(model);
+                profileService.CreateFeedItem(newFeedItem);
+                return RedirectToAction($"Details/{id}");
             }
-            return View(foundVisit);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult AddRating(int id, VisitedDetail model)
-        {
-            var visitedService = CreateVisitedService();
-            var profileService = CreateProfileService();
-            var businessService = CreateBusinessService();
-
-            var business = businessService.GetByID((int)model.BusinessID);
-            var newFeedItem = new ActivityFeedCreate();
-            newFeedItem.Activity = TypeOfActivity.Rating;
-            newFeedItem.ObjectType = "Business";
-            newFeedItem.ObjectID = (int)model.BusinessID;
-            newFeedItem.Content = $"{model.Rating}-star rating for {business.Name}";
-
-            if (!ModelState.IsValid) return View(model);
-
-            string result = visitedService.UpdateRating(model, model.BusinessID);
+            
+            string result = visitedService.UpdateRating(foundVisit, id);
             if (result == "Okay")
             {
                 TempData["SaveResult"] = "Rating updated!";
                 profileService.CreateFeedItem(newFeedItem);
-                return RedirectToAction($"Details/{model.BusinessID}");
+                return RedirectToAction($"Details/{id}");
             }
             else ModelState.AddModelError("", "Business could not be updated.");
-            return View(model);
+            return View();
         }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult AddRating(int id, VisitedDetail model)
+        //{
+        //    var visitedService = CreateVisitedService();
+        //    var profileService = CreateProfileService();
+        //    var businessService = CreateBusinessService();
+
+        //    var business = businessService.GetByID((int)model.BusinessID);
+        //    var newFeedItem = new ActivityFeedCreate();
+        //    newFeedItem.Activity = TypeOfActivity.Rating;
+        //    newFeedItem.ObjectType = "Business";
+        //    newFeedItem.ObjectID = (int)model.BusinessID;
+        //    newFeedItem.Content = $"{model.Rating}-star rating for {business.Name}";
+
+        //    if (!ModelState.IsValid) return View(model);
+
+        //    string result = visitedService.UpdateRating(model, model.BusinessID);
+        //    if (result == "Okay")
+        //    {
+        //        TempData["SaveResult"] = "Rating updated!";
+        //        profileService.CreateFeedItem(newFeedItem);
+        //        return RedirectToAction($"Details/{model.BusinessID}");
+        //    }
+        //    else ModelState.AddModelError("", "Business could not be updated.");
+        //    return View(model);
+        //}
         public ActionResult Delete(int id)
         {
             var service = CreateBusinessService();

@@ -404,6 +404,8 @@
     <Content Include="Views\Profile\test.cshtml" />
     <Content Include="Views\Profile\Notifications.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Liked.cshtml" />
+    <Content Include="Views\Profile\_GetCurrentLikes.cshtml" />
+    <Content Include="Views\Profile\_ReloadLikes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

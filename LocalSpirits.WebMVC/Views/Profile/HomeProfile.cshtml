@@ -27,11 +27,10 @@
                 <dd>
                     @Html.DisplayFor(modelItem => modelItem.State)
                 </dd>
-                <dt>
-                    @Html.ActionLink("Update Profile", "Edit")
-                </dt>
             </dl>
+
         </div>
+        @Html.ActionLink("Update Profile", "Edit", null, new { @class = "btn btn-warning btn-xs" })
     </div>
 </div>
 

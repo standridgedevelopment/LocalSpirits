@@ -143,21 +143,50 @@ namespace LocalSpirits.WebMVC.Controllers
             profileService.LikeFeedItem(id);
             return Content(message);
         }
-        private bool SetHeartState(int ActivityId, bool newState)
+        public ActionResult GetLikes(int id)
         {
-            var userId = Guid.Parse(User.Identity.GetUserId());
-            var service = new ProfileServices(userId);
-
-            return service.LikeFeedItem(ActivityId);
+            var profileService = CreateProfileService();
+            var feedItem = profileService.GetFeedItem(id);
+           
+            return PartialView("_GetCurrentLikes", feedItem);
         }
+        public ActionResult SetHeartState(int id)
+        {
+            var profileService = CreateProfileService();
 
-        [Route("{id}/Heart")]
-        [HttpPut]
-        public bool ToggleHeartOn(int id) => SetHeartState(id, true);
+            var foundLike = profileService.GetLike(id);
+            string message = "test";
 
-        [Route("{id}/Heart")]
-        [HttpDelete]
-        public bool ToggleHeartOff(int id) => SetHeartState(id, false);
+            var activityItem = profileService.GetFeedItem(id);
+            if (foundLike != null)
+            {
+                profileService.UnlikeFeedItem(id);
+                return PartialView("_ReloadLikes", activityItem);
+            }
+            profileService.LikeFeedItem(id);
+            return PartialView("_ReloadLikes", activityItem);
+        }
+        //public ActionResult SetHeartState(int id)
+        //{
+        //    var profileService = CreateProfileService();
+
+        //    var foundLike = profileService.GetLike(id);
+        //    string message = "test";
+
+        //    if (foundLike != null)
+        //    {
+        //        profileService.UnlikeFeedItem(id);
+        //        return Content(message);
+        //    }
+        //    profileService.LikeFeedItem(id);
+        //    return Content(message);
+        //}
+
+        [Route("Heart/{id}")]
+        //public bool ToggleHeartOn(int id) => SetHeartState(id, true);
+
+        ////[Route("{id}/Heart")]
+        ////public bool ToggleHeartOff(int id) => SetHeartState(id, false);
         public ActionResult Edit()
         {
             var service = CreateProfileService();

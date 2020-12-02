@@ -11,7 +11,7 @@ namespace LocalSpirits.WebMVC.Controllers.WebAPI
 {
 
     [Authorize]
-    [RoutePrefix("/api/Profile")]
+    [RoutePrefix("api/Profile")]
     public class ProfileController : ApiController
     {
         private bool SetHeartState(int ActivityId, bool newState)
@@ -22,11 +22,11 @@ namespace LocalSpirits.WebMVC.Controllers.WebAPI
             return service.LikeFeedItem(ActivityId);
         }
 
-        [Route("/Heart/{id}")]
+        [Route("{id}/Heart")]
         [HttpPut]
         public bool ToggleHeartOn(int id) => SetHeartState(id, true);
 
-        [Route( "/Heart /{id}")]
+        [Route("{id}/Heart")]
         [HttpDelete]
         public bool ToggleHeartOff(int id) => SetHeartState(id, false);
     }

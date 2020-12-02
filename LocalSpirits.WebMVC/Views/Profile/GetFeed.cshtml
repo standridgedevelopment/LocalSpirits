@@ -14,27 +14,38 @@
 
 
 @section scripts {
+   
     <script language="javascript" type="text/javascript">
+
         $(document).ready(function () {
             $("i[data-toggle='heart']")
+
                 .css({ "cursor": "pointer" })
                 .click(function (e) {
+                    //$('#likes').load('/Profile/_ReloadLikes'); 
                     var target = $(e.target);
                     var activityId = target.attr("data-id");
                     var heartSet = target.hasClass("glyphicon-heart");
-                    var fullUrl = '@Url.Action("heart", "api/Profile")/' + activityId;
+                    console.log(heartSet);
+                    var fullUrl = '@Url.Action("SetHeartState", "Profile")/' + activityId;
                     $.ajax({
                         method: heartSet ? "DELETE" : "PUT",
-                        //url: "api/Profile/heart/" + activityId,
                         url: fullUrl,
-                        data: null
+                        //url: "/api/Profile/" + activityId + "/Heart",
+                        data: null,
+                        success: function (objOperations) {
+
+                            $("#likes").html(objOperations);
+
+                        }
                     })
+
                         .done(function (r) {
                             target.removeClass();
                             target.addClass("glyphicon " + (heartSet ? "glyphicon-heart-empty" : "glyphicon-heart"));
                         })
                         .fail(function (r) {
-                            alert("Failed to change heart status");
+                            alert(r.status + r.responseText);
                         });
                 });
         });
@@ -60,7 +71,7 @@
 
     if (item.Activity == "Like")
     {
-        <div class="panel panel-warning" style="width: 25rem;">
+        <div class="panel panel-warning" style="width: 32rem;">
 
             <div class="col-md-3 my-6">
                 <img src="@Url.Content(@item.ProfilePicture)" width="55" height="55" />
@@ -82,7 +93,7 @@
         if (item.Content.Contains("Karaoke"))
         {
 
-            <div class="panel panel-success" style="width: 25rem;">
+            <div class="panel panel-success" style="width: 32rem;">
                 <div class="panel-heading">
                     <div class="row my-5">
 
@@ -141,7 +152,7 @@
         }
         if (item.Content.Contains("Music"))
         {
-            <div class="panel panel-primary" style="width: 25rem;">
+            <div class="panel panel-primary" style="width: 32rem;">
                 <div class="panel-heading">
                     <div class="row my-5">
                         <div class="col-md-3 my-6">
@@ -209,7 +220,7 @@
         }
         if (item.Content.Contains("Trivia"))
         {
-            <div class="panel panel-danger" style="width: 25rem;">
+            <div class="panel panel-danger" style="width: 32rem;">
                 <div class="panel-heading">
                     <div class="row my-5">
                         <div class="col-md-3 my-6">
@@ -279,7 +290,7 @@
     if (item.Activity == "Follow")
     {
 
-        <div class="panel panel-warning" style="width: 25rem;">
+        <div class="panel panel-warning" style="width: 32rem;">
             <div class="panel-heading">
                 <div class="row my-5">
 
@@ -300,27 +311,9 @@
                 @Html.ActionLink($"{item.Content}", $"Details", $"{item.ObjectType}", new { id = item.ObjectID }, new { @class = "my-class" })
                 <br />
                 <br />
-                @if (item.AmountOfLikes == 1 && item.LikedByUser == true)
-                {
-
-                    <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" /> You liked this</p>
-                }
-                @if (item.AmountOfLikes == 1 && item.LikedByUser == false)
-                {
-                    <p><img src="~/assets/img/FilledHeart.png" width="20" height="20" /> 1 person liked this</p>
-                }
-                @if (item.AmountOfLikes == 2 && item.LikedByUser == true)
-                {
-                    <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" />  You and 1 person liked this</p>
-                }
-                @if (item.AmountOfLikes > 1 && item.LikedByUser == false)
-                {
-                    <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" />  @Html.Raw(item.AmountOfLikes) people liked this</p>
-                }
-                @if (item.AmountOfLikes > 2 && item.LikedByUser == true)
-                {
-                    <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" />  You and @Html.Raw(item.AmountOfLikes - 1) people liked this</p>
-                }
+                <div id="likes">
+                   @Html.Partial("_ReloadLikes", item) 
+                </div>
             </div>
             <div class="panel-footer">
                 <div class="container">
@@ -341,7 +334,7 @@
     {
         if (item.Content.Contains("Karaoke"))
         {
-            <div class="panel panel-success" style="width: 25rem;">
+            <div class="panel panel-success" style="width: 32rem;">
                 <div class="panel-heading">
                     <div class="row my-5">
                         <div class="col-md-3 my-6">
@@ -408,7 +401,7 @@
         }
         if (item.Content.Contains("Music"))
         {
-            <div class="panel panel-primary" style="width: 25rem;">
+            <div class="panel panel-primary" style="width: 32rem;">
                 <div class="panel-heading">
                     <div class="row my-5">
                         <div class="col-md-3 my-6">
@@ -474,7 +467,7 @@
         }
         if (item.Content.Contains("Trivia"))
         {
-            <div class="panel panel-danger" style="width: 25rem;">
+            <div class="panel panel-danger" style="width: 32rem;">
                 <div class="panel-heading">
                     <div class="row my-5">
                         <div class="col-md-3 my-6">
@@ -540,7 +533,7 @@
     }
     if (item.Activity == "Rating")
     {
-        <div class="panel panel-warning" style="width: 25rem;">
+        <div class="panel panel-warning" style="width: 32rem;">
             <div class="panel-heading">
                 <div class="row my-5">
                     <div class="col-md-3 my-6">

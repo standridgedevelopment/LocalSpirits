@@ -458,13 +458,40 @@ namespace LocalSpirits.Services
                 return null;
             }
         }
-        public ActivityFeed GetFeedItem(int id)
+        public ActivityFeedListItem GetFeedItem(int id)
         {
             using (var ctx = new ApplicationDbContext())
             {
 
-                var foundActivity = ctx.ActivityFeed.Single(e => e.ID == id);
-                return foundActivity;
+                var activity = ctx.ActivityFeed.Single(e => e.ID == id);
+
+                var userProfile = ctx.Profiles.Single(e => e.ID == _userId);
+
+                bool likedByUser = LikedByUser(activity);
+                var timePosted = GetFeedPostTime(activity);
+
+
+                var activityItem = new ActivityFeedListItem
+                {
+                    ID = activity.ID,
+                    UserID = activity.UserID,
+                    Name = activity.Profile.FullName,
+                    Content = activity.Content,
+                    Activity = activity.Activity,
+                    Username = activity.Profile.Username,
+                    ProfilePicture = activity.Profile.ProfilePicture,
+                    UsersFullName = userProfile.FullName,
+                    ObjectID = activity.ObjectID,
+                    ObjectType = activity.ObjectType,
+                    Created = activity.Created,
+                    BusinessID = activity.BusinessID,
+                    AmountOfLikes = activity.AmountOfLikes,
+                    LikedByUser = likedByUser,
+                    WhenPosted = timePosted,
+
+
+                };
+                return activityItem;
 
 
             }

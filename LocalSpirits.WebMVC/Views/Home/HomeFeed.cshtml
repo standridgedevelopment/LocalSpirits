@@ -27,7 +27,7 @@
 
     if (item.Activity == "Like")
     {
-        <div class="panel panel-warning" style="width: 25rem;">
+        <div class="panel panel-warning" style="width: 32rem;">
             <div class="panel-heading">
                 <div class="row my-5">
 
@@ -52,7 +52,7 @@
     {
         if (item.Content.Contains("Karaoke"))
         {
-            <div class="panel panel-success" style="width: 25rem;">
+            <div class="panel panel-success" style="width: 32rem;">
                 <div class="panel-heading">
                     <div class="row my-5">
                         <div class="col-md-3 my-6">
@@ -119,7 +119,7 @@
         }
         if (item.Content.Contains("Music"))
         {
-            <div class="panel panel-primary" style="width: 25rem;">
+            <div class="panel panel-primary" style="width: 32rem;">
                 <div class="panel-heading">
                     <div class="row my-5">
                         <div class="col-md-3 my-6">
@@ -186,7 +186,7 @@
         }
         if (item.Content.Contains("Trivia"))
         {
-            <div class="panel panel-danger" style="width: 25rem;">
+            <div class="panel panel-danger" style="width: 32rem;">
                 <div class="panel-heading">
                     <div class="row my-5">
                         <div class="col-md-3 my-6">
@@ -255,7 +255,7 @@
     if (item.Activity == "Follow")
     {
 
-        <div class="panel panel-warning" style="width: 25rem;">
+        <div class="panel panel-warning" style="width: 32rem;">
             <div class="panel-heading">
                 <div class="row my-5">
                     <div class="col-md-3 my-6">
@@ -324,7 +324,7 @@
     {
         if (item.Content.Contains("Karaoke"))
         {
-            <div class="panel panel-success" style="width: 25rem;">
+            <div class="panel panel-success" style="width: 32rem;">
                 <div class="panel-heading">
                     @Html.ActionLink($"{item.Name}", "Details", "Business", new { id = item.BusinessID }, new { @class = "my-class" })
                     <p class="time">@Html.Raw(item.WhenPosted)</p>
@@ -383,7 +383,7 @@
         }
         if (item.Content.Contains("Music"))
         {
-            <div class="panel panel-primary" style="width: 25rem;">
+            <div class="panel panel-primary" style="width: 32rem;">
                 <div class="panel-heading">
                     @Html.ActionLink($"{item.Name}", "Details", "Business", new { id = item.BusinessID }, new { @class = "my-class" })
                     <p class="time">@Html.Raw(item.WhenPosted)</p>
@@ -442,7 +442,7 @@
         }
         if (item.Content.Contains("Trivia"))
         {
-            <div class="panel panel-danger" style="width: 25rem;">
+            <div class="panel panel-danger" style="width: 32rem;">
                 <div class="panel-heading">
                     @Html.ActionLink($"{item.Name}", "Details", "Business", new { id = item.BusinessID }, new { @class = "my-class" })
                     <p class="time">@Html.Raw(item.WhenPosted)</p>
@@ -502,7 +502,7 @@
     }
     if (item.Activity == "Rating")
     {
-        <div class="panel panel-warning" style="width: 25rem;">
+        <div class="panel panel-warning" style="width: 32rem;">
             <div class="panel-heading">
                 <div class="row my-5">
                     <div class="col-md-3 my-6">
