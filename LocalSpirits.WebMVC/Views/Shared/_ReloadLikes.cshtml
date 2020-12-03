@@ -1,0 +1,3 @@
+﻿@model LocalSpirits.Models.ActivityFeed.ActivityFeedListItem
+
+@Html.Action($"GetLikes", "Profile", new { id = Model.ID })

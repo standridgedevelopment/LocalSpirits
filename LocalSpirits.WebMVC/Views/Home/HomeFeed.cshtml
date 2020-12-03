@@ -7,18 +7,46 @@
 <h2>Home</h2>
 <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")" type="text/javascript"></script>
 <script src="//code.jquery.com/jquery-2.1.1.min.js" type="text/javascript"></script>
-<script type="text/javascript">
-    $(function () {
+@section scripts {
+
+
+    <script language="javascript" type="text/javascript">
 
         $(document).ready(function () {
-            $("like").click(function () {
-                // Change text of button element
-                $("#Geeks").html("Html Click");
-            });
-        });
+            $("i[data-toggle='heart']")
 
-    });
-</script>
+                .css({ "cursor": "pointer" })
+                .click(function (e) {
+                    //$('#likes').load('/Profile/_ReloadLikes');
+                    var target = $(e.target);
+                    var activityId = target.attr("data-id");
+                    var heartSet = target.hasClass("glyphicon-heart");
+                    console.log(heartSet);
+                    var fullUrl = '@Url.Action("SetHeartState", "Profile")/' + activityId;
+                    $.ajax({
+                        method: heartSet ? "DELETE" : "PUT",
+                        url: fullUrl,
+                        //url: "/api/Profile/" + activityId + "/Heart",
+                        data: null,
+                        success: function (objOperations) {
+
+                            //$("#likes").html(objOperations);
+                            $("#"+activityId).html(objOperations);
+
+                        }
+                    })
+
+                        .done(function (r) {
+                            target.removeClass();
+                            target.addClass("glyphicon " + (heartSet ? "glyphicon-heart-empty" : "glyphicon-heart"));
+                        })
+                        .fail(function (r) {
+                            alert(r.status + r.responseText);
+                        });
+                });
+        });
+    </script>
+}
 
 
 @foreach (var item in Model)
@@ -71,42 +99,15 @@
                     to their calendar.
                     <br />
                     <br />
-                    @if (item.AmountOfLikes == 1 && item.LikedByUser == true)
-                    {
-
-                        <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" /> You liked this</p>
-                    }
-                    @if (item.AmountOfLikes == 1 && item.LikedByUser == false)
-                    {
-                        <p><img src="~/assets/img/FilledHeart.png" width="20" height="20" /> 1 person liked this</p>
-                    }
-                    @if (item.AmountOfLikes == 2 && item.LikedByUser == true)
-                    {
-                        <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" />  You and 1 person liked this</p>
-                    }
-                    @if (item.AmountOfLikes > 1 && item.LikedByUser == false)
-                    {
-                        <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" />  @Html.Raw(item.AmountOfLikes) people liked this</p>
-                    }
-                    @if (item.AmountOfLikes > 2 && item.LikedByUser == true)
-                    {
-                        <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" />  You and @Html.Raw(item.AmountOfLikes - 1) people liked this</p>
-                    }
+                    <div id="@Html.Raw(item.ID)">
+                        @Html.Partial("_ReloadLikes", item)
+                    </div>
                 </div>
                 <div class="panel-footer">
                     <div class="container">
                         <div class="col-md-1 my-1">
-                            @if (item.LikedByUser == false)
-                            {
-                                <a href='@Url.Action("LikeFeedItem", "Profile",  new { id = item.ID })'>
-                                    <img src="~/assets/img/EmptyHeart.png" width="30" height="30" />
-                                </a>
-                            }
-                            else
-                            {
-                                <a href='@Url.Action("LikeFeedItem", "Profile",  new { id = item.ID })'>
-                                    <img src="~/assets/img/FilledHeart.png" width="30" height="30" />
-                                </a>}
+                            @Html.DisplayFor(modelItem => item.LikedByUser, new { Id = item.ID })
+
                         </div>
 
                         <div class="col-md-1 my-1">
@@ -138,42 +139,15 @@
                     to their calendar.
                     <br />
                     <br />
-                    @if (item.AmountOfLikes == 1 && item.LikedByUser == true)
-                    {
-
-                        <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" /> You liked this</p>
-                    }
-                    @if (item.AmountOfLikes == 1 && item.LikedByUser == false)
-                    {
-                        <p><img src="~/assets/img/FilledHeart.png" width="20" height="20" /> 1 person liked this</p>
-                    }
-                    @if (item.AmountOfLikes == 2 && item.LikedByUser == true)
-                    {
-                        <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" />  You and 1 person liked this</p>
-                    }
-                    @if (item.AmountOfLikes > 1 && item.LikedByUser == false)
-                    {
-                        <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" />  @Html.Raw(item.AmountOfLikes) people liked this</p>
-                    }
-                    @if (item.AmountOfLikes > 2 && item.LikedByUser == true)
-                    {
-                        <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" />  You and @Html.Raw(item.AmountOfLikes - 1) people liked this</p>
-                    }
+                    <div id="@Html.Raw(item.ID)">
+                        @Html.Partial("_ReloadLikes", item)
+                    </div>
                 </div>
                 <div class="panel-footer">
                     <div class="container">
                         <div class="col-md-1 my-1">
-                            @if (item.LikedByUser == false)
-                            {
-                                <a href='@Url.Action("LikeFeedItem", "Profile",  new { id = item.ID })'>
-                                    <img src="~/assets/img/EmptyHeart.png" width="30" height="30" />
-                                </a>
-                            }
-                            else
-                            {
-                                <a href='@Url.Action("LikeFeedItem", "Profile",  new { id = item.ID })'>
-                                    <img src="~/assets/img/FilledHeart.png" width="30" height="30" />
-                                </a>}
+                            @Html.DisplayFor(modelItem => item.LikedByUser, new { Id = item.ID })
+
                         </div>
 
                         <div class="col-md-1 my-1">
@@ -205,42 +179,15 @@
                     to their calendar.
                     <br />
                     <br />
-                    @if (item.AmountOfLikes == 1 && item.LikedByUser == true)
-                    {
-
-                        <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" /> You liked this</p>
-                    }
-                    @if (item.AmountOfLikes == 1 && item.LikedByUser == false)
-                    {
-                        <p><img src="~/assets/img/FilledHeart.png" width="20" height="20" /> 1 person liked this</p>
-                    }
-                    @if (item.AmountOfLikes == 2 && item.LikedByUser == true)
-                    {
-                        <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" />  You and 1 person liked this</p>
-                    }
-                    @if (item.AmountOfLikes > 1 && item.LikedByUser == false)
-                    {
-                        <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" />  @Html.Raw(item.AmountOfLikes) people liked this</p>
-                    }
-                    @if (item.AmountOfLikes > 2 && item.LikedByUser == true)
-                    {
-                        <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" />  You and @Html.Raw(item.AmountOfLikes - 1) people liked this</p>
-                    }
+                    <div id="@Html.Raw(item.ID)">
+                        @Html.Partial("_ReloadLikes", item)
+                    </div>
                 </div>
                 <div class="panel-footer">
                     <div class="container">
                         <div class="col-md-1 my-1">
-                            @if (item.LikedByUser == false)
-                            {
-                                <a href='@Url.Action("LikeFeedItem", "Profile",  new { id = item.ID })'>
-                                    <img src="~/assets/img/EmptyHeart.png" width="30" height="30" />
-                                </a>
-                            }
-                            else
-                            {
-                                <a href='@Url.Action("LikeFeedItem", "Profile",  new { id = item.ID })'>
-                                    <img src="~/assets/img/FilledHeart.png" width="30" height="30" />
-                                </a>}
+                            @Html.DisplayFor(modelItem => item.LikedByUser, new { Id = item.ID })
+
                         </div>
 
                         <div class="col-md-1 my-1">
@@ -274,42 +221,15 @@
                 @Html.ActionLink($"{item.Content}", $"Details", $"{item.ObjectType}", new { id = item.ObjectID }, new { @class = "my-class" })
                 <br />
                 <br />
-                @if (item.AmountOfLikes == 1 && item.LikedByUser == true)
-                {
-
-                    <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" /> You liked this</p>
-                }
-                @if (item.AmountOfLikes == 1 && item.LikedByUser == false)
-                {
-                    <p><img src="~/assets/img/FilledHeart.png" width="20" height="20" /> 1 person liked this</p>
-                }
-                @if (item.AmountOfLikes == 2 && item.LikedByUser == true)
-                {
-                    <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" />  You and 1 person liked this</p>
-                }
-                @if (item.AmountOfLikes > 1 && item.LikedByUser == false)
-                {
-                    <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" />  @Html.Raw(item.AmountOfLikes) people liked this</p>
-                }
-                @if (item.AmountOfLikes > 2 && item.LikedByUser == true)
-                {
-                    <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" />  You and @Html.Raw(item.AmountOfLikes - 1) people liked this</p>
-                }
+                <div id="@Html.Raw(item.ID)">
+                    @Html.Partial("_ReloadLikes", item)
+                </div>
             </div>
             <div class="panel-footer">
                 <div class="container">
                     <div class="col-md-1 my-1">
-                        @if (item.LikedByUser == false)
-                        {
-                            <a href='@Url.Action("LikeFeedItem", "Profile",  new { id = item.ID })'>
-                                <img src="~/assets/img/EmptyHeart.png" width="30" height="30" />
-                            </a>
-                        }
-                        else
-                        {
-                            <a href='@Url.Action("LikeFeedItem", "Profile",  new { id = item.ID })'>
-                                <img src="~/assets/img/FilledHeart.png" width="30" height="30" />
-                            </a>}
+                        @Html.DisplayFor(modelItem => item.LikedByUser, new { Id = item.ID })
+
                     </div>
 
                     <div class="col-md-1 my-1">
@@ -335,42 +255,15 @@
                     <p>@Html.ActionLink($"{item.Content}", $"Details", $"{item.ObjectType}", new { id = item.ObjectID }, new { @class = "my-class" })</p>
                     <br />
                     <br />
-                    @if (item.AmountOfLikes == 1 && item.LikedByUser == true)
-                    {
-
-                        <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" /> You liked this</p>
-                    }
-                    @if (item.AmountOfLikes == 1 && item.LikedByUser == false)
-                    {
-                        <p><img src="~/assets/img/FilledHeart.png" width="20" height="20" /> 1 person liked this</p>
-                    }
-                    @if (item.AmountOfLikes == 2 && item.LikedByUser == true)
-                    {
-                        <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" />  You and 1 person liked this</p>
-                    }
-                    @if (item.AmountOfLikes > 1 && item.LikedByUser == false)
-                    {
-                        <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" />  @Html.Raw(item.AmountOfLikes) people liked this</p>
-                    }
-                    @if (item.AmountOfLikes > 2 && item.LikedByUser == true)
-                    {
-                        <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" />  You and @Html.Raw(item.AmountOfLikes - 1) people liked this</p>
-                    }
+                    <div id="@Html.Raw(item.ID)">
+                        @Html.Partial("_ReloadLikes", item)
+                    </div>
                 </div>
                 <div class="panel-footer">
                     <div class="container">
                         <div class="col-md-1 my-1">
-                            @if (item.LikedByUser == false)
-                            {
-                                <a href='@Url.Action("LikeFeedItem", "Profile",  new { id = item.ID })'>
-                                    <img src="~/assets/img/EmptyHeart.png" width="30" height="30" />
-                                </a>
-                            }
-                            else
-                            {
-                                <a href='@Url.Action("LikeFeedItem", "Profile",  new { id = item.ID })'>
-                                    <img src="~/assets/img/FilledHeart.png" width="30" height="30" />
-                                </a>}
+                            @Html.DisplayFor(modelItem => item.LikedByUser, new { Id = item.ID })
+
                         </div>
 
                         <div class="col-md-1 my-1">
@@ -394,42 +287,15 @@
                     <p>@Html.ActionLink($"{item.Content}", $"Details", $"{item.ObjectType}", new { id = item.ObjectID }, new { @class = "my-class" })</p>
                     <br />
                     <br />
-                    @if (item.AmountOfLikes == 1 && item.LikedByUser == true)
-                    {
-
-                        <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" /> You liked this</p>
-                    }
-                    @if (item.AmountOfLikes == 1 && item.LikedByUser == false)
-                    {
-                        <p><img src="~/assets/img/FilledHeart.png" width="20" height="20" /> 1 person liked this</p>
-                    }
-                    @if (item.AmountOfLikes == 2 && item.LikedByUser == true)
-                    {
-                        <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" />  You and 1 person liked this</p>
-                    }
-                    @if (item.AmountOfLikes > 1 && item.LikedByUser == false)
-                    {
-                        <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" />  @Html.Raw(item.AmountOfLikes) people liked this</p>
-                    }
-                    @if (item.AmountOfLikes > 2 && item.LikedByUser == true)
-                    {
-                        <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" />  You and @Html.Raw(item.AmountOfLikes - 1) people liked this</p>
-                    }
+                    <div id="@Html.Raw(item.ID)">
+                        @Html.Partial("_ReloadLikes", item)
+                    </div>
                 </div>
                 <div class="panel-footer">
                     <div class="container">
                         <div class="col-md-1 my-1">
-                            @if (item.LikedByUser == false)
-                            {
-                                <a href='@Url.Action("LikeFeedItem", "Profile",  new { id = item.ID })'>
-                                    <img src="~/assets/img/EmptyHeart.png" width="30" height="30" />
-                                </a>
-                            }
-                            else
-                            {
-                                <a href='@Url.Action("LikeFeedItem", "Profile",  new { id = item.ID })'>
-                                    <img src="~/assets/img/FilledHeart.png" width="30" height="30" />
-                                </a>}
+                            @Html.DisplayFor(modelItem => item.LikedByUser, new { Id = item.ID })
+
                         </div>
 
                         <div class="col-md-1 my-1">
@@ -453,42 +319,15 @@
                     <p>@Html.ActionLink($"{item.Content}", $"Details", $"{item.ObjectType}", new { id = item.ObjectID }, new { @class = "my-class" })</p>
                     <br />
                     <br />
-                    @if (item.AmountOfLikes == 1 && item.LikedByUser == true)
-                    {
-
-                        <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" /> You liked this</p>
-                    }
-                    @if (item.AmountOfLikes == 1 && item.LikedByUser == false)
-                    {
-                        <p><img src="~/assets/img/FilledHeart.png" width="20" height="20" /> 1 person liked this</p>
-                    }
-                    @if (item.AmountOfLikes == 2 && item.LikedByUser == true)
-                    {
-                        <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" />  You and 1 person liked this</p>
-                    }
-                    @if (item.AmountOfLikes > 1 && item.LikedByUser == false)
-                    {
-                        <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" />  @Html.Raw(item.AmountOfLikes) people liked this</p>
-                    }
-                    @if (item.AmountOfLikes > 2 && item.LikedByUser == true)
-                    {
-                        <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" />  You and @Html.Raw(item.AmountOfLikes - 1) people liked this</p>
-                    }
+                    <div id="@Html.Raw(item.ID)">
+                        @Html.Partial("_ReloadLikes", item)
+                    </div>
                 </div>
                 <div class="panel-footer">
                     <div class="container">
                         <div class="col-md-1 my-1">
-                            @if (item.LikedByUser == false)
-                            {
-                                <a href='@Url.Action("LikeFeedItem", "Profile",  new { id = item.ID })'>
-                                    <img src="~/assets/img/EmptyHeart.png" width="30" height="30" />
-                                </a>
-                            }
-                            else
-                            {
-                                <a href='@Url.Action("LikeFeedItem", "Profile",  new { id = item.ID })'>
-                                    <img src="~/assets/img/FilledHeart.png" width="30" height="30" />
-                                </a>}
+                            @Html.DisplayFor(modelItem => item.LikedByUser, new { Id = item.ID })
+
                         </div>
 
                         <div class="col-md-1 my-1">
@@ -515,7 +354,7 @@
                     </div>
                 </div>
             </div>
-           
+
 
             <div class="panel-body">
 
@@ -570,42 +409,15 @@
                 }
                 <br />
                 <br />
-                @if (item.AmountOfLikes == 1 && item.LikedByUser == true)
-                {
-
-                    <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" /> You liked this</p>
-                }
-                @if (item.AmountOfLikes == 1 && item.LikedByUser == false)
-                {
-                    <p><img src="~/assets/img/FilledHeart.png" width="20" height="20" /> 1 person liked this</p>
-                }
-                @if (item.AmountOfLikes == 2 && item.LikedByUser == true)
-                {
-                    <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" />  You and 1 person liked this</p>
-                }
-                @if (item.AmountOfLikes > 1 && item.LikedByUser == false)
-                {
-                    <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" />  @Html.Raw(item.AmountOfLikes) people liked this</p>
-                }
-                @if (item.AmountOfLikes > 2 && item.LikedByUser == true)
-                {
-                    <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" />  You and @Html.Raw(item.AmountOfLikes - 1) people liked this</p>
-                }
+                <div id="@Html.Raw(item.ID)">
+                    @Html.Partial("_ReloadLikes", item)
+                </div>
             </div>
             <div class="panel-footer">
                 <div class="container">
                     <div class="col-md-1 my-1">
-                        @if (item.LikedByUser == false)
-                        {
-                            <a href='@Url.Action("LikeFeedItem", "Profile",  new { id = item.ID })'>
-                                <img src="~/assets/img/EmptyHeart.png" width="30" height="30" />
-                            </a>
-                        }
-                        else
-                        {
-                            <a href='@Url.Action("LikeFeedItem", "Profile",  new { id = item.ID })'>
-                                <img src="~/assets/img/FilledHeart.png" width="30" height="30" />
-                            </a>}
+                        @Html.DisplayFor(modelItem => item.LikedByUser, new { Id = item.ID })
+
                     </div>
 
                     <div class="col-md-1 my-1">

@@ -464,36 +464,53 @@ namespace LocalSpirits.Services
             {
 
                 var activity = ctx.ActivityFeed.Single(e => e.ID == id);
-
                 var userProfile = ctx.Profiles.Single(e => e.ID == _userId);
+                var activityItem = new ActivityFeedListItem();
 
                 bool likedByUser = LikedByUser(activity);
                 var timePosted = GetFeedPostTime(activity);
 
-
-                var activityItem = new ActivityFeedListItem
+                if (activity.UserID != null)
                 {
-                    ID = activity.ID,
-                    UserID = activity.UserID,
-                    Name = activity.Profile.FullName,
-                    Content = activity.Content,
-                    Activity = activity.Activity,
-                    Username = activity.Profile.Username,
-                    ProfilePicture = activity.Profile.ProfilePicture,
-                    UsersFullName = userProfile.FullName,
-                    ObjectID = activity.ObjectID,
-                    ObjectType = activity.ObjectType,
-                    Created = activity.Created,
-                    BusinessID = activity.BusinessID,
-                    AmountOfLikes = activity.AmountOfLikes,
-                    LikedByUser = likedByUser,
-                    WhenPosted = timePosted,
-
-
-                };
+                    activityItem = new ActivityFeedListItem
+                    {
+                        ID = activity.ID,
+                        UserID = activity.UserID,
+                        Name = activity.Profile.FullName,
+                        Content = activity.Content,
+                        Activity = activity.Activity,
+                        Username = activity.Profile.Username,
+                        ProfilePicture = activity.Profile.ProfilePicture,
+                        UsersFullName = userProfile.FullName,
+                        ObjectID = activity.ObjectID,
+                        ObjectType = activity.ObjectType,
+                        Created = activity.Created,
+                        BusinessID = activity.BusinessID,
+                        AmountOfLikes = activity.AmountOfLikes,
+                        LikedByUser = likedByUser,
+                        WhenPosted = timePosted,
+                    };
+                }
+                else
+                {
+                    activityItem = new ActivityFeedListItem
+                    {
+                        ID = activity.ID,
+                        UserID = activity.UserID,
+                        Name = activity.Business.Name,
+                        Content = activity.Content,
+                        Activity = activity.Activity,
+                        ObjectID = activity.ObjectID,
+                        ObjectType = activity.ObjectType,
+                        UsersFullName = userProfile.FullName,
+                        Created = activity.Created,
+                        BusinessID = activity.BusinessID,
+                        AmountOfLikes = activity.AmountOfLikes,
+                        LikedByUser = likedByUser,
+                        WhenPosted = timePosted,
+                    };
+                }
                 return activityItem;
-
-
             }
         }
         public bool LikeFeedItem(int id)

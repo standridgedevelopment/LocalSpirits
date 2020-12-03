@@ -1,0 +1,25 @@
+﻿@model LocalSpirits.Models.ActivityFeed.ActivityFeedListItem
+
+
+@if (Model.AmountOfLikes == 1 && Model.LikedByUser == true)
+{
+
+    <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" /> You liked this</p>
+}
+@if (Model.AmountOfLikes == 1 && Model.LikedByUser == false)
+{
+    <p><img src="~/assets/img/FilledHeart.png" width="20" height="20" /> 1 person liked this</p>
+}
+@if (Model.AmountOfLikes == 2 && Model.LikedByUser == true)
+{
+    <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" />  You and 1 person liked this</p>
+}
+@if (Model.AmountOfLikes > 1 && Model.LikedByUser == false)
+{
+    <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" />  @Html.Raw(Model.AmountOfLikes) people liked this</p>
+}
+@if (Model.AmountOfLikes > 2 && Model.LikedByUser == true)
+{
+    <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" />  You and @Html.Raw(Model.AmountOfLikes - 1) people liked this</p>
+}
+

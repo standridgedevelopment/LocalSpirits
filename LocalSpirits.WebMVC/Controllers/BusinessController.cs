@@ -12,6 +12,8 @@ using System.Web.Mvc;
 
 namespace LocalSpirits.WebMVC.Controllers
 {
+
+
     public class BusinessController : Controller
     {
         // GET: Business

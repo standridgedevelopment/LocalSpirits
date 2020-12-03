@@ -155,7 +155,6 @@ namespace LocalSpirits.WebMVC.Controllers
             var profileService = CreateProfileService();
 
             var foundLike = profileService.GetLike(id);
-            string message = "test";
 
             var activityItem = profileService.GetFeedItem(id);
             if (foundLike != null)
