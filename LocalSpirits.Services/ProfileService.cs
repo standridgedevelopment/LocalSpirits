@@ -602,6 +602,24 @@ namespace LocalSpirits.Services
 
             }
         }
+        public ICollection<Notification> GetAllNotifications()
+        {
+
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity = ctx.Profiles.Single(e => e.ID == _userId);
+                foreach (var item in entity.Notifications)
+                {
+                    if (item.Recieved == false)
+                        item.Recieved = true;
+                }
+
+                //List<Event> events = GetEvents(entity.AllVisits);
+
+                return entity.Notifications;
+
+            }
+        }
         public string GetFeedPostTime(ActivityFeed activity)
         {
             var timePosted = DateTimeOffset.Now - activity.Created;

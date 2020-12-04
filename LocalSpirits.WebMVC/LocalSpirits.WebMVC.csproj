@@ -213,6 +213,15 @@
     <Content Include="assets\ProfileIcons\parrot.png" />
     <Content Include="assets\ProfileIcons\penguin.png" />
     <Content Include="assets\ProfileIcons\seal.png" />
+    <Content Include="assets\SplashArt\alexander-gamanyuk-0SpK_7aeLcc-unsplash.jpg" />
+    <Content Include="assets\SplashArt\elevate-9Nw-uK9UeUI-unsplash.jpg" />
+    <Content Include="assets\SplashArt\elevate-sU_XYtIdcAs-unsplash.jpg" />
+    <Content Include="assets\SplashArt\kelsey-chance-tAH2cA_BL5g-unsplash.jpg" />
+    <Content Include="assets\SplashArt\laura-cleffmann-oo1Vjf5XWhw-unsplash.jpg" />
+    <Content Include="assets\SplashArt\louis-hansel-shotsoflouis-vI7pDreQLl4-unsplash.jpg" />
+    <Content Include="assets\SplashArt\natasha-t-BPTrCgSYKNA-unsplash.jpg" />
+    <Content Include="assets\SplashArt\samantha-gades-7J4T1XzpJgU-unsplash.jpg" />
+    <Content Include="assets\SplashArt\vinicius-amnx-amano-DL4OseW7WD8-unsplash.jpg" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -401,13 +410,13 @@
     <Content Include="Views\Home\Activity.cshtml" />
     <Content Include="Views\Event\Edit.cshtml" />
     <Content Include="Views\Event\Delete.cshtml" />
-    <Content Include="Views\Profile\test.cshtml" />
     <Content Include="Views\Profile\Notifications.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Liked.cshtml" />
     <Content Include="Views\Profile\_GetCurrentLikes.cshtml" />
     <Content Include="Views\Profile\_ReloadLikes.cshtml" />
     <Content Include="Views\Shared\_ReloadLikes.cshtml" />
     <Content Include="Views\Shared\_GetCurrentLikes.cshtml" />
+    <Content Include="Views\Profile\_ListNotifications.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

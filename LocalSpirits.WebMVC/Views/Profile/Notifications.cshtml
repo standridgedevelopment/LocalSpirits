@@ -1,17 +1,37 @@
 ﻿@model LocalSpirits.Models.Profile.ProfileDetail
+
+@section scripts {
+    <script type="text/javascript">
+    $(function() {
+        $('#icon').click(function() {
+                $.ajax({
+                    url: '@Url.Action("GetAllNotifications", "Profile")',
+                    type: 'GET',
+                    data: false,
+                    cache: false,
+                }).done(function(result){
+                    $('#notifications').html(result);
+                });
+        });
+    });
+    </script>
+}
+
 @if (Model.Notifications != null)
 {
     if (Model.Notifications.Count() > 0)
-    {
-        <a href='@Url.Action("HomeProfile", "Profile")'>
-            <img src="~/assets/img/Notifications.png" width="25" height="25" />
+    {<a href='@Url.Action("GetAllNotifications", "Profile")'>
+            <img src="~/assets/img/Notifications.png" width="25" height="25" id="icon" />
             <span class="badge"> @Html.Raw(Model.Notifications.Count())</span>
         </a>
+        <div id="notifications">
+
+        </div>
     }
     else
     {
-<a href='@Url.Action("HomeProfile", "Profile")'>
-    <img src="~/assets/img/Notifications.png" width="25" height="25" />
-</a>
+        <a href='@Url.Action("GetAllNotifications", "Profile")'>
+            <img src="~/assets/img/Notifications.png" width="25" height="25" />
+        </a>
     }
 }

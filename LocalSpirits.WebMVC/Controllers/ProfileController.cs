@@ -88,6 +88,13 @@ namespace LocalSpirits.WebMVC.Controllers
 
             return PartialView("Notifications", profile);
         }
+        public ActionResult GetAllNotifications()
+        {
+            var profileService = CreateProfileService();
+            var notifications = profileService.GetAllNotifications();
+
+            return View("_ListNotifications", notifications);
+        }
         public ActionResult About(string id)
         {
             var service = CreateProfileService();
