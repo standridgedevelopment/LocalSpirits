@@ -1,6 +1,14 @@
 ﻿@model LocalSpirits.Models.Comment.CommentCreate
 
-@using (Html.BeginForm())
+
+@using (Ajax.BeginForm("AddComment", "Profile",
+    new AjaxOptions 
+    { 
+        HttpMethod = "POST",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "div-for-partial",
+        OnSuccess = "postSuccess",
+        OnFailure = "postFailed" }))
 {
     @Html.AntiForgeryToken()
 
