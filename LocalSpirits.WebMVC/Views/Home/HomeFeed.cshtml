@@ -360,7 +360,7 @@
 
                 Added a
                 @Html.ActionLink($"{item.Content}", $"Details", $"{item.ObjectType}", new { id = item.ObjectID }, new { @class = "my-class" })
-                @if (item.Content.Contains("5"))
+                @if (item.Content.Contains("5-star"))
                 {<p>
                         <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
                         <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
@@ -370,7 +370,7 @@
                     </p>
 
                 }
-                @if (item.Content.Contains("4"))
+                @if (item.Content.Contains("4-star"))
                 {<p>
                         <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
                         <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
@@ -380,7 +380,7 @@
                     </p>
 
                 }
-                @if (item.Content.Contains("3"))
+                @if (item.Content.Contains("3-star"))
                 {<p>
                         <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
                         <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
@@ -389,7 +389,7 @@
                         <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
                     </p>
                 }
-                @if (item.Content.Contains("2"))
+                @if (item.Content.Contains("2-star"))
                 {<p>
                         <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
                         <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
@@ -398,7 +398,7 @@
                         <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
                     </p>
                 }
-                @if (item.Content.Contains("1"))
+                @if (item.Content.Contains("1-star"))
                 {<p>
                         <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
                         <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />

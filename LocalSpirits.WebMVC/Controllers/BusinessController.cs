@@ -95,12 +95,12 @@ namespace LocalSpirits.WebMVC.Controllers
                 {
                     ID = detail.ID,
                     Name = detail.Name,
-                    City = detail.City,
+                    CityID = detail.CityID,
                     State = detail.State,
                     ZipCode = detail.ZipCode,
                     Hours = detail.Hours,
                     PhoneNumber = detail.PhoneNumber,
-                    Website = detail.PhoneNumber,
+                    Website = detail.Website,
                 };
             return View(model);
         }
@@ -120,13 +120,13 @@ namespace LocalSpirits.WebMVC.Controllers
             var businessService = CreateBusinessService();
 
             string result = (businessService.Update(model, id));
-            if (result == "okay")
+            if (result == "Okay")
             {
                 TempData["SaveResult"] = "Business updated!";
-                return RedirectToAction($"State/{model.State}");
+                return RedirectToAction($"Details/{id}");
             }
-            if (result == "invalid city")
-                ModelState.AddModelError("", $"{model.City} could not be found.");
+            //if (result == "invalid city")
+            //    ModelState.AddModelError("", $"{model.City} could not be found.");
             else ModelState.AddModelError("", "Business could not be updated.");
             return View(model);
         }
@@ -162,7 +162,7 @@ namespace LocalSpirits.WebMVC.Controllers
             var newFeedItem = new ActivityFeedCreate();
             newFeedItem.Activity = TypeOfActivity.Rating;
             newFeedItem.ObjectType = "Business";
-            newFeedItem.ObjectID = (int)id;
+            newFeedItem.ObjectID = id;
             newFeedItem.Content = $"{rating}-star rating for {business.Name}";
 
             ModelState.Clear();
@@ -180,7 +180,7 @@ namespace LocalSpirits.WebMVC.Controllers
             if (result == "Okay")
             {
                 TempData["SaveResult"] = "Rating updated!";
-                profileService.CreateFeedItem(newFeedItem);
+                profileService.UpdateFeedItem(newFeedItem);
                 return RedirectToAction($"Details/{id}");
             }
             else ModelState.AddModelError("", "Business could not be updated.");

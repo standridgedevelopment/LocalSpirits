@@ -52,8 +52,8 @@ a:hover {
 abbr[title] {
   border-bottom: none;
   text-decoration: underline;
-  -webkit-text-decoration: underline dotted;
-  -moz-text-decoration: underline dotted;
+  webkit-text-decoration: underline dotted;
+  moz-text-decoration: underline dotted;
   text-decoration: underline dotted;
 }
 b,
@@ -1096,10 +1096,10 @@ textarea {
   font-size: inherit;
   line-height: inherit;
 }
-a {
-    color: #EE7600;
+/*a {
+    color: #EE7600 !important;
     text-decoration: none;
-}
+}*/
 a:hover,
 a:focus {
   color: #ff4d00;

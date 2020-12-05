@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -12,6 +13,8 @@
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -32,10 +35,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.3\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
@@ -64,53 +67,9 @@
     <Compile Include="FriendRequest.cs" />
     <Compile Include="IdentityModels.cs" />
     <Compile Include="Like.cs" />
-    <Compile Include="Migrations\202011290141342_2.cs" />
-    <Compile Include="Migrations\202011290141342_2.Designer.cs">
-      <DependentUpon>202011290141342_2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202011290148080_3.cs" />
-    <Compile Include="Migrations\202011290148080_3.Designer.cs">
-      <DependentUpon>202011290148080_3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202011290233059_4.cs" />
-    <Compile Include="Migrations\202011290233059_4.Designer.cs">
-      <DependentUpon>202011290233059_4.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202011291421521_5.cs" />
-    <Compile Include="Migrations\202011291421521_5.Designer.cs">
-      <DependentUpon>202011291421521_5.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202011291826410_6.cs" />
-    <Compile Include="Migrations\202011291826410_6.Designer.cs">
-      <DependentUpon>202011291826410_6.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202011291939283_7.cs" />
-    <Compile Include="Migrations\202011291939283_7.Designer.cs">
-      <DependentUpon>202011291939283_7.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202011292125503_8.cs" />
-    <Compile Include="Migrations\202011292125503_8.Designer.cs">
-      <DependentUpon>202011292125503_8.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202011292203552_9.cs" />
-    <Compile Include="Migrations\202011292203552_9.Designer.cs">
-      <DependentUpon>202011292203552_9.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202011300029214_10.cs" />
-    <Compile Include="Migrations\202011300029214_10.Designer.cs">
-      <DependentUpon>202011300029214_10.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202011300056488_11.cs" />
-    <Compile Include="Migrations\202011300056488_11.Designer.cs">
-      <DependentUpon>202011300056488_11.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202011300114540_12.cs" />
-    <Compile Include="Migrations\202011300114540_12.Designer.cs">
-      <DependentUpon>202011300114540_12.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202011300234423_13.cs" />
-    <Compile Include="Migrations\202011300234423_13.Designer.cs">
-      <DependentUpon>202011300234423_13.cs</DependentUpon>
+    <Compile Include="Migrations\202012051648000_15.cs" />
+    <Compile Include="Migrations\202012051648000_15.designer.cs">
+      <DependentUpon>202012051648000_15.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Notification.cs" />
@@ -124,42 +83,17 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202011290141342_2.resx">
-      <DependentUpon>202011290141342_2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202011290148080_3.resx">
-      <DependentUpon>202011290148080_3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202011290233059_4.resx">
-      <DependentUpon>202011290233059_4.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202011291421521_5.resx">
-      <DependentUpon>202011291421521_5.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202011291826410_6.resx">
-      <DependentUpon>202011291826410_6.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202011291939283_7.resx">
-      <DependentUpon>202011291939283_7.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202011292125503_8.resx">
-      <DependentUpon>202011292125503_8.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202011292203552_9.resx">
-      <DependentUpon>202011292203552_9.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202011300029214_10.resx">
-      <DependentUpon>202011300029214_10.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202011300056488_11.resx">
-      <DependentUpon>202011300056488_11.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202011300114540_12.resx">
-      <DependentUpon>202011300114540_12.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202011300234423_13.resx">
-      <DependentUpon>202011300234423_13.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202012051648000_15.resx">
+      <DependentUpon>202012051648000_15.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
 </Project>

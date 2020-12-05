@@ -1,5 +1,6 @@
 ﻿using LocalSpirits.Data;
 using LocalSpirits.Models.ActivityFeed;
+using LocalSpirits.Models.Comment;
 using LocalSpirits.Models.Friends;
 using LocalSpirits.Models.Profile;
 using LocalSpirits.WebMVC.Data;
@@ -34,7 +35,8 @@ namespace LocalSpirits.Services
                 LastName = model.LastName,
                 City = model.City,
                 State = (Data.StateName)model.State,
-                ZipCode = model.ZipCode
+                ZipCode = model.ZipCode,
+                ProfilePicture = model.GetProfilePicture,
             };
 
             using (var ctx = new ApplicationDbContext())
@@ -207,6 +209,7 @@ namespace LocalSpirits.Services
                 entity.City = model.City;
                 entity.State = model.State;
                 entity.ZipCode = model.ZipCode;
+                entity.ProfilePicture = model.GetProfilePicture;
 
                 return ctx.SaveChanges() == 1;
             }
@@ -263,6 +266,33 @@ namespace LocalSpirits.Services
 
             using (var ctx = new ApplicationDbContext())
             {
+                ctx.ActivityFeed.Add(entity);
+                ctx.SaveChanges();
+                return true;
+            }
+        }
+        public bool UpdateFeedItem(ActivityFeedCreate model)
+        {
+            var entity = new ActivityFeed()
+            {
+                UserID = _userId,
+                BusinessID = model.BusinessID,
+                Activity = $"{model.Activity}",
+                ObjectID = model.ObjectID,
+                ObjectType = model.ObjectType,
+                Content = model.Content,
+                Created = DateTimeOffset.Now,
+            };
+
+            using (var ctx = new ApplicationDbContext())
+            {
+                var activity = $"{model.Activity}";
+                try
+                {
+                    var oldActivity = ctx.ActivityFeed.Single(e => e.ObjectID == model.ObjectID && e.Activity == activity);
+                    ctx.ActivityFeed.Remove(oldActivity);
+                }
+                catch { }
                 ctx.ActivityFeed.Add(entity);
                 ctx.SaveChanges();
                 return true;
@@ -563,6 +593,7 @@ namespace LocalSpirits.Services
                     SenderFullName = foundLike.Profile.FullName,
                     SenderUsername = foundLike.Profile.Username,
                     Profile_ID = foundLike.ActivityFeed.UserID,
+                    ActivityFeedID = id,
                     TimeCreated = DateTimeOffset.Now,
                     Recieved = false,
                 };
@@ -613,10 +644,30 @@ namespace LocalSpirits.Services
                     if (item.Recieved == false)
                         item.Recieved = true;
                 }
+                ctx.SaveChanges();
 
                 //List<Event> events = GetEvents(entity.AllVisits);
 
                 return entity.Notifications;
+
+            }
+        }
+        public bool NewComment(CommentCreate model)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity = new Comment
+                {
+                    SenderFullName = model.SenderFullName,
+                    SenderUsername = model.SenderFullName,
+                    FeedID = model.FeedID,
+                    Created = DateTimeOffset.Now,
+                    CommentContent = model.CommentContent,
+                };
+
+                ctx.Comments.Add(entity);
+                ctx.SaveChanges();
+                return true;
 
             }
         }

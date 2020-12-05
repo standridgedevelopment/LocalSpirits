@@ -3,27 +3,29 @@
 @{
     ViewBag.Title = "Profile";
 }
+<br>
+<br>
 <div class="container col-md-pull-1 col-md-6">
-    <div class="col-md-3 my-6">
+    <div class="col-xs-4 col-sm-3 col-md-4 my-6">
         <img src="@Url.Content(Model.ProfilePicture)" width="125" height="125" />
     </div>
-    <div class="col-md-3 my-6">
-        <div class="panel panel-warning" style="width: 20rem;">
+    <div class="col-xs-9 col-sm-9 col-md-3 my-6">
+        <div class="panel panel-warning" style="width: 25rem;">
 
             <dl class="dl-horizontal">
-                <dt class="profile">Name:</dt>
+                <dt class="col-xs-1">Name:</dt>
                 <dd>
                     @Html.DisplayFor(model => model.FullName)
                 </dd>
-                <dt>City:</dt>
+                <dt class= "col-xs-3" >City:</dt>
                 <dd>
                     @Html.DisplayFor(modelItem => modelItem.City)
                 </dd>
-                <dt>ZipCode:</dt>
+                <dt class= "col-xs-3">Zip Code:</dt>
                 <dd>
                     @Html.DisplayFor(modelItem => modelItem.ZipCode)
                 </dd>
-                <dt>State:</dt>
+                <dt class= "col-xs-3">State:</dt>
                 <dd>
                     @Html.DisplayFor(modelItem => modelItem.State)
                 </dd>

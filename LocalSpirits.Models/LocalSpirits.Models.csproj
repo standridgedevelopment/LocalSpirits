@@ -65,6 +65,8 @@
     <Compile Include="City\CityDetail.cs" />
     <Compile Include="City\CityEdit.cs" />
     <Compile Include="City\CityListItem.cs" />
+    <Compile Include="Comment\CommentCreate.cs" />
+    <Compile Include="Comment\CommentListItem.cs" />
     <Compile Include="Event\EventCreate.cs" />
     <Compile Include="Event\EventDetail.cs" />
     <Compile Include="Event\EventEdit.cs" />

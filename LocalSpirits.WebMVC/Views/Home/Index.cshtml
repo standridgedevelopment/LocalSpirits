@@ -6,71 +6,69 @@
 }
 @using Microsoft.AspNet.Identity
 
-<img src="~/assets/SplashArt/vinicius-amnx-amano-DL4OseW7WD8-unsplash.jpg" alt="" width="1030" height="400">
-
-<div class="containter my-5">
-    <div class="row py-4">
-
-        <div class="col-md-8 col-lg-5  my-lg-auto">
-            <h1 class="text-dark front-eight-bold mb-3" style="color:orange;text-align:center;font-family:cursive">Local Spirits</h1>
-            <h3 style="color:lightgreen;text-align:center;font-family:cursive">A gathering place for spirited locals!</h3>
-            <img src="~/assets/SplashArt/elevate-9Nw-uK9UeUI-unsplash.jpg" alt="" width="400" height="500" style="align-self:center;">
-        </div>
-        <div class="col-md-4 col-lg-4 col-lg-4 col-lg-offset-1  my-md-5">
-            <section id="loginForm">
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                {
-                    @Html.AntiForgeryToken()
-                    <h4>Login</h4>
-                    <hr />
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Email, new { @class = "col-md-3 control-label" })
-                        <div class="col-md-9">
-                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Password, new { @class = "col-md-3 control-label" })
-                        <div class="col-md-9">
-                            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            <div class="checkbox">
-                                @Html.CheckBoxFor(m => m.RememberMe)
-                                @Html.LabelFor(m => m.RememberMe)
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            <input type="submit" value="Log in" class="btn btn-warning" />
-                        </div>
-                    </div>
-                    <p>
-                        @Html.ActionLink("Register as a new user", "Register", null, new { @class = "btn btn-success" })
-                    </p>
-                    @* Enable this once you have account confirmation enabled for password reset functionality
-                        <p>
-                            @Html.ActionLink("Forgot your password?", "ForgotPassword")
-                        </p>*@
-                }
-            </section>
-        </div>
+<div class="container col-small-12">
+    <div class="col-small-8">
+        <img src="~/assets/SplashArt/vinicius-amnx-amano-DL4OseW7WD8-unsplash.jpg" alt="" width="1030" height="400" class="img-responsive">
     </div>
 </div>
-<div class="col-md-6 col-lg-8 col-xl-6">
 
-</div>
+    <div class="containter my-5">
+        <div class="row py-4">
+
+            <div class="col-md-7 col-lg-5  my-lg-auto">
+                <h1 class="text-dark front-eight-bold mb-3" style="color:orange;font-family:cursive">Local Spirits</h1>
+                <h3 style="color:orange;font-family:cursive">A gathering place for spirited locals!</h3>
+                <img src="~/assets/SplashArt/elevate-9Nw-uK9UeUI-unsplash.jpg" alt="" width="370" height="500" style="align-self:center;">
+            </div>
+            <div class="col-md-4 col-lg-4 col-lg-4 col-lg-offset-1  my-md-5">
+                <section id="loginForm">
+                    <br>
+                    <br>
+                    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <h4>Login</h4>
+                        <hr />
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Email, new { @class = "col-md-3 control-label" })
+                            <div class="col-md-9">
+                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Password, new { @class = "col-md-3 control-label" })
+                            <div class="col-md-9">
+                                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <div class="checkbox">
+                                    @Html.CheckBoxFor(m => m.RememberMe)
+                                    @Html.LabelFor(m => m.RememberMe)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Log in" class="btn btn-warning" />
+                            </div>
+                        </div>
+                        <p>
+                            @Html.ActionLink("Register as a new user", "Register", "Account", null, null, null, null, new { @class = "btn btn-success" })
+                        </p>
+                        @* Enable this once you have account confirmation enabled for password reset functionality
+                            <p>
+                                @Html.ActionLink("Forgot your password?", "ForgotPassword")
+                            </p>*@
+                    }
+                </section>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-8 col-xl-6">
+
+    </div>

@@ -482,14 +482,15 @@ namespace LocalSpirits.Services
             {
 
                 var service = new CityService();
-                var foundCity = service.GetCityByName(model.City, model.State);
-                if (foundCity == null) return "invalid city";
+                //var foundCity = service.GetCityByName(model.City, model.State);
+                //if (foundCity == null) return "invalid city";
 
                 var entity = ctx.Businesses.Single(e => e.ID == id);
 
                 entity.ID = model.ID;
                 entity.Name = model.Name;
-                entity.CityID = foundCity.ID;
+                entity.CityID = model.CityID;
+                entity.TypeOfEstablishment = $"{model.typeOfEstablishment}";
                 entity.ZipCode = model.ZipCode;
                 entity.Hours = model.Hours;
                 entity.PhoneNumber = model.PhoneNumber;

@@ -26,5 +26,25 @@ namespace LocalSpirits.Models.Profile
         [Required]
         [DisplayName("Zip Code")]
         public int ZipCode { get; set; }
+        [Required]
+        [DisplayName("Enter Number Of Profile Picture")]
+        [Range(1, 7)]
+        public int ProfilePicture { get; set; }
+        public string GetProfilePicture
+        {
+            get
+            {
+                if (ProfilePicture == 1) return "~/assets/ProfileIcons/bird.png";
+                if (ProfilePicture == 2) return "~/assets/ProfileIcons/clown-fish.png";
+                if (ProfilePicture == 3) return "~/assets/ProfileIcons/cocker-spaniel.png";
+                if (ProfilePicture == 4) return "~/assets/ProfileIcons/dinosaur.png";
+                if (ProfilePicture == 5) return "~/assets/ProfileIcons/parrot.png";
+                if (ProfilePicture == 6) return "~/assets/ProfileIcons/penguin.png";
+                if (ProfilePicture == 7) return "~/assets/ProfileIcons/seal.png";
+                return null;
+
+            }
+            set { }
+        }
     }
 }

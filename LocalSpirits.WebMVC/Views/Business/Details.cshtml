@@ -63,7 +63,7 @@
                 <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
             </a>
             <a href='@Url.Action($"AddRating/{Model.ID}", "Business", new { rating = 5 })'>
-                <img src="~/assets/img/HalfStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
             </a>
         }
         else if (Model.RateAverage >= (decimal)3.25)
@@ -131,7 +131,7 @@
                 <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
             </a>
             <a href='@Url.Action($"AddRating/{Model.ID}", "Business", new { rating = 3 })'>
-                <img src="~/assets/img/EmptyHeart.png" alt="Star Rating" align="middle" width="30" height="30" />
+                <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
             </a>
 
             <a href='@Url.Action($"AddRating/{Model.ID}", "Business", new { rating = 4})'>
@@ -182,15 +182,22 @@
 
         else if (Model.RateAverage == 0)
         {
-            < img src = "~/assets/img/EmptyStar.png" alt = "Star Rating" align = "middle" width = "30" height = "30" />
+            <a href='@Url.Action($"AddRating/{Model.ID}", "Business", new { rating = 1 })'>
+                <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+            </a>
+            <a href='@Url.Action($"AddRating/{Model.ID}", "Business", new { rating = 2 })'>
+                <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+            </a>
+            <a href='@Url.Action($"AddRating/{Model.ID}", "Business", new { rating = 3 })'>
+                <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+            </a>
 
-            < img src = "~/assets/img/EmptyStar.png" alt = "Star Rating" align = "middle" width = "30" height = "30" />
-
-            < img src = "~/assets/img/EmptyStar.png" alt = "Star Rating" align = "middle" width = "30" height = "30" />
-
-            < img src = "~/assets/img/EmptyStar.png" alt = "Star Rating" align = "middle" width = "30" height = "30" />
-
-            < img src = "~/assets/img/EmptyStar.png" alt = "Star Rating" align = "middle" width = "30" height = "30" />
+            <a href='@Url.Action($"AddRating/{Model.ID}", "Business", new { rating = 4})'>
+                <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+            </a>
+            <a href='@Url.Action($"AddRating/{Model.ID}", "Business", new { rating = 5 })'>
+                <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+            </a>
         }
     }
     (@Model.RateCount) @{
@@ -211,10 +218,10 @@
         @Html.ActionLink("Follow", $"FollowBusiness/{Model.ID}", null, null, new { @class = "btn btn-warning btn-large" })
 
     }
-    
+
     <br />
     <br />
-    <div class="panel panel-warning" style="width: 20rem;">
+    <div class="panel panel-warning" style="width: 27rem;">
         <div class="panel-heading">About</div>
 
         <dl class="dl-horizontal-business">

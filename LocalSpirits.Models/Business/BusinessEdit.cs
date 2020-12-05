@@ -18,12 +18,9 @@ namespace LocalSpirits.Models.Business
         [Required]
         [DisplayName("Business Name")]
         public string Name { get; set; }
-        [Required]
-        public string City { get; set; }
-        [Required]
+        public int? CityID { get; set; }
         public string State { get; set; }
         [Required]
-        [MinLength(5), MaxLength(5)]
         [DisplayName("Zip Code")]
         public int? ZipCode { get; set; }
         public string Hours { get; set; }

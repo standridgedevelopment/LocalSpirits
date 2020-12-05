@@ -1,4 +1,6 @@
-﻿using LocalSpirits.Models.Friends;
+﻿using LocalSpirits.Data;
+using LocalSpirits.Models.Comment;
+using LocalSpirits.Models.Friends;
 using LocalSpirits.Models.Profile;
 using LocalSpirits.Services;
 using Microsoft.AspNet.Identity;
@@ -124,18 +126,18 @@ namespace LocalSpirits.WebMVC.Controllers
             profileService.GenerateNotification((id));
             return RedirectToAction("Activity", "Home");
         }
-        public ActionResult LikeProfileItem(int id, string username)
-        {
-            var profileService = CreateProfileService();
-            var foundLike = profileService.GetLike(id);
-            if (foundLike != null)
-            {
-                profileService.UnlikeFeedItem(id);
-                return RedirectToAction($"Index/{username}", "Profile");
-            }
-            profileService.LikeFeedItem(id);
-            return RedirectToAction($"Index/{username}", "Profile");
-        }
+        //public ActionResult LikeProfileItem(int id, string username)
+        //{
+        //    var profileService = CreateProfileService();
+        //    var foundLike = profileService.GetLike(id);
+        //    if (foundLike != null)
+        //    {
+        //        profileService.UnlikeFeedItem(id);
+        //        return RedirectToAction($"Index/{username}", "Profile");
+        //    }
+        //    profileService.LikeFeedItem(id);
+        //    return RedirectToAction($"Index/{username}", "Profile");
+        //}
         public ActionResult LikeProfileItemAjax(int id, string username)
         {
             var profileService = CreateProfileService();
@@ -172,27 +174,40 @@ namespace LocalSpirits.WebMVC.Controllers
             profileService.LikeFeedItem(id);
             return PartialView("_ReloadLikes", activityItem);
         }
-        //public ActionResult SetHeartState(int id)
-        //{
-        //    var profileService = CreateProfileService();
+        public ActionResult AddComment(int id)
+        {
+            var profileService = CreateProfileService();
+            var userProfile = profileService.GetProfile();
+            var activityItem = profileService.GetFeedItem(id);
 
-        //    var foundLike = profileService.GetLike(id);
-        //    string message = "test";
 
-        //    if (foundLike != null)
-        //    {
-        //        profileService.UnlikeFeedItem(id);
-        //        return Content(message);
-        //    }
-        //    profileService.LikeFeedItem(id);
-        //    return Content(message);
-        //}
+            var model = new CommentCreate
+            {
+                SenderFullName = userProfile.FullName,
+                SenderUsername = userProfile.Username,
+                FeedID = id,
+                Created = DateTimeOffset.Now,
+            };
 
-        [Route("Heart/{id}")]
-        //public bool ToggleHeartOn(int id) => SetHeartState(id, true);
+            return PartialView("_AddComment", model);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddComment(CommentCreate model)
+        {
+            if (!ModelState.IsValid) return View(model);
 
-        ////[Route("{id}/Heart")]
-        ////public bool ToggleHeartOff(int id) => SetHeartState(id, false);
+            var service = CreateProfileService();
+
+            if (service.NewComment(model))
+            {
+                TempData["SaveResult"] = "Comment Posted.";
+                return Content("Success");
+            }
+
+            ModelState.AddModelError("", "Your profile could not be updated.");
+            return Content("Fail");
+        }
         public ActionResult Edit()
         {
             var service = CreateProfileService();
@@ -205,7 +220,7 @@ namespace LocalSpirits.WebMVC.Controllers
                     LastName = detail.LastName,
                     City = detail.City,
                     State = detail.State,
-                    ZipCode = detail.ZipCode
+                    ZipCode = detail.ZipCode,
                 };
             return View(model);
         }
@@ -232,12 +247,6 @@ namespace LocalSpirits.WebMVC.Controllers
         {
             var userId = Guid.Parse(User.Identity.GetUserId());
             var service = new ProfileServices(userId);
-            return service;
-        }
-        private FriendsService CreateFriendService()
-        {
-            var userId = Guid.Parse(User.Identity.GetUserId());
-            var service = new FriendsService(userId);
             return service;
         }
     }

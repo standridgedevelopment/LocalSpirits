@@ -44,6 +44,7 @@ namespace LocalSpirits.WebMVC.Data
         public DbSet<ActivityFeed> ActivityFeed { get; set; }
         public DbSet<Like> Likes { get; set; }
         public DbSet<Notification> Notifications { get; set; }
+        public DbSet<Comment> Comments { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

@@ -57,11 +57,13 @@ will truncate terms that are too long to fit in the left column
     margin-left: 60px;
 }
 
-/*a {
-    color: #FF4D00!important;*/
-    /*#FF8C00;*/
-    /*text-decoration: none;
-}*/
+.btn {
+    color: #fff!important;
+}
+a {
+    color: #EE7600!important;
+    text-decoration: none;
+}
 textarea {
     max-width: 280px;
 }
@@ -125,4 +127,7 @@ dropbtn {
 .glyphicon {
     font-size: 30px !important;
     color: #ff4033
+}
+.glyphicon-comment {
+    color: #EE7600
 }
