@@ -423,11 +423,11 @@
     <Content Include="Views\Shared\_GetCurrentComments.cshtml" />
     <Content Include="Views\Profile\_ReloadComments.cshtml" />
     <Content Include="Views\Shared\_ReloadComments.cshtml" />
+    <Content Include="Views\Profile\PostDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Calendar\" />
-    <Folder Include="Views\Likes_Comments\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

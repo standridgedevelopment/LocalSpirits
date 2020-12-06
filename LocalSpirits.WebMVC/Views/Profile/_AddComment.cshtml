@@ -10,39 +10,60 @@
                 .click(function (e) {
                     var target = $(e.target);
                     var activityId = target.attr("data-id");
-                    var fullUrl = '@Url.Action("AddComment", "Profile")';
-                    $('#form').submit();
-                   
-
+                    var valdata = $("#form").serialize();
+                    var fullUrl = '@Url.Action("PostComment", "Profile")';
+                    //$('#form').submit();
                     $.ajax({
-                        method: "POST",
+                        type: "POST",
                         url: fullUrl,
-                        data: null,
+                        dataType: 'json',
+                        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',  
+                        data: valdata,
                         success: function (objOperations) {
-                            //$("#closeComment_"+activityId).html(objOperations);
                             $("#totalComments_" + activityId).html(objOperations);
-                            $("#comment_" + activityId).hide('');
-                            
+                            //$("#comment_" + activityId).hide('');
+
                         }
                     })
+                        .done(function (r) {
+                            $("#comment_" + activityId).hide('');
+                        })
                         .fail(function (r) {
-                            alert(r.status + r.responseText);
+                            //alert(r.status + r.responseText);
                         });
                 });
 
         });
-    @*$(document).ready(function () {
-            $('#btnSubmit')
+    //$(document).ready(function () {
+    //    $("i[data-toggle='hide']")
 
-                .css({ "cursor": "pointer" })
-                .click(function (e) {
-                    var target = $(e.target);
-                    var activityId = target.attr("data-id");
-                    var fullUrl = '@Url.Action("AddComment", "Profile")';
-                    $("#totalComments_" + activityId).html(objOperations);
-                        });
-                });*@
-    $(document).ready(function () {
+    //        .css({ "cursor": "pointer" })
+    //        .click(function (e) {
+    //            var target = $(e.target);
+    //            var commentId = target.attr("data-id");
+    //            $("#comment_" + commentId).hide('');
+    //        });
+    //});
+
+    //function hideComments() {
+    //    $(document.ready)
+    //        .css({ "cursor": "pointer" })
+    //        .click(function (e) {
+    //            var target = $(e.target);
+    //            var activityId = target.attr("data-id");
+    //            $("#comment_" + activityId).hide('');
+    //        });
+    //    }
+    //function refreshComments(objOperations) {
+    //    $(document.ready)
+    //        .css({ "cursor": "pointer" })
+    //        .click(function (e) {
+    //            var target = $(e.target);
+    //            var activityId = target.attr("data-id");
+    //            $("#totalComments_" + activityId).html(objOperations);
+    //        });
+    //            }
+    $(document).ready(function() {
         $("i[data-toggle='hide']")
 
             .css({ "cursor": "pointer" })
@@ -55,33 +76,44 @@
 </script>
 
 
-@using (Ajax.BeginForm(null, null))
-{@Html.AntiForgeryToken() <div class="form-horizontal">
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    @Html.HiddenFor(model => model.SenderFullName)
-    @Html.HiddenFor(model => model.SenderUsername)
-    @Html.HiddenFor(model => model.FeedID)
-    @Html.HiddenFor(model => model.Created)
-
-    <i class="glyphicon glyphicon-remove" data-toggle="hide"
-       data-id="@Html.Raw(Model.FeedID)" style="font-size: 15px!important;"></i>
-    <div class="form-group">
-
-        @Html.LabelFor(model => model.CommentContent, htmlAttributes: new { @class = "control-label col-md-5" })
-        <div class="col-md-10">
-            @Html.TextAreaFor(model => model.CommentContent, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.CommentContent, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-
-    <div class="form-group">
-        <div class="col-md-10">
-            <input type="submit" id="btnSubmit" value="Post Comment" class="btn btn-warning" data-id="@Html.Raw(Model.FeedID)" />
-        </div>
-    </div>
-</div>
+@*@using (Ajax.BeginForm(null, new AjaxOptions
+{
+    //Url = "/Profile/AddComment/",
+    //HttpMethod = "POST",
+    OnBegin = "hideComments",
+    OnComplete = "refreshComments"
 }
+))
+{*@
+    @*@Html.AntiForgeryToken()*@
+<form id="form">
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.SenderFullName)
+        @Html.HiddenFor(model => model.SenderUsername)
+        @Html.HiddenFor(model => model.FeedID)
+        @Html.HiddenFor(model => model.Created)
 
+        <i class="glyphicon glyphicon-remove" data-toggle="hide"
+           data-id="@Html.Raw(Model.FeedID)" style="font-size: 15px!important;"></i>
+        <div class="form-group">
+
+            @Html.LabelFor(model => model.CommentContent, htmlAttributes: new { @class = "control-label col-md-5" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.CommentContent, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CommentContent, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="submit" id="btnSubmit" value="Post Comment" class="btn btn-warning" data-id="@Html.Raw(Model.FeedID)" />
+            </div>
+        </div>
+    </div>
+</form>
+    
 @*}*@
+

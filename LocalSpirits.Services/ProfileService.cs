@@ -522,6 +522,8 @@ namespace LocalSpirits.Services
                         BusinessID = activity.BusinessID,
                         AmountOfLikes = activity.AmountOfLikes,
                         AmountOfComments = activity.AmountOfComments,
+                        Comments = activity.Comments,
+                        Likes = activity.Likes,
                         LikedByUser = likedByUser,
                         WhenPosted = timePosted,
                     };

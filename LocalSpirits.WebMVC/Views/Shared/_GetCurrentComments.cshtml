@@ -4,8 +4,8 @@
 @if (Model.AmountOfComments > 0)
 {
     <p>
-    <i class="glyphicon glyphicon-comment" data-toggle="viewAllComments"
-       data-id="@Html.Raw(Model.ID)" style="font-size:20px!important;"></i> @Html.Raw(Model.AmountOfComments)
+    <a href="@Url.Content($"~/Profile/GetPost/{Model.ID}")" class="glyphicon glyphicon-comment" data-toggle="viewAllComments"
+       data-id="@Html.Raw(Model.ID)" style="font-size:20px!important; text-decoration: none;"></a> @Html.Raw(Model.AmountOfComments)
 
     </p>
 }

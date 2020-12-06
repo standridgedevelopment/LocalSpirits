@@ -7,6 +7,12 @@
     <script>
 
         document.addEventListener('DOMContentLoaded', function () {
+            var today = new Date();
+            var dd = String(today.getDate()).padStart(2, '0');
+            var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+            var yyyy = today.getFullYear();
+
+            today = yyyy + '-' + mm + '-' + dd;
             var calendarEl = document.getElementById('calendar');
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 //eventClick: function (info) {
@@ -41,7 +47,7 @@
                     }
                 },
                 initialView: 'dayGridMonth',
-                initialDate: '2020-11-15',
+                initialDate: today,
                 editable: false,
                 selectable: true,
                 businessHours: true,

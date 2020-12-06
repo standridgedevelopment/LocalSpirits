@@ -21,7 +21,7 @@ namespace LocalSpirits.WebMVC.Controllers
             var service = CreateProfileService();
             var ownProfile = service.GetProfile();
 
-            if (ownProfile.Username == id || id == null) 
+            if (ownProfile.Username == id || id == null)
                 return RedirectToAction("HomeProfile");
 
             ModelState.Clear();
@@ -117,11 +117,11 @@ namespace LocalSpirits.WebMVC.Controllers
         {
             var profileService = CreateProfileService();
             var foundLike = profileService.GetLike(id);
-            if (foundLike != null) 
+            if (foundLike != null)
             {
                 profileService.UnlikeFeedItem(id);
                 return RedirectToAction("Activity", "Home");
-            } 
+            }
             profileService.LikeFeedItem(id);
             profileService.GenerateNotification((id));
             return RedirectToAction("Activity", "Home");
@@ -156,7 +156,7 @@ namespace LocalSpirits.WebMVC.Controllers
         {
             var profileService = CreateProfileService();
             var feedItem = profileService.GetFeedItem(id);
-           
+
             return PartialView("_GetCurrentLikes", feedItem);
         }
         public ActionResult GetComments(int id)
@@ -165,6 +165,13 @@ namespace LocalSpirits.WebMVC.Controllers
             var feedItem = profileService.GetFeedItem(id);
 
             return PartialView("_GetCurrentComments", feedItem);
+        }
+        public ActionResult GetPost(int id)
+        {
+            var profileService = CreateProfileService();
+            var feedItem = profileService.GetFeedItem(id);
+
+            return View("PostDetail", feedItem);
         }
         public ActionResult SetHeartState(int id)
         {
@@ -179,8 +186,10 @@ namespace LocalSpirits.WebMVC.Controllers
                 return PartialView("_ReloadLikes", activityItem);
             }
             profileService.LikeFeedItem(id);
+            profileService.GenerateNotification((id));
             return PartialView("_ReloadLikes", activityItem);
         }
+        [HttpGet]
         public ActionResult AddComment(int id)
         {
             var profileService = CreateProfileService();
@@ -198,9 +207,9 @@ namespace LocalSpirits.WebMVC.Controllers
 
             return PartialView("_AddComment", model);
         }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult AddComment(CommentCreate model)
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        public ActionResult PostComment(CommentCreate model)
         {
             if (!ModelState.IsValid) return View(model);
 
