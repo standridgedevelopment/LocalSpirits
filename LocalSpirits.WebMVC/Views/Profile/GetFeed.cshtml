@@ -9,8 +9,8 @@
 
 
 
-<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+@*<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>*@
+@*<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>*@
 
 
 @section scripts {
@@ -57,24 +57,11 @@
                 .click(function (e) {
                     var target = $(e.target);
                     var commentId = target.attr("data-id");
+                    $("#comment_" + commentId).show();
                     var commentSet = target.hasClass("glyphicon-comment");
                     $("#comment_" + commentId).load('/Profile/AddComment/' + commentId);
-                    @*var fullUrl = '@Url.Action("SetHeartState", "Profile")/' + commentId;*@
-                    //$.ajax({
-                    //    method: commentSet ? "DELETE" : "PUT",
-                    //    url: fullUrl,
-                    //    //url: "/api/Profile/" + activityId + "/Heart",
-                    //    data: null,
-                    //    success: function (objOperations) {
-
-                    //        //$("#likes").html(objOperations);
-                    //        $("#" + commentId).html(objOperations);
-
-                    //    }
-                    //})
-                        //.fail(function (r) {
-                        //    alert(r.status + r.responseText);
-                        //});
+                    
+                    
                 });
         });
     </script>
@@ -89,11 +76,10 @@
 
 }
 
-
-
-<br />
 <br />
 @Html.Action("CheckForFriend", "Friends")
+<br />
+<br />
 @foreach (var item in Model)
 {
 

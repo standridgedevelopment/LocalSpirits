@@ -367,7 +367,8 @@ namespace LocalSpirits.Services
                             var otherProfile = ctx.Profiles.Single(e => e.ID == friend.FriendsID);
 
                             //Liked By User??
-                            foreach (var activity in otherProfile.Feed)
+                            var orderedFeed = otherProfile.Feed.OrderByDescending(d => d.Created.DateTime).ToList();
+                            foreach (var activity in orderedFeed)
                             {
                                 bool likedByUser = LikedByUser(activity);
                                 var timePosted = GetFeedPostTime(activity);
@@ -396,14 +397,15 @@ namespace LocalSpirits.Services
                                     };
                                     activityFeed.Add(activityItem);
                                 }
-                                else continue;
+                                else break;
                             }
                         }
                         //BusinessProfile
                         if (friend.BusinessID != null)
                         {
                             var otherProfile = ctx.Businesses.Single(e => e.ID == friend.BusinessID);
-                            foreach (var activity in otherProfile.Feed)
+                            var orderedFeed = otherProfile.Feed.OrderByDescending(d => d.Created.DateTime).ToList();
+                            foreach (var activity in orderedFeed)
                             {
                                 bool likedByUser = LikedByUser(activity);
                                 var timePosted = GetFeedPostTime(activity);
@@ -428,7 +430,7 @@ namespace LocalSpirits.Services
                                     };
                                     activityFeed.Add(activityItem);
                                 }
-                                else continue;
+                                else break;
                             }
                         }
 
@@ -471,6 +473,8 @@ namespace LocalSpirits.Services
                     };
                     activityFeed.Add(activityItem);
                 }
+                activityFeed = activityFeed.OrderByDescending(d => d.Created.DateTime).ToList();
+
                 return activityFeed;
             }
 

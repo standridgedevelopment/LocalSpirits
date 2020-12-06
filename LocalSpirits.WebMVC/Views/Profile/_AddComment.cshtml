@@ -1,15 +1,50 @@
 ﻿@model LocalSpirits.Models.Comment.CommentCreate
 
 
-@using (Ajax.BeginForm("AddComment", "Profile",
-    new AjaxOptions 
-    { 
-        HttpMethod = "POST",
+@*@using (Ajax.BeginForm(null,
+    new AjaxOptions
+    {*@
+<!--HttpMethod = "POST",
         InsertionMode = InsertionMode.Replace,
         UpdateTargetId = "div-for-partial",
-        OnSuccess = "postSuccess",
-        OnFailure = "postFailed" }))
+        OnSuccess = ,
+        OnFailure = "postFailed"
+    }))
+{-->
+<script language="javascript" type="text/javascript">
+
+        $(document).ready(function () {
+            $('#btnSubmit')
+
+                .css({ "cursor": "pointer" })
+                .click(function (e) {
+                    var target = $(e.target);
+                    var activityId = target.attr("data-id");  
+                    var fullUrl = '@Url.Action("AddComment", "Profile")';
+                    $('#form').submit();
+
+                    $.ajax({
+                        method: "POST",
+                        url: fullUrl,
+                        //url: "/api/Profile/" + activityId + "/Heart",
+                        data: null,
+                        success: function (objOperations) {
+                            //$("#closeComment_"+activityId).html(objOperations);
+                            $("#comment_" + activityId).hide('');
+                        }
+                    })
+                        .fail(function (r) {
+                            alert(r.status + r.responseText);
+                        });
+                });
+        });
+</script>
+
+
+
+@using (Ajax.BeginForm(null, null))
 {
+
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
@@ -32,8 +67,10 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Post Comment" class="btn btn-warning" />
+                <input type="submit" id="btnSubmit" value="Post Comment" class="btn btn-warning" data-id="@Html.Raw(Model.FeedID)" />
             </div>
         </div>
     </div>
 }
+
+@*}*@

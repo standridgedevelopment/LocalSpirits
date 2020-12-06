@@ -202,11 +202,11 @@ namespace LocalSpirits.WebMVC.Controllers
             if (service.NewComment(model))
             {
                 TempData["SaveResult"] = "Comment Posted.";
-                return Content("Success");
+                return PartialView("Activity");
             }
 
             ModelState.AddModelError("", "Your profile could not be updated.");
-            return Content("Fail");
+            return PartialView("Activity");
         }
         public ActionResult Edit()
         {
