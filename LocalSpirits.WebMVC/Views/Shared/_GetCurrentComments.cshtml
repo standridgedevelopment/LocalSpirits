@@ -1,0 +1,13 @@
+﻿@model LocalSpirits.Models.ActivityFeed.ActivityFeedListItem
+
+
+@if (Model.AmountOfComments > 0)
+{
+    <p>
+    <i class="glyphicon glyphicon-comment" data-toggle="viewAllComments"
+       data-id="@Html.Raw(Model.ID)" style="font-size:20px!important;"></i> @Html.Raw(Model.AmountOfComments)
+
+    </p>
+}
+
+

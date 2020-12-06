@@ -521,6 +521,7 @@ namespace LocalSpirits.Services
                         Created = activity.Created,
                         BusinessID = activity.BusinessID,
                         AmountOfLikes = activity.AmountOfLikes,
+                        AmountOfComments = activity.AmountOfComments,
                         LikedByUser = likedByUser,
                         WhenPosted = timePosted,
                     };
@@ -540,6 +541,7 @@ namespace LocalSpirits.Services
                         Created = activity.Created,
                         BusinessID = activity.BusinessID,
                         AmountOfLikes = activity.AmountOfLikes,
+                        AmountOfComments = activity.AmountOfComments,
                         LikedByUser = likedByUser,
                         WhenPosted = timePosted,
                     };

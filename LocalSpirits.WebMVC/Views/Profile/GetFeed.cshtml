@@ -29,9 +29,8 @@
                     console.log(heartSet);
                     var fullUrl = '@Url.Action("SetHeartState", "Profile")/' + activityId;
                     $.ajax({
-                        method: heartSet ? "DELETE" : "PUT",
+                        //method: heartSet ? "DELETE" : "PUT",
                         url: fullUrl,
-                        //url: "/api/Profile/" + activityId + "/Heart",
                         data: null,
                         success: function (objOperations) {
 
@@ -57,11 +56,21 @@
                 .click(function (e) {
                     var target = $(e.target);
                     var commentId = target.attr("data-id");
-                    $("#comment_" + commentId).show();
-                    var commentSet = target.hasClass("glyphicon-comment");
                     $("#comment_" + commentId).load('/Profile/AddComment/' + commentId);
+                    $("#comment_" + commentId).show('');
                     
-                    
+                });
+        });
+        $(document).ready(function () {
+            $("i[data-toggle='viewAllComments']")
+
+                .css({ "cursor": "pointer" })
+                .click(function (e) {
+                    var target = $(e.target);
+                    var commentId = target.attr("data-id");
+                    $("#viewComments_" + commentId).load('/Profile/AddComment/' + commentId);
+                    $("#viewComments_" + commentId).show('');
+
                 });
         });
     </script>
@@ -132,6 +141,9 @@
                     <div id="@Html.Raw(item.ID)">
                         @Html.Partial("_ReloadLikes", item)
                     </div>
+                    <div class="col-md-1" id="totalComments_@Html.Raw(item.ID)">
+                        @Html.Partial("_ReloadComments", item)
+                    </div>
                 </div>
                 <div class="panel-footer">
                     <div class="container">
@@ -147,6 +159,7 @@
                     </div>
 
                     <div id="comment_@Html.Raw(item.ID)"></div>
+                    <div id="viewComments_@Html.Raw(item.ID)"></div>
                 </div>
             </div>
         }
@@ -172,8 +185,14 @@
         to their calendar.
         <br />
         <br />
-        <div id="@Html.Raw(item.ID)">
-            @Html.Partial("_ReloadLikes", item)
+        <div  class="container">
+            <div class="col-md-2" id="@Html.Raw(item.ID)">
+                @Html.Partial("_ReloadLikes", item)
+            </div>
+            <div class="col-md-1" id="totalComments_@Html.Raw(item.ID)">
+                @Html.Partial("_ReloadComments", item)
+            </div>
+           
         </div>
     </div>
     <div class="panel-footer">

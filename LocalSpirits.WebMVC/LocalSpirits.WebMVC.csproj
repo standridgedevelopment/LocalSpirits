@@ -420,6 +420,9 @@
     <Content Include="Views\Shared\_GetCurrentLikes.cshtml" />
     <Content Include="Views\Profile\_ListNotifications.cshtml" />
     <Content Include="Views\Profile\_AddComment.cshtml" />
+    <Content Include="Views\Shared\_GetCurrentComments.cshtml" />
+    <Content Include="Views\Profile\_ReloadComments.cshtml" />
+    <Content Include="Views\Shared\_ReloadComments.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

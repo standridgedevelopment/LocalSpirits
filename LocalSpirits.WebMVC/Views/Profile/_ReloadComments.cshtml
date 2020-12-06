@@ -1,0 +1,4 @@
+﻿@model LocalSpirits.Models.ActivityFeed.ActivityFeedListItem
+
+@Html.Action($"GetComments", "Profile", new { id = Model.ID })
+

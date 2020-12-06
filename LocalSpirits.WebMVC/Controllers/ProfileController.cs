@@ -159,6 +159,13 @@ namespace LocalSpirits.WebMVC.Controllers
            
             return PartialView("_GetCurrentLikes", feedItem);
         }
+        public ActionResult GetComments(int id)
+        {
+            var profileService = CreateProfileService();
+            var feedItem = profileService.GetFeedItem(id);
+
+            return PartialView("_GetCurrentComments", feedItem);
+        }
         public ActionResult SetHeartState(int id)
         {
             var profileService = CreateProfileService();
@@ -197,16 +204,18 @@ namespace LocalSpirits.WebMVC.Controllers
         {
             if (!ModelState.IsValid) return View(model);
 
-            var service = CreateProfileService();
+            var profileService = CreateProfileService();
+            var activityItem = profileService.GetFeedItem((int)model.FeedID);
 
-            if (service.NewComment(model))
+
+            if (profileService.NewComment(model))
             {
                 TempData["SaveResult"] = "Comment Posted.";
-                return PartialView("Activity");
+                return PartialView("_ReloadComments", activityItem);
             }
 
-            ModelState.AddModelError("", "Your profile could not be updated.");
-            return PartialView("Activity");
+            ModelState.AddModelError("", "Your comment could not be posted.");
+            return PartialView("_ReloadComments", activityItem);
         }
         public ActionResult Edit()
         {

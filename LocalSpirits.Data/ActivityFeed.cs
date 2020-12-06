@@ -36,9 +36,17 @@ namespace LocalSpirits.Data
             }
 
         }
+        public int AmountOfComments
+        {
+            get
+            {
+                return Comments.Count;
+            }
+
+        }
         public DateTimeOffset Created { get; set; }
         public string HowLongAgo { get; set; }
         public virtual ICollection<Like> Likes { get; set; }
-
+        public virtual ICollection<Comment> Comments { get; set; }
     }
 }

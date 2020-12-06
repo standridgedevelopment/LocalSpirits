@@ -23,6 +23,7 @@ namespace LocalSpirits.Models.ActivityFeed
         public int ObjectID { get; set; }
         public string ObjectType { get; set; }
         public int AmountOfLikes { get; set; }
+        public int AmountOfComments { get; set; }
         public string WhenPosted { get; set; }
         public DateTimeOffset Created { get; set; }
 

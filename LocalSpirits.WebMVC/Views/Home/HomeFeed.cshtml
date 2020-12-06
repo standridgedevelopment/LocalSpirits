@@ -52,10 +52,8 @@
                 .click(function (e) {
                     var target = $(e.target);
                     var commentId = target.attr("data-id");
-                    $("#comment_" + commentId).show();
-                    var commentSet = target.hasClass("glyphicon-comment");
                     $("#comment_" + commentId).load('/Profile/AddComment/' + commentId);
-
+                    $("#comment_" + commentId).show('');
 
                 });
         });
