@@ -1,54 +1,57 @@
 ﻿@model IEnumerable<LocalSpirits.Data.Notification>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        
-        <th>
-            @Html.DisplayNameFor(model => model.ActivityFeedID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SenderFullName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SenderUsername)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TimeCreated)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Recieved)
-        </th>
-        <th></th>
-    </tr>
+<br />
+<br />
 
-    @foreach (var item in Model)
+@foreach (var notification in Model)
+{
+    if (notification.CommentID != null)
     {
-        <tr>
-           
-            <td>
-                @Html.DisplayFor(modelItem => item.ActivityFeedID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SenderFullName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SenderUsername)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TimeCreated)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Recieved)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-            </td>
-        </tr>
-    }
+<div class="container">
+    <div class="row">
+        <div class="col-xs-2 col-sm-1 col-md-1">
+            
+ <span class="glyphicon glyphicon-comment" style="margin-top:20px; margin-left:60px; font-size:15px!important; ">
+            <img src="@Url.Content(@notification.SendersProfilePicture)" width="55" height="55" style="margin-top:-40px; margin-left:-60px;" />
+ </span>
+        </div>
+       
+        <div class="col-xs-10 col-sm-6 col-md-5">
+            <div class="panel panel-warning" style="width: 32rem" ;>
 
-</table>
+                <div class="panel-body">
+
+                    @Html.ActionLink($"{notification.SenderFullName}", "Index", "Profile", new { id = notification.SenderUsername }, null)
+                    commented on your 
+                    @Html.ActionLink($"post", "GetPost", "Profile", new { id = notification.ActivityFeedID }, null)
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    }
+    else
+    {
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-2 col-sm-1 col-md-1">
+                    <img src="@Url.Content(@notification.SendersProfilePicture)" width="55" height="55" />
+                    <img src="~/assets/img/FilledHeart.png" width="20" height="20" style="margin-top:-70px; margin-left:60px" />
+                </div>
+                <div class="col-xs-10 col-sm-6 col-md-5">
+                    <div class="panel panel-warning" style="width: 32rem" ;>
+                        <div class="panel-body">
+
+                            @Html.ActionLink($"{notification.SenderFullName}", "Index", "Profile", new { id = notification.SenderUsername }, null)
+                            likes your
+                            @Html.ActionLink($"post", "GetPost", "Profile", new { id = notification.ActivityFeedID }, null)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}
+

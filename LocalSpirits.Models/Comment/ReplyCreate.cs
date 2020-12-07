@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LocalSpirits.Models.Comment
 {
-    public class Reply
+    public class ReplyCreate
     {
         public int? CommentID { get; set; }
         [DisplayName("Reply")]

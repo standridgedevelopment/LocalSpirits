@@ -1,0 +1,3 @@
+﻿@model LocalSpirits.Data.Comment
+
+@Html.Action($"GetCommentLikes", "Profile", new { id = Model.CommentID })

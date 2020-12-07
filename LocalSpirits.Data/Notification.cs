@@ -18,8 +18,12 @@ namespace LocalSpirits.Data
         [ForeignKey(nameof(ActivityFeed))]
         public int? ActivityFeedID { get; set; }
         public virtual ActivityFeed ActivityFeed { get; set; }
+        [ForeignKey(nameof(Comment))]
+        public int? CommentID { get; set; }
+        public virtual Comment Comment { get; set; }
         public string SenderFullName { get; set; }
         public string SenderUsername { get; set; }
+        public string SendersProfilePicture { get; set; }
         public DateTimeOffset TimeCreated { get; set; }
         public bool Recieved { get; set; }
     }

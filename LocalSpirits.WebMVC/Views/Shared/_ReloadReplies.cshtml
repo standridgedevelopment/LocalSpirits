@@ -1,0 +1,4 @@
+﻿@model LocalSpirits.Data.Comment
+
+@Html.Action($"GetReplies", "Profile", new { id = Model.CommentID })
+

@@ -591,16 +591,86 @@ namespace LocalSpirits.Services
             }
             return false;
         }
-        public bool GenerateNotification(int id)
+        public bool CommentLikedByUser(Comment comment)
+        {
+            foreach (var like in comment.Likes)
+            {
+                if (like.UserID == _userId)
+                {
+                    return true;
+                }
+
+            }
+            return false;
+        }
+        public CommentListItem GetComment(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+
+                var comment = ctx.Comments.Single(e => e.CommentID == id);
+                var userProfile = ctx.Profiles.Single(e => e.ID == _userId);
+                var commentItem = new CommentListItem();
+
+                bool likedByUser = CommentLikedByUser(comment);
+                var timePosted = GetCommentPostTime(comment);
+
+                commentItem = new CommentListItem
+                {
+                    CommentID = comment.CommentID,
+                    ActivityFeedID = comment.FeedID,
+                    SenderFullName = comment.SenderFullName,
+                    CommentContent = comment.CommentContent,
+                    SenderUsername = comment.SenderUsername,
+                    Created = comment.Created,
+                    AmountOfLikes = comment.AmountOfLikes,
+                    AmountOfReplies = comment.AmountOfReplies,
+                    Replies = comment.Replies,
+                    Likes = comment.Likes,
+                    LikedByUser = likedByUser,
+                    WhenPosted = timePosted,
+                };
+                return commentItem;
+            }
+        }
+        public bool GenerateLikeNotification(int id)
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var foundLike = ctx.Likes.Single(e => e.ActivityFeedID == id && e.UserID == _userId);
+                var profile = GetProfile();
+
                 var notification = new Notification
                 {
                     SenderFullName = foundLike.Profile.FullName,
                     SenderUsername = foundLike.Profile.Username,
+                    SendersProfilePicture = profile.ProfilePicture,
                     Profile_ID = foundLike.ActivityFeed.UserID,
+                    ActivityFeedID = id,
+                    TimeCreated = DateTimeOffset.Now,
+                    Recieved = false,
+                };
+
+                ctx.Notifications.Add(notification);
+                ctx.SaveChanges();
+                return true;
+
+            }
+        }
+        public bool GenerateCommentNotification(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var foundComment = ctx.Comments.Where(e => e.FeedID == id && e.SenderID == _userId).First();
+                var profile = GetProfile();
+
+                var notification = new Notification
+                {
+                    SenderFullName = foundComment.SenderFullName,
+                    SenderUsername = foundComment.SenderUsername,
+                    SendersProfilePicture = profile.ProfilePicture,
+                    Profile_ID = foundComment.ActivityFeed.UserID,
+                    CommentID = foundComment.CommentID,
                     ActivityFeedID = id,
                     TimeCreated = DateTimeOffset.Now,
                     Recieved = false,
@@ -668,6 +738,7 @@ namespace LocalSpirits.Services
                 {
                     SenderFullName = model.SenderFullName,
                     SenderUsername = model.SenderFullName,
+                    SenderID  = _userId,
                     FeedID = model.FeedID,
                     Created = DateTimeOffset.Now,
                     CommentContent = model.CommentContent,
@@ -679,9 +750,36 @@ namespace LocalSpirits.Services
 
             }
         }
+        public bool NewReply(ReplyCreate model)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity = new Reply
+                {
+                    SenderFullName = model.SenderFullName,
+                    SenderUsername = model.SenderFullName,
+                    CommentID = model.CommentID,
+                    Created = DateTimeOffset.Now,
+                    ReplyContent = model.ReplyContent,
+                };
+
+                ctx.Replies.Add(entity);
+                ctx.SaveChanges();
+                return true;
+
+            }
+        }
         public string GetFeedPostTime(ActivityFeed activity)
         {
             var timePosted = DateTimeOffset.Now - activity.Created;
+            if (timePosted.Days > 0) return $"{timePosted.Days}d";
+            if (timePosted.Hours > 0) return $"{timePosted.Hours}h";
+            if (timePosted.Minutes > 0) return $"{timePosted.Minutes}m";
+            return "now";
+        }
+        public string GetCommentPostTime(Comment comment)
+        {
+            var timePosted = DateTimeOffset.Now - comment.Created;
             if (timePosted.Days > 0) return $"{timePosted.Days}d";
             if (timePosted.Hours > 0) return $"{timePosted.Hours}h";
             if (timePosted.Minutes > 0) return $"{timePosted.Minutes}m";

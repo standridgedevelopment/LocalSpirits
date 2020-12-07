@@ -414,16 +414,18 @@
     <Content Include="Views\Event\Delete.cshtml" />
     <Content Include="Views\Profile\Notifications.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Liked.cshtml" />
-    <Content Include="Views\Profile\_GetCurrentLikes.cshtml" />
-    <Content Include="Views\Profile\_ReloadLikes.cshtml" />
     <Content Include="Views\Shared\_ReloadLikes.cshtml" />
     <Content Include="Views\Shared\_GetCurrentLikes.cshtml" />
     <Content Include="Views\Profile\_ListNotifications.cshtml" />
     <Content Include="Views\Profile\_AddComment.cshtml" />
     <Content Include="Views\Shared\_GetCurrentComments.cshtml" />
-    <Content Include="Views\Profile\_ReloadComments.cshtml" />
     <Content Include="Views\Shared\_ReloadComments.cshtml" />
     <Content Include="Views\Profile\PostDetail.cshtml" />
+    <Content Include="Views\Profile\_AddReply.cshtml" />
+    <Content Include="Views\Shared\_ReloadReplies.cshtml" />
+    <Content Include="Views\Shared\_GetCurrentReplies.cshtml" />
+    <Content Include="Views\Shared\_ReloadCommentLikes.cshtml" />
+    <Content Include="Views\Shared\_GetCurrentCommentLikes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

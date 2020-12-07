@@ -99,6 +99,7 @@
 
             <div class="col-md-3 my-6">
                 <img src="@Url.Content(@item.ProfilePicture)" width="55" height="55" />
+
             </div>
 
             <div class="col-md-8 my-6">
@@ -138,11 +139,14 @@
                     to their calendar.
                     <br />
                     <br />
-                    <div id="@Html.Raw(item.ID)">
-                        @Html.Partial("_ReloadLikes", item)
-                    </div>
-                    <div class="col-md-1" id="totalComments_@Html.Raw(item.ID)">
-                        @Html.Partial("_ReloadComments", item)
+                    <div class="container">
+                        <div class="col-md-2" id="@Html.Raw(item.ID)">
+                            @Html.Partial("_ReloadLikes", item)
+                        </div>
+                        <div class="col-md-1" id="totalComments_@Html.Raw(item.ID)">
+                            @Html.Partial("_ReloadComments", item)
+                        </div>
+
                     </div>
                 </div>
                 <div class="panel-footer">
@@ -159,7 +163,6 @@
                     </div>
 
                     <div id="comment_@Html.Raw(item.ID)"></div>
-                    <div id="viewComments_@Html.Raw(item.ID)"></div>
                 </div>
             </div>
         }
@@ -234,8 +237,14 @@
         to their calendar.
         <br />
         <br />
-        <div id="@Html.Raw(item.ID)">
-            @Html.Partial("_ReloadLikes", item)
+        <div class="container">
+            <div class="col-md-2" id="@Html.Raw(item.ID)">
+                @Html.Partial("_ReloadLikes", item)
+            </div>
+            <div class="col-md-1" id="totalComments_@Html.Raw(item.ID)">
+                @Html.Partial("_ReloadComments", item)
+            </div>
+
         </div>
     </div>
     <div class="panel-footer">
@@ -280,9 +289,15 @@
         @Html.ActionLink($"{item.Content}", $"Details", $"{item.ObjectType}", new { id = item.ObjectID }, new { @class = "my-class" })
         <br />
         <br />
-        <div id="@Html.Raw(item.ID)">
-            @Html.Partial("_ReloadLikes", item)
-        </div>
+        <div class="container">
+    <div class="col-md-2" id="@Html.Raw(item.ID)">
+        @Html.Partial("_ReloadLikes", item)
+    </div>
+    <div class="col-md-1" id="totalComments_@Html.Raw(item.ID)">
+        @Html.Partial("_ReloadComments", item)
+    </div>
+
+</div>
     </div>
     <div class="panel-footer">
         <div class="container">
@@ -324,8 +339,14 @@
         <p>@Html.ActionLink($"{item.Content}", $"Details", $"{item.ObjectType}", new { id = item.ObjectID }, new { @class = "my-class" })</p>
         <br />
         <br />
-        <div id="@Html.Raw(item.ID)">
-            @Html.Partial("_ReloadLikes", item)
+        <div class="container">
+            <div class="col-md-2" id="@Html.Raw(item.ID)">
+                @Html.Partial("_ReloadLikes", item)
+            </div>
+            <div class="col-md-1" id="totalComments_@Html.Raw(item.ID)">
+                @Html.Partial("_ReloadComments", item)
+            </div>
+
         </div>
     </div>
     <div class="panel-footer">
@@ -365,8 +386,14 @@
         <p>@Html.ActionLink($"{item.Content}", $"Details", $"{item.ObjectType}", new { id = item.ObjectID }, new { @class = "my-class" })</p>
         <br />
         <br />
-        <div id="@Html.Raw(item.ID)">
-            @Html.Partial("_ReloadLikes", item)
+        <div class="container">
+            <div class="col-md-2" id="@Html.Raw(item.ID)">
+                @Html.Partial("_ReloadLikes", item)
+            </div>
+            <div class="col-md-1" id="totalComments_@Html.Raw(item.ID)">
+                @Html.Partial("_ReloadComments", item)
+            </div>
+
         </div>
     </div>
     <div class="panel-footer">
@@ -404,9 +431,14 @@
         Created a new event!
         <p>@Html.ActionLink($"{item.Content}", $"Details", $"{item.ObjectType}", new { id = item.ObjectID }, new { @class = "my-class" })</p>
         <br />
-        <br />
-        <div id="@Html.Raw(item.ID)">
-            @Html.Partial("_ReloadLikes", item)
+        <div class="container">
+            <div class="col-md-2" id="@Html.Raw(item.ID)">
+                @Html.Partial("_ReloadLikes", item)
+            </div>
+            <div class="col-md-1" id="totalComments_@Html.Raw(item.ID)">
+                @Html.Partial("_ReloadComments", item)
+            </div>
+
         </div>
     </div>
     <div class="panel-footer">
@@ -498,8 +530,14 @@
         }
         <br />
         <br />
-        <div id="@Html.Raw(item.ID)">
-            @Html.Partial("_ReloadLikes", item)
+        <div class="container">
+            <div class="col-md-2" id="@Html.Raw(item.ID)">
+                @Html.Partial("_ReloadLikes", item)
+            </div>
+            <div class="col-md-1" id="totalComments_@Html.Raw(item.ID)">
+                @Html.Partial("_ReloadComments", item)
+            </div>
+
         </div>
     </div>
     <div class="panel-footer">

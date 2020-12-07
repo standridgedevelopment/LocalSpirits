@@ -4,22 +4,22 @@
 @if (Model.AmountOfLikes == 1 && Model.LikedByUser == true)
 {
 
-    <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" /> You liked this</p>
+    <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" /> You</p>
 }
 @if (Model.AmountOfLikes == 1 && Model.LikedByUser == false)
 {
-    <p><img src="~/assets/img/FilledHeart.png" width="20" height="20" /> 1 person liked this</p>
+    <p><img src="~/assets/img/FilledHeart.png" width="20" height="20" /> 1 person</p>
 }
 @if (Model.AmountOfLikes == 2 && Model.LikedByUser == true)
 {
-    <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" />  You and 1 person liked this</p>
+    <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" />  You and 1 person</p>
 }
 @if (Model.AmountOfLikes > 1 && Model.LikedByUser == false)
 {
-    <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" />  @Html.Raw(Model.AmountOfLikes) people liked this</p>
+    <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" />  @Html.Raw(Model.AmountOfLikes) people</p>
 }
 @if (Model.AmountOfLikes > 2 && Model.LikedByUser == true)
 {
-    <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" />  You and @Html.Raw(Model.AmountOfLikes - 1) people liked this</p>
+    <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" />  You and @Html.Raw(Model.AmountOfLikes - 1) people</p>
 }
 

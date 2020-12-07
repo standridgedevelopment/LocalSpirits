@@ -62,6 +62,18 @@
                 });
         });
         $(document).ready(function () {
+            $("i[data-toggle='reply']")
+
+                .css({ "cursor": "pointer" })
+                .click(function (e) {
+                    var target = $(e.target);
+                    var commentId = target.attr("data-id");
+                    $("#comment_" + commentId).load('/Profile/AddReply/' + commentId);
+                    $("#comment_" + commentId).show('');
+
+                });
+        });
+        $(document).ready(function () {
             $("i[data-toggle='viewAllComments']")
 
                 .css({ "cursor": "pointer" })
@@ -121,11 +133,14 @@
                 to their calendar.
                 <br />
                 <br />
-                <div id="@Html.Raw(Model.ID)">
-                    @Html.Partial("_ReloadLikes", Model)
-                </div>
-                <div class="col-md-1" id="totalComments_@Html.Raw(Model.ID)">
-                    @Html.Partial("_ReloadComments", Model)
+                <div class="container">
+                    <div class="col-md-2" id="@Html.Raw(Model.ID)">
+                        @Html.Partial("_ReloadLikes", Model)
+                    </div>
+                    <div class="col-md-1" id="totalComments_@Html.Raw(Model.ID)">
+                        @Html.Partial("_ReloadComments", Model)
+                    </div>
+
                 </div>
             </div>
             <div class="panel-footer">
@@ -202,8 +217,6 @@
                            data-id="@Html.Raw(Model.ID)"></i>
                     </div>
                 </div>
-
-
             </div>
         </div>
         <div id="viewComments">
@@ -212,13 +225,39 @@
                 <div class="panel panel-primary" style="width: 26rem; margin-left:27px">
                     <div class="panel-body">
                         <p style="font-weight:bold">
-                            @Html.Raw(comment.SenderUsername)
+                            @Html.ActionLink($"{comment.SenderFullName}", "Index", "Profile", new { id = comment.SenderUsername }, new { @class = "my-class" })
                         </p>
                         <p>
                             @Html.Raw(comment.CommentContent)
                         </p>
+                        <br />
+                        <br />
+                        <div class="container">
+                            <div class="col-md-2" id="ReplyLikes_@Html.Raw(comment.CommentID)">
+                                @Html.Partial("_ReloadCommentLikes", comment)
+                            </div>
+                            <div class="col-md-1" id="totalReplies_@Html.Raw(comment.CommentID)">
+                                @Html.Partial("_ReloadReplies", comment)
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="panel-footer">
+                        <div class="container">
+                            <div class="col-md-1 my-1">
+                                @Html.DisplayFor(modelItem => Model.LikedByUser, new { Id = Model.ID })
+
+                            </div>
+
+                            <div class="col-md-1 my-1">
+                                <i class="glyphicon glyphicon-comment " data-toggle="reply"
+                                   data-id="@Html.Raw(Model.ID)"></i>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
             }
         </div>
     }
@@ -244,8 +283,14 @@
                 to their calendar.
                 <br />
                 <br />
-                <div id="@Html.Raw(Model.ID)">
-                    @Html.Partial("_ReloadLikes", Model)
+                <div class="container">
+                    <div class="col-md-2" id="@Html.Raw(Model.ID)">
+                        @Html.Partial("_ReloadLikes", Model)
+                    </div>
+                    <div class="col-md-1" id="totalComments_@Html.Raw(Model.ID)">
+                        @Html.Partial("_ReloadComments", Model)
+                    </div>
+
                 </div>
             </div>
             <div class="panel-footer">
@@ -260,9 +305,48 @@
                            data-id="@Html.Raw(Model.ID)"></i>
                     </div>
                 </div>
-
-                <div id="comment_@Html.Raw(Model.ID)"></div>
             </div>
+        </div>
+        <div id="viewComments">
+            @foreach (var comment in Model.Comments)
+            {
+                <div class="panel panel-primary" style="width: 26rem; margin-left:27px">
+                    <div class="panel-body">
+                        <p style="font-weight:bold">
+                            @Html.ActionLink($"{comment.SenderFullName}", "Index", "Profile", new { id = comment.SenderUsername }, new { @class = "my-class" })
+                        </p>
+                        <p>
+                            @Html.Raw(comment.CommentContent)
+                        </p>
+                        <br />
+                        <br />
+                        <div class="container">
+                            <div class="col-md-2" id="ReplyLikes_@Html.Raw(comment.CommentID)">
+                                @Html.Partial("_ReloadCommentLikes", comment)
+                            </div>
+                            <div class="col-md-1" id="totalReplies_@Html.Raw(comment.CommentID)">
+                                @Html.Partial("_ReloadReplies", comment)
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="panel-footer">
+                        <div class="container">
+                            <div class="col-md-1 my-1">
+                                @Html.DisplayFor(modelItem => Model.LikedByUser, new { Id = Model.ID })
+
+                            </div>
+
+                            <div class="col-md-1 my-1">
+                                <i class="glyphicon glyphicon-comment " data-toggle="reply"
+                                   data-id="@Html.Raw(Model.ID)"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            }
         </div>
     }
 }
@@ -290,8 +374,14 @@
             @Html.ActionLink($"{Model.Content}", $"Details", $"{Model.ObjectType}", new { id = Model.ObjectID }, new { @class = "my-class" })
             <br />
             <br />
-            <div id="@Html.Raw(Model.ID)">
-                @Html.Partial("_ReloadLikes", Model)
+            <div class="container">
+                <div class="col-md-2" id="@Html.Raw(Model.ID)">
+                    @Html.Partial("_ReloadLikes", Model)
+                </div>
+                <div class="col-md-1" id="totalComments_@Html.Raw(Model.ID)">
+                    @Html.Partial("_ReloadComments", Model)
+                </div>
+
             </div>
         </div>
         <div class="panel-footer">
@@ -306,9 +396,48 @@
                        data-id="@Html.Raw(Model.ID)"></i>
                 </div>
             </div>
-
-            <div id="comment_@Html.Raw(Model.ID)"></div>
         </div>
+    </div>
+    <div id="viewComments">
+        @foreach (var comment in Model.Comments)
+        {
+            <div class="panel panel-primary" style="width: 26rem; margin-left:27px">
+                <div class="panel-body">
+                    <p style="font-weight:bold">
+                        @Html.ActionLink($"{comment.SenderFullName}", "Index", "Profile", new { id = comment.SenderUsername }, new { @class = "my-class" })
+                    </p>
+                    <p>
+                        @Html.Raw(comment.CommentContent)
+                    </p>
+                    <br />
+                    <br />
+                    <div class="container">
+                        <div class="col-md-2" id="ReplyLikes_@Html.Raw(comment.CommentID)">
+                            @Html.Partial("_ReloadCommentLikes", comment)
+                        </div>
+                        <div class="col-md-1" id="totalReplies_@Html.Raw(comment.CommentID)">
+                            @Html.Partial("_ReloadReplies", comment)
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="panel-footer">
+                    <div class="container">
+                        <div class="col-md-1 my-1">
+                            @Html.DisplayFor(modelItem => Model.LikedByUser, new { Id = Model.ID })
+
+                        </div>
+
+                        <div class="col-md-1 my-1">
+                            <i class="glyphicon glyphicon-comment " data-toggle="reply"
+                               data-id="@Html.Raw(Model.ID)"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        }
     </div>
 }
 @if (Model.Activity == "NewEvent")
@@ -334,8 +463,14 @@
                 <p>@Html.ActionLink($"{Model.Content}", $"Details", $"{Model.ObjectType}", new { id = Model.ObjectID }, new { @class = "my-class" })</p>
                 <br />
                 <br />
-                <div id="@Html.Raw(Model.ID)">
-                    @Html.Partial("_ReloadLikes", Model)
+                <div class="container">
+                    <div class="col-md-2" id="@Html.Raw(Model.ID)">
+                        @Html.Partial("_ReloadLikes", Model)
+                    </div>
+                    <div class="col-md-1" id="totalComments_@Html.Raw(Model.ID)">
+                        @Html.Partial("_ReloadComments", Model)
+                    </div>
+
                 </div>
             </div>
             <div class="panel-footer">
@@ -350,9 +485,48 @@
                            data-id="@Html.Raw(Model.ID)"></i>
                     </div>
                 </div>
-
-                <div id="comment_@Html.Raw(Model.ID)"></div>
             </div>
+        </div>
+        <div id="viewComments">
+            @foreach (var comment in Model.Comments)
+            {
+                <div class="panel panel-primary" style="width: 26rem; margin-left:27px">
+                    <div class="panel-body">
+                        <p style="font-weight:bold">
+                            @Html.ActionLink($"{comment.SenderFullName}", "Index", "Profile", new { id = comment.SenderUsername }, new { @class = "my-class" })
+                        </p>
+                        <p>
+                            @Html.Raw(comment.CommentContent)
+                        </p>
+                        <br />
+                        <br />
+                        <div class="container">
+                            <div class="col-md-2" id="ReplyLikes_@Html.Raw(comment.CommentID)">
+                                @Html.Partial("_ReloadCommentLikes", comment)
+                            </div>
+                            <div class="col-md-1" id="totalReplies_@Html.Raw(comment.CommentID)">
+                                @Html.Partial("_ReloadReplies", comment)
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="panel-footer">
+                        <div class="container">
+                            <div class="col-md-1 my-1">
+                                @Html.DisplayFor(modelItem => Model.LikedByUser, new { Id = Model.ID })
+
+                            </div>
+
+                            <div class="col-md-1 my-1">
+                                <i class="glyphicon glyphicon-comment " data-toggle="reply"
+                                   data-id="@Html.Raw(Model.ID)"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            }
         </div>
     }
     if (Model.Content.Contains("Music"))
@@ -375,8 +549,14 @@
                 <p>@Html.ActionLink($"{Model.Content}", $"Details", $"{Model.ObjectType}", new { id = Model.ObjectID }, new { @class = "my-class" })</p>
                 <br />
                 <br />
-                <div id="@Html.Raw(Model.ID)">
-                    @Html.Partial("_ReloadLikes", Model)
+                <div class="container">
+                    <div class="col-md-2" id="@Html.Raw(Model.ID)">
+                        @Html.Partial("_ReloadLikes", Model)
+                    </div>
+                    <div class="col-md-1" id="totalComments_@Html.Raw(Model.ID)">
+                        @Html.Partial("_ReloadComments", Model)
+                    </div>
+
                 </div>
             </div>
             <div class="panel-footer">
@@ -391,9 +571,48 @@
                            data-id="@Html.Raw(Model.ID)"></i>
                     </div>
                 </div>
-
-                <div id="comment_@Html.Raw(Model.ID)"></div>
             </div>
+        </div>
+        <div id="viewComments">
+            @foreach (var comment in Model.Comments)
+            {
+                <div class="panel panel-primary" style="width: 26rem; margin-left:27px">
+                    <div class="panel-body">
+                        <p style="font-weight:bold">
+                            @Html.ActionLink($"{comment.SenderFullName}", "Index", "Profile", new { id = comment.SenderUsername }, new { @class = "my-class" })
+                        </p>
+                        <p>
+                            @Html.Raw(comment.CommentContent)
+                        </p>
+                        <br />
+                        <br />
+                        <div class="container">
+                            <div class="col-md-2" id="ReplyLikes_@Html.Raw(comment.CommentID)">
+                                @Html.Partial("_ReloadCommentLikes", comment)
+                            </div>
+                            <div class="col-md-1" id="totalReplies_@Html.Raw(comment.CommentID)">
+                                @Html.Partial("_ReloadReplies", comment)
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="panel-footer">
+                        <div class="container">
+                            <div class="col-md-1 my-1">
+                                @Html.DisplayFor(modelItem => Model.LikedByUser, new { Id = Model.ID })
+
+                            </div>
+
+                            <div class="col-md-1 my-1">
+                                <i class="glyphicon glyphicon-comment " data-toggle="reply"
+                                   data-id="@Html.Raw(Model.ID)"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            }
         </div>
     }
     if (Model.Content.Contains("Trivia"))
@@ -415,8 +634,14 @@
                 <p>@Html.ActionLink($"{Model.Content}", $"Details", $"{Model.ObjectType}", new { id = Model.ObjectID }, new { @class = "my-class" })</p>
                 <br />
                 <br />
-                <div id="@Html.Raw(Model.ID)">
-                    @Html.Partial("_ReloadLikes", Model)
+                <div class="container">
+                    <div class="col-md-2" id="@Html.Raw(Model.ID)">
+                        @Html.Partial("_ReloadLikes", Model)
+                    </div>
+                    <div class="col-md-1" id="totalComments_@Html.Raw(Model.ID)">
+                        @Html.Partial("_ReloadComments", Model)
+                    </div>
+
                 </div>
             </div>
             <div class="panel-footer">
@@ -431,9 +656,48 @@
                            data-id="@Html.Raw(Model.ID)"></i>
                     </div>
                 </div>
-
-                <div id="comment_@Html.Raw(Model.ID)"></div>
             </div>
+        </div>
+        <div id="viewComments">
+            @foreach (var comment in Model.Comments)
+            {
+                <div class="panel panel-primary" style="width: 26rem; margin-left:27px">
+                    <div class="panel-body">
+                        <p style="font-weight:bold">
+                            @Html.ActionLink($"{comment.SenderFullName}", "Index", "Profile", new { id = comment.SenderUsername }, new { @class = "my-class" })
+                        </p>
+                        <p>
+                            @Html.Raw(comment.CommentContent)
+                        </p>
+                        <br />
+                        <br />
+                        <div class="container">
+                            <div class="col-md-2" id="ReplyLikes_@Html.Raw(comment.CommentID)">
+                                @Html.Partial("_ReloadCommentLikes", comment)
+                            </div>
+                            <div class="col-md-1" id="totalReplies_@Html.Raw(comment.CommentID)">
+                                @Html.Partial("_ReloadReplies", comment)
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="panel-footer">
+                        <div class="container">
+                            <div class="col-md-1 my-1">
+                                @Html.DisplayFor(modelItem => Model.LikedByUser, new { Id = Model.ID })
+
+                            </div>
+
+                            <div class="col-md-1 my-1">
+                                <i class="glyphicon glyphicon-comment " data-toggle="reply"
+                                   data-id="@Html.Raw(Model.ID)"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            }
         </div>
     }
 }
@@ -508,8 +772,14 @@
             }
             <br />
             <br />
-            <div id="@Html.Raw(Model.ID)">
-                @Html.Partial("_ReloadLikes", Model)
+            <div class="container">
+                <div class="col-md-2" id="@Html.Raw(Model.ID)">
+                    @Html.Partial("_ReloadLikes", Model)
+                </div>
+                <div class="col-md-1" id="totalComments_@Html.Raw(Model.ID)">
+                    @Html.Partial("_ReloadComments", Model)
+                </div>
+
             </div>
         </div>
         <div class="panel-footer">
@@ -524,9 +794,48 @@
                        data-id="@Html.Raw(Model.ID)"></i>
                 </div>
             </div>
-
-            <div id="comment_@Html.Raw(Model.ID)"></div>
         </div>
+    </div>
+    <div id="viewComments">
+        @foreach (var comment in Model.Comments)
+        {
+            <div class="panel panel-primary" style="width: 26rem; margin-left:27px">
+                <div class="panel-body">
+                    <p style="font-weight:bold">
+                        @Html.ActionLink($"{comment.SenderFullName}", "Index", "Profile", new { id = comment.SenderUsername }, new { @class = "my-class" })
+                    </p>
+                    <p>
+                        @Html.Raw(comment.CommentContent)
+                    </p>
+                    <br />
+                    <br />
+                    <div class="container">
+                        <div class="col-md-2" id="ReplyLikes_@Html.Raw(comment.CommentID)">
+                            @Html.Partial("_ReloadCommentLikes", comment)
+                        </div>
+                        <div class="col-md-1" id="totalReplies_@Html.Raw(comment.CommentID)">
+                            @Html.Partial("_ReloadReplies", comment)
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="panel-footer">
+                    <div class="container">
+                        <div class="col-md-1 my-1">
+                            @Html.DisplayFor(modelItem => Model.LikedByUser, new { Id = Model.ID })
+
+                        </div>
+
+                        <div class="col-md-1 my-1">
+                            <i class="glyphicon glyphicon-comment " data-toggle="reply"
+                               data-id="@Html.Raw(Model.ID)"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        }
     </div>
 }
 

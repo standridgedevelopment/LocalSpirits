@@ -123,7 +123,7 @@ namespace LocalSpirits.WebMVC.Controllers
                 return RedirectToAction("Activity", "Home");
             }
             profileService.LikeFeedItem(id);
-            profileService.GenerateNotification((id));
+            profileService.GenerateLikeNotification((id));
             return RedirectToAction("Activity", "Home");
         }
         //public ActionResult LikeProfileItem(int id, string username)
@@ -159,6 +159,13 @@ namespace LocalSpirits.WebMVC.Controllers
 
             return PartialView("_GetCurrentLikes", feedItem);
         }
+        public ActionResult GetCommentLikes(int id)
+        {
+            var profileService = CreateProfileService();
+            var comment = profileService.GetComment(id);
+
+            return PartialView("_GetCurrentCommentLikes", comment);
+        }
         public ActionResult GetComments(int id)
         {
             var profileService = CreateProfileService();
@@ -166,12 +173,27 @@ namespace LocalSpirits.WebMVC.Controllers
 
             return PartialView("_GetCurrentComments", feedItem);
         }
+        public ActionResult GetReplies(int id)
+        {
+            var profileService = CreateProfileService();
+            var comment = profileService.GetComment(id);
+
+            return PartialView("_GetCurrentReplies", comment);
+        }
         public ActionResult GetPost(int id)
         {
             var profileService = CreateProfileService();
             var feedItem = profileService.GetFeedItem(id);
+            ModelState.Clear();
 
             return View("PostDetail", feedItem);
+        }
+        public ActionResult GetComment(int id)
+        {
+            var profileService = CreateProfileService();
+            var comment = profileService.GetComment(id);
+
+            return View("CommentDetail", comment);
         }
         public ActionResult SetHeartState(int id)
         {
@@ -186,7 +208,7 @@ namespace LocalSpirits.WebMVC.Controllers
                 return PartialView("_ReloadLikes", activityItem);
             }
             profileService.LikeFeedItem(id);
-            profileService.GenerateNotification((id));
+            profileService.GenerateLikeNotification((id));
             return PartialView("_ReloadLikes", activityItem);
         }
         [HttpGet]
@@ -194,7 +216,6 @@ namespace LocalSpirits.WebMVC.Controllers
         {
             var profileService = CreateProfileService();
             var userProfile = profileService.GetProfile();
-            var activityItem = profileService.GetFeedItem(id);
 
 
             var model = new CommentCreate
@@ -220,11 +241,46 @@ namespace LocalSpirits.WebMVC.Controllers
             if (profileService.NewComment(model))
             {
                 TempData["SaveResult"] = "Comment Posted.";
+                profileService.GenerateCommentNotification((int)model.FeedID);
                 return PartialView("_ReloadComments", activityItem);
             }
 
             ModelState.AddModelError("", "Your comment could not be posted.");
             return PartialView("_ReloadComments", activityItem);
+        }
+
+        public ActionResult AddReply(int id)
+        {
+            var profileService = CreateProfileService();
+            var userProfile = profileService.GetProfile();
+
+
+            var model = new ReplyCreate
+            {
+                SenderFullName = userProfile.FullName,
+                SenderUsername = userProfile.Username,
+                CommentID = id,
+                Created = DateTimeOffset.Now,
+            };
+
+            return PartialView("_AddReply", model);
+        }
+        public ActionResult PostReply(ReplyCreate model)
+        {
+            if (!ModelState.IsValid) return View(model);
+
+            var profileService = CreateProfileService();
+            var comment = profileService.GetComment((int)model.CommentID);
+
+
+            if (profileService.NewReply(model))
+            {
+                TempData["SaveResult"] = "Reply Posted.";
+                return PartialView("_ReloadReplies", comment);
+            }
+
+            ModelState.AddModelError("", "Your reply could not be posted.");
+            return PartialView("_ReloadReplies", comment);
         }
         public ActionResult Edit()
         {

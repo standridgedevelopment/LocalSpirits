@@ -11,6 +11,7 @@ namespace LocalSpirits.Models.Notification
         public int? ActivityFeedID { get; set; }
         public string SenderFullName { get; set; }
         public string SenderUsername { get; set; }
+        public string SendersProfilePicture { get; set; }
         public DateTimeOffset TimeCreated { get; set; }
     }
 }

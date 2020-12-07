@@ -60,6 +60,23 @@
     <Compile Include="Beer.cs" />
     <Compile Include="Business.cs" />
     <Compile Include="City.cs" />
+    <Compile Include="Migrations\202012070029315_17.cs" />
+    <Compile Include="Migrations\202012070029315_17.designer.cs">
+      <DependentUpon>202012070029315_17.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012070139440_18.cs" />
+    <Compile Include="Migrations\202012070139440_18.designer.cs">
+      <DependentUpon>202012070139440_18.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012070203455_19.cs" />
+    <Compile Include="Migrations\202012070203455_19.designer.cs">
+      <DependentUpon>202012070203455_19.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012070243014_20.cs" />
+    <Compile Include="Migrations\202012070243014_20.designer.cs">
+      <DependentUpon>202012070243014_20.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reply.cs" />
     <Compile Include="Comment.cs" />
     <Compile Include="Event.cs" />
     <Compile Include="ActivityFeed.cs" />
@@ -94,6 +111,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202012060212236_16.resx">
       <DependentUpon>202012060212236_16.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012070029315_17.resx">
+      <DependentUpon>202012070029315_17.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012070139440_18.resx">
+      <DependentUpon>202012070139440_18.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012070203455_19.resx">
+      <DependentUpon>202012070203455_19.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012070243014_20.resx">
+      <DependentUpon>202012070243014_20.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
