@@ -289,7 +289,7 @@ namespace LocalSpirits.Services
                 var activity = $"{model.Activity}";
                 try
                 {
-                    var oldActivity = ctx.ActivityFeed.Single(e => e.ObjectID == model.ObjectID && e.Activity == activity);
+                    var oldActivity = ctx.ActivityFeed.Single(e => e.ObjectID == model.ObjectID && e.Activity == activity && e.UserID == _userId);
                     ctx.ActivityFeed.Remove(oldActivity);
                 }
                 catch { }
