@@ -76,6 +76,10 @@
     <Compile Include="Migrations\202012070243014_20.designer.cs">
       <DependentUpon>202012070243014_20.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202012071757592_21.cs" />
+    <Compile Include="Migrations\202012071757592_21.designer.cs">
+      <DependentUpon>202012071757592_21.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reply.cs" />
     <Compile Include="Comment.cs" />
     <Compile Include="Event.cs" />
@@ -123,6 +127,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202012070243014_20.resx">
       <DependentUpon>202012070243014_20.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012071757592_21.resx">
+      <DependentUpon>202012071757592_21.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

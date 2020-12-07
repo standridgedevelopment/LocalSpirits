@@ -738,6 +738,7 @@ namespace LocalSpirits.Services
                 {
                     SenderFullName = model.SenderFullName,
                     SenderUsername = model.SenderFullName,
+                    SenderProfilePicture = model.SenderProfilePicture,
                     SenderID  = _userId,
                     FeedID = model.FeedID,
                     Created = DateTimeOffset.Now,

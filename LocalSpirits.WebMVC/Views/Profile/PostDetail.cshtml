@@ -225,6 +225,7 @@
                 <div class="panel panel-primary" style="width: 26rem; margin-left:27px">
                     <div class="panel-body">
                         <p style="font-weight:bold">
+                            <img src="@Url.Content(comment.SenderProfilePicture)" width="55" height="55" style="margin-left:-60px" />
                             @Html.ActionLink($"{comment.SenderFullName}", "Index", "Profile", new { id = comment.SenderUsername }, new { @class = "my-class" })
                         </p>
                         <p>
@@ -313,6 +314,7 @@
                 <div class="panel panel-primary" style="width: 26rem; margin-left:27px">
                     <div class="panel-body">
                         <p style="font-weight:bold">
+                            <img src="@Url.Content(comment.SenderProfilePicture)" width="55" height="55" style="margin-left:-60px" />
                             @Html.ActionLink($"{comment.SenderFullName}", "Index", "Profile", new { id = comment.SenderUsername }, new { @class = "my-class" })
                         </p>
                         <p>
@@ -401,9 +403,11 @@
     <div id="viewComments">
         @foreach (var comment in Model.Comments)
         {
+       
             <div class="panel panel-primary" style="width: 26rem; margin-left:27px">
                 <div class="panel-body">
                     <p style="font-weight:bold">
+                        <img src="@Url.Content(comment.SenderProfilePicture)" width="55" height="55" style="margin-left:-60px" />
                         @Html.ActionLink($"{comment.SenderFullName}", "Index", "Profile", new { id = comment.SenderUsername }, new { @class = "my-class" })
                     </p>
                     <p>
@@ -493,6 +497,7 @@
                 <div class="panel panel-primary" style="width: 26rem; margin-left:27px">
                     <div class="panel-body">
                         <p style="font-weight:bold">
+                            <img src="@Url.Content(comment.SenderProfilePicture)" width="55" height="55" style="margin-left:-60px" />
                             @Html.ActionLink($"{comment.SenderFullName}", "Index", "Profile", new { id = comment.SenderUsername }, new { @class = "my-class" })
                         </p>
                         <p>
@@ -579,6 +584,7 @@
                 <div class="panel panel-primary" style="width: 26rem; margin-left:27px">
                     <div class="panel-body">
                         <p style="font-weight:bold">
+                            <img src="@Url.Content(comment.SenderProfilePicture)" width="55" height="55" style="margin-left:-60px" />
                             @Html.ActionLink($"{comment.SenderFullName}", "Index", "Profile", new { id = comment.SenderUsername }, new { @class = "my-class" })
                         </p>
                         <p>
@@ -664,6 +670,7 @@
                 <div class="panel panel-primary" style="width: 26rem; margin-left:27px">
                     <div class="panel-body">
                         <p style="font-weight:bold">
+                            <img src="@Url.Content(comment.SenderProfilePicture)" width="55" height="55" style="margin-left:-60px" />
                             @Html.ActionLink($"{comment.SenderFullName}", "Index", "Profile", new { id = comment.SenderUsername }, new { @class = "my-class" })
                         </p>
                         <p>
@@ -802,6 +809,7 @@
             <div class="panel panel-primary" style="width: 26rem; margin-left:27px">
                 <div class="panel-body">
                     <p style="font-weight:bold">
+                        <img src="@Url.Content(comment.SenderProfilePicture)" width="55" height="55" style="margin-left:-60px" />
                         @Html.ActionLink($"{comment.SenderFullName}", "Index", "Profile", new { id = comment.SenderUsername }, new { @class = "my-class" })
                     </p>
                     <p>

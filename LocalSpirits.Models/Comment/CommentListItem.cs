@@ -15,6 +15,7 @@ namespace LocalSpirits.Models.Comment
         public int? ActivityFeedID { get; set; }
         public string SenderFullName { get; set; }
         public string SenderUsername { get; set; }
+        public string SenderProfilePicture { get; set; }
         public string CommentContent { get; set; }
         [UIHint("Liked")]
         public bool LikedByUser { get; set; }

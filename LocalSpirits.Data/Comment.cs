@@ -21,6 +21,7 @@ namespace LocalSpirits.Data
         public string CommentContent { get; set; }
         public string SenderFullName { get; set; }
         public string SenderUsername { get; set; }
+        public string SenderProfilePicture { get; set; }
         public int AmountOfLikes
         {
             get

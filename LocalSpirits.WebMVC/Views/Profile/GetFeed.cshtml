@@ -61,18 +61,18 @@
                     
                 });
         });
-        $(document).ready(function () {
-            $("i[data-toggle='viewAllComments']")
+        //$(document).ready(function () {
+        //    $("i[data-toggle='viewAllComments']")
 
-                .css({ "cursor": "pointer" })
-                .click(function (e) {
-                    var target = $(e.target);
-                    var commentId = target.attr("data-id");
-                    $("#viewComments_" + commentId).load('/Profile/AddComment/' + commentId);
-                    $("#viewComments_" + commentId).show('');
+        //        .css({ "cursor": "pointer" })
+        //        .click(function (e) {
+        //            var target = $(e.target);
+        //            var commentId = target.attr("data-id");
+        //            $("#viewComments_" + commentId).load('/Profile/AddComment/' + commentId);
+        //            $("#viewComments_" + commentId).show('');
 
-                });
-        });
+        //        });
+        //});
     </script>
 }
 

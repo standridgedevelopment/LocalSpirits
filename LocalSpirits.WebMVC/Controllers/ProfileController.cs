@@ -259,6 +259,7 @@ namespace LocalSpirits.WebMVC.Controllers
             {
                 SenderFullName = userProfile.FullName,
                 SenderUsername = userProfile.Username,
+                SenderProfilePicture = userProfile.ProfilePicture,
                 CommentID = id,
                 Created = DateTimeOffset.Now,
             };

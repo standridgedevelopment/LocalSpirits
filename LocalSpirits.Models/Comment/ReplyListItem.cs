@@ -12,6 +12,7 @@ namespace LocalSpirits.Models.Comment
         public int? CommentID { get; set; }
         public string SenderFullName { get; set; }
         public string SenderUsername { get; set; }
+        public string SenderProfilePicture { get; set; }
         public string ReplyContent { get; set; }
         public DateTimeOffset Created { get; set; }
         public DateTimeOffset? Modified { get; set; }
