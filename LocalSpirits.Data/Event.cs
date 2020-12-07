@@ -31,7 +31,7 @@ namespace LocalSpirits.Data
         public string description { get; set; }
         public string url
         {
-            get => $"https://localhost:44384/Event/Details/{id}";
+            get => $"https://localspirits.azurewebsites.net/Event/Details/{id}";
 
             set { }
         }

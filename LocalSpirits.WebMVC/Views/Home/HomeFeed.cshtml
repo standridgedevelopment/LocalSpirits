@@ -92,417 +92,417 @@
     {
         if (item.Content.Contains("Karaoke"))
         {
-<div class="panel panel-success" style="width: 32rem;">
-    <div class="panel-heading">
-        <div class="row my-5">
-            <div class="col-md-3 my-6">
-                <img src="@Url.Content(@item.ProfilePicture)" width="55" height="55" />
-            </div>
+            <div class="panel panel-success" style="width: 32rem;">
+                <div class="panel-heading">
+                    <div class="row my-5">
+                        <div class="col-md-3 my-6">
+                            <img src="@Url.Content(@item.ProfilePicture)" width="55" height="55" />
+                        </div>
 
-            <div class="col-md-8 my-6">
-                @Html.ActionLink($"{item.Name}", "Index", "Profile", new { id = item.Username }, new { @class = "my-class" })
-                <p class="time">@Html.Raw(item.WhenPosted)</p>
-            </div>
-        </div>
-    </div>
-    <div class="panel-body">
-        Added
-        @Html.ActionLink($"{item.Content}", $"Details", $"{item.ObjectType}", new { id = item.ObjectID }, new { @class = "my-class" })
-        to their calendar.
-        <br />
-        <br />
-        <div class="container">
-            <div class="col-md-2" id="@Html.Raw(item.ID)">
-                @Html.Partial("_ReloadLikes", item)
-            </div>
-            <div class="col-md-1" id="totalComments_@Html.Raw(item.ID)">
-                @Html.Partial("_ReloadComments", item)
-            </div>
+                        <div class="col-md-8 my-6">
+                            @Html.ActionLink($"{item.Name}", "Index", "Profile", new { id = item.Username }, new { @class = "my-class" })
+                            <p class="time">@Html.Raw(item.WhenPosted)</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    Added
+                    @Html.ActionLink($"{item.Content}", $"Details", $"{item.ObjectType}", new { id = item.ObjectID }, new { @class = "my-class" })
+                    to their calendar.
+                    <br />
+                    <br />
+                    <div class="container">
+                        <div class="col-md-2" id="@Html.Raw(item.ID)">
+                            @Html.Partial("_ReloadLikes", item)
+                        </div>
+                        <div class="col-md-1" id="totalComments_@Html.Raw(item.ID)">
+                            @Html.Partial("_ReloadComments", item)
+                        </div>
 
-        </div>
-    </div>
-    <div class="panel-footer">
-        <div class="container">
-            <div class="col-md-1 my-1">
-                @Html.DisplayFor(modelItem => item.LikedByUser, new { Id = item.ID })
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <div class="container">
+                        <div class="col-md-1 my-1">
+                            @Html.DisplayFor(modelItem => item.LikedByUser, new { Id = item.ID })
 
+                        </div>
+
+                        <div class="col-md-1 my-1">
+                            <i class="glyphicon glyphicon-comment " data-toggle="comment"
+                               data-id="@Html.Raw(item.ID)"></i>
+                        </div>
+                    </div>
+
+                    <div id="comment_@Html.Raw(item.ID)"></div>
+                </div>
             </div>
-
-            <div class="col-md-1 my-1">
-                <i class="glyphicon glyphicon-comment " data-toggle="comment"
-                   data-id="@Html.Raw(item.ID)"></i>
-            </div>
-        </div>
-
-        <div id="comment_@Html.Raw(item.ID)"></div>
-    </div>
-</div>
         }
         if (item.Content.Contains("Music"))
         {
-<div class="panel panel-primary" style="width: 32rem;">
-    <div class="panel-heading">
-        <div class="row my-5">
-            <div class="col-md-3 my-6">
-                <img src="@Url.Content(@item.ProfilePicture)" width="55" height="55" />
-            </div>
+            <div class="panel panel-primary" style="width: 32rem;">
+                <div class="panel-heading">
+                    <div class="row my-5">
+                        <div class="col-md-3 my-6">
+                            <img src="@Url.Content(@item.ProfilePicture)" width="55" height="55" />
+                        </div>
 
-            <div class="col-md-8 my-6">
-                @Html.ActionLink($"{item.Name}", "Index", "Profile", new { id = item.Username }, new { @class = "my-class" })
-                <p class="time">@Html.Raw(item.WhenPosted)</p>
-            </div>
-        </div>
-    </div>
-    <div class="panel-body">
-        Added
-        @Html.ActionLink($"{item.Content}", $"Details", $"{item.ObjectType}", new { id = item.ObjectID }, new { @class = "my-class" })
-        to their calendar.
-        <br />
-        <br />
-        <div class="container">
-            <div class="col-md-2" id="@Html.Raw(item.ID)">
-                @Html.Partial("_ReloadLikes", item)
-            </div>
-            <div class="col-md-1" id="totalComments_@Html.Raw(item.ID)">
-                @Html.Partial("_ReloadComments", item)
-            </div>
+                        <div class="col-md-8 my-6">
+                            @Html.ActionLink($"{item.Name}", "Index", "Profile", new { id = item.Username }, new { @class = "my-class" })
+                            <p class="time">@Html.Raw(item.WhenPosted)</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    Added
+                    @Html.ActionLink($"{item.Content}", $"Details", $"{item.ObjectType}", new { id = item.ObjectID }, new { @class = "my-class" })
+                    to their calendar.
+                    <br />
+                    <br />
+                    <div class="container">
+                        <div class="col-md-2" id="@Html.Raw(item.ID)">
+                            @Html.Partial("_ReloadLikes", item)
+                        </div>
+                        <div class="col-md-1" id="totalComments_@Html.Raw(item.ID)">
+                            @Html.Partial("_ReloadComments", item)
+                        </div>
 
-        </div>
-    </div>
-    <div class="panel-footer">
-        <div class="container">
-            <div class="col-md-1 my-1">
-                @Html.DisplayFor(modelItem => item.LikedByUser, new { Id = item.ID })
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <div class="container">
+                        <div class="col-md-1 my-1">
+                            @Html.DisplayFor(modelItem => item.LikedByUser, new { Id = item.ID })
 
+                        </div>
+
+                        <div class="col-md-1 my-1">
+                            <i class="glyphicon glyphicon-comment " data-toggle="comment"
+                               data-id="@Html.Raw(item.ID)"></i>
+                        </div>
+                    </div>
+
+                    <div id="comment_@Html.Raw(item.ID)"></div>
+                </div>
             </div>
-
-            <div class="col-md-1 my-1">
-                <i class="glyphicon glyphicon-comment " data-toggle="comment"
-                   data-id="@Html.Raw(item.ID)"></i>
-            </div>
-        </div>
-
-        <div id="comment_@Html.Raw(item.ID)"></div>
-    </div>
-</div>
         }
         if (item.Content.Contains("Trivia"))
         {
-<div class="panel panel-danger" style="width: 32rem;">
-    <div class="panel-heading">
-        <div class="row my-5">
-            <div class="col-md-3 my-6">
-                <img src="@Url.Content(@item.ProfilePicture)" width="55" height="55" />
-            </div>
+            <div class="panel panel-danger" style="width: 32rem;">
+                <div class="panel-heading">
+                    <div class="row my-5">
+                        <div class="col-md-3 my-6">
+                            <img src="@Url.Content(@item.ProfilePicture)" width="55" height="55" />
+                        </div>
 
-            <div class="col-md-8 my-6">
-                @Html.ActionLink($"{item.Name}", "Index", "Profile", new { id = item.Username }, new { @class = "my-class" })
-                <p class="time">@Html.Raw(item.WhenPosted)</p>
-            </div>
-        </div>
-    </div>
-    <div class="panel-body">
-        Added
-        @Html.ActionLink($"{item.Content}", $"Details", $"{item.ObjectType}", new { id = item.ObjectID }, new { @class = "my-class" })
-        to their calendar.
-        <br />
-        <br />
-        <div class="container">
-            <div class="col-md-2" id="@Html.Raw(item.ID)">
-                @Html.Partial("_ReloadLikes", item)
-            </div>
-            <div class="col-md-1" id="totalComments_@Html.Raw(item.ID)">
-                @Html.Partial("_ReloadComments", item)
-            </div>
+                        <div class="col-md-8 my-6">
+                            @Html.ActionLink($"{item.Name}", "Index", "Profile", new { id = item.Username }, new { @class = "my-class" })
+                            <p class="time">@Html.Raw(item.WhenPosted)</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    Added
+                    @Html.ActionLink($"{item.Content}", $"Details", $"{item.ObjectType}", new { id = item.ObjectID }, new { @class = "my-class" })
+                    to their calendar.
+                    <br />
+                    <br />
+                    <div class="container">
+                        <div class="col-md-2" id="@Html.Raw(item.ID)">
+                            @Html.Partial("_ReloadLikes", item)
+                        </div>
+                        <div class="col-md-1" id="totalComments_@Html.Raw(item.ID)">
+                            @Html.Partial("_ReloadComments", item)
+                        </div>
 
-        </div>
-    </div>
-    <div class="panel-footer">
-        <div class="container">
-            <div class="col-md-1 my-1">
-                @Html.DisplayFor(modelItem => item.LikedByUser, new { Id = item.ID })
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <div class="container">
+                        <div class="col-md-1 my-1">
+                            @Html.DisplayFor(modelItem => item.LikedByUser, new { Id = item.ID })
 
+                        </div>
+
+                        <div class="col-md-1 my-1">
+                            <i class="glyphicon glyphicon-comment " data-toggle="comment"
+                               data-id="@Html.Raw(item.ID)"></i>
+                        </div>
+                    </div>
+
+                    <div id="comment_@Html.Raw(item.ID)"></div>
+                </div>
             </div>
-
-            <div class="col-md-1 my-1">
-                <i class="glyphicon glyphicon-comment " data-toggle="comment"
-                   data-id="@Html.Raw(item.ID)"></i>
-            </div>
-        </div>
-
-        <div id="comment_@Html.Raw(item.ID)"></div>
-    </div>
-</div>
         }
     }
     if (item.Activity == "Follow")
     {
 
-<div class="panel panel-warning" style="width: 32rem;">
-    <div class="panel-heading">
-        <div class="row my-5">
-            <div class="col-md-3 my-6">
-                <img src="@Url.Content(@item.ProfilePicture)" width="55" height="55" />
+        <div class="panel panel-warning" style="width: 32rem;">
+            <div class="panel-heading">
+                <div class="row my-5">
+                    <div class="col-md-3 my-6">
+                        <img src="@Url.Content(@item.ProfilePicture)" width="55" height="55" />
+                    </div>
+
+                    <div class="col-md-8 my-6">
+                        @Html.ActionLink($"{item.Name}", "Index", "Profile", new { id = item.Username }, new { @class = "my-class" })
+                        <p class="time">@Html.Raw(item.WhenPosted)</p>
+                    </div>
+                </div>
             </div>
 
-            <div class="col-md-8 my-6">
-                @Html.ActionLink($"{item.Name}", "Index", "Profile", new { id = item.Username }, new { @class = "my-class" })
-                <p class="time">@Html.Raw(item.WhenPosted)</p>
+            <div class="panel-body">
+                Followed
+                @Html.ActionLink($"{item.Content}", $"Details", $"{item.ObjectType}", new { id = item.ObjectID }, new { @class = "my-class" })
+                <br />
+                <br />
+                <div class="container">
+                    <div class="col-md-2" id="@Html.Raw(item.ID)">
+                        @Html.Partial("_ReloadLikes", item)
+                    </div>
+                    <div class="col-md-1" id="totalComments_@Html.Raw(item.ID)">
+                        @Html.Partial("_ReloadComments", item)
+                    </div>
+
+                </div>
+            </div>
+            <div class="panel-footer">
+                <div class="container">
+                    <div class="col-md-1 my-1">
+                        @Html.DisplayFor(modelItem => item.LikedByUser, new { Id = item.ID })
+
+                    </div>
+
+                    <div class="col-md-1 my-1">
+                        <i class="glyphicon glyphicon-comment " data-toggle="comment"
+                           data-id="@Html.Raw(item.ID)"></i>
+                    </div>
+                </div>
+
+                <div id="comment_@Html.Raw(item.ID)"></div>
             </div>
         </div>
-    </div>
-
-    <div class="panel-body">
-        Followed
-        @Html.ActionLink($"{item.Content}", $"Details", $"{item.ObjectType}", new { id = item.ObjectID }, new { @class = "my-class" })
-        <br />
-        <br />
-        <div class="container">
-            <div class="col-md-2" id="@Html.Raw(item.ID)">
-                @Html.Partial("_ReloadLikes", item)
-            </div>
-            <div class="col-md-1" id="totalComments_@Html.Raw(item.ID)">
-                @Html.Partial("_ReloadComments", item)
-            </div>
-
-        </div>
-    </div>
-    <div class="panel-footer">
-        <div class="container">
-            <div class="col-md-1 my-1">
-                @Html.DisplayFor(modelItem => item.LikedByUser, new { Id = item.ID })
-
-            </div>
-
-            <div class="col-md-1 my-1">
-                <i class="glyphicon glyphicon-comment " data-toggle="comment"
-                   data-id="@Html.Raw(item.ID)"></i>
-            </div>
-        </div>
-
-        <div id="comment_@Html.Raw(item.ID)"></div>
-    </div>
-</div>
     }
     if (item.Activity == "NewEvent")
     {
         if (item.Content.Contains("Karaoke"))
         {
-<div class="panel panel-success" style="width: 32rem;">
-    <div class="panel-heading">
-        @Html.ActionLink($"{item.Name}", "Details", "Business", new { id = item.BusinessID }, new { @class = "my-class" })
-        <p class="time">@Html.Raw(item.WhenPosted)</p>
-    </div>
+            <div class="panel panel-success" style="width: 32rem;">
+                <div class="panel-heading">
+                    @Html.ActionLink($"{item.Name}", "Details", "Business", new { id = item.BusinessID }, new { @class = "my-class" })
+                    <p class="time">@Html.Raw(item.WhenPosted)</p>
+                </div>
 
-    <div class="panel-body">
-        Created a new event!
-        <p>@Html.ActionLink($"{item.Content}", $"Details", $"{item.ObjectType}", new { id = item.ObjectID }, new { @class = "my-class" })</p>
-        <br />
-        <br />
-        <div class="container">
-            <div class="col-md-2" id="@Html.Raw(item.ID)">
-                @Html.Partial("_ReloadLikes", item)
+                <div class="panel-body">
+                    Created a new event!
+                    <p>@Html.ActionLink($"{item.Content}", $"Details", $"{item.ObjectType}", new { id = item.ObjectID }, new { @class = "my-class" })</p>
+                    <br />
+                    <br />
+                    <div class="container">
+                        <div class="col-md-2" id="@Html.Raw(item.ID)">
+                            @Html.Partial("_ReloadLikes", item)
+                        </div>
+                        <div class="col-md-1" id="totalComments_@Html.Raw(item.ID)">
+                            @Html.Partial("_ReloadComments", item)
+                        </div>
+
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <div class="container">
+                        <div class="col-md-1 my-1">
+                            @Html.DisplayFor(modelItem => item.LikedByUser, new { Id = item.ID })
+
+                        </div>
+
+                        <div class="col-md-1 my-1">
+                            <i class="glyphicon glyphicon-comment " data-toggle="comment"
+                               data-id="@Html.Raw(item.ID)"></i>
+                        </div>
+                    </div>
+
+                    <div id="comment_@Html.Raw(item.ID)"></div>
+                </div>
             </div>
-            <div class="col-md-1" id="totalComments_@Html.Raw(item.ID)">
-                @Html.Partial("_ReloadComments", item)
-            </div>
-
-        </div>
-    </div>
-    <div class="panel-footer">
-        <div class="container">
-            <div class="col-md-1 my-1">
-                @Html.DisplayFor(modelItem => item.LikedByUser, new { Id = item.ID })
-
-            </div>
-
-            <div class="col-md-1 my-1">
-                <i class="glyphicon glyphicon-comment " data-toggle="comment"
-                   data-id="@Html.Raw(item.ID)"></i>
-            </div>
-        </div>
-
-        <div id="comment_@Html.Raw(item.ID)"></div>
-    </div>
-</div>
         }
         if (item.Content.Contains("Music"))
         {
-<div class="panel panel-primary" style="width: 32rem;">
-    <div class="panel-heading">
-        @Html.ActionLink($"{item.Name}", "Details", "Business", new { id = item.BusinessID }, new { @class = "my-class" })
-        <p class="time">@Html.Raw(item.WhenPosted)</p>
-    </div>
+            <div class="panel panel-primary" style="width: 32rem;">
+                <div class="panel-heading">
+                    @Html.ActionLink($"{item.Name}", "Details", "Business", new { id = item.BusinessID }, new { @class = "my-class" })
+                    <p class="time">@Html.Raw(item.WhenPosted)</p>
+                </div>
 
-    <div class="panel-body">
-        Created a new event!
-        <p>@Html.ActionLink($"{item.Content}", $"Details", $"{item.ObjectType}", new { id = item.ObjectID }, new { @class = "my-class" })</p>
-        <br />
-        <br />
-        <div class="container">
-            <div class="col-md-2" id="@Html.Raw(item.ID)">
-                @Html.Partial("_ReloadLikes", item)
+                <div class="panel-body">
+                    Created a new event!
+                    <p>@Html.ActionLink($"{item.Content}", $"Details", $"{item.ObjectType}", new { id = item.ObjectID }, new { @class = "my-class" })</p>
+                    <br />
+                    <br />
+                    <div class="container">
+                        <div class="col-md-2" id="@Html.Raw(item.ID)">
+                            @Html.Partial("_ReloadLikes", item)
+                        </div>
+                        <div class="col-md-1" id="totalComments_@Html.Raw(item.ID)">
+                            @Html.Partial("_ReloadComments", item)
+                        </div>
+
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <div class="container">
+                        <div class="col-md-1 my-1">
+                            @Html.DisplayFor(modelItem => item.LikedByUser, new { Id = item.ID })
+
+                        </div>
+
+                        <div class="col-md-1 my-1">
+                            <i class="glyphicon glyphicon-comment " data-toggle="comment"
+                               data-id="@Html.Raw(item.ID)"></i>
+                        </div>
+                    </div>
+
+                    <div id="comment_@Html.Raw(item.ID)"></div>
+                </div>
             </div>
-            <div class="col-md-1" id="totalComments_@Html.Raw(item.ID)">
-                @Html.Partial("_ReloadComments", item)
-            </div>
-
-        </div>
-    </div>
-    <div class="panel-footer">
-        <div class="container">
-            <div class="col-md-1 my-1">
-                @Html.DisplayFor(modelItem => item.LikedByUser, new { Id = item.ID })
-
-            </div>
-
-            <div class="col-md-1 my-1">
-                <i class="glyphicon glyphicon-comment " data-toggle="comment"
-                   data-id="@Html.Raw(item.ID)"></i>
-            </div>
-        </div>
-
-        <div id="comment_@Html.Raw(item.ID)"></div>
-    </div>
-</div>
         }
         if (item.Content.Contains("Trivia"))
         {
-<div class="panel panel-danger" style="width: 32rem;">
-    <div class="panel-heading">
-        @Html.ActionLink($"{item.Name}", "Details", "Business", new { id = item.BusinessID }, new { @class = "my-class" })
-        <p class="time">@Html.Raw(item.WhenPosted)</p>
-    </div>
+            <div class="panel panel-danger" style="width: 32rem;">
+                <div class="panel-heading">
+                    @Html.ActionLink($"{item.Name}", "Details", "Business", new { id = item.BusinessID }, new { @class = "my-class" })
+                    <p class="time">@Html.Raw(item.WhenPosted)</p>
+                </div>
 
-    <div class="panel-body">
-        Created a new event!
-        <p>@Html.ActionLink($"{item.Content}", $"Details", $"{item.ObjectType}", new { id = item.ObjectID }, new { @class = "my-class" })</p>
-        <br />
-        <br />
-        <div class="container">
-            <div class="col-md-2" id="@Html.Raw(item.ID)">
-                @Html.Partial("_ReloadLikes", item)
+                <div class="panel-body">
+                    Created a new event!
+                    <p>@Html.ActionLink($"{item.Content}", $"Details", $"{item.ObjectType}", new { id = item.ObjectID }, new { @class = "my-class" })</p>
+                    <br />
+                    <br />
+                    <div class="container">
+                        <div class="col-md-2" id="@Html.Raw(item.ID)">
+                            @Html.Partial("_ReloadLikes", item)
+                        </div>
+                        <div class="col-md-1" id="totalComments_@Html.Raw(item.ID)">
+                            @Html.Partial("_ReloadComments", item)
+                        </div>
+
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <div class="container">
+                        <div class="col-md-1 my-1">
+                            @Html.DisplayFor(modelItem => item.LikedByUser, new { Id = item.ID })
+
+                        </div>
+
+                        <div class="col-md-1 my-1">
+                            <i class="glyphicon glyphicon-comment " data-toggle="comment"
+                               data-id="@Html.Raw(item.ID)"></i>
+                        </div>
+                    </div>
+
+                    <div id="comment_@Html.Raw(item.ID)"></div>
+                </div>
             </div>
-            <div class="col-md-1" id="totalComments_@Html.Raw(item.ID)">
-                @Html.Partial("_ReloadComments", item)
-            </div>
-
-        </div>
-    </div>
-    <div class="panel-footer">
-        <div class="container">
-            <div class="col-md-1 my-1">
-                @Html.DisplayFor(modelItem => item.LikedByUser, new { Id = item.ID })
-
-            </div>
-
-            <div class="col-md-1 my-1">
-                <i class="glyphicon glyphicon-comment " data-toggle="comment"
-                   data-id="@Html.Raw(item.ID)"></i>
-            </div>
-        </div>
-
-        <div id="comment_@Html.Raw(item.ID)"></div>
-    </div>
-</div>
         }
     }
     if (item.Activity == "Rating")
     {
-<div class="panel panel-warning" style="width: 32rem;">
-    <div class="panel-heading">
-        <div class="row my-5">
-            <div class="col-md-3 my-6">
-                <img src="@Url.Content(@item.ProfilePicture)" width="55" height="55" />
+        <div class="panel panel-warning" style="width: 32rem;">
+            <div class="panel-heading">
+                <div class="row my-5">
+                    <div class="col-md-3 my-6">
+                        <img src="@Url.Content(@item.ProfilePicture)" width="55" height="55" />
+                    </div>
+
+                    <div class="col-md-8 my-6">
+                        @Html.ActionLink($"{item.Name}", "Index", "Profile", new { id = item.Username }, new { @class = "my-class" })
+                        <p class="time">@Html.Raw(item.WhenPosted)</p>
+                    </div>
+                </div>
             </div>
 
-            <div class="col-md-8 my-6">
-                @Html.ActionLink($"{item.Name}", "Index", "Profile", new { id = item.Username }, new { @class = "my-class" })
-                <p class="time">@Html.Raw(item.WhenPosted)</p>
+
+            <div class="panel-body">
+
+                Added a
+                @Html.ActionLink($"{item.Content}", $"Details", $"{item.ObjectType}", new { id = item.ObjectID }, new { @class = "my-class" })
+                @if (item.Content.Contains("5-star"))
+                {<p>
+                        <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                    </p>
+
+                }
+                @if (item.Content.Contains("4-star"))
+                {<p>
+                        <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                    </p>
+
+                }
+                @if (item.Content.Contains("3-star"))
+                {<p>
+                        <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                    </p>
+                }
+                @if (item.Content.Contains("2-star"))
+                {<p>
+                        <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                    </p>
+                }
+                @if (item.Content.Contains("1-star"))
+                {<p>
+                        <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                        <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
+                    </p>
+                }
+                <br />
+                <br />
+                <div class="container">
+                    <div class="col-md-2" id="@Html.Raw(item.ID)">
+                        @Html.Partial("_ReloadLikes", item)
+                    </div>
+                    <div class="col-md-1" id="totalComments_@Html.Raw(item.ID)">
+                        @Html.Partial("_ReloadComments", item)
+                    </div>
+
+                </div>
+            </div>
+            <div class="panel-footer">
+                <div class="container">
+                    <div class="col-md-1 my-1">
+                        @Html.DisplayFor(modelItem => item.LikedByUser, new { Id = item.ID })
+
+                    </div>
+
+                    <div class="col-md-1 my-1">
+                        <i class="glyphicon glyphicon-comment " data-toggle="comment"
+                           data-id="@Html.Raw(item.ID)"></i>
+                    </div>
+                </div>
+
+                <div id="comment_@Html.Raw(item.ID)"></div>
             </div>
         </div>
-    </div>
-
-
-    <div class="panel-body">
-
-        Added a
-        @Html.ActionLink($"{item.Content}", $"Details", $"{item.ObjectType}", new { id = item.ObjectID }, new { @class = "my-class" })
-        @if (item.Content.Contains("5-star"))
-        {<p>
-                <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
-                <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
-                <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
-                <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
-                <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
-            </p>
-
-        }
-        @if (item.Content.Contains("4-star"))
-        {<p>
-                <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
-                <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
-                <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
-                <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
-                <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
-            </p>
-
-        }
-        @if (item.Content.Contains("3-star"))
-        {<p>
-                <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
-                <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
-                <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
-                <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
-                <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
-            </p>
-        }
-        @if (item.Content.Contains("2-star"))
-        {<p>
-                <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
-                <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
-                <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
-                <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
-                <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
-            </p>
-        }
-        @if (item.Content.Contains("1-star"))
-        {<p>
-                <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
-                <img src="~/assets/img/FilledStar.png" alt="Star Rating" align="middle" width="30" height="30" />
-                <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
-                <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
-                <img src="~/assets/img/EmptyStar.png" alt="Star Rating" align="middle" width="30" height="30" />
-            </p>
-        }
-        <br />
-        <br />
-        <div class="container">
-            <div class="col-md-2" id="@Html.Raw(item.ID)">
-                @Html.Partial("_ReloadLikes", item)
-            </div>
-            <div class="col-md-1" id="totalComments_@Html.Raw(item.ID)">
-                @Html.Partial("_ReloadComments", item)
-            </div>
-
-        </div>
-    </div>
-    <div class="panel-footer">
-        <div class="container">
-            <div class="col-md-1 my-1">
-                @Html.DisplayFor(modelItem => item.LikedByUser, new { Id = item.ID })
-
-            </div>
-
-            <div class="col-md-1 my-1">
-                <i class="glyphicon glyphicon-comment " data-toggle="comment"
-                   data-id="@Html.Raw(item.ID)"></i>
-            </div>
-        </div>
-
-        <div id="comment_@Html.Raw(item.ID)"></div>
-    </div>
-</div>
     }
 }
 

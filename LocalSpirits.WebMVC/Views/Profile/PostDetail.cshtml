@@ -403,7 +403,7 @@
     <div id="viewComments">
         @foreach (var comment in Model.Comments)
         {
-       
+
             <div class="panel panel-primary" style="width: 26rem; margin-left:27px">
                 <div class="panel-body">
                     <p style="font-weight:bold">
@@ -450,16 +450,8 @@
     {
         <div class="panel panel-success" style="width: 32rem;">
             <div class="panel-heading">
-                <div class="row my-5">
-                    <div class="col-md-3 my-6">
-                        <img src="@Url.Content(@Model.ProfilePicture)" width="55" height="55" />
-                    </div>
-                    <div class="col-md-8 my-6">
-                        @Html.ActionLink($"{Model.Name}", "Index", "Profile", new { id = Model.Username }, new { @class = "my-class" })
-                        <p class="time">@Html.Raw(Model.WhenPosted)</p>
-                    </div>
-
-                </div>
+                @Html.ActionLink($"{Model.Name}", "Details", "Business", new { id = Model.BusinessID }, new { @class = "my-class" })
+                <p class="time">@Html.Raw(Model.WhenPosted)</p>
             </div>
 
             <div class="panel-body">
@@ -538,15 +530,8 @@
     {
         <div class="panel panel-primary" style="width: 32rem;">
             <div class="panel-heading">
-                <div class="row my-5">
-                    <div class="col-md-3 my-6">
-                        <img src="@Url.Content(@Model.ProfilePicture)" width="55" height="55" />
-                    </div>
-                    <div class="col-md-8 my-6">
-                        @Html.ActionLink($"{Model.Name}", "Index", "Profile", new { id = Model.Username }, new { @class = "my-class" })
-                        <p class="time">@Html.Raw(Model.WhenPosted)</p>
-                    </div>
-                </div>
+                @Html.ActionLink($"{Model.Name}", "Details", "Business", new { id = Model.BusinessID }, new { @class = "my-class" })
+                <p class="time">@Html.Raw(Model.WhenPosted)</p>
             </div>
 
             <div class="panel-body">
@@ -625,16 +610,10 @@
     {
         <div class="panel panel-danger" style="width: 32rem;">
             <div class="panel-heading">
-                <div class="row my-5">
-                    <div class="col-md-3 my-6">
-                        <img src="@Url.Content(@Model.ProfilePicture)" width="55" height="55" />
-                    </div>
-                    <div class="col-md-8 my-6">
-                        @Html.ActionLink($"{Model.Name}", "Index", "Profile", new { id = Model.Username }, new { @class = "my-class" })
-                        <p class="time">@Html.Raw(Model.WhenPosted)</p>
-                    </div>
-                </div>
+                @Html.ActionLink($"{Model.Name}", "Details", "Business", new { id = Model.BusinessID }, new { @class = "my-class" })
+                <p class="time">@Html.Raw(Model.WhenPosted)</p>
             </div>
+
             <div class="panel-body">
                 Created a new event!
                 <p>@Html.ActionLink($"{Model.Content}", $"Details", $"{Model.ObjectType}", new { id = Model.ObjectID }, new { @class = "my-class" })</p>

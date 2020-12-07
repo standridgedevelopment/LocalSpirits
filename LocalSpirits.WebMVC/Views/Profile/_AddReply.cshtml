@@ -61,6 +61,7 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.SenderFullName)
         @Html.HiddenFor(model => model.SenderUsername)
+        @ @Html.HiddenFor(model => model.SenderProfilePicture)
         @Html.HiddenFor(model => model.CommentID)
         @Html.HiddenFor(model => model.Created)
 

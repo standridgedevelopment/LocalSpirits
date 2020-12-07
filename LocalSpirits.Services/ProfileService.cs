@@ -289,7 +289,7 @@ namespace LocalSpirits.Services
                 var activity = $"{model.Activity}";
                 try
                 {
-                    var oldActivity = ctx.ActivityFeed.Single(e => e.ObjectID == model.ObjectID && e.Activity == activity && e.UserID == _userId);
+                    var oldActivity = ctx.ActivityFeed.Where(e => e.ObjectID == model.ObjectID && e.Activity == activity && e.UserID == _userId).First();
                     ctx.ActivityFeed.Remove(oldActivity);
                 }
                 catch { }
@@ -544,6 +544,8 @@ namespace LocalSpirits.Services
                         BusinessID = activity.BusinessID,
                         AmountOfLikes = activity.AmountOfLikes,
                         AmountOfComments = activity.AmountOfComments,
+                        Likes = activity.Likes,
+                        Comments = activity.Comments,
                         LikedByUser = likedByUser,
                         WhenPosted = timePosted,
                     };
@@ -737,7 +739,7 @@ namespace LocalSpirits.Services
                 var entity = new Comment
                 {
                     SenderFullName = model.SenderFullName,
-                    SenderUsername = model.SenderFullName,
+                    SenderUsername = model.SenderUsername,
                     SenderProfilePicture = model.SenderProfilePicture,
                     SenderID  = _userId,
                     FeedID = model.FeedID,
