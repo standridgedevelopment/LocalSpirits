@@ -1,25 +1,42 @@
 ﻿@model LocalSpirits.Models.ActivityFeed.ActivityFeedListItem
+<style>
+    .theDetails {
+        display: none
+    }
+</style>
+@section scripts {
 
+    <script language="javascript" type="text/javascript">
 
+        $(document).ready(function () {
+                $('.theText').hover(function () {
+                    $(this).parent().find('.theDetails').show();
+                }, function () {
+                    $(this).parent().find('.theDetails').hide();
+                });
+            });
+    </script>
+}
 @if (Model.AmountOfLikes == 1 && Model.LikedByUser == true)
 {
 
-    <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20"style="margin-left:-30px;" /> You</p>
+    <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" style="margin-left:-30px;" /> You</p>
 }
 @if (Model.AmountOfLikes == 1 && Model.LikedByUser == false)
 {
-    <p><img src="~/assets/img/FilledHeart.png" width="20" height="20"style="margin-left:-30px;" /> 1 person</p>
+    <p><img src="~/assets/img/FilledHeart.png" width="20" height="20" style="margin-left:-30px;" /> @Html.ActionLink("1 person", "DisplayLikes", "Profile", new { id = Model.ID }, new { target = "_blank" }) </p>
 }
 @if (Model.AmountOfLikes == 2 && Model.LikedByUser == true)
 {
-    <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" style="margin-left:-30px;" />  You and 1 person</p>
+    <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" style="margin-left:-30px;" /> @Html.ActionLink("You and 1 person", "DisplayLikes", "Profile", new { id = Model.ID }, new { target = "_blank" }) </p>
 }
 @if (Model.AmountOfLikes > 1 && Model.LikedByUser == false)
 {
-    <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20"style="margin-left:-30px;" />  @Html.Raw(Model.AmountOfLikes) people</p>
+    <div class="theText"> <img src="~/assets/img/FilledHeart.png" width="20" height="20" style="margin-left:-30px;" />  @Html.ActionLink($"{Model.AmountOfLikes} people", "DisplayLikes", "Profile", new { id = Model.ID }, new { target = "_blank" }) </div>
+    <div class="theDetails">@Html.Partial("_DisplayLikes", (LocalSpirits.Models.ActivityFeed.ActivityFeedListItem)Model)</div>
 }
 @if (Model.AmountOfLikes > 2 && Model.LikedByUser == true)
 {
-    <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" style="margin-left:-30px;" />  You and @Html.Raw(Model.AmountOfLikes - 1) people</p>
+    <p> <img src="~/assets/img/FilledHeart.png" width="20" height="20" style="margin-left:-30px;" />  @Html.ActionLink($"You and {Model.AmountOfLikes - 1} people", "DisplayLikes", "Profile", new { id = Model.ID }, new { target = "_blank" }) </p>
 }
 

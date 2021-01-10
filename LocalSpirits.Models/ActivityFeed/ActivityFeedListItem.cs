@@ -26,6 +26,7 @@ namespace LocalSpirits.Models.ActivityFeed
         public int AmountOfLikes { get; set; }
         public int AmountOfComments { get; set; }
         public string WhenPosted { get; set; }
+        public virtual ICollection<Data.Profile> WhoLiked { get; set; }
         public virtual ICollection<Like> Likes { get; set; }
         public virtual ICollection<Data.Comment> Comments { get; set; }
         public DateTimeOffset Created { get; set; }

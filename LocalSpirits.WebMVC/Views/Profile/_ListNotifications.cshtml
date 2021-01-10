@@ -7,28 +7,28 @@
 {
     if (notification.CommentID != null)
     {
-<div class="container">
-    <div class="row">
-        <div class="col-xs-2 col-sm-1 col-md-1">
-            
- <span class="glyphicon glyphicon-comment" style="margin-top:20px; margin-left:60px; font-size:15px!important; ">
-            <img src="@Url.Content(@notification.SendersProfilePicture)" width="55" height="55" style="margin-top:-40px; margin-left:-60px;" />
- </span>
-        </div>
-       
-        <div class="col-xs-10 col-sm-6 col-md-5">
-            <div class="panel panel-warning" style="width: 32rem" ;>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-2 col-sm-1 col-md-1">
 
-                <div class="panel-body">
+                    <span class="glyphicon glyphicon-comment" style="margin-top:20px; margin-left:60px; font-size:15px!important; ">
+                        <img src="@Url.Content(@notification.SendersProfilePicture)" width="55" height="55" style="margin-top:-40px; margin-left:-60px;" />
+                    </span>
+                </div>
 
-                    @Html.ActionLink($"{notification.SenderFullName}", "Index", "Profile", new { id = notification.SenderUsername }, null)
-                    commented on your 
-                    @Html.ActionLink($"post", "GetPost", "Profile", new { id = notification.ActivityFeedID }, null)
+                <div class="col-xs-10 col-sm-6 col-md-5">
+                    <div class="panel panel-warning" style="width: 32rem" ;>
+
+                        <div class="panel-body">
+
+                            @Html.ActionLink($"{notification.SenderFullName}", "Index", "Profile", new { id = notification.SenderUsername }, null)
+                            commented on your
+                            @Html.ActionLink($"post", "GetPost", "Profile", new { id = notification.ActivityFeedID }, null)
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
 
 
     }

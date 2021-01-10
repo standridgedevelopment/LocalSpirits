@@ -1,0 +1,34 @@
+﻿@model LocalSpirits.Models.ActivityFeed.ActivityFeedListItem
+
+<br />
+<br />
+@foreach (var name in Model.WhoLiked)
+{
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-2 col-sm-1 col-md-1">
+                <img src="@Url.Content(@name.ProfilePicture)" width="55" height="55" style="margin-top:-10px; margin-left:30px;" />
+            </div>
+
+            <div class="col-xs-10 col-sm-6 col-md-5">
+                <div class="panel panel-warning" style="width: 15rem" ;>
+
+                    <div class="panel-body">
+
+                        @Html.ActionLink($"{name.FullName}", "Index", "Profile", null)
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+
+@*<tr>
+        <td>
+            @Html.ActionLink($"{name.FullName}", "Index", "Profile", new { id = name.Username }, new { @class = "my-class" })
+        </td>
+
+    </tr>*@
+

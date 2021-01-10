@@ -60,26 +60,11 @@
     <Compile Include="Beer.cs" />
     <Compile Include="Business.cs" />
     <Compile Include="City.cs" />
-    <Compile Include="Migrations\202012070029315_17.cs" />
-    <Compile Include="Migrations\202012070029315_17.designer.cs">
-      <DependentUpon>202012070029315_17.cs</DependentUpon>
+    <Compile Include="Migrations\202012301746167_1.cs" />
+    <Compile Include="Migrations\202012301746167_1.designer.cs">
+      <DependentUpon>202012301746167_1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202012070139440_18.cs" />
-    <Compile Include="Migrations\202012070139440_18.designer.cs">
-      <DependentUpon>202012070139440_18.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202012070203455_19.cs" />
-    <Compile Include="Migrations\202012070203455_19.designer.cs">
-      <DependentUpon>202012070203455_19.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202012070243014_20.cs" />
-    <Compile Include="Migrations\202012070243014_20.designer.cs">
-      <DependentUpon>202012070243014_20.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202012071757592_21.cs" />
-    <Compile Include="Migrations\202012071757592_21.designer.cs">
-      <DependentUpon>202012071757592_21.cs</DependentUpon>
-    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Reply.cs" />
     <Compile Include="Comment.cs" />
     <Compile Include="Event.cs" />
@@ -88,15 +73,6 @@
     <Compile Include="FriendRequest.cs" />
     <Compile Include="IdentityModels.cs" />
     <Compile Include="Like.cs" />
-    <Compile Include="Migrations\202012051648000_15.cs" />
-    <Compile Include="Migrations\202012051648000_15.designer.cs">
-      <DependentUpon>202012051648000_15.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202012060212236_16.cs" />
-    <Compile Include="Migrations\202012060212236_16.designer.cs">
-      <DependentUpon>202012060212236_16.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Notification.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Profile.cs" />
@@ -110,34 +86,16 @@
     <None Include="Scripts\jquery-3.4.1.slim.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202012051648000_15.resx">
-      <DependentUpon>202012051648000_15.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202012060212236_16.resx">
-      <DependentUpon>202012060212236_16.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202012070029315_17.resx">
-      <DependentUpon>202012070029315_17.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202012070139440_18.resx">
-      <DependentUpon>202012070139440_18.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202012070203455_19.resx">
-      <DependentUpon>202012070203455_19.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202012070243014_20.resx">
-      <DependentUpon>202012070243014_20.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202012071757592_21.resx">
-      <DependentUpon>202012071757592_21.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202012301746167_1.resx">
+      <DependentUpon>202012301746167_1.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

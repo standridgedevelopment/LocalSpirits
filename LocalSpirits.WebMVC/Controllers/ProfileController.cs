@@ -159,6 +159,14 @@ namespace LocalSpirits.WebMVC.Controllers
 
             return PartialView("_GetCurrentLikes", feedItem);
         }
+        public ActionResult DisplayLikes(int id)
+        {
+            var profileService = CreateProfileService();
+            var feedItem = profileService.GetFeedItem(id);
+
+            ModelState.Clear();
+            return View("_DisplayLikes", feedItem);
+        }
         public ActionResult GetCommentLikes(int id)
         {
             var profileService = CreateProfileService();

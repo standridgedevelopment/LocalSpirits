@@ -373,6 +373,13 @@ namespace LocalSpirits.Services
                                 bool likedByUser = LikedByUser(activity);
                                 var timePosted = GetFeedPostTime(activity);
 
+                                //Who Liked the Post?
+                                var whoLiked = new List<Profile>();
+                                foreach (var like in activity.Likes)
+                                {
+                                    whoLiked.Add(like.Profile);
+                                }
+
                                 if ((DateTimeOffset.Now - activity.Created).TotalDays <= 3)
                                 {
                                     var activityItem = new ActivityFeedListItem
@@ -389,6 +396,7 @@ namespace LocalSpirits.Services
                                         ObjectType = activity.ObjectType,
                                         Created = activity.Created,
                                         BusinessID = activity.BusinessID,
+                                        WhoLiked = whoLiked,
                                         AmountOfLikes = activity.AmountOfLikes,
                                         LikedByUser = likedByUser,
                                         WhenPosted = timePosted,
@@ -410,6 +418,13 @@ namespace LocalSpirits.Services
                                 bool likedByUser = LikedByUser(activity);
                                 var timePosted = GetFeedPostTime(activity);
 
+                                //Who Liked The Post
+                                var whoLiked = new List<Profile>();
+                                foreach (var like in activity.Likes)
+                                {
+                                    whoLiked.Add(like.Profile);
+                                }
+
                                 if ((DateTimeOffset.Now - activity.Created).TotalDays <= 3 && activity.Activity != "Follow")
                                 {
                                     var activityItem = new ActivityFeedListItem
@@ -424,6 +439,7 @@ namespace LocalSpirits.Services
                                         UsersFullName = userProfile.FullName,
                                         Created = activity.Created,
                                         BusinessID = activity.BusinessID,
+                                        WhoLiked = whoLiked,
                                         AmountOfLikes = activity.AmountOfLikes,
                                         LikedByUser = likedByUser,
                                         WhenPosted = timePosted,
@@ -453,6 +469,11 @@ namespace LocalSpirits.Services
                 {
                     bool likedByUser = LikedByUser(activity);
                     var timePosted = GetFeedPostTime(activity);
+                    var whoLiked = new List<Profile>();
+                    foreach (var like in activity.Likes)
+                    {
+                        whoLiked.Add(like.Profile);
+                    }
 
                     var activityItem = new ActivityFeedListItem
                     {
@@ -467,6 +488,7 @@ namespace LocalSpirits.Services
                         ObjectType = activity.ObjectType,
                         Created = activity.Created,
                         BusinessID = activity.BusinessID,
+                        WhoLiked = whoLiked,
                         AmountOfLikes = activity.AmountOfLikes,
                         LikedByUser = likedByUser,
                         WhenPosted = timePosted,
@@ -503,6 +525,11 @@ namespace LocalSpirits.Services
 
                 bool likedByUser = LikedByUser(activity);
                 var timePosted = GetFeedPostTime(activity);
+                var whoLiked = new List<Profile>();
+                foreach (var like in activity.Likes)
+                {
+                    whoLiked.Add(like.Profile);
+                }
 
                 if (activity.UserID != null)
                 {
@@ -520,6 +547,7 @@ namespace LocalSpirits.Services
                         ObjectType = activity.ObjectType,
                         Created = activity.Created,
                         BusinessID = activity.BusinessID,
+                        WhoLiked = whoLiked,
                         AmountOfLikes = activity.AmountOfLikes,
                         AmountOfComments = activity.AmountOfComments,
                         Comments = activity.Comments,
@@ -542,6 +570,7 @@ namespace LocalSpirits.Services
                         UsersFullName = userProfile.FullName,
                         Created = activity.Created,
                         BusinessID = activity.BusinessID,
+                        WhoLiked = whoLiked,
                         AmountOfLikes = activity.AmountOfLikes,
                         AmountOfComments = activity.AmountOfComments,
                         Likes = activity.Likes,

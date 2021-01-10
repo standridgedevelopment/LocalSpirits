@@ -426,6 +426,7 @@
     <Content Include="Views\Shared\_GetCurrentReplies.cshtml" />
     <Content Include="Views\Shared\_ReloadCommentLikes.cshtml" />
     <Content Include="Views\Shared\_GetCurrentCommentLikes.cshtml" />
+    <Content Include="Views\Shared\_DisplayLikes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
